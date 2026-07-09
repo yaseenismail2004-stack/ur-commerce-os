@@ -1,0 +1,16 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/*.html
+  Cache-Control: no-store
+
+/UR%20Commerce%20OS.dc.html
+  Cache-Control: no-store
+
+/UR%20Storefront.html
+  Cache-Control: no-store
+
+/storefront.html
+  Cache-Control: no-store
