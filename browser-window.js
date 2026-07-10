@@ -202,11 +202,12 @@ function ChromeWindow({
 }) {
   const desktopAppFrame = typeof window !== 'undefined' && window.innerWidth >= 900;
   const frameStyle = desktopAppFrame ? {
-    width: `min(${width}px, calc(100vw - 48px))`,
-    height: `min(${height}px, calc(100vh - 56px))`,
-    borderRadius: 30,
+    width: '100vw',
+    height: '100dvh',
+    minHeight: '100dvh',
+    borderRadius: 0,
     overflow: 'hidden',
-    boxShadow: '0 34px 90px rgba(17,24,39,0.13)',
+    boxShadow: 'none',
     display: 'flex',
     flexDirection: 'column',
     background: '#fff'
@@ -231,8 +232,10 @@ function ChromeWindow({
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: 1,
+      minWidth: 0,
+      minHeight: 0,
       background: '#fff',
-      overflow: 'auto'
+      overflow: desktopAppFrame ? 'hidden' : 'auto'
     }
   }, children));
 }

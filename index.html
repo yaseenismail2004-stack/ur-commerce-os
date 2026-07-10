@@ -1325,11 +1325,42 @@
       }
     }
     @media (min-width:900px) {
+      html,
+      body {
+        width:100%;
+        height:100%;
+        overflow:hidden;
+      }
+      #dc-root {
+        width:100vw;
+        height:100dvh;
+        overflow:hidden;
+      }
+      #dc-root > * {
+        min-width:0;
+        min-height:0;
+      }
+      #dc-root .ur-preview-stage {
+        width:100%;
+        height:100%;
+        min-height:100%;
+        padding:0 !important;
+        align-items:stretch !important;
+        justify-content:stretch !important;
+        overflow:hidden;
+      }
+      #dc-root .ur-app-shell {
+        width:100%;
+        height:100dvh !important;
+        min-height:0 !important;
+        overflow:hidden !important;
+      }
       #dc-root .ios-device-frame {
         display:none !important;
       }
       #dc-root .ur-desktop-onboard-overlay {
-        padding:42px !important;
+        padding:0 !important;
+        overflow:hidden !important;
       }
       #dc-root .ur-desktop-onboard-panel {
         width:min(820px,calc(100vw - 96px)) !important;
@@ -1343,24 +1374,28 @@
         margin-inline:auto !important;
       }
       #dc-root .ur-desktop-onboard-panel.ur-desktop-auth-panel {
-        width:min(1140px,calc(100vw - 96px)) !important;
-        max-height:calc(100vh - 96px) !important;
+        width:100% !important;
+        height:100% !important;
+        max-height:none !important;
+        overflow:hidden !important;
       }
       #dc-root .ur-desktop-auth-layout {
-        min-height:640px;
+        min-height:100%;
+        height:100%;
         display:grid;
         grid-template-columns:minmax(0,.9fr) minmax(420px,1fr);
-      grid-template-areas:"form preview";
+        grid-template-areas:"form preview";
         overflow:hidden;
         background:var(--c-surface,#FFFDF9);
-        border-radius:24px;
+        border-radius:0;
       }
       #dc-root .ur-desktop-auth-form {
         grid-area:form;
         min-width:0;
-        padding:42px 54px 34px;
+        padding:clamp(32px,5vw,80px);
         display:flex;
         flex-direction:column;
+        justify-content:center;
         overflow:auto;
         background:var(--c-surface,#FFFDF9);
         text-align:start;
@@ -1368,7 +1403,7 @@
       #dc-root .ur-desktop-auth-preview {
         grid-area:preview;
         min-width:0;
-        padding:38px;
+        padding:clamp(32px,5vw,80px);
         display:flex;
         flex-direction:column;
         justify-content:space-between;
@@ -1577,14 +1612,72 @@
         font-size:11px;
         font-weight:900;
       }
+      #dc-root .ur-desktop-shell {
+        width:100% !important;
+        height:100% !important;
+        min-height:0 !important;
+        border:0 !important;
+        border-radius:0 !important;
+        box-shadow:none !important;
+      }
+      #dc-root .ur-desktop-side,
+      #dc-root .ur-desktop-main {
+        min-height:0 !important;
+      }
+      #dc-root .ur-desktop-main {
+        height:100% !important;
+        max-height:none !important;
+      }
+      #dc-root .ur-desktop-intro {
+        position:fixed !important;
+        inset:0 !important;
+        width:100vw !important;
+        height:100dvh !important;
+        min-height:100dvh !important;
+        max-width:none !important;
+        max-height:none !important;
+        margin:0 !important;
+        overflow:auto !important;
+        border:0 !important;
+        border-radius:0 !important;
+        box-shadow:none !important;
+      }
+      #dc-root .ur-desktop-intro > div:first-child {
+        padding:clamp(36px,5vw,84px) !important;
+        gap:28px !important;
+      }
+      #dc-root .ur-desktop-intro-visual {
+        padding:clamp(32px,5vw,80px) !important;
+        background:#EEF4FA !important;
+      }
+      #dc-root .ur-desktop-intro-grid {
+        width:min(640px,100%) !important;
+        height:min(660px,74vh);
+        grid-template-rows:repeat(4,minmax(0,1fr));
+        gap:12px !important;
+      }
+      #dc-root .ur-desktop-intro-feature {
+        padding:16px !important;
+        border-radius:16px !important;
+        box-shadow:0 10px 24px rgba(31,49,72,.08) !important;
+      }
+      #dc-root .ur-desktop-intro-grid > div:last-child {
+        margin-top:0 !important;
+        padding:16px !important;
+        border-radius:18px !important;
+        box-shadow:0 12px 28px rgba(31,49,72,.10) !important;
+      }
       @media (min-width:900px) and (max-width:1099px) {
         #dc-root .ur-desktop-onboard-panel.ur-desktop-auth-panel {
-          width:min(600px,calc(100vw - 64px)) !important;
+          width:100% !important;
+          height:100% !important;
+          max-height:none !important;
         }
         #dc-root .ur-desktop-auth-layout {
           grid-template-columns:1fr;
           grid-template-areas:"form";
-          min-height:0;
+          min-height:100%;
+          height:100%;
         }
         #dc-root .ur-desktop-auth-preview {
           display:none;
@@ -18876,7 +18969,7 @@ ZW|Zimbabwe|263
     vals.desktopWizardVisible = layoutDevice !== 'mobile';
     vals.legacyDesktopOnboardVisible = !s.onboarded && Number(s.onboardStep || 0) > 0;
     vals.desktopWizardShellStyle = vals.legacyDesktopOnboardVisible
-      ? 'width:min(1280px,calc(100vw - 48px));min-height:min(820px,calc(100vh - 48px));height:auto;margin:0 auto;border-radius:30px;border:1px solid color-mix(in srgb,var(--c-border,#EAE1D0) 74%, transparent);box-shadow:0 34px 90px color-mix(in srgb,var(--c-ink,#111827) 13%, transparent);'
+      ? 'width:100%;height:100%;min-height:100%;margin:0;border:0;border-radius:0;box-shadow:none;'
       : 'width:0;height:0;min-height:0;pointer-events:none;';
     vals.legacyDesktopWorkspaceDisplay = 'none';
     vals.legacyDesktopProfileIslandVisible = false;
