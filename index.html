@@ -1342,6 +1342,254 @@
         width:min(560px,100%) !important;
         margin-inline:auto !important;
       }
+      #dc-root .ur-desktop-onboard-panel.ur-desktop-auth-panel {
+        width:min(1140px,calc(100vw - 96px)) !important;
+        max-height:calc(100vh - 96px) !important;
+      }
+      #dc-root .ur-desktop-auth-layout {
+        min-height:640px;
+        display:grid;
+        grid-template-columns:minmax(0,.9fr) minmax(420px,1fr);
+      grid-template-areas:"form preview";
+        overflow:hidden;
+        background:var(--c-surface,#FFFDF9);
+        border-radius:24px;
+      }
+      #dc-root .ur-desktop-auth-form {
+        grid-area:form;
+        min-width:0;
+        padding:42px 54px 34px;
+        display:flex;
+        flex-direction:column;
+        overflow:auto;
+        background:var(--c-surface,#FFFDF9);
+        text-align:start;
+      }
+      #dc-root .ur-desktop-auth-preview {
+        grid-area:preview;
+        min-width:0;
+        padding:38px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        background:#EEF4FA;
+        border-inline-end:1px solid #D7E1EC;
+        color:#172033;
+      }
+      #dc-root .ur-desktop-auth-top {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:16px;
+        margin-bottom:28px;
+      }
+      #dc-root .ur-desktop-auth-brand {
+        display:flex;
+        align-items:center;
+        gap:10px;
+        min-width:0;
+      }
+      #dc-root .ur-desktop-auth-brand-mark {
+        width:38px;
+        height:38px;
+        display:grid;
+        place-items:center;
+        flex:0 0 auto;
+        border-radius:12px;
+        background:var(--c-inverse-bg,#1D1D1F);
+        color:var(--c-inverse-ink,#FFFFFF);
+        font-size:16px;
+        font-weight:950;
+      }
+      #dc-root .ur-desktop-auth-language {
+        width:38px;
+        height:34px;
+        padding:0;
+        border:1px solid var(--c-border,#EAE1D0);
+        border-radius:10px;
+        background:transparent;
+        color:var(--c-sub,#606062);
+        font:inherit;
+        font-size:12px;
+        font-weight:900;
+        cursor:pointer;
+      }
+      #dc-root .ur-desktop-auth-mode {
+        display:inline-flex;
+        align-items:center;
+        min-height:28px;
+        padding:0 9px;
+        border-radius:999px;
+        background:var(--c-info-bg,#E5ECFD);
+        color:var(--c-info,#2563EB);
+        font-size:11px;
+        font-weight:900;
+        white-space:nowrap;
+      }
+      #dc-root .ur-desktop-auth-form .ur-progress-shell {
+        width:100% !important;
+        margin:0 0 26px !important;
+      }
+      #dc-root .ur-desktop-auth-mark {
+        width:64px !important;
+        height:64px !important;
+        margin:0 0 16px !important;
+        border-radius:18px !important;
+        box-shadow:0 10px 22px rgba(29,29,31,.09) !important;
+      }
+      #dc-root .ur-desktop-auth-title {
+        margin:0 0 8px !important;
+        color:var(--c-ink,#1D1D1F) !important;
+        font-size:28px !important;
+        font-weight:950 !important;
+        line-height:1.35 !important;
+        text-align:start !important;
+      }
+      #dc-root .ur-desktop-auth-copy {
+        max-width:450px !important;
+        margin:0 0 26px !important;
+        color:var(--c-sub-2,#606062) !important;
+        font-size:15px !important;
+        line-height:1.75 !important;
+        text-align:start !important;
+      }
+      #dc-root .ur-desktop-auth-google {
+        min-height:54px !important;
+        padding:14px 16px !important;
+        border-radius:10px !important;
+        border-color:var(--c-border,#D0D1D4) !important;
+        box-shadow:none !important;
+      }
+      #dc-root .ur-desktop-auth-divider {
+        margin:20px 0 14px !important;
+      }
+      #dc-root .ur-desktop-auth-methods {
+        gap:10px !important;
+      }
+      #dc-root .ur-desktop-auth-methods button {
+        min-height:48px !important;
+        padding:12px !important;
+        border-radius:10px !important;
+      }
+      #dc-root .ur-desktop-auth-manual {
+        margin-top:16px !important;
+      }
+      #dc-root .ur-desktop-auth-manual input,
+      #dc-root .ur-desktop-auth-manual select {
+        min-height:48px !important;
+        border-radius:10px !important;
+      }
+      #dc-root .ur-desktop-auth-trust {
+        margin-top:16px !important;
+        color:var(--c-sub,#606062) !important;
+        font-size:13px !important;
+        text-align:start !important;
+      }
+      #dc-root .ur-desktop-auth-back {
+        width:auto !important;
+        min-height:42px !important;
+        margin-top:16px !important;
+        padding:0 2px !important;
+        align-self:flex-start;
+        color:var(--c-sub-2,#606062) !important;
+      }
+      #dc-root .ur-desktop-auth-form button:focus-visible,
+      #dc-root .ur-desktop-auth-language:focus-visible {
+        outline:3px solid rgba(37,99,235,.42);
+        outline-offset:3px;
+      }
+      #dc-root .ur-desktop-auth-preview-brand {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:14px;
+      }
+      #dc-root .ur-desktop-auth-preview-logo {
+        width:42px;
+        height:42px;
+        display:grid;
+        place-items:center;
+        border-radius:13px;
+        background:#1D1D1F;
+        color:#FFFFFF;
+        font-size:18px;
+        font-weight:950;
+      }
+      #dc-root .ur-desktop-auth-preview-title {
+        margin:42px 0 12px;
+        font-family:'Noto Kufi Arabic',sans-serif;
+        font-size:30px;
+        font-weight:950;
+        line-height:1.45;
+        letter-spacing:0;
+      }
+      #dc-root .ur-desktop-auth-preview-sub {
+        max-width:360px;
+        margin:0;
+        color:#536174;
+        font-size:14px;
+        line-height:1.8;
+      }
+      #dc-root .ur-desktop-auth-dashboard {
+        margin-top:auto;
+        border:1px solid #D8E1EB;
+        border-radius:14px;
+        background:#FFFFFF;
+        box-shadow:0 16px 36px rgba(31,49,72,.10);
+        overflow:hidden;
+      }
+      #dc-root .ur-desktop-auth-dashboard-head,
+      #dc-root .ur-desktop-auth-dashboard-row {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+      }
+      #dc-root .ur-desktop-auth-dashboard-head {
+        padding:16px 18px;
+        border-bottom:1px solid #E5EBF1;
+      }
+      #dc-root .ur-desktop-auth-dashboard-metrics {
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        border-bottom:1px solid #E5EBF1;
+      }
+      #dc-root .ur-desktop-auth-dashboard-metrics > div {
+        min-width:0;
+        padding:16px 14px;
+      }
+      #dc-root .ur-desktop-auth-dashboard-metrics > div + div {
+        border-inline-start:1px solid #E5EBF1;
+      }
+      #dc-root .ur-desktop-auth-dashboard-row {
+        padding:14px 18px;
+        color:#536174;
+        font-size:12px;
+      }
+      #dc-root .ur-desktop-auth-dashboard-row + .ur-desktop-auth-dashboard-row {
+        border-top:1px solid #EEF2F6;
+      }
+      #dc-root .ur-desktop-auth-dashboard-status {
+        padding:5px 8px;
+        border-radius:999px;
+        background:#E4F8EC;
+        color:#1E8A4B;
+        font-size:11px;
+        font-weight:900;
+      }
+      @media (min-width:900px) and (max-width:1099px) {
+        #dc-root .ur-desktop-onboard-panel.ur-desktop-auth-panel {
+          width:min(600px,calc(100vw - 64px)) !important;
+        }
+        #dc-root .ur-desktop-auth-layout {
+          grid-template-columns:1fr;
+          grid-template-areas:"form";
+          min-height:0;
+        }
+        #dc-root .ur-desktop-auth-preview {
+          display:none;
+        }
+      }
       #dc-root:has(.ur-desktop-shell) .ur-side-shell.ur-desktop-side,
       #dc-root:has(.ur-desktop-shell) .ur-side-shell.ur-desktop-side + div,
       #dc-root:has(.ur-desktop-intro) [style*="z-index:90"][style*="position:absolute"] {
@@ -5332,7 +5580,7 @@
 
           <sc-if value="{{legacyDesktopOnboardVisible}}" hint-placeholder-val="{{true}}">
             <div class="ur-desktop-onboard-overlay" style="position:absolute;inset:0;z-index:90;background:var(--c-bg,#F7F4EE);display:flex;align-items:center;justify-content:center;padding:28px;overflow:auto;">
-              <div class="ur-desktop-onboard-panel" style="width:min(460px,100%);max-height:100%;overflow:auto;">
+              <div class="ur-desktop-onboard-panel {{desktopAuthPanelClass}}" style="width:min(460px,100%);max-height:100%;overflow:auto;">
 
                 <sc-if value="{{ob0}}" hint-placeholder-val="{{true}}">
                   <div style="position:relative;min-height:620px;border-radius:30px;overflow:hidden;background:linear-gradient(180deg,#FBFCFF 0%,#F3F6FB 56%,#EDF2F7 100%);color:#111827;padding:24px 24px 26px;text-align:center;box-shadow:0 26px 70px rgba(15,23,42,0.14);animation:urFadeUp 0.45s ease both;{{onboardLeavingCss}}">
@@ -5380,90 +5628,67 @@
                 </sc-if>
 
                 <sc-if value="{{ob1}}" hint-placeholder-val="{{false}}">
-                  <div class="ur-onboard-stage" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
-                    <div class="ur-progress-shell" style="width:100%;margin-bottom:26px;text-align:start;">
-                      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;padding-inline-start:16px;">
-                        <span style="font-size:11.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{onboardProgressLabel}}</span>
-                        <span dir="ltr" style="font-size:11px;font-weight:950;color:{{onboardThemePreview.accent}};font-variant-numeric:tabular-nums;">{{onboardProgressPercent}}</span>
-                      </div>
-                      <div class="ur-onboard-progress" style="{{onboardProgressStyle}}height:7px;background:{{onboardThemePreview.soft}};"><span style="background:linear-gradient(90deg,{{onboardThemePreview.brand}},{{onboardThemePreview.accent}});"></span></div>
-                      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;">
-                        <div style="display:flex;gap:5px;">
-                          <sc-for list="{{onboardProgressNodeItems}}" as="node" hint-placeholder-count="5">
-                            <span style="{{node.style}}width:7px;height:7px;border-radius:999px;display:block;animation:urProgressNode 1.45s ease-in-out infinite;"></span>
-                          </sc-for>
+                  <div class="ur-desktop-auth-layout">
+                    <div class="ur-desktop-auth-form">
+                      <div class="ur-desktop-auth-top">
+                        <div class="ur-desktop-auth-brand">
+                          <div class="ur-desktop-auth-brand-mark"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أ</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">U</sc-if></div>
+                          <div style="min-width:0;"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#1D1D1F);"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></div><div style="font-size:10.5px;font-weight:800;color:var(--c-sub,#606062);margin-top:2px;">Commerce OS</div></div>
                         </div>
-                        <div style="font-size:10.5px;font-weight:850;color:var(--c-tertiary,#B5AD9C);">{{onboardStepLabel}}</div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <span class="ur-desktop-auth-mode">{{desktopAuthModeLabel}}</span>
+                          <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><button class="ur-desktop-auth-language" onclick="{{setLangEn}}" aria-label="Switch to English">EN</button></sc-if>
+                          <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><button class="ur-desktop-auth-language" onclick="{{setLangAr}}" aria-label="التبديل إلى العربية">AR</button></sc-if>
+                        </div>
                       </div>
-                    </div>
-                    <div style="width:82px;height:82px;border-radius:24px;background:var(--c-surface,#FFFDF9);box-shadow:0 12px 28px rgba(43,42,39,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-                      <svg width="38" height="38" viewBox="0 0 48 48">
-                        <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/>
-                        <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/>
-                        <path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/>
-                        <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/>
-                      </svg>
-                    </div>
-                    <div style="font-size:24px;font-weight:800;color:var(--c-ink,#2B2A27);">{{googleAuthTitle}}</div>
-                    <div style="font-size:14px;line-height:1.7;color:var(--c-sub,#8A8274);max-width:340px;margin:10px auto 22px;">{{googleAuthSub}}</div>
-                    <button onclick="{{continueGoogleAuth}}" style="width:100%;padding:15px 16px;border-radius:16px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;box-shadow:0 3px 14px rgba(43,42,39,0.06);">
-                      <svg width="20" height="20" viewBox="0 0 48 48">
-                        <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/>
-                        <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/>
-                        <path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/>
-                        <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/>
-                      </svg>
-                      {{googleAuthButton}}
-                    </button>
-                    <div style="display:flex;align-items:center;gap:10px;width:100%;margin:16px 0 12px;">
-                      <div style="height:1px;background:var(--c-divider,#F1EADC);flex:1;"></div>
-                      <span style="font-size:11.5px;color:var(--c-sub,#8A8274);font-weight:700;">{{authOtherWays}}</span>
-                      <div style="height:1px;background:var(--c-divider,#F1EADC);flex:1;"></div>
-                    </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;width:100%;">
-                      <button onclick="{{chooseEmailAuth}}" style="padding:12px;border-radius:14px;border:1.5px solid {{authEmailBorder}};background:{{authEmailBg}};color:{{authEmailFg}};font-size:12.5px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-                        {{authEmailLabel}}
-                      </button>
-                      <button onclick="{{choosePhoneAuth}}" style="padding:12px;border-radius:14px;border:1.5px solid {{authPhoneBorder}};background:{{authPhoneBg}};color:{{authPhoneFg}};font-size:12.5px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 4h10v16H7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 17h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-                        {{authPhoneLabel}}
-                      </button>
-                    </div>
-                    <sc-if value="{{manualAuthSelected}}" hint-placeholder-val="{{false}}">
-                      <div style="width:100%;display:flex;flex-direction:column;gap:8px;margin-top:12px;text-align:start;">
-                        <label style="display:flex;flex-direction:column;gap:7px;">
-                          <span style="font-size:12px;font-weight:800;color:var(--c-sub,#8A8274);">{{authInputLabel}}</span>
-                          <div style="display:flex;gap:8px;">
-                            <sc-if value="{{authPhoneSelected}}" hint-placeholder-val="{{false}}">
-                              <div style="position:relative;flex:0 0 86px;min-width:86px;border-radius:14px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);overflow:hidden;">
-                                <div style="height:100%;padding:14px 26px 14px 10px;font-size:13px;font-weight:800;color:var(--c-ink,#2B2A27);text-align:center;white-space:nowrap;" dir="ltr">+{{selectedPhoneDial}}</div>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--c-sub,#8A8274);"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                <select value="{{onboardPhoneCountry}}" onChange="{{setOnboardPhoneCountry}}" aria-label="{{phoneCountryLabel}}" title="{{phoneCountryLabel}}" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-family:inherit;">
-                                  <sc-for list="{{phoneCountryList}}" as="c" hint-placeholder-count="8">
-                                    <option value="{{c.iso}}">{{c.label}}</option>
-                                  </sc-for>
-                                </select>
-                              </div>
-                            </sc-if>
-                            <input value="{{onboardAuthInput}}" onChange="{{setOnboardAuthInput}}" inputmode="{{authInputMode}}" placeholder="{{authInputPlaceholder}}" dir="ltr" style="flex:1;min-width:0;padding:14px 15px;border-radius:14px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:14px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/>
+                      <sc-if value="{{desktopAuthProgressVisible}}" hint-placeholder-val="{{true}}">
+                        <div class="ur-progress-shell" style="text-align:start;">
+                          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;padding-inline-start:16px;">
+                            <span style="font-size:11.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{onboardProgressLabel}}</span>
+                            <span dir="ltr" style="font-size:11px;font-weight:950;color:{{onboardThemePreview.accent}};font-variant-numeric:tabular-nums;">{{onboardProgressPercent}}</span>
                           </div>
-                        </label>
-                        <label style="display:flex;flex-direction:column;gap:7px;">
-                          <span style="font-size:12px;font-weight:800;color:var(--c-sub,#8A8274);">{{authPasswordLabel}}</span>
-                          <input type="password" value="{{onboardAuthPassword}}" onChange="{{setOnboardAuthPassword}}" placeholder="{{authPasswordPlaceholder}}" dir="ltr" style="width:100%;padding:14px 15px;border-radius:14px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:14px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;box-sizing:border-box;"/>
-                        </label>
-                        <sc-if value="{{authPasswordConfirmVisible}}" hint-placeholder-val="{{false}}">
-                          <label style="display:flex;flex-direction:column;gap:7px;">
-                            <span style="font-size:12px;font-weight:800;color:var(--c-sub,#8A8274);">{{authPasswordConfirmLabel}}</span>
-                            <input type="password" value="{{onboardAuthPasswordConfirm}}" onChange="{{setOnboardAuthPasswordConfirm}}" placeholder="{{authPasswordConfirmPlaceholder}}" dir="ltr" style="width:100%;padding:14px 15px;border-radius:14px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:14px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;box-sizing:border-box;"/>
-                          </label>
-                        </sc-if>
-                        <button onclick="{{continueManualAuth}}" style="width:100%;padding:14px;border-radius:15px;border:none;background:{{onboardThemePreview.accent}};color:{{onboardThemePreview.surface}};font-size:13.5px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 10px 22px color-mix(in srgb,{{onboardThemePreview.accent}} 28%, transparent);">{{manualAuthButton}}</button>
+                          <div class="ur-onboard-progress" style="{{onboardProgressStyle}}height:7px;background:{{onboardThemePreview.soft}};"><span style="background:linear-gradient(90deg,{{onboardThemePreview.brand}},{{onboardThemePreview.accent}});"></span></div>
+                          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;"><div style="display:flex;gap:5px;"><sc-for list="{{onboardProgressNodeItems}}" as="node" hint-placeholder-count="5"><span style="{{node.style}}width:7px;height:7px;border-radius:999px;display:block;animation:urProgressNode 1.45s ease-in-out infinite;"></span></sc-for></div><div style="font-size:10.5px;font-weight:850;color:var(--c-tertiary,#808082);">{{onboardStepLabel}}</div></div>
+                        </div>
+                      </sc-if>
+                      <div class="ur-desktop-auth-mark" style="background:var(--c-surface,#FFFDF9);display:flex;align-items:center;justify-content:center;">
+                        <svg width="34" height="34" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/><path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/></svg>
                       </div>
-                    </sc-if>
-                    <div style="font-size:11.5px;line-height:1.6;color:var(--c-tertiary,#B5AD9C);margin-top:12px;">{{googleAuthPrivacy}}</div>
-                    <button onclick="{{onboardBack}}" style="padding:13px 18px;border-radius:16px;border:none;background:transparent;color:var(--c-sub,#8A8274);font-size:13px;font-weight:700;cursor:pointer;margin-top:18px;font-family:inherit;">{{t.onboard.back}}</button>
+                      <div class="ur-desktop-auth-title">{{googleAuthTitle}}</div>
+                      <div class="ur-desktop-auth-copy">{{desktopAuthDescription}}</div>
+                      <button class="ur-desktop-auth-google" onclick="{{continueGoogleAuth}}" style="width:100%;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;">
+                        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/><path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/></svg>
+                        {{googleAuthButton}}
+                      </button>
+                      <div class="ur-desktop-auth-divider" style="display:flex;align-items:center;gap:10px;width:100%;"><div style="height:1px;background:var(--c-divider,#E5E5E7);flex:1;"></div><span style="font-size:12px;color:var(--c-sub,#606062);font-weight:800;">{{authOtherWays}}</span><div style="height:1px;background:var(--c-divider,#E5E5E7);flex:1;"></div></div>
+                      <div class="ur-desktop-auth-methods" style="display:grid;grid-template-columns:1fr 1fr;width:100%;">
+                        <button onclick="{{chooseEmailAuth}}" style="border:1.5px solid {{authEmailBorder}};background:{{authEmailBg}};color:{{authEmailFg}};font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>{{authEmailLabel}}</button>
+                        <button onclick="{{choosePhoneAuth}}" style="border:1.5px solid {{authPhoneBorder}};background:{{authPhoneBg}};color:{{authPhoneFg}};font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 4h10v16H7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 17h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>{{authPhoneLabel}}</button>
+                      </div>
+                      <sc-if value="{{manualAuthSelected}}" hint-placeholder-val="{{false}}">
+                        <div class="ur-desktop-auth-manual" style="width:100%;display:flex;flex-direction:column;gap:10px;text-align:start;">
+                          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:12px;font-weight:800;color:var(--c-sub,#606062);">{{authInputLabel}}</span><div style="display:flex;gap:8px;"><sc-if value="{{authPhoneSelected}}" hint-placeholder-val="{{false}}"><div style="position:relative;flex:0 0 86px;min-width:86px;border-radius:10px;border:1.5px solid var(--c-border,#D0D1D4);background:var(--c-bg,#F5F5F7);overflow:hidden;"><div style="height:100%;padding:14px 26px 14px 10px;font-size:13px;font-weight:800;color:var(--c-ink,#1D1D1F);text-align:center;white-space:nowrap;" dir="ltr">+{{selectedPhoneDial}}</div><svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--c-sub,#606062);"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><select value="{{onboardPhoneCountry}}" onChange="{{setOnboardPhoneCountry}}" aria-label="{{phoneCountryLabel}}" title="{{phoneCountryLabel}}" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-family:inherit;"><sc-for list="{{phoneCountryList}}" as="c" hint-placeholder-count="8"><option value="{{c.iso}}">{{c.label}}</option></sc-for></select></div></sc-if><input value="{{onboardAuthInput}}" onChange="{{setOnboardAuthInput}}" inputmode="{{authInputMode}}" placeholder="{{authInputPlaceholder}}" dir="ltr" style="flex:1;min-width:0;padding:14px 15px;border:1.5px solid var(--c-border,#D0D1D4);background:var(--c-surface,#FFFDF9);font-size:14px;color:var(--c-ink,#1D1D1F);outline:none;font-family:inherit;"/></div></label>
+                          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:12px;font-weight:800;color:var(--c-sub,#606062);">{{authPasswordLabel}}</span><input type="password" value="{{onboardAuthPassword}}" onChange="{{setOnboardAuthPassword}}" placeholder="{{authPasswordPlaceholder}}" dir="ltr" style="width:100%;padding:14px 15px;border:1.5px solid var(--c-border,#D0D1D4);background:var(--c-surface,#FFFDF9);font-size:14px;color:var(--c-ink,#1D1D1F);outline:none;font-family:inherit;box-sizing:border-box;"/></label>
+                          <sc-if value="{{authPasswordConfirmVisible}}" hint-placeholder-val="{{false}}"><label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:12px;font-weight:800;color:var(--c-sub,#606062);">{{authPasswordConfirmLabel}}</span><input type="password" value="{{onboardAuthPasswordConfirm}}" onChange="{{setOnboardAuthPasswordConfirm}}" placeholder="{{authPasswordConfirmPlaceholder}}" dir="ltr" style="width:100%;padding:14px 15px;border:1.5px solid var(--c-border,#D0D1D4);background:var(--c-surface,#FFFDF9);font-size:14px;color:var(--c-ink,#1D1D1F);outline:none;font-family:inherit;box-sizing:border-box;"/></label></sc-if>
+                          <button onclick="{{continueManualAuth}}" style="width:100%;min-height:50px;border-radius:10px;border:none;background:{{onboardThemePreview.accent}};color:{{onboardThemePreview.surface}};font-size:14px;font-weight:900;cursor:pointer;font-family:inherit;box-shadow:0 10px 20px color-mix(in srgb,{{onboardThemePreview.accent}} 24%, transparent);">{{manualAuthButton}}</button>
+                        </div>
+                      </sc-if>
+                      <div class="ur-desktop-auth-trust">{{desktopAuthTrust}}</div>
+                      <button class="ur-desktop-auth-back" onclick="{{onboardBack}}" style="border:none;background:transparent;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;">{{t.onboard.back}}</button>
+                    </div>
+                    <aside class="ur-desktop-auth-preview" aria-hidden="true">
+                      <div>
+                        <div class="ur-desktop-auth-preview-brand"><div style="display:flex;align-items:center;gap:11px;"><div class="ur-desktop-auth-preview-logo"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أ</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">U</sc-if></div><div><div style="font-size:15px;font-weight:950;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></div><div style="margin-top:2px;color:#64748B;font-size:10.5px;font-weight:800;">Commerce OS</div></div></div><span class="ur-desktop-auth-dashboard-status"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">جاهز</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Ready</sc-if></span></div>
+                        <div class="ur-desktop-auth-preview-title"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">ابدأ متجرك من مكان مرتب</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Start with a clear store workspace</sc-if></div>
+                        <p class="ur-desktop-auth-preview-sub"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">لوحة واحدة لمنتجاتك وطلباتك وشحنك، جاهزة من أول يوم.</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">One workspace for products, orders, and shipping from day one.</sc-if></p>
+                      </div>
+                      <div class="ur-desktop-auth-dashboard">
+                        <div class="ur-desktop-auth-dashboard-head"><div><div style="font-size:14px;font-weight:950;color:#172033;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متابعة اليوم</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Today</sc-if></div><div style="font-size:11px;color:#64748B;margin-top:3px;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متجرك الجديد</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Your new store</sc-if></div></div><span class="ur-desktop-auth-dashboard-status"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">محلي</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Local</sc-if></span></div>
+                        <div class="ur-desktop-auth-dashboard-metrics"><div><span style="display:block;font-size:11px;color:#64748B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الطلبات</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Orders</sc-if></span><b dir="ltr" style="display:block;margin-top:6px;font-size:23px;color:#172033;">0</b></div><div><span style="display:block;font-size:11px;color:#64748B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">المنتجات</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Products</sc-if></span><b dir="ltr" style="display:block;margin-top:6px;font-size:23px;color:#172033;">0</b></div><div><span style="display:block;font-size:11px;color:#64748B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">المخزون</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Stock</sc-if></span><b style="display:block;margin-top:8px;font-size:13px;color:#1E8A4B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">جاهز</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Ready</sc-if></b></div></div>
+                        <div class="ur-desktop-auth-dashboard-row"><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">طلبات تنتظر إجراء</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Orders awaiting action</sc-if></span><b dir="ltr" style="color:#172033;">0</b></div>
+                        <div class="ur-desktop-auth-dashboard-row"><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الشحن والتوصيل</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Shipping</sc-if></span><span class="ur-desktop-auth-dashboard-status"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">جاهز</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Ready</sc-if></span></div>
+                      </div>
+                    </aside>
                   </div>
                 </sc-if>
 
@@ -19291,6 +19516,21 @@ ZW|Zimbabwe|263
       ? 'لن ننشر أي شيء على حسابك. معلوماتك تبقى محفوظة وآمنة.'
       : 'We will not post anything to your account. Your information stays private and secure.';
     vals.authOtherWays = isAr ? 'أو استخدم طريقة أخرى' : 'Or use another method';
+    vals.desktopAuthPanelClass = s.onboardStep === 1 ? 'ur-desktop-auth-panel' : '';
+    vals.desktopAuthProgressVisible = s.onboardAuthMode === 'signup';
+    vals.desktopAuthModeLabel = isAr
+      ? (s.onboardAuthMode === 'login' ? 'تسجيل دخول آمن' : 'حساب جديد')
+      : (s.onboardAuthMode === 'login' ? 'Secure sign in' : 'New account');
+    vals.desktopAuthDescription = isAr
+      ? (s.onboardAuthMode === 'login'
+        ? 'ادخل إلى متجرك من أي جهاز باستخدام حسابك المعتاد.'
+        : 'يُستخدم حساب Google للدخول فقط. بيانات متجرك تبقى محفوظة في أور.')
+      : (s.onboardAuthMode === 'login'
+        ? 'Access your store from any device with your usual account.'
+        : 'Google is used only to sign in. Your store data stays in UR.');
+    vals.desktopAuthTrust = isAr
+      ? 'لن ننشر أي شيء على حسابك.'
+      : 'We will not post anything to your account.';
     vals.authEmailLabel = isAr ? 'البريد الإلكتروني' : 'Email';
     vals.authPhoneLabel = isAr ? 'رقم الهاتف' : 'Phone';
     vals.authInputLabel = vals.authEmailSelected
