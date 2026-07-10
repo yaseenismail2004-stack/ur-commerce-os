@@ -5668,7 +5668,7 @@
     </sc-if>
 
     <sc-if value="{{desktopWizardVisible}}" hint-placeholder-val="{{false}}">
-      <x-import component-from-global-scope="ChromeWindow" from="./browser-window.js?v=20260709-precompiled" width="{{frameWidth}}" height="{{frameHeight}}" url="{{desktopUrl}}" hint-size="1440,900">
+      <x-import component-from-global-scope="ChromeWindow" from="./browser-window.js?v=20260710-viewport-native" width="{{frameWidth}}" height="{{frameHeight}}" url="{{desktopUrl}}" hint-size="1440,900">
         <div class="ur-app-shell {{screenMotionClass}}" dir="{{dir}}" style="{{themeVars}}height:100%;display:flex;background:var(--c-bg,#F7F4EE);font-family:{{appFontFamily}};position:relative;overflow:hidden;transition:background 0.3s ease;{{desktopWizardShellStyle}}">
 
           <sc-if value="{{legacyDesktopOnboardVisible}}" hint-placeholder-val="{{true}}">
