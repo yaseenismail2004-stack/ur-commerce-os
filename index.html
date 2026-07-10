@@ -14379,12 +14379,13 @@ ZW|Zimbabwe|263
       const { body: config } = await this.backendJson('/api/auth/google/config', {}, { auth: false });
       if (!config.configured) return false;
       const storeName = encodeURIComponent(this.state.onboardStoreName || '');
-      const startUrl = this.authApiUrl(`/api/auth/google/start?mode=${encodeURIComponent(mode)}&storeName=${storeName}`);
+      const appOrigin = encodeURIComponent(window.location.origin);
+      const startUrl = this.authApiUrl(`/api/auth/google/start?mode=${encodeURIComponent(mode)}&storeName=${storeName}&origin=${appOrigin}`);
       const backendOrigin = new URL(this.authApiUrl('/')).origin;
       const popup = window.open(startUrl, 'urGoogleAuth', 'width=520,height=680');
       if (!popup) {
         this.showToast(isAr ? 'المتصفح منع نافذة Google' : 'Browser blocked the Google window');
-        return false;
+        return 'failed';
       }
       this.setState({ authLoading: true, authStatus: 'connecting' });
       return await new Promise(resolve => {
@@ -14417,25 +14418,26 @@ ZW|Zimbabwe|263
           }
           this.setState({ authLoading: false, authStatus: 'offline', onboardLaunching: false });
           this.showToast(payload.error || (isAr ? 'تعذر تسجيل الدخول عبر Google' : 'Google sign-in failed'));
-          finish(false);
+          finish('failed');
         };
         window.addEventListener('message', onMessage);
         closedTimer = setInterval(() => {
           if (popup.closed) {
             this.setState({ authLoading: false, onboardLaunching: false });
-            finish(false);
+            finish('failed');
           }
         }, 600);
         timeoutTimer = setTimeout(() => {
           try { popup.close(); } catch (err) {}
           this.setState({ authLoading: false, authStatus: 'offline', onboardLaunching: false });
           this.showToast(isAr ? 'انتهى وقت تسجيل Google' : 'Google sign-in timed out');
-          finish(false);
+          finish('failed');
         }, 120000);
       });
     } catch (err) {
       this.setState({ authLoading: false, authStatus: 'offline', onboardLaunching: false });
-      return false;
+      this.showToast(isAr ? 'تعذر الاتصال بخدمة Google' : 'Could not connect to Google sign-in');
+      return 'failed';
     }
   };
   completeBackendAuth = async ({ mode = 'signup', method = 'google', identifier = '', password = '', storeName = '', storePhone = '', storeAddress = '', storeSlug = '', openDays = '', openHours = '', logoDataUrl = '', logoName = '' } = {}) => {
@@ -14517,9 +14519,10 @@ ZW|Zimbabwe|263
   startGoogleLogin = () => this.playOnboardStart('login');
   continueGoogleAuth = async () => {
     const usedGoogle = await this.startGoogleOAuthFlow(this.state.onboardAuthMode || 'login');
-    if (!usedGoogle) {
+    if (usedGoogle !== true) {
       this.setState({ authLoading: false, onboardLaunching: false });
-      this.showToast(this.state.lang === 'ar' ? 'تسجيل Google غير مهيأ حالياً' : 'Google sign-in is not configured');
+      if (usedGoogle === false) this.showToast(this.state.lang === 'ar' ? 'تسجيل Google غير مهيأ حالياً' : 'Google sign-in is not configured');
+      return;
     }
     if (this.state.onboardAuthMode === 'login') return;
     this.setState({ onboardStep: 2, googleConnected: true, onboardAuthMethod: 'google' });
@@ -15044,9 +15047,9 @@ ZW|Zimbabwe|263
     };
     if (method === 'google') {
       const usedGoogle = await this.startGoogleOAuthFlow('signup');
-      if (!usedGoogle) {
+      if (usedGoogle !== true) {
         this.setState({ onboardLaunching: false });
-        this.showToast(this.state.lang === 'ar' ? 'تسجيل Google غير مهيأ حالياً' : 'Google sign-in is not configured');
+        if (usedGoogle === false) this.showToast(this.state.lang === 'ar' ? 'تسجيل Google غير مهيأ حالياً' : 'Google sign-in is not configured');
       }
       return;
     }
