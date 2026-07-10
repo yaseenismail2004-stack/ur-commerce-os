@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UR Commerce OS</title>
+<title>أور</title>
 <link rel="icon" href="data:,">
 <script src="./support.js"></script>
 </head>
@@ -1737,10 +1737,10 @@
         min-height:100%;
         height:100%;
         display:grid;
-        grid-template-columns:minmax(0,.9fr) minmax(420px,1fr);
+        grid-template-columns:minmax(0,.86fr) minmax(520px,1.14fr);
         grid-template-areas:"form preview";
         overflow:hidden;
-        background:var(--c-surface,#FFFDF9);
+        background:#F5F7FA;
         border-radius:0;
       }
       #dc-root .ur-desktop-auth-form {
@@ -1749,21 +1749,25 @@
         padding:clamp(32px,5vw,80px);
         display:flex;
         flex-direction:column;
+        align-items:center;
         justify-content:center;
         overflow:auto;
-        background:var(--c-surface,#FFFDF9);
+        background:#FFFDFC;
         text-align:start;
       }
+      #dc-root .ur-desktop-auth-form > * { width:min(432px,100%); }
       #dc-root .ur-desktop-auth-preview {
         grid-area:preview;
         min-width:0;
         padding:clamp(32px,5vw,80px);
         display:flex;
         flex-direction:column;
-        justify-content:space-between;
-        background:#EEF4FA;
-        border-inline-end:1px solid #D7E1EC;
-        color:#172033;
+        justify-content:flex-start;
+        position:relative;
+        overflow:hidden;
+        background:#172B43;
+        color:#FFFFFF;
+      }
       }
       #dc-root .ur-desktop-auth-top {
         display:flex;
@@ -1803,43 +1807,16 @@
         font-weight:900;
         cursor:pointer;
       }
-      #dc-root .ur-desktop-auth-mode {
-        display:inline-flex;
-        align-items:center;
-        min-height:28px;
-        padding:0 9px;
-        border-radius:999px;
-        background:var(--c-info-bg,#E5ECFD);
-        color:var(--c-info,#2563EB);
-        font-size:11px;
-        font-weight:900;
-        white-space:nowrap;
-      }
       #dc-root .ur-desktop-auth-form .ur-progress-shell {
         width:100% !important;
         margin:0 0 26px !important;
       }
-      #dc-root .ur-desktop-auth-mark {
-        width:64px !important;
-        height:64px !important;
-        margin:0 0 16px !important;
-        border-radius:18px !important;
-        box-shadow:0 10px 22px rgba(29,29,31,.09) !important;
-      }
       #dc-root .ur-desktop-auth-title {
-        margin:0 0 8px !important;
+        margin:0 0 28px !important;
         color:var(--c-ink,#1D1D1F) !important;
-        font-size:28px !important;
+        font-size:clamp(28px,2.25vw,34px) !important;
         font-weight:950 !important;
-        line-height:1.35 !important;
-        text-align:start !important;
-      }
-      #dc-root .ur-desktop-auth-copy {
-        max-width:450px !important;
-        margin:0 0 26px !important;
-        color:var(--c-sub-2,#606062) !important;
-        font-size:15px !important;
-        line-height:1.75 !important;
+        line-height:1.28 !important;
         text-align:start !important;
       }
       #dc-root .ur-desktop-auth-google {
@@ -1868,16 +1845,10 @@
         min-height:48px !important;
         border-radius:10px !important;
       }
-      #dc-root .ur-desktop-auth-trust {
-        margin-top:16px !important;
-        color:var(--c-sub,#606062) !important;
-        font-size:13px !important;
-        text-align:start !important;
-      }
       #dc-root .ur-desktop-auth-back {
         width:auto !important;
         min-height:42px !important;
-        margin-top:16px !important;
+        margin-top:22px !important;
         padding:0 2px !important;
         align-self:flex-start;
         color:var(--c-sub-2,#606062) !important;
@@ -1890,7 +1861,6 @@
       #dc-root .ur-desktop-auth-preview-brand {
         display:flex;
         align-items:center;
-        justify-content:space-between;
         gap:14px;
       }
       #dc-root .ur-desktop-auth-preview-logo {
@@ -1899,72 +1869,37 @@
         display:grid;
         place-items:center;
         border-radius:13px;
-        background:#1D1D1F;
-        color:#FFFFFF;
+        background:#FFFFFF;
+        color:#172B43;
         font-size:18px;
         font-weight:950;
       }
+      #dc-root .ur-desktop-auth-preview-brand > div:last-child { color:#FFFFFF; }
+      #dc-root .ur-desktop-auth-preview-copy {
+        max-width:520px;
+        margin-top:clamp(128px,18vh,204px);
+      }
       #dc-root .ur-desktop-auth-preview-title {
-        margin:42px 0 12px;
+        margin:0;
         font-family:'Noto Kufi Arabic',sans-serif;
-        font-size:30px;
+        font-size:clamp(30px,3.1vw,44px);
         font-weight:950;
-        line-height:1.45;
+        line-height:1.35;
         letter-spacing:0;
       }
       #dc-root .ur-desktop-auth-preview-sub {
-        max-width:360px;
-        margin:0;
-        color:#536174;
-        font-size:14px;
+        max-width:320px;
+        margin:16px 0 0;
+        color:rgba(255,255,255,.72);
+        font-size:15px;
+        font-weight:650;
         line-height:1.8;
       }
-      #dc-root .ur-desktop-auth-dashboard {
-        margin-top:auto;
-        border:1px solid #D8E1EB;
-        border-radius:14px;
-        background:#FFFFFF;
-        box-shadow:0 16px 36px rgba(31,49,72,.10);
-        overflow:hidden;
-      }
-      #dc-root .ur-desktop-auth-dashboard-head,
-      #dc-root .ur-desktop-auth-dashboard-row {
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:12px;
-      }
-      #dc-root .ur-desktop-auth-dashboard-head {
-        padding:16px 18px;
-        border-bottom:1px solid #E5EBF1;
-      }
-      #dc-root .ur-desktop-auth-dashboard-metrics {
-        display:grid;
-        grid-template-columns:repeat(3,minmax(0,1fr));
-        border-bottom:1px solid #E5EBF1;
-      }
-      #dc-root .ur-desktop-auth-dashboard-metrics > div {
-        min-width:0;
-        padding:16px 14px;
-      }
-      #dc-root .ur-desktop-auth-dashboard-metrics > div + div {
-        border-inline-start:1px solid #E5EBF1;
-      }
-      #dc-root .ur-desktop-auth-dashboard-row {
-        padding:14px 18px;
-        color:#536174;
-        font-size:12px;
-      }
-      #dc-root .ur-desktop-auth-dashboard-row + .ur-desktop-auth-dashboard-row {
-        border-top:1px solid #EEF2F6;
-      }
-      #dc-root .ur-desktop-auth-dashboard-status {
-        padding:5px 8px;
-        border-radius:999px;
-        background:#E4F8EC;
-        color:#1E8A4B;
-        font-size:11px;
-        font-weight:900;
+      #dc-root .ur-desktop-auth-preview-rule {
+        width:58px;
+        height:2px;
+        margin-top:24px;
+        background:#51B8FF;
       }
       #dc-root .ur-desktop-shell {
         width:100% !important;
@@ -2052,11 +1987,11 @@
         max-height:calc(100vh - 28px) !important;
       }
       #dc-root .ur-desktop-side {
-        padding:14px 12px !important;
-        gap:10px !important;
+        padding:10px 12px !important;
+        gap:8px !important;
       }
       #dc-root .ur-desktop-brand {
-        min-height:46px !important;
+        min-height:42px !important;
         padding-bottom:0 !important;
       }
       #dc-root .ur-desktop-logo {
@@ -2065,21 +2000,22 @@
         border-radius:13px !important;
       }
       #dc-root .ur-desktop-nav-section {
-        gap:3px !important;
+        gap:2px !important;
       }
       #dc-root .ur-desktop-section-label {
-        padding-bottom:3px !important;
-        font-size:9.5px !important;
+        display:none !important;
       }
       #dc-root .ur-desktop-nav-item {
-        min-height:36px !important;
-        border-radius:12px !important;
+        min-height:34px !important;
+        height:34px !important;
+        padding:0 9px !important;
+        border-radius:11px !important;
         gap:8px !important;
       }
       #dc-root .ur-desktop-nav-icon {
-        width:24px !important;
-        height:24px !important;
-        border-radius:9px !important;
+        width:22px !important;
+        height:22px !important;
+        border-radius:8px !important;
       }
       #dc-root .ur-desktop-topbar {
         min-height:66px !important;
@@ -2318,6 +2254,39 @@
     #dc-root .ur-app-shell table,
     #dc-root .ur-app-shell [style*="display:grid"] {
       min-width:0;
+    }
+    @media (min-width:900px) and (max-height:860px) {
+      #dc-root .ur-desktop-side {
+        padding:10px 12px !important;
+        gap:8px !important;
+      }
+      #dc-root .ur-desktop-brand {
+        min-height:42px !important;
+        padding-bottom:0 !important;
+      }
+      #dc-root .ur-desktop-logo {
+        width:36px !important;
+        height:36px !important;
+        border-radius:13px !important;
+      }
+      #dc-root .ur-desktop-nav-section {
+        gap:2px !important;
+      }
+      #dc-root .ur-desktop-section-label {
+        display:none !important;
+      }
+      #dc-root .ur-desktop-nav-item {
+        min-height:34px !important;
+        height:34px !important;
+        padding:0 9px !important;
+        border-radius:11px !important;
+        gap:8px !important;
+      }
+      #dc-root .ur-desktop-nav-icon {
+        width:22px !important;
+        height:22px !important;
+        border-radius:8px !important;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       #dc-root *, #dc-root [style*="animation:"] { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
@@ -6092,14 +6061,13 @@
 
                 <sc-if value="{{ob1}}" hint-placeholder-val="{{false}}">
                   <div class="ur-desktop-auth-layout">
-                    <div class="ur-desktop-auth-form">
+                      <div class="ur-desktop-auth-form">
                       <div class="ur-desktop-auth-top">
                         <div class="ur-desktop-auth-brand">
                           <div class="ur-desktop-auth-brand-mark"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أ</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">U</sc-if></div>
-                          <div style="min-width:0;"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#1D1D1F);"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></div><div style="font-size:10.5px;font-weight:800;color:var(--c-sub,#606062);margin-top:2px;">Commerce OS</div></div>
+                          <div style="min-width:0;font-size:15px;font-weight:950;color:var(--c-ink,#1D1D1F);"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></div>
                         </div>
                         <div style="display:flex;align-items:center;gap:8px;">
-                          <span class="ur-desktop-auth-mode">{{desktopAuthModeLabel}}</span>
                           <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><button class="ur-desktop-auth-language" onclick="{{setLangEn}}" aria-label="Switch to English">EN</button></sc-if>
                           <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><button class="ur-desktop-auth-language" onclick="{{setLangAr}}" aria-label="التبديل إلى العربية">AR</button></sc-if>
                         </div>
@@ -6114,16 +6082,12 @@
                           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;"><div style="display:flex;gap:5px;"><sc-for list="{{onboardProgressNodeItems}}" as="node" hint-placeholder-count="5"><span style="{{node.style}}width:7px;height:7px;border-radius:999px;display:block;animation:urProgressNode 1.45s ease-in-out infinite;"></span></sc-for></div><div style="font-size:10.5px;font-weight:850;color:var(--c-tertiary,#808082);">{{onboardStepLabel}}</div></div>
                         </div>
                       </sc-if>
-                      <div class="ur-desktop-auth-mark" style="background:var(--c-surface,#FFFDF9);display:flex;align-items:center;justify-content:center;">
-                        <svg width="34" height="34" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/><path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/></svg>
-                      </div>
-                      <div class="ur-desktop-auth-title">{{googleAuthTitle}}</div>
-                      <div class="ur-desktop-auth-copy">{{desktopAuthDescription}}</div>
+                      <div class="ur-desktop-auth-title">{{desktopAuthTitle}}</div>
                       <button class="ur-desktop-auth-google" onclick="{{continueGoogleAuth}}" style="width:100%;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;">
                         <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/><path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/></svg>
                         {{googleAuthButton}}
                       </button>
-                      <div class="ur-desktop-auth-divider" style="display:flex;align-items:center;gap:10px;width:100%;"><div style="height:1px;background:var(--c-divider,#E5E5E7);flex:1;"></div><span style="font-size:12px;color:var(--c-sub,#606062);font-weight:800;">{{authOtherWays}}</span><div style="height:1px;background:var(--c-divider,#E5E5E7);flex:1;"></div></div>
+                      <div class="ur-desktop-auth-divider" style="display:flex;align-items:center;gap:10px;width:100%;"><div style="height:1px;background:var(--c-divider,#E5E5E7);flex:1;"></div><span style="font-size:12px;color:var(--c-sub,#606062);font-weight:800;">{{desktopAuthOtherWays}}</span><div style="height:1px;background:var(--c-divider,#E5E5E7);flex:1;"></div></div>
                       <div class="ur-desktop-auth-methods" style="display:grid;grid-template-columns:1fr 1fr;width:100%;">
                         <button onclick="{{chooseEmailAuth}}" style="border:1.5px solid {{authEmailBorder}};background:{{authEmailBg}};color:{{authEmailFg}};font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>{{authEmailLabel}}</button>
                         <button onclick="{{choosePhoneAuth}}" style="border:1.5px solid {{authPhoneBorder}};background:{{authPhoneBg}};color:{{authPhoneFg}};font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 4h10v16H7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 17h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>{{authPhoneLabel}}</button>
@@ -6136,20 +6100,14 @@
                           <button onclick="{{continueManualAuth}}" style="width:100%;min-height:50px;border-radius:10px;border:none;background:{{onboardThemePreview.accent}};color:{{onboardThemePreview.surface}};font-size:14px;font-weight:900;cursor:pointer;font-family:inherit;box-shadow:0 10px 20px color-mix(in srgb,{{onboardThemePreview.accent}} 24%, transparent);">{{manualAuthButton}}</button>
                         </div>
                       </sc-if>
-                      <div class="ur-desktop-auth-trust">{{desktopAuthTrust}}</div>
                       <button class="ur-desktop-auth-back" onclick="{{onboardBack}}" style="border:none;background:transparent;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;">{{t.onboard.back}}</button>
                     </div>
-                    <aside class="ur-desktop-auth-preview" aria-hidden="true">
-                      <div>
-                        <div class="ur-desktop-auth-preview-brand"><div style="display:flex;align-items:center;gap:11px;"><div class="ur-desktop-auth-preview-logo"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أ</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">U</sc-if></div><div><div style="font-size:15px;font-weight:950;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></div><div style="margin-top:2px;color:#64748B;font-size:10.5px;font-weight:800;">Commerce OS</div></div></div></div>
-                        <div class="ur-desktop-auth-preview-title"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">إدارة متجرك من لوحة واحدة</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Manage your store from one workspace</sc-if></div>
-                        <p class="ur-desktop-auth-preview-sub"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">تابع المنتجات والطلبات والشحن من لوحة واحدة.</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Manage products, orders, and shipping from one workspace.</sc-if></p>
-                      </div>
-                      <div class="ur-desktop-auth-dashboard">
-                        <div class="ur-desktop-auth-dashboard-head"><div><div style="font-size:14px;font-weight:950;color:#172033;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متابعة اليوم</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Today</sc-if></div><div style="font-size:11px;color:#64748B;margin-top:3px;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">ملخص المتجر</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Store summary</sc-if></div></div></div>
-                        <div class="ur-desktop-auth-dashboard-metrics"><div><span style="display:block;font-size:11px;color:#64748B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الطلبات</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Orders</sc-if></span><b dir="ltr" style="display:block;margin-top:6px;font-size:23px;color:#172033;">0</b></div><div><span style="display:block;font-size:11px;color:#64748B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">المنتجات</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Products</sc-if></span><b dir="ltr" style="display:block;margin-top:6px;font-size:23px;color:#172033;">0</b></div><div><span style="display:block;font-size:11px;color:#64748B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">المخزون</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Stock</sc-if></span><b style="display:block;margin-top:8px;font-size:13px;color:#1E8A4B;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">جاهز</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Ready</sc-if></b></div></div>
-                        <div class="ur-desktop-auth-dashboard-row"><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">طلبات تنتظر إجراء</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Orders awaiting action</sc-if></span><b dir="ltr" style="color:#172033;">0</b></div>
-                        <div class="ur-desktop-auth-dashboard-row"><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الشحن والتوصيل</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Shipping</sc-if></span><span class="ur-desktop-auth-dashboard-status"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">جاهز</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Ready</sc-if></span></div>
+                    <aside class="ur-desktop-auth-preview">
+                      <div class="ur-desktop-auth-preview-brand"><div style="display:flex;align-items:center;gap:11px;"><div class="ur-desktop-auth-preview-logo"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أ</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">U</sc-if></div><div style="font-size:15px;font-weight:950;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></div></div></div>
+                      <div class="ur-desktop-auth-preview-copy">
+                        <div class="ur-desktop-auth-preview-title"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متجرك، بترتيب واضح.</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Your store, clearly organised.</sc-if></div>
+                        <p class="ur-desktop-auth-preview-sub"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">سجّل دخولك وكمل شغلك من المكان اللي وصلت له.</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Sign in and continue where you left off.</sc-if></p>
+                        <div class="ur-desktop-auth-preview-rule"></div>
                       </div>
                     </aside>
                   </div>
@@ -19979,6 +19937,10 @@ ZW|Zimbabwe|263
     vals.desktopAuthModeLabel = isAr
       ? (s.onboardAuthMode === 'login' ? 'تسجيل دخول آمن' : 'حساب جديد')
       : (s.onboardAuthMode === 'login' ? 'Secure sign in' : 'New account');
+    vals.desktopAuthTitle = isAr
+      ? (s.onboardAuthMode === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب')
+      : (s.onboardAuthMode === 'login' ? 'Sign in' : 'Create an account');
+    vals.desktopAuthOtherWays = isAr ? 'أو' : 'or';
     vals.desktopAuthDescription = isAr
       ? (s.onboardAuthMethod === 'email'
         ? 'استخدم بريدك الإلكتروني وكلمة السر للوصول إلى متجرك.'
