@@ -1617,7 +1617,7 @@
   <div class="ur-preview-stage" style="display:flex;justify-content:center;align-items:flex-start;padding:28px 24px 100px;">
 
     <sc-if value="{{isMobileDevice}}" hint-placeholder-val="{{true}}">
-      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx?v=20260708-mobile-native" width="{{402}}" height="{{874}}" hint-size="402,874">
+      <x-import component-from-global-scope="IOSDevice" from="./ios-frame.js?v=20260709-precompiled" width="{{402}}" height="{{874}}" hint-size="402,874">
         <div class="ur-app-shell {{screenMotionClass}}" dir="{{dir}}" style="{{themeVars}}height:100%;display:flex;flex-direction:column;background:var(--c-bg,#F7F4EE);font-family:{{appFontFamily}};position:relative;overflow:hidden;transition:background 0.3s ease;">
 
           <sc-if value="{{notOnboarded}}" hint-placeholder-val="{{true}}">
@@ -3682,11 +3682,12 @@
                             </div>
                             <div style="border-radius:18px;background:var(--c-surface,#FFFDF9);padding:14px;display:flex;flex-direction:column;gap:10px;">
                               <div><div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securitySigninTitle}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);line-height:1.7;margin-top:3px;">{{securitySigninSub}}</div></div>
+                              <input type="password" value="{{securityCurrentPassword}}" onChange="{{setSecurityCurrentPassword}}" placeholder="{{settingsCurrentPasswordTitle}}" autocomplete="current-password" style="width:100%;padding:13px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:13px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/>
                               <input type="password" value="{{securityPassword}}" onChange="{{setSecurityPassword}}" placeholder="{{settingsPasswordTitle}}" autocomplete="new-password" style="width:100%;padding:13px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:13px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/>
                               <input type="password" value="{{securityConfirm}}" onChange="{{setSecurityConfirm}}" placeholder="{{settingsPasswordConfirmTitle}}" autocomplete="new-password" style="width:100%;padding:13px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:13px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/>
-                              <input type="password" value="{{securityPin}}" onChange="{{setSecurityPin}}" placeholder="{{securityPinPlaceholder}}" inputmode="numeric" autocomplete="off" style="width:100%;padding:13px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:13px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/>
-                              <button onclick="{{toggleTwoFactor}}" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-bg,#F7F4EE);cursor:pointer;font-family:inherit;text-align:start;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{settingsTwoFactorTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{settingsTwoFactorSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{twoFactorTrack}};position:relative;transition:background .18s ease;"><span style="position:absolute;top:2px;inset-inline-start:{{twoFactorKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);transition:inset-inline-start .18s ease;"></span></span></button>
-                              <button onclick="{{toggleSecurityRequirePin}}" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-bg,#F7F4EE);cursor:pointer;font-family:inherit;text-align:start;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securityRequirePinTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityPinSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{securityRequirePinTrack}};position:relative;transition:background .18s ease;"><span style="position:absolute;top:2px;inset-inline-start:{{securityRequirePinKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);transition:inset-inline-start .18s ease;"></span></span></button>
+                              <input type="password" value="" placeholder="{{securityPinPlaceholder}}" disabled aria-disabled="true" autocomplete="off" style="width:100%;padding:13px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:13px;color:var(--c-sub,#8A8274);outline:none;font-family:inherit;opacity:.6;cursor:not-allowed;"/>
+                              <button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-bg,#F7F4EE);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{settingsTwoFactorTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{settingsTwoFactorSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:var(--c-border,#EAE1D0);position:relative;"><span style="position:absolute;top:2px;inset-inline-start:2px;width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);"></span></span></button>
+                              <button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-bg,#F7F4EE);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securityRequirePinTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityPinSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:var(--c-border,#EAE1D0);position:relative;"><span style="position:absolute;top:2px;inset-inline-start:2px;width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);"></span></span></button>
                             </div>
                             <div style="border-radius:18px;background:var(--c-surface,#FFFDF9);padding:14px;display:flex;flex-direction:column;gap:12px;">
                               <div><div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);">{{accessTitle}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);line-height:1.7;margin-top:3px;">{{accessSub}}</div></div>
@@ -5325,7 +5326,7 @@
     </sc-if>
 
     <sc-if value="{{desktopWizardVisible}}" hint-placeholder-val="{{false}}">
-      <x-import component-from-global-scope="ChromeWindow" from="./browser-window.jsx" width="{{frameWidth}}" height="{{frameHeight}}" url="{{desktopUrl}}" hint-size="1440,900">
+      <x-import component-from-global-scope="ChromeWindow" from="./browser-window.js?v=20260709-precompiled" width="{{frameWidth}}" height="{{frameHeight}}" url="{{desktopUrl}}" hint-size="1440,900">
         <div class="ur-app-shell {{screenMotionClass}}" dir="{{dir}}" style="{{themeVars}}height:100%;display:flex;background:var(--c-bg,#F7F4EE);font-family:{{appFontFamily}};position:relative;overflow:hidden;transition:background 0.3s ease;{{desktopWizardShellStyle}}">
 
           <sc-if value="{{legacyDesktopOnboardVisible}}" hint-placeholder-val="{{true}}">
@@ -7331,14 +7332,15 @@
                           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
                             <div style="border-radius:20px;background:var(--c-bg,#F7F4EE);padding:16px;border:1px solid var(--c-border,#EAE1D0);display:flex;flex-direction:column;gap:11px;">
                               <div><div style="font-size:14px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securitySigninTitle}}</div><div style="font-size:11.5px;color:var(--c-sub,#8A8274);line-height:1.7;margin-top:3px;">{{securitySigninSub}}</div></div>
+                              <input type="password" value="{{securityCurrentPassword}}" onChange="{{setSecurityCurrentPassword}}" placeholder="{{settingsCurrentPasswordTitle}}" autocomplete="current-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/>
                               <input type="password" value="{{securityPassword}}" onChange="{{setSecurityPassword}}" placeholder="{{settingsPasswordTitle}}" autocomplete="new-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/>
                               <input type="password" value="{{securityConfirm}}" onChange="{{setSecurityConfirm}}" placeholder="{{settingsPasswordConfirmTitle}}" autocomplete="new-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/>
-                              <input type="password" value="{{securityPin}}" onChange="{{setSecurityPin}}" placeholder="{{securityPinPlaceholder}}" inputmode="numeric" autocomplete="off" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/>
+                              <input type="password" value="" placeholder="{{securityPinPlaceholder}}" disabled aria-disabled="true" autocomplete="off" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-sub,#8A8274);font-family:inherit;outline:none;opacity:.6;cursor:not-allowed;"/>
                             </div>
                             <div style="border-radius:20px;background:var(--c-bg,#F7F4EE);padding:16px;border:1px solid var(--c-border,#EAE1D0);display:flex;flex-direction:column;gap:11px;">
-                              <button onclick="{{toggleTwoFactor}}" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:pointer;font-family:inherit;text-align:start;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{settingsTwoFactorTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{settingsTwoFactorSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{twoFactorTrack}};position:relative;transition:background .18s ease;"><span style="position:absolute;top:2px;inset-inline-start:{{twoFactorKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);transition:inset-inline-start .18s ease;"></span></span></button>
-                              <button onclick="{{toggleSecurityRequirePin}}" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:pointer;font-family:inherit;text-align:start;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securityRequirePinTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityPinSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{securityRequirePinTrack}};position:relative;transition:background .18s ease;"><span style="position:absolute;top:2px;inset-inline-start:{{securityRequirePinKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);transition:inset-inline-start .18s ease;"></span></span></button>
-                              <button onclick="{{toggleTrustedDeviceOnly}}" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:pointer;font-family:inherit;text-align:start;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securityTrustedDeviceTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityTrustedDeviceSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{securityTrustedDeviceTrack}};position:relative;transition:background .18s ease;"><span style="position:absolute;top:2px;inset-inline-start:{{securityTrustedDeviceKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);transition:inset-inline-start .18s ease;"></span></span></button>
+                              <button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{settingsTwoFactorTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{settingsTwoFactorSub}}</span></span></button>
+                              <button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securityRequirePinTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityPinSub}}</span></span></button>
+                              <button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:13px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><span style="display:block;font-size:12.5px;font-weight:900;color:var(--c-ink,#2B2A27);">{{securityTrustedDeviceTitle}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityTrustedDeviceSub}}</span></span></button>
                               <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;"><sc-for list="{{securitySessionOptions}}" as="opt" hint-placeholder-count="4"><button onclick="{{opt.selectFn}}" style="padding:9px;border-radius:12px;border:1.5px solid {{opt.border}};background:{{opt.bg}};color:{{opt.fg}};font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{opt.label}}</button></sc-for></div>
                             </div>
                           </div>
@@ -8816,8 +8818,8 @@
                       <div style="display:grid;gap:16px;">
                         <section style="border-radius:22px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:18px;"><div style="font-size:22px;font-weight:950;color:var(--c-ink,#2B2A27);">{{securityHeroTitle}}</div><div style="font-size:12.5px;color:var(--c-sub,#8A8274);line-height:1.8;margin-top:4px;">{{securityHeroSub}}</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px;"><sc-for list="{{securityStatusCards}}" as="card" hint-placeholder-count="3"><div style="padding:13px;border-radius:16px;background:{{card.bg}};border:1px solid var(--c-border,#EAE1D0);"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-size:11px;font-weight:950;color:var(--c-sub,#8A8274);">{{card.label}}</span><b style="font-size:13px;color:{{card.fg}};">{{card.value}}</b></div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:5px;">{{card.sub}}</div></div></sc-for></div></section>
                         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
-                          <section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:10px;"><div><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);">{{securitySigninTitle}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:3px;">{{securitySigninSub}}</div></div><input type="password" value="{{securityPassword}}" onChange="{{setSecurityPassword}}" placeholder="{{settingsPasswordTitle}}" autocomplete="new-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/><input type="password" value="{{securityConfirm}}" onChange="{{setSecurityConfirm}}" placeholder="{{settingsPasswordConfirmTitle}}" autocomplete="new-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/><input type="password" value="{{securityPin}}" onChange="{{setSecurityPin}}" placeholder="{{securityPinPlaceholder}}" inputmode="numeric" autocomplete="off" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/></section>
-                          <section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:10px;"><button onclick="{{toggleTwoFactor}}" style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:pointer;font-family:inherit;text-align:start;"><span><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{settingsTwoFactorTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{settingsTwoFactorSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{twoFactorTrack}};position:relative;"><span style="position:absolute;top:2px;inset-inline-start:{{twoFactorKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);"></span></span></button><button onclick="{{toggleSecurityRequirePin}}" style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:pointer;font-family:inherit;text-align:start;"><span><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{securityRequirePinTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityPinSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{securityRequirePinTrack}};position:relative;"><span style="position:absolute;top:2px;inset-inline-start:{{securityRequirePinKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);"></span></span></button><button onclick="{{toggleTrustedDeviceOnly}}" style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:pointer;font-family:inherit;text-align:start;"><span><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{securityTrustedDeviceTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityTrustedDeviceSub}}</span></span><span style="width:40px;height:22px;border-radius:999px;background:{{securityTrustedDeviceTrack}};position:relative;"><span style="position:absolute;top:2px;inset-inline-start:{{securityTrustedDeviceKnob}};width:18px;height:18px;border-radius:50%;background:var(--c-on-gold,#FFFDF9);"></span></span></button><div style="display:flex;gap:7px;flex-wrap:wrap;"><sc-for list="{{securitySessionOptions}}" as="opt" hint-placeholder-count="4"><button onclick="{{opt.selectFn}}" style="padding:9px 11px;border-radius:999px;border:1.5px solid {{opt.border}};background:{{opt.bg}};color:{{opt.fg}};font-size:11px;font-weight:950;cursor:pointer;font-family:inherit;">{{opt.label}}</button></sc-for></div></section>
+                          <section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:10px;"><div><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);">{{securitySigninTitle}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:3px;">{{securitySigninSub}}</div></div><input type="password" value="{{securityCurrentPassword}}" onChange="{{setSecurityCurrentPassword}}" placeholder="{{settingsCurrentPasswordTitle}}" autocomplete="current-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/><input type="password" value="{{securityPassword}}" onChange="{{setSecurityPassword}}" placeholder="{{settingsPasswordTitle}}" autocomplete="new-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/><input type="password" value="{{securityConfirm}}" onChange="{{setSecurityConfirm}}" placeholder="{{settingsPasswordConfirmTitle}}" autocomplete="new-password" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-ink,#2B2A27);font-family:inherit;outline:none;"/><input type="password" value="" placeholder="{{securityPinPlaceholder}}" disabled aria-disabled="true" autocomplete="off" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);font-size:13px;color:var(--c-sub,#8A8274);font-family:inherit;outline:none;opacity:.6;cursor:not-allowed;"/></section>
+                          <section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:10px;"><button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{settingsTwoFactorTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{settingsTwoFactorSub}}</span></span></button><button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{securityRequirePinTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityPinSub}}</span></span></button><button disabled aria-disabled="true" style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;border:none;background:var(--c-surface,#FFFDF9);cursor:not-allowed;font-family:inherit;text-align:start;opacity:.6;"><span><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{securityTrustedDeviceTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:2px;">{{securityTrustedDeviceSub}}</span></span></button><div style="display:flex;gap:7px;flex-wrap:wrap;"><sc-for list="{{securitySessionOptions}}" as="opt" hint-placeholder-count="4"><button onclick="{{opt.selectFn}}" style="padding:9px 11px;border-radius:999px;border:1.5px solid {{opt.border}};background:{{opt.bg}};color:{{opt.fg}};font-size:11px;font-weight:950;cursor:pointer;font-family:inherit;">{{opt.label}}</button></sc-for></div></section>
                         </div>
                         <section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:12px;"><div><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);">{{accessTitle}}</div><div style="font-size:11.5px;color:var(--c-sub,#8A8274);line-height:1.7;margin-top:3px;">{{accessSub}}</div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;"><sc-for list="{{roleOptionsList}}" as="r" hint-placeholder-count="6"><button onclick="{{r.selectFn}}" style="padding:10px;border-radius:13px;border:1.5px solid {{r.border}};background:{{r.bg}};color:{{r.fg}};text-align:start;cursor:pointer;font-family:inherit;"><span style="display:block;font-size:11.5px;font-weight:950;">{{r.label}}</span><span style="display:block;font-size:9.8px;color:{{r.subFg}};opacity:.72;margin-top:4px;line-height:1.45;">{{r.desc}}</span></button></sc-for></div></section>
                         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;"><section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:9px;"><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);">{{securityDevicesTitle}}</div><sc-for list="{{securityDeviceList}}" as="device" hint-placeholder-count="2"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;border-radius:14px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);"><span style="min-width:0;"><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{device.title}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{device.sub}}</span></span><button onclick="{{device.revokeFn}}" style="display:{{device.actionDisplay}};padding:6px 9px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{device.actionLabel}}</button></div></sc-for></section><section style="border-radius:18px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);padding:15px;display:grid;gap:9px;"><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);">{{securityActivityTitle}}</div><sc-for list="{{securityActivityList}}" as="log" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:auto 1fr;gap:9px;padding:10px;border-radius:14px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);"><span style="width:8px;height:8px;border-radius:999px;background:var(--c-gold,#C8A96B);margin-top:5px;"></span><span style="min-width:0;"><b style="display:block;font-size:11.5px;color:var(--c-ink,#2B2A27);">{{log.actionLabel}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{log.areaLabel}} · {{log.actor}} · {{log.timeLabel}}</span></span></div></sc-for></section></div>
@@ -9853,6 +9855,7 @@ class Component extends DCLogic {
     newPrinterConnection: 'Bluetooth',
     newPrinterRole: 'receipt',
     newPrinterPaper: '80mm',
+    securityCurrentPassword: '',
     securityPassword: '',
     securityConfirm: '',
     securityPin: '',
@@ -9897,6 +9900,7 @@ class Component extends DCLogic {
     theme: 'light',
     commerceSyncStatus: 'local',
     commerceUpdatedAt: '',
+    commerceRevision: 0,
     tablet: false,
     notifPanelOpen: false,
     allNotifsRead: false,
@@ -9914,19 +9918,40 @@ class Component extends DCLogic {
     return host === 'uriraq.online' || host === 'www.uriraq.online' ? 'https://api.uriraq.online' : '';
   }
 
+  isDevelopmentHost(hostname = '') {
+    const host = String(hostname || '').trim().toLowerCase().replace(/^\[|\]$/g, '');
+    return !host || host === 'localhost' || host === '127.0.0.1' || host === '::1' || host.endsWith('.localhost');
+  }
+
+  isTrustedBackendBase(value, hostname = '') {
+    try {
+      const url = new URL(this.normalizeBackendBase(value));
+      if (url.origin === 'https://api.uriraq.online') return true;
+      return this.isDevelopmentHost(hostname) && this.isDevelopmentHost(url.hostname);
+    } catch (err) {
+      return false;
+    }
+  }
+
   resolveBackendApiBase(fallback = 'http://127.0.0.1:8787') {
     let chosen = '';
     try {
       if (typeof window !== 'undefined') {
+        const hostname = String((window.location && window.location.hostname) || '');
+        const productionBase = this.productionBackendBaseForHost(hostname);
+        if (productionBase) {
+          if (typeof localStorage !== 'undefined') localStorage.removeItem('urCommerceOS.backendBase.v1');
+          return productionBase;
+        }
+        if (!this.isDevelopmentHost(hostname)) return 'https://api.uriraq.online';
         const params = new URLSearchParams(window.location.search || '');
         chosen = params.get('backend') || params.get('apiBase') || '';
         if (!chosen && window.UR_COMMERCE_BACKEND_BASE) chosen = window.UR_COMMERCE_BACKEND_BASE;
-        const productionBase = this.productionBackendBaseForHost(window.location && window.location.hostname);
-        if (!chosen && productionBase) chosen = productionBase;
         if (!chosen && typeof localStorage !== 'undefined') chosen = localStorage.getItem('urCommerceOS.backendBase.v1') || '';
         const normalized = this.normalizeBackendBase(chosen, fallback);
-        if (chosen && typeof localStorage !== 'undefined') localStorage.setItem('urCommerceOS.backendBase.v1', normalized);
-        return normalized;
+        const trusted = this.isTrustedBackendBase(normalized, hostname) ? normalized : this.normalizeBackendBase(fallback);
+        if (chosen && typeof localStorage !== 'undefined') localStorage.setItem('urCommerceOS.backendBase.v1', trusted);
+        return trusted;
       }
     } catch (err) {}
     return this.normalizeBackendBase(chosen, fallback);
@@ -11693,6 +11718,20 @@ ZW|Zimbabwe|263
   };
   nav = (screen) => {
     if (screen === 'styleguide') screen = 'settings';
+    const requiredPermission = {
+      products: 'products',
+      orders: 'orders',
+      customers: 'customers',
+      discounts: 'discounts',
+      staff: 'settings',
+      branches: 'settings',
+      payments: 'payments',
+      website: 'settings',
+      integrations: 'apps',
+      settings: 'settings',
+      subscription: 'subscriptions',
+    }[screen];
+    if (requiredPermission && !this.requirePermission(requiredPermission)) return false;
     const screenOrder = {
       home: 0,
       products: 1,
@@ -12615,16 +12654,27 @@ ZW|Zimbabwe|263
     reader.readAsDataURL(file);
   }
   async uploadProductImageIfNeeded(image) {
-    if (!image || !image.dataUrl || !String(image.dataUrl).startsWith('data:image/') || !this.state.authToken || typeof fetch === 'undefined') return image;
+    if (!image || !image.dataUrl || !String(image.dataUrl).startsWith('data:image/') || !this.hasBackendSession()) return image;
     try {
+      if (typeof fetch === 'undefined') throw Object.assign(new Error('Image upload is unavailable'), { offline: true });
       const { body } = await this.backendJson('/api/uploads/product-image', {
         method: 'POST',
         body: JSON.stringify({ dataUrl: image.dataUrl, name: image.name || '' }),
       }, { errorMessage: 'Upload failed' });
       if (!body.image || !body.image.url) throw new Error(body.error || 'Upload failed');
-      return { url: body.image.url, name: body.image.name || image.name || '', size: body.image.size, mime: body.image.mime };
+      return {
+        assetId: body.image.assetId || '',
+        objectKey: body.image.objectKey || '',
+        visibility: body.image.visibility || 'public',
+        checksum: body.image.checksum || '',
+        url: body.image.url,
+        name: body.image.name || image.name || '',
+        size: body.image.size,
+        mime: body.image.mime,
+      };
     } catch (err) {
-      return image;
+      this.showToast(this.state.lang === 'ar' ? 'تعذر رفع الصورة؛ لم يتم حفظ نسخة مضمنة' : 'Image upload failed; no embedded copy was saved');
+      throw err;
     }
   }
   async prepareProductImagesForSave(draft) {
@@ -12632,12 +12682,37 @@ ZW|Zimbabwe|263
       ? draft.images
       : (draft && draft.imageDataUrl ? [{ dataUrl: draft.imageDataUrl, name: draft.imageName || '' }] : []);
     if (!images.length) return [];
-    this.setState({ commerceSyncStatus: 'uploading' });
+    if (this.hasBackendSession()) this.setState({ commerceSyncStatus: 'uploading' });
     const uploaded = [];
-    for (const image of images) {
-      uploaded.push(await this.uploadProductImageIfNeeded(image));
+    const uploadedThisAttempt = [];
+    try {
+      for (const image of images) {
+        const saved = await this.uploadProductImageIfNeeded(image);
+        uploaded.push(saved);
+        if (saved !== image && saved && saved.objectKey) uploadedThisAttempt.push(saved);
+      }
+    } catch (err) {
+      await this.cleanupUploadedProductImages(uploadedThisAttempt);
+      throw err;
     }
     return uploaded.filter(img => this.imageSource(img));
+  }
+  async cleanupUploadedProductImages(images = []) {
+    if (!this.hasBackendSession() || typeof fetch === 'undefined') return false;
+    const targets = (images || []).filter(image => image && image.objectKey);
+    if (!targets.length) return false;
+    const deleted = await Promise.all(targets.map(async image => {
+      try {
+        await this.backendJson('/api/uploads/product-image', {
+          method: 'DELETE',
+          body: JSON.stringify({ objectKey: image.objectKey, assetId: image.assetId || '' }),
+        }, { errorMessage: 'Image cleanup failed' });
+        return true;
+      } catch (err) {
+        return false;
+      }
+    }));
+    return deleted.some(Boolean);
   }
   productHasEmbeddedImages(product) {
     if (!product) return false;
@@ -12649,6 +12724,7 @@ ZW|Zimbabwe|263
     const products = Array.isArray(this.PRODUCTS) ? this.PRODUCTS : [];
     if (!products.some(product => this.productHasEmbeddedImages(product))) return false;
     this._imageMigrationRunning = true;
+    const uploadedThisAttempt = [];
     try {
       this.setState({ commerceSyncStatus: 'uploading' });
       let changed = false;
@@ -12664,6 +12740,7 @@ ZW|Zimbabwe|263
         for (const image of images) {
           const uploaded = await this.uploadProductImageIfNeeded(image);
           nextImages.push(uploaded);
+          if (uploaded !== image && uploaded && uploaded.objectKey) uploadedThisAttempt.push(uploaded);
           if (image && image.dataUrl && uploaded && uploaded.url && !uploaded.dataUrl) productChanged = true;
         }
         if (!productChanged) {
@@ -12687,6 +12764,9 @@ ZW|Zimbabwe|263
         this.forceUpdate();
       }
       return changed;
+    } catch (err) {
+      await this.cleanupUploadedProductImages(uploadedThisAttempt);
+      throw err;
     } finally {
       this._imageMigrationRunning = false;
     }
@@ -12968,6 +13048,65 @@ ZW|Zimbabwe|263
     }
     return '';
   }
+  findImportEntry(row, keys) {
+    if (!row || typeof row !== 'object') return { present: false, value: undefined };
+    const map = new Map(Object.keys(row).map(key => [this.importKey(key), key]));
+    let firstPresent = null;
+    for (const key of keys) {
+      const sourceKey = map.get(this.importKey(key));
+      if (typeof sourceKey === 'undefined') continue;
+      const entry = { present: true, value: row[sourceKey] };
+      if (!firstPresent) firstPresent = entry;
+      if (entry.value && (typeof entry.value === 'object' || String(entry.value).trim())) return entry;
+    }
+    return firstPresent || { present: false, value: undefined };
+  }
+  normalizeImportedImage(image) {
+    if (typeof image === 'string') {
+      const source = image.trim();
+      if (!source) return null;
+      return source.startsWith('data:image/') ? { dataUrl: source, name: '' } : { url: source, name: '' };
+    }
+    if (!image || typeof image !== 'object' || Array.isArray(image)) return null;
+    const normalized = {};
+    const dataUrl = String(image.dataUrl || image.imageDataUrl || '').trim();
+    const url = String(image.url || image.imageUrl || '').trim();
+    if (dataUrl.startsWith('data:image/')) normalized.dataUrl = dataUrl;
+    if (url) normalized.url = url;
+    ['assetId', 'objectKey', 'checksum', 'name', 'mime', 'visibility'].forEach(key => {
+      if (typeof image[key] === 'string' && image[key].trim()) normalized[key] = image[key].trim();
+    });
+    const size = Number(image.size);
+    if (image.size != null && image.size !== '' && Number.isFinite(size) && size >= 0) normalized.size = size;
+    if (!normalized.dataUrl && !normalized.url && !normalized.assetId && !normalized.objectKey) return null;
+    return normalized;
+  }
+  importedProductImagePatch(row) {
+    const imagesEntry = this.findImportEntry(row, ['images']);
+    const imageEntry = this.findImportEntry(row, ['imageDataUrl', 'imageUrl', 'image_url', 'image', 'url', 'الصورة']);
+    const imageNameEntry = this.findImportEntry(row, ['imageName', 'image_name', 'اسم الصورة']);
+    if (!imagesEntry.present && !imageEntry.present) return {};
+
+    let sourceImages = [];
+    if (imagesEntry.present) {
+      let source = imagesEntry.value;
+      if (typeof source === 'string' && /^[\[{]/.test(source.trim())) {
+        try { source = JSON.parse(source); } catch (err) {}
+      }
+      sourceImages = Array.isArray(source) ? source : (source == null || source === '' ? [] : [source]);
+    } else if (imageEntry.value != null && imageEntry.value !== '') {
+      sourceImages = [imageEntry.value];
+    }
+    const images = sourceImages.map(image => this.normalizeImportedImage(image)).filter(Boolean);
+    const primary = images[0] || {};
+    const primarySource = primary.dataUrl || primary.url || '';
+    return {
+      imageDataUrl: primary.dataUrl || '',
+      imageUrl: primary.url || (!primary.dataUrl ? primarySource : ''),
+      imageName: primary.name || String(imageNameEntry.value || '').trim(),
+      images,
+    };
+  }
   importNumber(value) {
     const digits = { '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9' };
     const clean = String(value ?? '').replace(/[٠-٩]/g, d => digits[d]).replace(/,/g, '').replace(/[^\d.-]/g, '');
@@ -13004,7 +13143,8 @@ ZW|Zimbabwe|263
     }).filter(Boolean);
   }
   normalizeImportedProduct(row, variants, categoryById, index) {
-    const nameValue = this.pickImportValue(row, ['name', 'productName', 'product', 'title', 'اسم المنتج', 'المنتج', 'الاسم']) || this.localizedText(row.name);
+    const importedName = this.pickImportValue(row, ['name', 'productName', 'product', 'title', 'اسم المنتج', 'المنتج', 'الاسم']);
+    const nameValue = importedName && typeof importedName === 'object' ? this.localizedText(importedName) : (importedName || this.localizedText(row.name));
     const name = String(nameValue || '').trim();
     if (!name) return null;
     const categoryValue = this.pickImportValue(row, ['catKey', 'category', 'categoryName', 'mainCategory', 'main_category', 'الفئة', 'التصنيف', 'القسم'])
@@ -13037,7 +13177,6 @@ ZW|Zimbabwe|263
       colorStocks[v.color] = (colorStocks[v.color] || 0) + this.productNumber(v.qty);
     });
     const stock = variantRows.length ? variantRows.reduce((sum, v) => sum + this.productNumber(v.qty), 0) : rowStock;
-    const imageUrl = String(this.pickImportValue(row, ['imageDataUrl', 'imageUrl', 'image_url', 'image', 'url', 'الصورة']) || '').trim();
     return {
       id: `p-import-${Date.now().toString(36)}-${index}`,
       catKey,
@@ -13048,11 +13187,8 @@ ZW|Zimbabwe|263
       sku: String(this.pickImportValue(row, ['sku', 'SKU', 'رمز', 'الكود']) || `UR-IMP-${String(index + 1).padStart(3, '0')}`).trim(),
       barcode: String(this.pickImportValue(row, ['barcode', 'باركود']) || (variantRows[0] && variantRows[0].barcode) || this.generateBarcode()).trim(),
       color: colors[0] || baseColor,
-      imageDataUrl: imageUrl.startsWith('data:image/') ? imageUrl : '',
-      imageUrl: imageUrl && !imageUrl.startsWith('data:image/') ? imageUrl : '',
-      imageName: '',
-      images: imageUrl ? [imageUrl.startsWith('data:image/') ? { dataUrl: imageUrl, name: '' } : { url: imageUrl, name: '' }] : [],
       variants: { sizes, colors, colorNames, colorStocks, variantStocks: variantRows },
+      ...this.importedProductImagePatch(row),
     };
   }
   applyImportedProducts(imported) {
@@ -13106,7 +13242,8 @@ ZW|Zimbabwe|263
     return true;
   }
   csvCell(value) {
-    const text = String(value == null ? '' : value).replace(/\r?\n/g, ' ');
+    const raw = String(value == null ? '' : value).replace(/\r?\n/g, ' ');
+    const text = /^[\s\t]*[=+\-@]/.test(raw) ? `'${raw}` : raw;
     return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
   }
   fullBackupPayload() {
@@ -13140,12 +13277,14 @@ ZW|Zimbabwe|263
     };
   }
   exportFullBackup = () => {
+    if (!this.requirePermission('settings')) return null;
     const payload = this.fullBackupPayload();
     this.downloadJsonFile(payload, `ur-full-backup-${new Date().toISOString().slice(0, 10)}.json`);
     this.showToast(this.state.lang === 'ar' ? 'تم تصدير نسخة احتياطية كاملة' : 'Full backup exported');
     return payload;
   };
   importFullBackupFile = () => {
+    if (!this.requirePermission('settings')) return;
     if (typeof document === 'undefined') return;
     const input = document.createElement('input');
     input.type = 'file';
@@ -13158,6 +13297,7 @@ ZW|Zimbabwe|263
   };
   async handleFullBackupImportFile(file) {
     try {
+      if (!this.requirePermission('settings')) return null;
       if (!file) return null;
       if (file.size > 80 * 1024 * 1024) {
         this.showToast(this.state.lang === 'ar' ? 'ملف النسخة كبير جداً' : 'Backup file is too large');
@@ -13165,17 +13305,21 @@ ZW|Zimbabwe|263
       }
       const text = await file.text();
       const payload = JSON.parse(String(text || '').replace(/^\uFEFF/, ''));
-      const result = this.applyFullBackupPayload(payload);
+      const result = await this.applyFullBackupPayload(payload);
       this.showToast(this.state.lang === 'ar'
         ? `تم استيراد النسخة: ${result.products} منتج و ${result.orders} طلب`
         : `Backup imported: ${result.products} products and ${result.orders} orders`);
       return result;
     } catch (err) {
+      if (err && err.code === 'SNAPSHOT_CONFLICT') {
+        this.handleCommerceSyncError(err);
+        return null;
+      }
       this.showToast(this.state.lang === 'ar' ? 'تعذر استيراد النسخة. تأكد من ملف JSON' : 'Backup import failed. Use a valid JSON file');
       return null;
     }
   }
-  applyFullBackupPayload(payload = {}) {
+  async applyFullBackupPayload(payload = {}) {
     const data = payload && payload.data && typeof payload.data === 'object' ? payload.data : payload;
     if (!data || typeof data !== 'object') throw new Error('Invalid backup');
     const settings = data.settings && typeof data.settings === 'object' ? data.settings : {};
@@ -13184,17 +13328,50 @@ ZW|Zimbabwe|263
       storeSettings: settings.storeSettings || data.storeSettings,
       subscription: settings.subscription || data.subscription,
     };
-    if (Object.keys(mergedSettings).some(key => typeof mergedSettings[key] !== 'undefined')) {
-      this.applyCommerceSettingsFromBackend(mergedSettings);
-    }
-    if (Array.isArray(data.products)) this.PRODUCTS = data.products.filter(p => p && p.id && p.name);
+    const currentSettings = this.commerceSettingsPayload();
+    const candidateSettings = {
+      ...currentSettings,
+      ...mergedSettings,
+      storeSettings: {
+        ...((currentSettings && currentSettings.storeSettings) || {}),
+        ...((mergedSettings && mergedSettings.storeSettings) || {}),
+      },
+    };
+    const candidateProducts = Array.isArray(data.products)
+      ? data.products.filter(p => p && p.id && p.name)
+      : (this.PRODUCTS || []);
     const business = data.business && typeof data.business === 'object' ? data.business : data;
-    if (Array.isArray(business.orders)) this.ORDERS = business.orders;
-    if (Array.isArray(business.customers)) this.CUSTOMERS = business.customers;
-    if (Array.isArray(business.discounts)) this.DISCOUNTS = business.discounts;
-    if (Array.isArray(business.staff)) this.STAFF = business.staff;
-    if (Array.isArray(business.branches)) this.BRANCHES = business.branches;
-    if (Array.isArray(business.modules)) this.MODULES = this.normalizeModuleList(business.modules);
+    const candidateBusiness = {
+      orders: Array.isArray(business.orders) ? business.orders : (this.ORDERS || []),
+      customers: Array.isArray(business.customers) ? business.customers : (this.CUSTOMERS || []),
+      discounts: Array.isArray(business.discounts) ? business.discounts : (this.DISCOUNTS || []),
+      staff: Array.isArray(business.staff) ? business.staff : (this.STAFF || []),
+      branches: Array.isArray(business.branches) ? business.branches : (this.BRANCHES || []),
+      modules: Array.isArray(business.modules) ? this.normalizeModuleList(business.modules) : (this.MODULES || []),
+    };
+    if (this.hasBackendSession() && typeof fetch !== 'undefined') {
+      const { body } = await this.runSerializedCommerceWrite(() => this.backendJson('/api/commerce/snapshot', {
+        method: 'PUT',
+        body: JSON.stringify({
+          products: candidateProducts,
+          business: candidateBusiness,
+          settings: candidateSettings,
+          expectedRevision: Math.max(0, Number(this.state.commerceRevision) || 0),
+        }),
+      }, { errorMessage: 'Backup restore failed' }));
+      this.applyCommercePatchFromBackend(body);
+      if (body.settings && typeof body.settings === 'object') this.applyCommerceSettingsFromBackend(body.settings);
+      this.setState({ commerceSyncStatus: 'saved' });
+    } else {
+      this.PRODUCTS = candidateProducts;
+      this.ORDERS = candidateBusiness.orders;
+      this.CUSTOMERS = candidateBusiness.customers;
+      this.DISCOUNTS = candidateBusiness.discounts;
+      this.STAFF = candidateBusiness.staff;
+      this.BRANCHES = candidateBusiness.branches;
+      this.MODULES = candidateBusiness.modules;
+      this.applyCommerceSettingsFromBackend(candidateSettings);
+    }
     const admin = data.subscriptionAdmin || data.subscription_admin || {};
     if (Array.isArray(admin.stores)) this.SUBSCRIPTION_STORES = admin.stores;
     if (Array.isArray(admin.audit)) this.SUBSCRIPTION_AUDIT = admin.audit;
@@ -13212,6 +13389,15 @@ ZW|Zimbabwe|263
     };
   }
   saveNewProduct = async () => {
+    if (this._saveNewProductInFlight) return false;
+    this._saveNewProductInFlight = true;
+    try {
+      return await this.saveNewProductUnlocked();
+    } finally {
+      this._saveNewProductInFlight = false;
+    }
+  };
+  saveNewProductUnlocked = async () => {
     const draft = this.state.newProduct || this.makeProductDraft();
     const editingId = this.state.editingProductId;
     const existingProduct = editingId ? this.PRODUCTS.find(p => p.id === editingId) : null;
@@ -13227,7 +13413,17 @@ ZW|Zimbabwe|263
     const catKey = draft.catKey || 'shirts';
     const inventory = this.productDraftInventory(draft, draft.barcode);
     const { draftColors, draftSizes, colorStocks, variantRows, productColors } = inventory;
-    const savedImages = await this.prepareProductImagesForSave(draft);
+    let savedImages;
+    try {
+      savedImages = await this.prepareProductImagesForSave(draft);
+    } catch (err) {
+      this.setState({ commerceSyncStatus: this.hasBackendSession() ? 'offline' : 'local' });
+      return false;
+    }
+    const existingImageKeys = new Set((Array.isArray(draft.images) ? draft.images : [])
+      .map(image => String(image && image.objectKey || '').trim())
+      .filter(Boolean));
+    const uploadedThisAttempt = savedImages.filter(image => image && image.objectKey && !existingImageKeys.has(String(image.objectKey)));
     const primaryImage = savedImages[0] || {};
     const primaryImageSource = this.imageSource(primaryImage);
     const product = {
@@ -13268,11 +13464,32 @@ ZW|Zimbabwe|263
       ? [{ id: 'mv' + Date.now().toString(36), type: editingId ? 'adjustment' : 'initial', qty: delta, reason: movementReason, at: new Date().toISOString() }, ...previousMovements].slice(0, 30)
       : previousMovements;
 
-    this.PRODUCTS = editingId ? this.PRODUCTS.map(p => p.id === editingId ? product : p) : [product, ...this.PRODUCTS];
-    this.persistProducts();
+    const candidateProducts = editingId ? this.PRODUCTS.map(p => p.id === editingId ? product : p) : [product, ...this.PRODUCTS];
+    if (uploadedThisAttempt.length && this.hasBackendSession() && typeof fetch !== 'undefined') {
+      try {
+        this.setState({ commerceSyncStatus: 'saving' });
+        const { body } = await this.runSerializedCommerceWrite(() => this.backendJson('/api/commerce/products', {
+          method: 'PUT',
+          body: JSON.stringify({
+            products: candidateProducts,
+            expectedRevision: Math.max(0, Number(this.state.commerceRevision) || 0),
+          }),
+        }, { errorMessage: 'Product sync failed' }));
+        this.applyCommercePatchFromBackend(body);
+        this.setState({ commerceSyncStatus: 'saved' });
+      } catch (err) {
+        await this.cleanupUploadedProductImages(uploadedThisAttempt);
+        this.handleCommerceSyncError(err);
+        return false;
+      }
+    } else {
+      this.PRODUCTS = candidateProducts;
+      this.persistProducts();
+    }
     this.setState({ addProductOpen: false, editingProductId: null, selectedProductId: product.id, productSearch: '', productCategory: 'all', newProduct: this.makeProductDraft() });
     this.resetScrollSoon();
     this.showToast(editingId ? this.T[this.state.lang].toast.productSaved : (this.state.lang === 'ar' ? 'تمت إضافة المنتج' : 'Product added'));
+    return true;
   };
   openOrder = (id) => { this.setState({ selectedOrderId: id }); this.resetScrollSoon(); };
   closeOrder = () => { this.setState({ selectedOrderId: null }); this.resetScrollSoon(); };
@@ -13362,25 +13579,46 @@ ZW|Zimbabwe|263
     const orderId = this.state.selectedOrderId;
     const order = this.ORDERS.find(item => item.id === orderId);
     const isAr = this.state.lang === 'ar';
-    if (!order) return;
+    if (!order) return false;
+    const dispatchKey = String(orderId);
+    const inFlight = this._alwaseetDispatchInFlight || (this._alwaseetDispatchInFlight = new Set());
+    if (inFlight.has(dispatchKey)) {
+      this.showToast(isAr ? 'إرسال الطلب للوسيط قيد التنفيذ' : 'Al-Waseet dispatch is already in progress');
+      return false;
+    }
+    inFlight.add(dispatchKey);
     if (!this.isWebsiteOrder(order) && !order.deliveryAddress) {
       this.showToast(isAr ? 'هذا الطلب ما بيه معلومات توصيل كافية' : 'This order has no delivery details');
-      return;
+      inFlight.delete(dispatchKey);
+      return false;
     }
     const shippingSettings = this.normalizeShippingSettings((this.state.storeSettings || {}).shippingSettings);
     if (!shippingSettings.enabled) {
       this.showToast(isAr ? 'فعّل التوصيل من شركات الشحن أولاً' : 'Enable delivery first');
-      return;
+      inFlight.delete(dispatchKey);
+      return false;
     }
     if (!shippingSettings.token && (!shippingSettings.username || !shippingSettings.password)) {
       this.showToast(isAr ? 'اربط حساب الوسيط من شركات الشحن أولاً' : 'Connect Al-Waseet in shipping providers first');
-      return;
+      inFlight.delete(dispatchKey);
+      return false;
     }
     if (order.alwaseetQrId || (order.alwaseetReference && (order.alwaseetReference.qrId || order.alwaseetReference.orderId))) {
       this.setSelectedOrderDeliveryStatus('in-transit');
-      return;
+      inFlight.delete(dispatchKey);
+      return true;
     }
-    if (!(await this.ensureBackendAuthForAction())) return;
+    try {
+      if (!(await this.ensureBackendAuthForAction())) {
+        inFlight.delete(dispatchKey);
+        return false;
+      }
+    } catch (err) {
+      inFlight.delete(dispatchKey);
+      this.setState({ commerceSyncStatus: 'offline' });
+      this.showToast(isAr ? 'تعذر تسجيل الدخول لإرسال الطلب' : 'Could not authenticate the dispatch request');
+      return false;
+    }
     this.setState({ commerceSyncStatus: 'saving' });
     this.showToast(isAr ? 'جاري إرسال الطلب للوسيط...' : 'Sending order to Al-Waseet...');
     try {
@@ -13402,17 +13640,90 @@ ZW|Zimbabwe|263
         }),
       }, { errorMessage: 'Al-Waseet dispatch failed' });
       if (!body.ok || !body.order) throw Object.assign(new Error(body.error || 'Al-Waseet dispatch failed'), { status: response.status });
-      this.ORDERS = this.ORDERS.map(item => item.id === orderId ? body.order : item);
+      const normalizedShippingStatus = String(body.shippingStatus || (body.order && (body.order.shippingStatus || body.order.alwaseetStatus)) || (body.queued ? 'queued' : '')).trim().toLowerCase();
+      const nextOrder = normalizedShippingStatus
+        ? { ...body.order, shippingStatus: normalizedShippingStatus, alwaseetStatus: normalizedShippingStatus }
+        : body.order;
+      this.ORDERS = this.ORDERS.map(item => item.id === orderId ? nextOrder : item);
       this.persistBusinessData({ localOnly: true });
-      this.setState({ commerceSyncStatus: 'saved' });
+      this.setState({
+        commerceSyncStatus: 'saved',
+        ...(body.updatedAt ? { commerceUpdatedAt: body.updatedAt } : {}),
+        ...(body.revision !== undefined ? { commerceRevision: Math.max(0, Number(body.revision) || 0) } : {}),
+      });
       this.forceUpdate();
+      const queued = response.status === 202 || body.queued === true || normalizedShippingStatus === 'queued' || normalizedShippingStatus === 'processing';
+      if (queued) {
+        const jobId = (body.job && body.job.id) || (body.order && body.order.shippingJobId) || '';
+        this.showToast(normalizedShippingStatus === 'processing'
+          ? (isAr ? 'إرسال الطلب للوسيط قيد التنفيذ' : 'Al-Waseet dispatch is already in progress')
+          : (isAr ? 'تمت إضافة الطلب لطابور الوسيط' : 'Order queued for Al-Waseet'));
+        if (jobId) this.pollAlwaseetShippingJob(jobId, orderId);
+        else if (typeof setTimeout !== 'undefined') setTimeout(() => this.refreshBackendLiveData(), 1500);
+        return true;
+      }
       const ref = body.shipment && (body.shipment.qrId || body.shipment.orderId) ? ` #${body.shipment.qrId || body.shipment.orderId}` : '';
       this.showToast(isAr ? `تم إرسال الطلب للوسيط${ref}` : `Order sent to Al-Waseet${ref}`);
+      return true;
     } catch (err) {
       this.setState({ commerceSyncStatus: 'offline' });
       const message = String(err.message || '');
       this.showToast(isAr ? `تعذر إرسال الطلب للوسيط: ${message}` : `Could not send to Al-Waseet: ${message}`);
+      return false;
+    } finally {
+      inFlight.delete(dispatchKey);
     }
+  };
+  pollAlwaseetShippingJob = (jobId, orderId) => {
+    const normalizedJobId = String(jobId || '').trim();
+    if (!normalizedJobId) return Promise.resolve(false);
+    const activePolls = this._alwaseetShippingPolls || (this._alwaseetShippingPolls = new Map());
+    if (activePolls.has(normalizedJobId)) return activePolls.get(normalizedJobId);
+    const isAr = this.state.lang === 'ar';
+    let trackedPromise;
+    const pollPromise = (async () => {
+      for (let attempt = 0; attempt < 60; attempt += 1) {
+        if (typeof setTimeout !== 'undefined') await new Promise(resolve => setTimeout(resolve, attempt === 0 ? 500 : 1500));
+        try {
+          const { body } = await this.backendJson(`/api/shipping/jobs/${encodeURIComponent(normalizedJobId)}`, {}, { errorMessage: 'Shipping job refresh failed' });
+          const job = body && body.job;
+          if (!job || !job.status) throw Object.assign(new Error('Shipping job status is unavailable'), { status: 502 });
+          const status = String(job.status === 'pending' ? 'queued' : job.status).trim().toLowerCase();
+          if (status === 'succeeded') {
+            const refreshed = await this.refreshBackendLiveData();
+            if (refreshed === true) return true;
+            continue;
+          }
+          this.ORDERS = this.ORDERS.map(item => item.id === orderId ? {
+            ...item,
+            shippingJobId: job.id || normalizedJobId,
+            shippingStatus: status,
+            alwaseetStatus: status,
+            alwaseetError: job.lastError || '',
+          } : item);
+          this.persistBusinessData({ localOnly: true });
+          this.forceUpdate();
+          if (status === 'failed' || status === 'needs_review') {
+            const label = status === 'needs_review'
+              ? (isAr ? 'نتيجة الإرسال غير مؤكدة وتحتاج مراجعة' : 'Dispatch outcome needs review')
+              : (isAr ? 'فشل إرسال الطلب للوسيط' : 'Al-Waseet dispatch failed');
+            this.showToast(job.lastError ? `${label}: ${job.lastError}` : label);
+            return false;
+          }
+        } catch (err) {
+          const status = Math.max(0, Number(err && err.status) || 0);
+          const transient = !status || status >= 500 || status === 408 || status === 425 || status === 429;
+          if (!transient) break;
+        }
+      }
+      await this.refreshBackendLiveData().catch(() => false);
+      return false;
+    })();
+    trackedPromise = pollPromise.finally(() => {
+      if (activePolls.get(normalizedJobId) === trackedPromise) activePolls.delete(normalizedJobId);
+    });
+    activePolls.set(normalizedJobId, trackedPromise);
+    return trackedPromise;
   };
   openCustomer = (id) => { this.setState({ selectedCustomerId: id }); this.resetScrollSoon(); };
   closeCustomer = () => { this.setState({ selectedCustomerId: null }); this.resetScrollSoon(); };
@@ -13436,9 +13747,15 @@ ZW|Zimbabwe|263
   authApiUrl(path = '') {
     return `${String(this.state.subscriptionApiBase || 'http://127.0.0.1:8787').replace(/\/$/, '')}${path}`;
   }
-  authHeaders(extra = {}) {
+  authHeaders(extra = {}, targetUrl = '') {
     const headers = { 'content-type': 'application/json; charset=utf-8', 'x-ur-role': this.state.currentUserRole || 'owner', ...extra };
-    if (this.state.authToken) headers.authorization = `Bearer ${this.state.authToken}`;
+    const hostname = typeof window !== 'undefined' && window.location ? window.location.hostname : '';
+    if (this.state.authToken && this.isTrustedBackendBase(targetUrl || this.authApiUrl('/'), hostname)) {
+      headers.authorization = `Bearer ${this.state.authToken}`;
+    } else {
+      delete headers.authorization;
+      delete headers.Authorization;
+    }
     return headers;
   }
   backendFetch(path, options = {}, config = {}) {
@@ -13446,7 +13763,7 @@ ZW|Zimbabwe|263
     const url = config.absolute ? path : this.authApiUrl(path);
     const baseHeaders = config.auth === false
       ? { 'content-type': 'application/json; charset=utf-8', ...(options.headers || {}) }
-      : this.authHeaders(options.headers || {});
+      : this.authHeaders(options.headers || {}, url);
     return fetch(url, { ...options, headers: baseHeaders });
   }
   async backendJson(path, options = {}, config = {}) {
@@ -13489,7 +13806,12 @@ ZW|Zimbabwe|263
       changed = this.applySubscriptionUsageFromBackend(body.subscriptionUsage) || changed;
       this.persistAppSettings({ localOnly: true });
     }
-    if (body.updatedAt) this.setState({ commerceUpdatedAt: body.updatedAt });
+    const syncMeta = {};
+    if (body.updatedAt) syncMeta.commerceUpdatedAt = body.updatedAt;
+    if (body.revision !== undefined && Number.isFinite(Number(body.revision))) {
+      syncMeta.commerceRevision = Math.max(0, Number(body.revision));
+    }
+    if (Object.keys(syncMeta).length) this.setState(syncMeta);
     return changed;
   }
   ensureBackendAuthForAction = async () => {
@@ -13528,6 +13850,7 @@ ZW|Zimbabwe|263
       products: this.PRODUCTS || [],
       business: this.commerceBusinessPayload(),
       settings: this.commerceSettingsPayload(state),
+      expectedRevision: Math.max(0, Number((state || {}).commerceRevision) || 0),
     };
   }
   orderIdentity(order = {}) {
@@ -13631,59 +13954,97 @@ ZW|Zimbabwe|263
     clearTimeout(this._settingsSyncTimer);
     this._settingsSyncTimer = setTimeout(() => this.syncSettingsToBackend(), delay);
   }
-  syncProductsToBackend = async () => {
+  runSerializedCommerceWrite = async (task) => {
+    const previous = this._commerceWriteQueue || Promise.resolve();
+    let release;
+    this._commerceWriteQueue = new Promise(resolve => { release = resolve; });
+    await previous.catch(() => {});
+    try {
+      return await task();
+    } finally {
+      release();
+    }
+  };
+  handleCommerceSyncError(err) {
+    if (err && err.code === 'SNAPSHOT_CONFLICT') {
+      this.stopBackendLiveUpdates();
+      this.setState({ commerceSyncStatus: 'conflict' });
+      this.showToast(this.state.lang === 'ar'
+        ? 'توجد تغييرات أحدث من جهاز آخر. أعد تحميل البيانات قبل الحفظ.'
+        : 'Newer changes exist on another device. Reload before saving.');
+      return true;
+    }
+    this.setState({ commerceSyncStatus: 'offline' });
+    if (err && err.code === 'PLAN_LIMIT_EXCEEDED') this.showToast(this.planLimitErrorMessage(err));
+    return false;
+  }
+  syncProductsToBackend = async () => this.runSerializedCommerceWrite(async () => {
     if (!this.hasBackendSession() || typeof fetch === 'undefined' || !this.hasBackendPermission('products')) return false;
+    const productsBeforeMigration = this.PRODUCTS;
+    let migratedImages = [];
     try {
       this.setState({ commerceSyncStatus: 'saving' });
-      await this.migrateProductImagesToBackend();
+      const migrated = await this.migrateProductImagesToBackend();
+      if (migrated) {
+        const previousKeys = new Set((productsBeforeMigration || [])
+          .flatMap(product => Array.isArray(product.images) ? product.images : [])
+          .map(image => String(image && image.objectKey || '').trim())
+          .filter(Boolean));
+        migratedImages = (this.PRODUCTS || [])
+          .flatMap(product => Array.isArray(product.images) ? product.images : [])
+          .filter(image => image && image.objectKey && !previousKeys.has(String(image.objectKey)));
+      }
       const result = await this.backendJson('/api/commerce/products', {
         method: 'PUT',
-        body: JSON.stringify({ products: this.PRODUCTS || [] }),
+        body: JSON.stringify({ products: this.PRODUCTS || [], expectedRevision: Math.max(0, Number(this.state.commerceRevision) || 0) }),
       }, { errorMessage: 'Product sync failed' });
       if (result.body) this.applyCommercePatchFromBackend(result.body);
       this.setState({ commerceSyncStatus: 'saved' });
       return true;
     } catch (err) {
-      this.setState({ commerceSyncStatus: 'offline' });
-      if (err.code === 'PLAN_LIMIT_EXCEEDED') this.showToast(this.planLimitErrorMessage(err));
+      if (migratedImages.length) {
+        this.PRODUCTS = productsBeforeMigration;
+        this.persistProducts({ localOnly: true });
+        await this.cleanupUploadedProductImages(migratedImages);
+        this.forceUpdate();
+      }
+      this.handleCommerceSyncError(err);
       return false;
     }
-  };
-  syncBusinessToBackend = async () => {
+  });
+  syncBusinessToBackend = async () => this.runSerializedCommerceWrite(async () => {
     if (!this.hasBackendSession() || typeof fetch === 'undefined' || !this.hasBackendPermission('orders')) return false;
     try {
       this.setState({ commerceSyncStatus: 'saving' });
       const result = await this.backendJson('/api/commerce/business', {
         method: 'PUT',
-        body: JSON.stringify({ business: this.commerceBusinessPayload() }),
+        body: JSON.stringify({ business: this.commerceBusinessPayload(), expectedRevision: Math.max(0, Number(this.state.commerceRevision) || 0) }),
       }, { errorMessage: 'Business sync failed' });
       if (result.body) this.applyCommercePatchFromBackend(result.body);
       this.setState({ commerceSyncStatus: 'saved' });
       return true;
     } catch (err) {
-      this.setState({ commerceSyncStatus: 'offline' });
-      if (err.code === 'PLAN_LIMIT_EXCEEDED') this.showToast(this.planLimitErrorMessage(err));
+      this.handleCommerceSyncError(err);
       return false;
     }
-  };
-  syncSettingsToBackend = async () => {
+  });
+  syncSettingsToBackend = async () => this.runSerializedCommerceWrite(async () => {
     if (!this.hasBackendSession() || typeof fetch === 'undefined' || !this.hasBackendPermission('settings')) return false;
     try {
       this.setState({ commerceSyncStatus: 'saving' });
       const result = await this.backendJson('/api/commerce/settings', {
         method: 'PUT',
-        body: JSON.stringify({ settings: this.commerceSettingsPayload() }),
+        body: JSON.stringify({ settings: this.commerceSettingsPayload(), expectedRevision: Math.max(0, Number(this.state.commerceRevision) || 0) }),
       }, { errorMessage: 'Settings sync failed' });
       if (result.body) this.applyCommercePatchFromBackend(result.body);
       this.setState({ commerceSyncStatus: 'saved' });
       return true;
     } catch (err) {
-      this.setState({ commerceSyncStatus: 'offline' });
-      if (err.code === 'PLAN_LIMIT_EXCEEDED') this.showToast(this.planLimitErrorMessage(err));
+      this.handleCommerceSyncError(err);
       return false;
     }
-  };
-  syncCommerceSnapshotToBackend = async () => {
+  });
+  syncCommerceSnapshotToBackend = async () => this.runSerializedCommerceWrite(async () => {
     if (!this.hasBackendSession() || typeof fetch === 'undefined') return false;
     try {
       this.setState({ commerceSyncStatus: 'saving' });
@@ -13695,11 +14056,10 @@ ZW|Zimbabwe|263
       this.setState({ commerceSyncStatus: 'saved' });
       return true;
     } catch (err) {
-      this.setState({ commerceSyncStatus: 'offline' });
-      if (err.code === 'PLAN_LIMIT_EXCEEDED') this.showToast(this.planLimitErrorMessage(err));
+      this.handleCommerceSyncError(err);
       return false;
     }
-  };
+  });
   resolveBusinessProfileKeyFromSettings(settings = {}, fallbackState = this.state) {
     const store = settings && settings.storeSettings && typeof settings.storeSettings === 'object' ? settings.storeSettings : {};
     const storedProfile = store.businessProfile && store.businessProfile.key;
@@ -13736,13 +14096,122 @@ ZW|Zimbabwe|263
     this.setState(next);
     return true;
   }
+  loadCommerceOrdersFromBackend = async (options = {}) => {
+    if (!this.hasBackendSession() || !this.hasBackendPermission('orders')) return null;
+    const config = Number.isInteger(options) ? { maxPages: options } : (options || {});
+    const maxPages = Math.max(1, Math.min(1000, Number(config.maxPages) || 500));
+    const updatedAfter = typeof config.updatedAfter === 'string' ? config.updatedAfter.trim() : '';
+    const allowPartial = config.allowPartial === true;
+    const startCursor = typeof config.startCursor === 'string' ? config.startCursor.trim() : '';
+    const orders = [];
+    const seen = new Set();
+    const seenCursors = new Set();
+    let cursor = startCursor;
+    let syncThrough = '';
+    for (let pageIndex = 0; pageIndex < maxPages; pageIndex += 1) {
+      if (cursor) {
+        if (seenCursors.has(cursor)) throw new Error('Orders pagination cursor repeated');
+        seenCursors.add(cursor);
+      }
+      const path = `/api/commerce/orders?limit=100${updatedAfter ? `&updatedAfter=${encodeURIComponent(updatedAfter)}` : ''}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`;
+      let body;
+      try {
+        ({ body } = await this.backendJson(path, {}, { errorMessage: 'Orders sync failed' }));
+      } catch (err) {
+        if (err && err.status === 400 && err.body && err.body.code === 'INVALID_ORDER_CURSOR' && startCursor && config._cursorRetried !== true) {
+          return this.loadCommerceOrdersFromBackend({ ...config, startCursor: '', _cursorRetried: true });
+        }
+        if (err && err.status === 404) return { supported: false, orders: null, complete: false, syncThrough: '' };
+        throw err;
+      }
+      if (!Array.isArray(body.orders)) return { supported: false, orders: null, complete: false, syncThrough: '' };
+      for (const order of body.orders) {
+        const key = this.orderIdentity(order);
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        orders.push(order);
+      }
+      const page = body.page && typeof body.page === 'object' ? body.page : {};
+      if (!syncThrough && typeof page.syncThrough === 'string') syncThrough = page.syncThrough;
+      if (!page.hasMore) return { supported: true, orders, complete: true, syncThrough };
+      if (!page.nextCursor || page.nextCursor === cursor || seenCursors.has(page.nextCursor)) throw new Error('Orders pagination cursor did not advance');
+      cursor = page.nextCursor;
+    }
+    if (allowPartial) return { supported: true, orders, complete: false, syncThrough, nextCursor: cursor };
+    throw new Error('Orders pagination exceeded the safe page limit');
+  };
   loadCommerceSnapshotFromBackend = async (silent = true, options = {}) => {
     if (!this.hasBackendSession() || typeof fetch === 'undefined') return false;
     if (!silent) this.setState({ commerceSyncStatus: 'loading' });
     try {
       const previousOrderKeys = this.backendOrderKeySet(this.ORDERS);
-      const canNotifyNewOrders = !!options.notifyNewOrders && !!this._backendSnapshotLoaded;
-      const { body } = await this.backendJson('/api/commerce/snapshot', {}, { errorMessage: 'Commerce sync failed' });
+      const shouldPageOrders = this.hasBackendPermission('orders');
+      const snapshotWasLoaded = !!this._backendSnapshotLoaded;
+      let orderSyncMode = 'none';
+      let orderSyncOptions = null;
+      if (shouldPageOrders) {
+        if (this._backendOrdersHistoryCursor) {
+          orderSyncMode = 'history';
+          orderSyncOptions = { maxPages: 500, startCursor: this._backendOrdersHistoryCursor, allowPartial: true };
+        } else if (this._backendOrdersUpdatedAfter) {
+          orderSyncMode = 'delta';
+          orderSyncOptions = {
+            maxPages: 500,
+            updatedAfter: this._backendOrdersUpdatedAfter,
+            startCursor: this._backendOrdersDeltaCursor || '',
+            allowPartial: true,
+          };
+        } else {
+          orderSyncMode = 'initial';
+          orderSyncOptions = { maxPages: 500, allowPartial: true };
+        }
+      }
+      let canNotifyNewOrders = !!options.notifyNewOrders && snapshotWasLoaded && orderSyncMode === 'delta';
+      let [{ body }, pagedResult] = await Promise.all([
+        this.backendJson(`/api/commerce/snapshot${shouldPageOrders ? '?includeOrders=false' : ''}`, {}, { errorMessage: 'Commerce sync failed' }),
+        shouldPageOrders ? this.loadCommerceOrdersFromBackend(orderSyncOptions) : Promise.resolve(null),
+      ]);
+      if (shouldPageOrders && pagedResult && pagedResult.supported === false) {
+        ({ body } = await this.backendJson('/api/commerce/snapshot', {}, { errorMessage: 'Commerce sync failed' }));
+        this._backendOrdersHistoryCursor = '';
+        this._backendOrdersDeltaCursor = '';
+        this._backendOrdersUpdatedAfter = '';
+        canNotifyNewOrders = !!options.notifyNewOrders && snapshotWasLoaded;
+        pagedResult = null;
+      }
+      if (body.business && pagedResult && pagedResult.supported && Array.isArray(pagedResult.orders)) {
+        const pagedOrders = pagedResult.orders;
+        const replacements = new Map(pagedOrders.map(order => [this.orderIdentity(order), order]).filter(([key]) => !!key));
+        const existingKeys = new Set(this.ORDERS.map(order => this.orderIdentity(order)).filter(Boolean));
+        const additions = pagedOrders.filter(order => !existingKeys.has(this.orderIdentity(order)));
+        let mergedOrders;
+        if (orderSyncMode === 'history') {
+          mergedOrders = [
+            ...this.ORDERS.map(order => replacements.get(this.orderIdentity(order)) || order),
+            ...additions,
+          ];
+        } else if (orderSyncMode === 'delta') {
+          mergedOrders = [
+            ...additions,
+            ...this.ORDERS.map(order => replacements.get(this.orderIdentity(order)) || order),
+          ];
+        } else {
+          mergedOrders = pagedOrders;
+        }
+        body.business = {
+          ...body.business,
+          orders: mergedOrders,
+        };
+        if (orderSyncMode === 'initial') {
+          if (pagedResult.syncThrough) this._backendOrdersUpdatedAfter = pagedResult.syncThrough;
+          this._backendOrdersHistoryCursor = pagedResult.complete ? '' : (pagedResult.nextCursor || '');
+        } else if (orderSyncMode === 'history') {
+          this._backendOrdersHistoryCursor = pagedResult.complete ? '' : (pagedResult.nextCursor || '');
+        } else if (orderSyncMode === 'delta') {
+          this._backendOrdersDeltaCursor = pagedResult.complete ? '' : (pagedResult.nextCursor || '');
+          if (pagedResult.complete && pagedResult.syncThrough) this._backendOrdersUpdatedAfter = pagedResult.syncThrough;
+        }
+      }
       const hasProducts = Array.isArray(body.products);
       const hasBusiness = body.business && typeof body.business === 'object';
       const hasSettings = body.settings && typeof body.settings === 'object' && Object.keys(body.settings).length;
@@ -13756,7 +14225,7 @@ ZW|Zimbabwe|263
         const business = body.business || {};
         const incomingOrders = Array.isArray(business.orders) ? business.orders : [];
         const newOrders = canNotifyNewOrders
-          ? incomingOrders.filter(order => !previousOrderKeys.has(this.orderIdentity(order)))
+          ? incomingOrders.filter(order => this.isWebsiteOrder(order) && !previousOrderKeys.has(this.orderIdentity(order)))
           : [];
         if (Array.isArray(business.orders)) this.ORDERS = business.orders;
         if (Array.isArray(business.customers)) this.CUSTOMERS = business.customers;
@@ -16666,14 +17135,33 @@ ZW|Zimbabwe|263
         : (this.state.lang === 'ar' ? 'فشل الاتصال بالوسيط' : 'Al-Waseet connection failed'));
     }
   };
-  disconnectAlWaseet = () => {
-    this.setState(s => {
-      const current = this.normalizeShippingSettings((s.storeSettings || {}).shippingSettings);
-      const shippingSettings = this.normalizeShippingSettings({ ...current, token: '', connected: false, connectionStatus: current.username ? 'saved' : 'not_configured', lastConnectedAt: '' });
-      return { storeSettings: { ...s.storeSettings, shippingSettings } };
-    });
-    this.persistSettingsSoon();
-    this.showToast(this.state.lang === 'ar' ? 'تم فصل اتصال الوسيط' : 'Al-Waseet disconnected');
+  disconnectAlWaseet = async () => {
+    if (this._alwaseetDisconnecting) return false;
+    this._alwaseetDisconnecting = true;
+    try {
+      if (this.hasBackendSession()) {
+        try {
+          const { body } = await this.backendJson('/api/shipping/alwaseet/credentials', {
+            method: 'DELETE',
+            body: '{}',
+          }, { errorMessage: 'Al-Waseet disconnect failed' });
+          if (!body || body.ok !== true) throw new Error((body && body.error) || 'Al-Waseet disconnect failed');
+        } catch (err) {
+          this.showToast(this.state.lang === 'ar' ? 'تعذر فصل اتصال الوسيط' : 'Could not disconnect Al-Waseet');
+          return false;
+        }
+      }
+      this.setState(s => {
+        const current = this.normalizeShippingSettings((s.storeSettings || {}).shippingSettings);
+        const shippingSettings = this.normalizeShippingSettings({ ...current, token: '', connected: false, connectionStatus: current.username ? 'saved' : 'not_configured', lastConnectedAt: '' });
+        return { storeSettings: { ...s.storeSettings, shippingSettings } };
+      });
+      this.persistSettingsSoon();
+      this.showToast(this.state.lang === 'ar' ? 'تم فصل اتصال الوسيط' : 'Al-Waseet disconnected');
+      return true;
+    } finally {
+      this._alwaseetDisconnecting = false;
+    }
   };
   setWebsiteSetting = (key, e) => {
     const value = e && e.target ? e.target.value : e;
@@ -17453,6 +17941,7 @@ ZW|Zimbabwe|263
     });
     this.persistSettingsSoon();
   };
+  setSecurityCurrentPassword = (e) => this.setState({ securityCurrentPassword: e.target.value });
   setSecurityPassword = (e) => this.setState({ securityPassword: e.target.value });
   setSecurityConfirm = (e) => this.setState({ securityConfirm: e.target.value });
   printerSettingsDefaults() {
@@ -17630,21 +18119,40 @@ ZW|Zimbabwe|263
     };
     reader.readAsDataURL(file);
   }
-  saveSecuritySettings = () => {
+  saveSecuritySettings = async () => {
+    const currentPassword = this.state.securityCurrentPassword || '';
     const pass = this.state.securityPassword || '';
     const confirm = this.state.securityConfirm || '';
     const pin = this.state.securityPin || '';
-    if (pass || confirm) {
-      if (pass.length < 6) {
-        this.showToast(this.state.lang === 'ar' ? 'كلمة المرور يجب أن تكون 6 أحرف على الأقل' : 'Password must be at least 6 characters');
+    if (currentPassword || pass || confirm) {
+      if (!this.hasBackendSession()) {
+        this.showToast(this.state.lang === 'ar' ? 'سجّل الدخول أولاً لتغيير كلمة المرور' : 'Sign in before changing your password');
+        return;
+      }
+      if (pass.length < 8) {
+        this.showToast(this.state.lang === 'ar' ? 'كلمة المرور الجديدة يجب أن تكون 8 أحرف على الأقل' : 'New password must be at least 8 characters');
         return;
       }
       if (pass !== confirm) {
         this.showToast(this.state.lang === 'ar' ? 'تأكيد كلمة المرور غير مطابق' : 'Password confirmation does not match');
         return;
       }
-      this.setState(s => ({ storeSettings: { ...s.storeSettings, passwordUpdated: true }, securityPassword: '', securityConfirm: '' }));
-      this.persistSettingsSoon();
+      try {
+        await this.backendJson('/api/auth/password', {
+          method: 'POST',
+          body: JSON.stringify({ currentPassword, newPassword: pass }),
+        });
+        this.setState(s => ({
+          storeSettings: { ...s.storeSettings, passwordUpdated: true },
+          securityCurrentPassword: '',
+          securityPassword: '',
+          securityConfirm: '',
+        }));
+        this.showToast(this.state.lang === 'ar' ? 'تم تغيير كلمة المرور' : 'Password changed');
+      } catch (err) {
+        this.showToast(this.state.lang === 'ar' ? 'تعذر تغيير كلمة المرور، تحقق من كلمة المرور الحالية' : 'Could not change password; check your current password');
+        return;
+      }
     }
     if (pin) {
       if (pin.length < 4) {
@@ -18652,14 +19160,16 @@ ZW|Zimbabwe|263
       saving: isAr ? 'جار الحفظ' : 'Saving',
       saved: isAr ? 'محفوظ' : 'Saved',
       connected: isAr ? 'مزامن' : 'Connected',
+      conflict: isAr ? 'تعارض — أعد التحميل' : 'Conflict — reload',
       offline: isAr ? 'محفوظ محلياً' : 'Local copy',
       local: isAr ? 'محلي' : 'Local',
     };
     const syncWarm = ['uploading', 'loading', 'saving'].includes(syncStatus);
     const syncOk = ['saved', 'connected'].includes(syncStatus);
+    const syncConflict = syncStatus === 'conflict';
     vals.commerceSyncLabel = syncCopy[syncStatus] || syncCopy.local;
-    vals.commerceSyncBg = syncOk ? TK.successBg : (syncWarm ? TK.warningBg : TK.divider);
-    vals.commerceSyncFg = syncOk ? TK.success : (syncWarm ? TK.warning : TK.sub);
+    vals.commerceSyncBg = syncOk ? TK.successBg : (syncConflict ? TK.errorBg : (syncWarm ? TK.warningBg : TK.divider));
+    vals.commerceSyncFg = syncOk ? TK.success : (syncConflict ? TK.error : (syncWarm ? TK.warning : TK.sub));
     vals.commerceSyncDisplay = s.onboarded ? 'inline-flex' : 'none';
 
     const activeBg = (key) => s.screen === key ? TK.surface2 : 'transparent';
@@ -20279,8 +20789,13 @@ ZW|Zimbabwe|263
       returned: isAr ? 'تم الإرجاع' : 'Returned',
       cancelled: isAr ? 'تم الإلغاء' : 'Cancelled',
     };
+    const deliveryStatusForOrder = (order) => String((order && (order.shippingStatus || order.alwaseetStatus)) || 'pending-dispatch');
     const orderDeliveryStatusMeta = (status) => ({
       'pending-dispatch': { label: isAr ? 'بانتظار المراجعة' : 'Needs review', color: TK.warning, bg: TK.warningBg },
+      queued: { label: isAr ? 'بانتظار الإرسال' : 'Queued', color: TK.info, bg: TK.infoBg },
+      processing: { label: isAr ? 'جاري الإرسال' : 'Sending', color: TK.info, bg: TK.infoBg },
+      failed: { label: isAr ? 'فشل الإرسال' : 'Dispatch failed', color: TK.error, bg: TK.errorBg },
+      needs_review: { label: isAr ? 'النتيجة غير مؤكدة' : 'Needs review', color: TK.warning, bg: TK.warningBg },
       ready: { label: isAr ? 'جاهز للشحن' : 'Ready to ship', color: TK.info, bg: TK.infoBg },
       dispatched: { label: isAr ? 'مرسل للوسيط' : 'Sent to provider', color: TK.info, bg: TK.infoBg },
       'in-transit': { label: isAr ? 'قيد التوصيل' : 'In delivery', color: TK.goldDeep, bg: TK.warningBg },
@@ -20293,7 +20808,7 @@ ZW|Zimbabwe|263
       const customerName = L(o.customer);
       const totalNo = Number(o.total || 0);
       const isWebsiteOrder = this.isWebsiteOrder(o);
-      const deliveryMeta = orderDeliveryStatusMeta(o.alwaseetStatus || 'pending-dispatch');
+      const deliveryMeta = orderDeliveryStatusMeta(deliveryStatusForOrder(o));
       return {
         ...o,
         customer: customerName,
@@ -20513,7 +21028,7 @@ ZW|Zimbabwe|263
     const selOMeta = orderStatusMeta[selO.status] || orderStatusMeta.new;
     const selectedOrderCustomer = L(selO.customer);
     const selectedIsWebsiteOrder = this.isWebsiteOrder(selO);
-    const selectedDeliveryMeta = orderDeliveryStatusMeta(selO.alwaseetStatus || 'pending-dispatch');
+    const selectedDeliveryMeta = orderDeliveryStatusMeta(deliveryStatusForOrder(selO));
     const selectedDeliveryAddress = selO.deliveryAddress || {};
     const selectedDeliveryProvider = selO.shippingProvider === 'alwaseet'
       ? (isAr ? 'الوسيط' : 'Al-Waseet')
@@ -20542,8 +21057,12 @@ ZW|Zimbabwe|263
       { key: 'phone', label: isAr ? 'الهاتف' : 'Phone', value: selectedDeliveryAddress.phone || '', dir: 'ltr' },
       { key: 'notes', label: isAr ? 'ملاحظات' : 'Notes', value: selectedDeliveryAddress.notes || '', dir: 'auto' },
       { key: 'qr', label: isAr ? 'رقم الوسيط' : 'Al-Waseet QR', value: selO.alwaseetQrId || (selO.alwaseetReference && selO.alwaseetReference.qrId) || '', dir: 'ltr' },
+      { key: 'shipping-error', label: isAr ? 'مشكلة الشحن' : 'Shipping issue', value: selO.alwaseetError || '', dir: 'auto' },
     ].filter(row => String(row.value || '').trim());
-    const selectedOrderDeliveryActionSource = [
+    const selectedDeliveryStatus = deliveryStatusForOrder(selO);
+    const selectedDeliveryInFlight = !!(this._alwaseetDispatchInFlight && this._alwaseetDispatchInFlight.has(String(selO.id)));
+    const selectedDeliveryLocked = selectedDeliveryInFlight || ['queued', 'processing', 'failed', 'needs_review'].includes(selectedDeliveryStatus);
+    const selectedOrderDeliveryActionSource = selectedDeliveryLocked ? [] : [
       { key: 'ready', label: isAr ? 'جاهز للشحن' : 'Ready' },
       { key: 'dispatched', label: isAr ? 'مرسل للوسيط' : 'Sent' },
       { key: 'in-transit', label: isAr ? 'قيد التوصيل' : 'In delivery' },
@@ -20560,7 +21079,7 @@ ZW|Zimbabwe|263
         border: TK.gold,
         fn: () => { if (typeof window !== 'undefined') window.open(action.url, '_blank'); },
       };
-      const active = (selO.alwaseetStatus || 'pending-dispatch') === action.key;
+      const active = selectedDeliveryStatus === action.key;
       return {
         ...action,
         bg: active ? TK.inverseBg : TK.surface,
@@ -20595,13 +21114,12 @@ ZW|Zimbabwe|263
       border: tone === 'primary' ? TK.gold : (active ? TK.inverseBg : TK.border),
       fn,
     });
-    const selectedDeliveryStatus = selO.alwaseetStatus || 'pending-dispatch';
     if (selectedIsWebsiteOrder) {
       const websiteOrderActions = [];
       if (selO.status === 'new') {
         websiteOrderActions.push(makeSelectedOrderAction('confirm', isAr ? 'تأكيد الطلب' : 'Confirm', false, () => this.setSelectedOrderStatus('processing'), 'primary'));
       }
-      if (!['fulfilled', 'returned', 'cancelled'].includes(selO.status)) {
+      if (!selectedDeliveryLocked && !['fulfilled', 'returned', 'cancelled'].includes(selO.status)) {
         websiteOrderActions.push(makeSelectedOrderAction('ready', isAr ? 'جاهز للشحن' : 'Ready', selectedDeliveryStatus === 'ready', () => this.setSelectedOrderDeliveryStatus('ready')));
         if (!['dispatched', 'in-transit', 'delivered', 'returned'].includes(selectedDeliveryStatus)) {
           websiteOrderActions.push(makeSelectedOrderAction('dispatch', isAr ? 'إرسال للوسيط' : 'Send to provider', false, () => this.setSelectedOrderDeliveryStatus('dispatched')));
@@ -20945,21 +21463,22 @@ ZW|Zimbabwe|263
     vals.settingsInvoicePrefixTitle = isAr ? 'بادئة رقم الفاتورة' : 'Invoice prefix';
     vals.settingsTaxTitle = isAr ? 'نسبة الضريبة (%)' : 'Tax rate (%)';
     vals.settingsReceiptSizeTitle = isAr ? 'مقاس الإيصال' : 'Receipt size';
+    vals.settingsCurrentPasswordTitle = isAr ? 'كلمة المرور الحالية (إن وجدت)' : 'Current password (if set)';
     vals.settingsPasswordTitle = isAr ? 'كلمة مرور جديدة' : 'New password';
     vals.settingsPasswordConfirmTitle = isAr ? 'تأكيد كلمة المرور' : 'Confirm password';
-    vals.settingsTwoFactorTitle = isAr ? 'التحقق بخطوتين' : 'Two-factor verification';
-    vals.settingsTwoFactorSub = isAr ? 'حماية إضافية عند تسجيل الدخول' : 'Extra protection during sign-in';
+    vals.settingsTwoFactorTitle = isAr ? 'التحقق بخطوتين — قريباً' : 'Two-factor verification — coming soon';
+    vals.settingsTwoFactorSub = isAr ? 'غير مدعوم من الخادم حالياً' : 'Not supported by the server yet';
     vals.securityHeroTitle = isAr ? 'مركز الأمان' : 'Security center';
     vals.securityHeroSub = isAr ? 'رتّب صلاحيات الفريق، الأجهزة، وإجراءات الحماية من مكان واحد.' : 'Manage team access, devices, and protective controls in one place.';
     vals.securitySigninTitle = isAr ? 'حماية الدخول' : 'Sign-in protection';
-    vals.securitySigninSub = isAr ? 'كلمة المرور، التحقق بخطوتين، وPIN للإجراءات الحساسة.' : 'Password, two-factor verification, and a PIN for sensitive actions.';
+    vals.securitySigninSub = isAr ? 'تغيير كلمة المرور متاح الآن؛ بقية أدوات الحماية موقوفة حتى يدعمها الخادم.' : 'Password changes are available now; other controls stay disabled until server support is ready.';
     vals.securityPinTitle = isAr ? 'PIN الإجراءات الحساسة' : 'Sensitive action PIN';
-    vals.securityPinSub = isAr ? 'يُطلب عند حذف بيانات، تغيير اشتراك، أو تعديل صلاحيات مهمة.' : 'Required for deletion, subscription changes, or critical permission edits.';
-    vals.securityPinPlaceholder = isAr ? '4 إلى 6 أرقام' : '4 to 6 digits';
-    vals.securityPinStatus = securitySettings.sensitivePinSet ? (isAr ? 'مفعّل' : 'Enabled') : (isAr ? 'غير مضاف' : 'Not set');
-    vals.securityRequirePinTitle = isAr ? 'طلب PIN للإجراءات الحساسة' : 'Require PIN for sensitive actions';
-    vals.securityTrustedDeviceTitle = isAr ? 'السماح للأجهزة المعروفة فقط' : 'Trusted devices only';
-    vals.securityTrustedDeviceSub = isAr ? 'يعطيك طبقة حماية إضافية لحسابات الفريق.' : 'Adds an extra protection layer for team accounts.';
+    vals.securityPinSub = isAr ? 'قريباً — غير مدعوم من الخادم حالياً.' : 'Coming soon — not supported by the server yet.';
+    vals.securityPinPlaceholder = isAr ? 'PIN قريباً' : 'PIN coming soon';
+    vals.securityPinStatus = isAr ? 'غير متاح' : 'Unavailable';
+    vals.securityRequirePinTitle = isAr ? 'طلب PIN — قريباً' : 'Require PIN — coming soon';
+    vals.securityTrustedDeviceTitle = isAr ? 'الأجهزة الموثوقة — قريباً' : 'Trusted devices — coming soon';
+    vals.securityTrustedDeviceSub = isAr ? 'غير مدعوم من الخادم حالياً.' : 'Not supported by the server yet.';
     vals.securitySessionTitle = isAr ? 'مدة بقاء الجلسة' : 'Session duration';
     vals.securitySessionSub = isAr ? 'بعدها يحتاج المستخدم يفتح الحساب مرة ثانية.' : 'Users sign in again after this duration.';
     vals.securityDevicesTitle = isAr ? 'الأجهزة المفتوحة' : 'Active devices';
@@ -20979,6 +21498,7 @@ ZW|Zimbabwe|263
     vals.importFullBackupFile = this.importFullBackupFile;
     vals.setInvoicePrefix = this.setInvoicePrefix;
     vals.setTaxRate = this.setTaxRate;
+    vals.setSecurityCurrentPassword = this.setSecurityCurrentPassword;
     vals.setSecurityPassword = this.setSecurityPassword;
     vals.setSecurityConfirm = this.setSecurityConfirm;
     vals.setSecurityPin = this.setSecurityPin;
@@ -21088,18 +21608,19 @@ ZW|Zimbabwe|263
     vals.invoicePreviewTitle = invoiceDesign.title;
     vals.invoicePreviewSubtitle = invoiceDesign.subtitle;
     vals.invoicePreviewFooter = invoiceDesign.footer;
+    vals.securityCurrentPassword = s.securityCurrentPassword || '';
     vals.securityPassword = s.securityPassword || '';
     vals.securityConfirm = s.securityConfirm || '';
     vals.securityPin = s.securityPin || '';
-    vals.securityRequirePinTrack = securitySettings.requirePinForSensitive ? TK.gold : TK.border;
-    vals.securityRequirePinKnob = securitySettings.requirePinForSensitive ? '22px' : '2px';
-    vals.securityTrustedDeviceTrack = securitySettings.trustedDeviceOnly ? TK.gold : TK.border;
-    vals.securityTrustedDeviceKnob = securitySettings.trustedDeviceOnly ? '22px' : '2px';
+    vals.securityRequirePinTrack = TK.border;
+    vals.securityRequirePinKnob = '2px';
+    vals.securityTrustedDeviceTrack = TK.border;
+    vals.securityTrustedDeviceKnob = '2px';
     const currentRole = this.roleOptions(isAr).find(r => r.key === s.currentUserRole) || this.roleOptions(isAr)[0];
     vals.securityStatusCards = [
       { label: isAr ? 'الدور الحالي' : 'Current role', value: currentRole.label, sub: currentRole.desc, fg: TK.info, bg: TK.infoBg },
-      { label: isAr ? 'تحقق الدخول' : 'Login check', value: storeSettings.twoFactor ? (isAr ? 'مفعّل' : 'On') : (isAr ? 'متوقف' : 'Off'), sub: vals.settingsTwoFactorSub, fg: storeSettings.twoFactor ? TK.success : TK.warning, bg: storeSettings.twoFactor ? TK.successBg : TK.warningBg },
-      { label: isAr ? 'PIN' : 'PIN', value: vals.securityPinStatus, sub: vals.securityPinSub, fg: securitySettings.sensitivePinSet ? TK.success : TK.warning, bg: securitySettings.sensitivePinSet ? TK.successBg : TK.warningBg },
+      { label: isAr ? 'تحقق الدخول' : 'Login check', value: isAr ? 'غير متاح' : 'Unavailable', sub: vals.settingsTwoFactorSub, fg: TK.warning, bg: TK.warningBg },
+      { label: isAr ? 'PIN' : 'PIN', value: vals.securityPinStatus, sub: vals.securityPinSub, fg: TK.warning, bg: TK.warningBg },
     ];
     vals.securitySessionOptions = [15, 30, 60, 120].map(minutes => {
       const active = securitySettings.sessionTimeoutMinutes === minutes;
@@ -21120,8 +21641,8 @@ ZW|Zimbabwe|263
       status: device.current ? (isAr ? 'حالي' : 'Current') : (isAr ? 'مفتوح' : 'Active'),
       statusFg: device.current ? TK.success : TK.info,
       statusBg: device.current ? TK.successBg : TK.infoBg,
-      actionLabel: isAr ? 'إخراج' : 'Sign out',
-      actionDisplay: device.current ? 'none' : 'inline-flex',
+      actionLabel: isAr ? 'قريباً' : 'Coming soon',
+      actionDisplay: 'none',
       revokeFn: () => this.revokeSecurityDevice(device.id),
     }));
     vals.securityActivityList = securitySettings.activityLog.map(log => ({
@@ -21134,8 +21655,8 @@ ZW|Zimbabwe|263
     vals.securityActivityEmpty = vals.securityActivityList.length === 0;
     vals.securityActivityEmptyText = isAr ? 'ماكو نشاط أمان بعد.' : 'No security activity yet.';
     vals.newPrinterName = s.newPrinterName || '';
-    vals.twoFactorTrack = storeSettings.twoFactor ? TK.gold : TK.border;
-    vals.twoFactorKnob = storeSettings.twoFactor ? '22px' : '2px';
+    vals.twoFactorTrack = TK.border;
+    vals.twoFactorKnob = '2px';
     vals.brandStudioTitle = isAr ? 'استوديو العلامة التجارية' : 'Brand studio';
     vals.brandStudioSub = isAr ? 'ارفع شعار المتجر واختار ثيم جاهز. كل اختيار يغير مظهر التطبيق بشكل مرتب.' : 'Upload the store logo and pick a ready theme. Each choice updates the app cleanly.';
     vals.brandLogoTitle = isAr ? 'الشعار وهوية المتجر' : 'Logo and identity';

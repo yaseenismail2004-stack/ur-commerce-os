@@ -246,19 +246,38 @@
         const host = String(hostname || '').toLowerCase();
         return host === 'uriraq.online' || host === 'www.uriraq.online' ? 'https://api.uriraq.online' : '';
       }
+      function isDevelopmentHost(hostname = '') {
+        const host = String(hostname || '').trim().toLowerCase().replace(/^\[|\]$/g, '');
+        return !host || host === 'localhost' || host === '127.0.0.1' || host === '::1' || host.endsWith('.localhost');
+      }
+      function isTrustedBackendBase(value, hostname = '') {
+        try {
+          const url = new URL(normalizeBackendBase(value));
+          if (url.origin === 'https://api.uriraq.online') return true;
+          return isDevelopmentHost(hostname) && isDevelopmentHost(url.hostname);
+        } catch (err) {
+          return false;
+        }
+      }
       function configuredBackendBase() {
         let chosen = '';
         try {
           if (typeof window !== 'undefined') {
+            const hostname = String((window.location && window.location.hostname) || '');
+            const productionBase = productionBackendBaseForHost(hostname);
+            if (productionBase) {
+              if (typeof localStorage !== 'undefined') localStorage.removeItem('urCommerceOS.backendBase.v1');
+              return productionBase;
+            }
+            if (!isDevelopmentHost(hostname)) return 'https://api.uriraq.online';
             const params = new URLSearchParams(window.location.search || '');
             chosen = params.get('backend') || params.get('apiBase') || '';
             if (!chosen && window.UR_COMMERCE_BACKEND_BASE) chosen = window.UR_COMMERCE_BACKEND_BASE;
-            const productionBase = productionBackendBaseForHost(window.location && window.location.hostname);
-            if (!chosen && productionBase) chosen = productionBase;
             if (!chosen && typeof localStorage !== 'undefined') chosen = localStorage.getItem('urCommerceOS.backendBase.v1') || '';
             const normalized = normalizeBackendBase(chosen);
-            if (chosen && typeof localStorage !== 'undefined') localStorage.setItem('urCommerceOS.backendBase.v1', normalized);
-            return normalized;
+            const trusted = isTrustedBackendBase(normalized, hostname) ? normalized : normalizeBackendBase('');
+            if (chosen && typeof localStorage !== 'undefined') localStorage.setItem('urCommerceOS.backendBase.v1', trusted);
+            return trusted;
           }
         } catch (err) {}
         return normalizeBackendBase(chosen);
@@ -452,8 +471,8 @@
           const response = await fetch(`${backendBase}/api/storefront/site?storeId=${encodeURIComponent(access.storeId)}&key=${encodeURIComponent(access.key)}`);
           const body = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(body.error || 'Storefront load failed');
-          if (body.settings && typeof body.settings === 'object') state.settings = body.settings;
-          if (Array.isArray(body.products)) state.products = cleanStoredProducts(body.products);
+           if (body.settings && typeof body.settings === 'object') state.settings = body.settings;
+           if (Array.isArray(body.products)) state.products = cleanStoredProducts(body.products);
           state.storefront = {
             storeId: (body.storefront && body.storefront.storeId) || access.storeId,
             key: (body.storefront && body.storefront.key) || access.key,
@@ -651,29 +670,95 @@
       function cartSubtotal() {
         return cartItems().reduce((sum, item) => sum + ((Number(item.product.price) || 0) * item.qty), 0);
       }
+      function discountExpiry(discount = {}) {
+        const value = discount.expiresAt || discount.expiryDate || discount.validUntil || discount.endDate || discount.expires;
+        const raw = value && typeof value === 'object' ? (value.en || value.ar || '') : value;
+        const label = String(raw || '').trim();
+        if (!label || label === '—' || label === '-') return null;
+        if (/expired|منتهي/i.test(label)) return 0;
+        const datedLabel = /^[A-Za-z]{3,9}\s+\d{1,2}$/.test(label)
+          ? `${label}, ${new Date().getFullYear()} 23:59:59`
+          : label;
+        if (!/^\d{4}-\d{2}-\d{2}(?:[T\s].*)?$/.test(datedLabel) && datedLabel === label) return null;
+        const timestamp = Date.parse(datedLabel);
+        return Number.isFinite(timestamp) ? timestamp : null;
+      }
+      function discountStart(discount = {}) {
+        const raw = discount.startsAt || discount.validFrom || discount.startDate || discount.beginsAt;
+        const value = raw && typeof raw === 'object' ? (raw.en || raw.ar || '') : raw;
+        const label = String(value || '').trim();
+        if (!label || !/\d{4}/.test(label)) return null;
+        const timestamp = Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(label) ? `${label}T00:00:00.000Z` : label);
+        return Number.isFinite(timestamp) ? timestamp : null;
+      }
+      function normalizeCoupon(discount = {}) {
+        const code = String(discount.code || discount.name || '').trim().toUpperCase();
+        const type = String(discount.type || discount.kind || 'percent').toLowerCase() === 'fixed' ? 'fixed' : 'percent';
+        const value = Math.max(0, Number(discount.value ?? discount.percent ?? discount.discount ?? 0) || 0);
+        const minimum = Math.max(0, Number(discount.minimum ?? discount.minimumOrder ?? discount.minTotal ?? discount.minimumSubtotal ?? 0) || 0);
+        const expiry = discountExpiry(discount);
+        const startsAt = discountStart(discount);
+        const maximumUses = Math.max(0, Number(discount.maxUses ?? discount.usageLimit ?? discount.maximumUses ?? 0) || 0);
+        const used = Math.max(0, Number(discount.used ?? discount.usedCount ?? discount.usageCount ?? 0) || 0);
+        const status = String(discount.status || '').toLowerCase();
+        const activeValue = discount.active ?? discount.enabled;
+        const disabled = activeValue === false || activeValue === 0 || /^(false|0|inactive|disabled)$/.test(String(activeValue || '').toLowerCase()) || /^(inactive|disabled|expired)$/.test(status);
+        const active = !disabled
+          && (expiry === null || expiry > Date.now())
+          && (startsAt === null || startsAt <= Date.now())
+          && (!maximumUses || used < maximumUses);
+        return { code, type, value, minimum, active, expiry, startsAt, maximumUses, used, label: text(discount.name || discount.title || discount.code, '') };
+      }
       function availableCoupons() {
         const business = safeJson(storageGet('business'), {});
         const saved = Array.isArray(business.discounts) ? business.discounts : [];
-        const mapped = saved.map(d => ({
-          code: String(d.code || d.name || '').trim().toUpperCase(),
-          percent: Math.max(0, Math.min(80, Number(d.percent || d.value || d.discount || 0))),
-          label: text(d.name || d.title || d.code, ''),
-        })).filter(d => d.code && d.percent);
-        return [
-          { code: 'UR10', percent: 10, label: 'خصم 10%' },
-          { code: 'WELCOME', percent: 7, label: 'خصم ترحيبي' },
-          ...mapped,
-        ];
+        return saved.map(normalizeCoupon).filter(discount => discount.code && discount.value > 0 && discount.active);
       }
       function couponDiscount(subtotal = cartSubtotal()) {
         if (!state.coupon) return 0;
-        return Math.round(subtotal * (Number(state.coupon.percent) || 0) / 100);
+        if (state.coupon.type === 'server') {
+          if (Number(state.coupon.validatedSubtotal) !== Number(subtotal)) return 0;
+          return Math.min(subtotal, Math.max(0, Math.round(Number(state.coupon.value) || 0)));
+        }
+        const minimum = Math.max(0, Number(state.coupon.minimum) || 0);
+        if (subtotal < minimum) return 0;
+        if (state.coupon.type === 'fixed') return Math.min(subtotal, Math.round(Number(state.coupon.value) || 0));
+        return Math.min(subtotal, Math.round(subtotal * Math.min(100, Math.max(0, Number(state.coupon.value) || 0)) / 100));
       }
       function cartTotal(shipping = currentShipping()) {
         const subtotal = cartSubtotal();
         return Math.max(0, subtotal - couponDiscount(subtotal)) + deliveryFee(shipping);
       }
-      function applyCoupon() {
+      function couponValidationLineItems() {
+        return cartItems().map(item => ({
+          p: item.product.id,
+          q: item.qty,
+          variantKey: variantStockKey(item.color, item.size),
+        }));
+      }
+      async function applyRemoteCoupon(code) {
+        const access = state.storefront && state.storefront.storeId ? state.storefront : storefrontParams();
+        if (!access.storeId || !access.key || typeof fetch === 'undefined') return null;
+        try {
+          const query = `storeId=${encodeURIComponent(access.storeId)}&key=${encodeURIComponent(access.key)}`;
+          const response = await fetch(`${backendBase}/api/storefront/coupon/validate?${query}`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json; charset=utf-8' },
+            body: JSON.stringify({ code, lineItems: couponValidationLineItems() }),
+          });
+          const body = await response.json().catch(() => ({}));
+          if (!response.ok || !body.valid) return { valid: false, message: body.error || body.message || '' };
+          return {
+            valid: true,
+            code: String(body.code || code).trim().toUpperCase(),
+            discount: Math.max(0, Math.round(Number(body.discount) || 0)),
+            subtotal: Math.max(0, Math.round(Number(body.subtotal) || cartSubtotal())),
+          };
+        } catch (err) {
+          return { valid: false, offline: true };
+        }
+      }
+      async function applyCoupon() {
         const code = String(state.couponInput || '').trim().toUpperCase();
         if (!code) {
           state.coupon = null;
@@ -681,10 +766,30 @@
           render();
           return;
         }
+        if (state.storefront && state.storefront.remote) {
+          const result = await applyRemoteCoupon(code);
+          if (!result || !result.valid) {
+            state.coupon = null;
+            toast(result && result.offline ? 'تعذر التحقق من الخصم حالياً' : (result && result.message) || 'كود الخصم غير صحيح');
+            render();
+            return;
+          }
+          state.coupon = { code: result.code, type: 'server', value: result.discount, minimum: 0, validatedSubtotal: result.subtotal };
+          state.couponInput = result.code;
+          toast('تم تطبيق الخصم');
+          render();
+          return;
+        }
         const found = availableCoupons().find(c => c.code === code);
         if (!found) {
           state.coupon = null;
           toast('كود الخصم غير صحيح');
+          render();
+          return;
+        }
+        if (cartSubtotal() < found.minimum) {
+          state.coupon = null;
+          toast(`الحد الأدنى لهذا الخصم ${money(found.minimum)}`);
           render();
           return;
         }
@@ -965,7 +1070,7 @@
                 <div class="summary-line"><span>التوصيل</span><strong>${shipping.enabled === false ? 'غير مفعل' : money(fee)}</strong></div>
               </div>
               <div class="coupon-box">
-                <input id="couponInput" value="${esc(state.couponInput)}" placeholder="كود الخصم مثل UR10">
+                <input id="couponInput" value="${esc(state.couponInput)}" placeholder="أدخل كود الخصم">
                 <button data-action="apply-coupon">تطبيق</button>
               </div>
               <div class="coupon-note">${state.coupon ? `تم تطبيق ${esc(state.coupon.code)} (${state.coupon.percent}%)` : 'أدخل كود خصم إذا وفره المتجر.'}</div>
@@ -1226,7 +1331,15 @@
         if (!preview) return;
         preview.textContent = JSON.stringify(buildAlWaseetPayload(currentShipping()), null, 2);
       }
+      function checkoutAvailabilityError() {
+        const { website } = normalize();
+        if (website.enabled === false) return 'المتجر الإلكتروني متوقف حالياً';
+        if (currentShipping().enabled === false) return 'التوصيل متوقف حالياً، لا يمكن إكمال الطلب';
+        return '';
+      }
       function validateCheckout() {
+        const availabilityError = checkoutAvailabilityError();
+        if (availabilityError) return availabilityError;
         if (!cartItems().length) return 'السلة فارغة';
         if (!paymentOptions().some(p => p.key === state.checkout.payment)) return 'اختار طريقة دفع متاحة';
         if (state.checkout.name.trim().length < 2) return 'اكتب اسم الزبون';
@@ -1287,7 +1400,10 @@
             : payload;
           const response = await fetch(`${backendBase}/api/storefront/orders`, {
             method: 'POST',
-            headers: { 'content-type': 'application/json; charset=utf-8' },
+            headers: {
+              'content-type': 'application/json; charset=utf-8',
+              ...(bodyPayload.order && bodyPayload.order.id ? { 'idempotency-key': String(bodyPayload.order.id) } : {}),
+            },
             body: JSON.stringify(bodyPayload),
           });
           const body = await response.json().catch(() => ({}));
@@ -1387,6 +1503,7 @@
         const customers = existingCustomer ? oldCustomers.map(c => c.id === customerId ? customer : c) : [customer, ...oldCustomers];
         const nextBusiness = { ...business, orders: [order, ...oldOrders], customers };
         const requiresRemoteConfirm = !!(state.storefront && state.storefront.remote && state.storefront.key && typeof fetch !== 'undefined');
+        let acceptedOrder = order;
         if (requiresRemoteConfirm) {
           const sent = await sendOrderToBackend(order, customer, nextBusiness, { queue: false });
           if (!sent.ok) {
@@ -1396,18 +1513,31 @@
             render();
             return;
           }
+          const canonical = sent.body && (sent.body.order || sent.body.receipt);
+          if (canonical && typeof canonical === 'object') acceptedOrder = { ...order, ...canonical };
+          if (sent.body && Array.isArray(sent.body.products)) {
+            state.products = cleanStoredProducts(sent.body.products);
+            storageSet('products', JSON.stringify(state.products));
+          } else {
+            await loadRemoteStorefront();
+          }
         } else {
           sendOrderToBackend(order, customer, nextBusiness);
+          storageSet('business', JSON.stringify(nextBusiness));
+          updateProductsAfterOrder(items);
         }
-        storageSet('business', JSON.stringify(nextBusiness));
         localStorage.setItem('urCommerceOS.storefront.lastPayload.v1', JSON.stringify(payload));
-        updateProductsAfterOrder(items);
         state.cart = [];
         state.coupon = null;
         state.couponInput = '';
         state.cartOpen = false;
         state.checkoutOpen = false;
-        state.orderSuccess = { code: order.code, total, phone: payload.client_mobile, payment: order.payment };
+        state.orderSuccess = {
+          code: acceptedOrder.code || acceptedOrder.id || order.code,
+          total: Number.isFinite(Number(acceptedOrder.total)) ? Number(acceptedOrder.total) : total,
+          phone: payload.client_mobile,
+          payment: acceptedOrder.payment || order.payment,
+        };
         state.checkout = { ...state.checkout, address: '', notes: '' };
         render();
       }
@@ -1667,7 +1797,9 @@
         if (action === 'category') state.category = target.dataset.key || 'all';
         if (action === 'scroll-products') document.getElementById('products')?.scrollIntoView({ behavior:'smooth', block:'start' });
         if (action === 'checkout') {
-          if (!cartItems().length) toast('السلة فارغة');
+          const availabilityError = checkoutAvailabilityError();
+          if (availabilityError) toast(availabilityError);
+          else if (!cartItems().length) toast('السلة فارغة');
           else {
             state.checkoutOpen = true;
             state.cartOpen = false;
@@ -1734,11 +1866,20 @@
         updateProductsAfterOrder,
         normalizePhone,
         currentShipping,
+        checkoutAvailabilityError,
+        availableCoupons,
+        normalizeCoupon,
+        couponDiscount,
+        applyRemoteCoupon,
+        couponValidationLineItems,
         storefrontParams,
         loadRemoteStorefront,
         orderBackendPayload,
         safeJson,
         cssUrl,
+        configuredBackendBase,
+        isDevelopmentHost,
+        isTrustedBackendBase,
       };
       return (typeof window !== 'undefined' && window.__UR_STOREFRONT_TEST__) ? { init, addToCart, __test: testApi } : { init, addToCart };
     })();
