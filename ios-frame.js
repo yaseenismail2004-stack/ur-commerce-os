@@ -160,7 +160,7 @@ function IOSGlassPill({
       ...style
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "ios-device-island",
+    className: "ios-glass-tint",
     style: {
       position: 'absolute',
       inset: 0,
@@ -394,19 +394,6 @@ function IOSDevice({
       WebkitFontSmoothing: 'antialiased'
     }
   }, !nativeMobile && /*#__PURE__*/React.createElement("div", {
-    className: "ios-device-island",
-    style: {
-      position: 'absolute',
-      top: 11,
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: 126,
-      height: 37,
-      borderRadius: 24,
-      background: '#000',
-      zIndex: 50
-    }
-  }), !nativeMobile && /*#__PURE__*/React.createElement("div", {
     className: "ios-device-status",
     style: {
       position: 'absolute',

@@ -2093,7 +2093,6 @@
         outline:none !important;
         background:var(--c-bg,#F7F4EE) !important;
       }
-      #dc-root .ios-device-island,
       #dc-root .ios-device-status,
       #dc-root .ios-device-home {
         display:none !important;
@@ -2288,6 +2287,332 @@
         border-radius:8px !important;
       }
     }
+    #dc-root .ur-preview-stage.ur-preview-stage-onboarding {
+      min-height:100vh;
+      padding:0 !important;
+      align-items:stretch !important;
+      background:#F6F4EF;
+      overflow:hidden;
+    }
+    #dc-root .ur-unified-onboard {
+      width:100%;
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);
+      background:#FCFBF8;
+      color:#22201E;
+      overflow:hidden;
+      scrollbar-width:none;
+    }
+    #dc-root .ur-unified-onboard-aside {
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:56px clamp(32px,5vw,80px);
+      background:#212124;
+      color:#FDFBF6;
+    }
+    #dc-root .ur-unified-brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:16px;
+      font-weight:900;
+    }
+    #dc-root .ur-unified-aside-top {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    #dc-root .ur-unified-language {
+      display:flex;
+      align-items:center;
+      gap:4px;
+      padding:3px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:8px;
+    }
+    #dc-root .ur-unified-language button {
+      min-width:34px;
+      min-height:30px;
+      padding:0 8px;
+      border:0;
+      border-radius:6px;
+      background:transparent;
+      color:#DDD7CC;
+      font:inherit;
+      font-size:11px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    #dc-root .ur-unified-language button[aria-pressed="true"] { background:#FDFBF6; color:#252326; }
+    #dc-root .ur-unified-brand-mark {
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      background:#C8A96B;
+      color:#212124;
+      font-size:17px;
+      font-weight:950;
+    }
+    #dc-root .ur-unified-aside-copy {
+      max-width:390px;
+    }
+    #dc-root .ur-unified-aside-copy h1 {
+      margin:0;
+      color:#FDFBF6;
+      font-size:34px;
+      line-height:1.32;
+      font-weight:950;
+    }
+    #dc-root .ur-unified-aside-copy p {
+      margin:14px 0 0;
+      color:#D7D2C8;
+      font-size:16px;
+      line-height:1.8;
+    }
+    #dc-root .ur-unified-aside-list {
+      display:grid;
+      gap:12px;
+      margin-top:34px;
+    }
+    #dc-root .ur-unified-aside-list span {
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:#F4F1EA;
+      font-size:13px;
+      font-weight:800;
+    }
+    #dc-root .ur-unified-aside-list i {
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#C8A96B;
+      flex:0 0 auto;
+    }
+    #dc-root .ur-unified-aside-note {
+      color:#BEB8AD;
+      font-size:12px;
+      line-height:1.7;
+    }
+    #dc-root .ur-unified-onboard-main {
+      min-width:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px clamp(24px,7vw,112px);
+      overflow-y:auto;
+      scrollbar-width:none;
+    }
+    #dc-root .ur-unified-onboard-main::-webkit-scrollbar,
+    #dc-root .ur-unified-onboard::-webkit-scrollbar { width:0; height:0; display:none; }
+    #dc-root .ur-unified-onboard-content {
+      width:min(100%,620px);
+    }
+    #dc-root .ur-unified-progress {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:34px;
+      color:#776F63;
+      font-size:12px;
+      font-weight:850;
+    }
+    #dc-root .ur-unified-progress-track {
+      height:4px;
+      flex:1;
+      overflow:hidden;
+      border-radius:0;
+      background:#E8E2D8;
+    }
+    #dc-root .ur-unified-progress-track span {
+      display:block;
+      width:100%;
+      height:100%;
+      background:#C8A96B;
+      transform:scaleX(var(--ob-progress,0));
+      transform-origin:var(--ob-origin,right);
+      transition:transform 160ms ease-out;
+    }
+    #dc-root .ur-unified-step { animation:urUnifiedStep 160ms ease-out both; }
+    @keyframes urUnifiedStep { from { opacity:0; transform:translate3d(0,8px,0); } to { opacity:1; transform:translate3d(0,0,0); } }
+    #dc-root .ur-unified-kicker {
+      margin:0 0 8px;
+      color:#8B7040;
+      font-size:13px;
+      font-weight:900;
+    }
+    #dc-root .ur-unified-step h2 {
+      margin:0;
+      color:#22201E;
+      font-size:30px;
+      line-height:1.35;
+      font-weight:950;
+    }
+    #dc-root .ur-unified-step > p {
+      margin:10px 0 28px;
+      color:#70695E;
+      font-size:15px;
+      line-height:1.8;
+    }
+    #dc-root .ur-unified-form {
+      display:grid;
+      gap:16px;
+    }
+    #dc-root .ur-unified-field {
+      display:grid;
+      gap:7px;
+      min-width:0;
+      color:#3E3932;
+      font-size:13px;
+      font-weight:850;
+    }
+    #dc-root .ur-unified-field input,
+    #dc-root .ur-unified-field select {
+      width:100%;
+      min-height:50px;
+      border:1px solid #D9D1C5;
+      border-radius:8px;
+      background:#FFF;
+      color:#22201E;
+      padding:12px 14px;
+      font:inherit;
+      font-size:15px;
+      box-sizing:border-box;
+      outline:none;
+    }
+    #dc-root .ur-unified-field input:focus,
+    #dc-root .ur-unified-field select:focus {
+      border-color:#A98748 !important;
+      box-shadow:0 0 0 3px rgba(200,169,107,.18) !important;
+    }
+    #dc-root .ur-unified-inline-fields {
+      display:grid;
+      grid-template-columns:minmax(116px,.32fr) minmax(0,1fr);
+      gap:10px;
+      align-items:end;
+    }
+    #dc-root .ur-unified-choice-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      max-height:300px;
+      padding-inline-end:2px;
+      overflow:auto;
+      scrollbar-width:none;
+    }
+    #dc-root .ur-unified-choice-grid::-webkit-scrollbar { width:0; height:0; display:none; }
+    #dc-root .ur-unified-choice {
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:10px;
+      padding:12px;
+      border:1px solid #D9D1C5;
+      border-radius:8px;
+      background:#FFF;
+      color:#22201E;
+      font:inherit;
+      text-align:start;
+      cursor:pointer;
+    }
+    #dc-root .ur-unified-choice[aria-pressed="true"] {
+      border-color:#9A7740;
+      background:#F8F1E4;
+      box-shadow:inset 3px 0 0 #C8A96B;
+    }
+    #dc-root .ur-unified-choice-icon {
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:8px;
+      background:#F0EBE2;
+      color:#7B6134;
+    }
+    #dc-root .ur-unified-choice b,
+    #dc-root .ur-unified-choice small { display:block; min-width:0; }
+    #dc-root .ur-unified-choice b { font-size:13px; }
+    #dc-root .ur-unified-choice small { margin-top:3px; color:#766F65; font-size:11px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    #dc-root .ur-unified-primary,
+    #dc-root .ur-unified-secondary,
+    #dc-root .ur-unified-google {
+      min-height:50px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      border-radius:8px;
+      padding:12px 18px;
+      font:inherit;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    #dc-root .ur-unified-primary { border:1px solid #C8A96B; background:#C8A96B; color:#211E19; box-shadow:none; }
+    #dc-root .ur-unified-secondary { border:1px solid #D5CEC2; background:transparent; color:#38332C; }
+    #dc-root .ur-unified-google { width:100%; border:1px solid #D5CEC2; background:#FFF; color:#28231F; }
+    #dc-root .ur-unified-actions {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:28px;
+    }
+    #dc-root .ur-unified-methods { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    #dc-root .ur-unified-method {
+      min-height:46px;
+      border:1px solid #D9D1C5;
+      border-radius:8px;
+      background:#FFF;
+      color:#36312A;
+      font:inherit;
+      font-size:13px;
+      font-weight:850;
+      cursor:pointer;
+    }
+    #dc-root .ur-unified-method[aria-pressed="true"] { border-color:#22201E; background:#22201E; color:#FFF; }
+    #dc-root .ur-unified-divider { display:flex; align-items:center; gap:10px; margin:18px 0 0; color:#81796C; font-size:12px; font-weight:800; }
+    #dc-root .ur-unified-divider::before, #dc-root .ur-unified-divider::after { content:""; height:1px; flex:1; background:#E5DED3; }
+    #dc-root .ur-unified-note { margin:12px 0 0; color:#81796C; font-size:12px; line-height:1.65; }
+    #dc-root .ur-unified-list { display:grid; gap:1px; border:1px solid #E0D8CD; border-radius:8px; overflow:hidden; background:#E0D8CD; }
+    #dc-root .ur-unified-list > div { display:flex; align-items:center; gap:12px; padding:15px; background:#FFF; color:#39342D; font-size:14px; font-weight:800; }
+    #dc-root .ur-unified-list svg { flex:0 0 auto; color:#95723A; }
+    #dc-root .ur-unified-logo-upload { display:flex; align-items:center; gap:14px; padding:18px; border:1px dashed #B8AA95; border-radius:8px; background:#FFF; cursor:pointer; }
+    #dc-root .ur-unified-logo-preview { width:54px; height:54px; border-radius:8px; display:grid; place-items:center; flex:0 0 auto; background:#EDE5D8; color:#6B5735; font-size:20px; font-weight:950; background-size:cover; background-position:center; }
+    #dc-root .ur-unified-summary { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    #dc-root .ur-unified-summary > div { padding:15px; border:1px solid #E0D8CD; border-radius:8px; background:#FFF; }
+    #dc-root .ur-unified-summary span { display:block; color:#81796C; font-size:11px; font-weight:800; }
+    #dc-root .ur-unified-summary b { display:block; margin-top:6px; color:#2A2621; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    @media (max-width:899px) {
+      #dc-root .ur-preview-stage.ur-preview-stage-onboarding { min-height:100svh; overflow:clip; }
+      #dc-root .ur-unified-onboard { min-height:100svh; display:block; overflow:hidden; }
+      #dc-root .ur-unified-onboard-aside { min-height:0; padding:calc(18px + env(safe-area-inset-top)) 20px 18px; background:#212124; }
+      #dc-root .ur-unified-aside-copy { display:none; }
+      #dc-root .ur-unified-aside-note { display:none; }
+      #dc-root .ur-unified-onboard-main { min-height:calc(100svh - 72px); padding:28px 20px calc(28px + env(safe-area-inset-bottom)); align-items:flex-start; overflow-y:auto; overscroll-behavior:contain; }
+      #dc-root .ur-unified-progress { margin-bottom:26px; }
+      #dc-root .ur-unified-step h2 { font-size:25px; }
+      #dc-root .ur-unified-step > p { margin-bottom:22px; font-size:14px; }
+      #dc-root .ur-unified-inline-fields { grid-template-columns:108px minmax(0,1fr); }
+      #dc-root .ur-unified-choice-grid { max-height:none; }
+    }
+    @media (max-width:430px) {
+      #dc-root .ur-unified-onboard-main { padding-inline:16px; }
+      #dc-root .ur-unified-choice-grid { grid-template-columns:1fr; }
+      #dc-root .ur-unified-summary { grid-template-columns:1fr; }
+      #dc-root .ur-unified-actions { flex-direction:column-reverse; align-items:stretch; }
+      #dc-root .ur-unified-actions > button { width:100%; }
+    }
     @media (prefers-reduced-motion: reduce) {
       #dc-root *, #dc-root [style*="animation:"] { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
     }
@@ -2295,9 +2620,150 @@
 </helmet>
 <div style="min-height:100vh;background:linear-gradient(180deg,#F5F5F7 0%,#ECEFF3 100%);font-family:'IBM Plex Sans Arabic',sans-serif;">
 
-  <div class="ur-preview-stage" style="display:flex;justify-content:center;align-items:flex-start;padding:28px 24px 100px;">
+  <div class="ur-preview-stage {{onboardPreviewStageClass}}" style="display:flex;justify-content:center;align-items:flex-start;padding:28px 24px 100px;">
 
-    <sc-if value="{{isMobileDevice}}" hint-placeholder-val="{{true}}">
+    <sc-if value="{{unifiedOnboardVisible}}" hint-placeholder-val="{{true}}">
+      <section class="ur-unified-onboard" dir="{{dir}}" style="{{themeVars}}" aria-label="{{onboardProgressLabel}}">
+        <aside class="ur-unified-onboard-aside">
+          <div class="ur-unified-aside-top">
+            <div class="ur-unified-brand">
+              <span class="ur-unified-brand-mark">أ</span>
+              <span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">أور</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">UR</sc-if></span>
+            </div>
+            <div class="ur-unified-language"><button aria-pressed="{{isAr}}" onclick="{{setLangAr}}">AR</button><button aria-pressed="{{isEn}}" onclick="{{setLangEn}}">EN</button></div>
+          </div>
+          <div class="ur-unified-aside-copy">
+            <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h1>ابدأ متجرك بخطوات واضحة.</h1><p>أنشئ الحساب، عرّف متجرك، ثم ادخل لوحة التحكم. كل الإعدادات التفصيلية تقدر تكملها بوقتك.</p></sc-if>
+            <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h1>Start your store with clear steps.</h1><p>Create your account, add the store basics, then enter the dashboard. You can finish the details later.</p></sc-if>
+            <div class="ur-unified-aside-list">
+              <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><span><i></i>بيانات أساسية فقط</span><span><i></i>بدون رابط أو إعدادات وهمية</span><span><i></i>كل شيء قابل للتعديل لاحقاً</span></sc-if>
+              <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><span><i></i>Only the essential details</span><span><i></i>No placeholder links or setup</span><span><i></i>Everything stays editable later</span></sc-if>
+            </div>
+          </div>
+          <div class="ur-unified-aside-note"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">بياناتك محفوظة داخل حسابك ولا تُنشر تلقائياً.</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Your details stay in your account and are never published automatically.</sc-if></div>
+        </aside>
+
+        <main class="ur-unified-onboard-main">
+          <div class="ur-unified-onboard-content">
+            <sc-if value="{{notOb0}}" hint-placeholder-val="{{false}}">
+              <div class="ur-unified-progress">
+                <span>{{onboardStepLabel}}</span>
+                <div class="ur-unified-progress-track" style="{{onboardProgressStyle}}"><span></span></div>
+                <span dir="ltr">{{onboardProgressPercent}}</span>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ob0}}" hint-placeholder-val="{{true}}">
+              <div class="ur-unified-step">
+                <p class="ur-unified-kicker"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">إدارة التجارة</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Commerce management</sc-if></p>
+                <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h2>خلّ متجرك يشتغل بترتيب من أول يوم.</h2><p>المنتجات والطلبات والشحن بمكان واحد، من غير ما نثقل عليك بإعدادات ما تحتاجها هسه.</p></sc-if>
+                <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h2>Run your store with a clear start.</h2><p>Products, orders, and delivery in one place without loading you with setup you do not need yet.</p></sc-if>
+                <div class="ur-unified-list">
+                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">
+                    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M5 12h14M5 17h9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>رتّب منتجاتك وأسعارك</div>
+                    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>تابع الطلبات أولاً بأول</div>
+                    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h10v8H4zM14 11h3l3 3v2h-6zM7 18.5a1.5 1.5 0 1 0 0-3M17 18.5a1.5 1.5 0 1 0 0-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>جهّز الشحن وقت ما يناسبك</div>
+                  </sc-if>
+                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">
+                    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M5 12h14M5 17h9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>Organize products and prices</div>
+                    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Follow orders as they arrive</div>
+                    <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h10v8H4zM14 11h3l3 3v2h-6zM7 18.5a1.5 1.5 0 1 0 0-3M17 18.5a1.5 1.5 0 1 0 0-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Set delivery up when ready</div>
+                  </sc-if>
+                </div>
+                <div class="ur-unified-actions">
+                  <button class="ur-unified-secondary" onclick="{{startGoogleLogin}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">لدي حساب بالفعل</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">I already have an account</sc-if></button>
+                  <button class="ur-unified-primary" onclick="{{startGoogleSignup}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">ابدأ الآن</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Get started</sc-if></button>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ob1}}" hint-placeholder-val="{{false}}">
+              <div class="ur-unified-step">
+                <p class="ur-unified-kicker"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الحساب</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Account</sc-if></p>
+                <h2>{{desktopAuthTitle}}</h2>
+                <p>{{desktopAuthDescription}}</p>
+                <button class="ur-unified-google" onclick="{{continueGoogleAuth}}"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5Z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.2 4 9.4 8.5 6.3 14.7Z"/><path fill="#4CAF50" d="M24 44c5.1 0 9.8-2 13.3-5.2l-6.1-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.2 39.6 16 44 24 44Z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.1 5.2C36.9 39.1 44 34 44 24c0-1.3-.1-2.4-.4-3.5Z"/></svg>{{googleAuthButton}}</button>
+                <div class="ur-unified-divider"><span>{{desktopAuthOtherWays}}</span></div>
+                <div class="ur-unified-methods">
+                  <button class="ur-unified-method" aria-pressed="{{authEmailSelected}}" onclick="{{chooseEmailAuth}}">{{authEmailLabel}}</button>
+                  <button class="ur-unified-method" aria-pressed="{{authPhoneSelected}}" onclick="{{choosePhoneAuth}}">{{authPhoneLabel}}</button>
+                </div>
+                <sc-if value="{{manualAuthSelected}}" hint-placeholder-val="{{false}}">
+                  <div class="ur-unified-form" style="margin-top:16px;">
+                    <sc-if value="{{authPhoneSelected}}" hint-placeholder-val="{{false}}">
+                      <label class="ur-unified-field"><span>{{phoneCountryLabel}}</span><select value="{{onboardPhoneCountry}}" onChange="{{setOnboardPhoneCountry}}"><sc-for list="{{phoneCountryList}}" as="country" hint-placeholder-count="8"><option value="{{country.iso}}">{{country.label}}</option></sc-for></select></label>
+                    </sc-if>
+                    <label class="ur-unified-field"><span>{{authInputLabel}}</span><input value="{{onboardAuthInput}}" onChange="{{setOnboardAuthInput}}" inputmode="{{authInputMode}}" placeholder="{{authInputPlaceholder}}" dir="ltr" autocomplete="{{authAutocomplete}}"/></label>
+                    <label class="ur-unified-field"><span>{{authPasswordLabel}}</span><input type="password" value="{{onboardAuthPassword}}" onChange="{{setOnboardAuthPassword}}" placeholder="{{authPasswordPlaceholder}}" dir="ltr" autocomplete="new-password"/></label>
+                    <sc-if value="{{authPasswordConfirmVisible}}" hint-placeholder-val="{{false}}"><label class="ur-unified-field"><span>{{authPasswordConfirmLabel}}</span><input type="password" value="{{onboardAuthPasswordConfirm}}" onChange="{{setOnboardAuthPasswordConfirm}}" placeholder="{{authPasswordConfirmPlaceholder}}" dir="ltr" autocomplete="new-password"/></label></sc-if>
+                    <button class="ur-unified-primary" onclick="{{continueManualAuth}}">{{manualAuthButton}}</button>
+                  </div>
+                </sc-if>
+                <p class="ur-unified-note">{{googleAuthPrivacy}}</p>
+                <div class="ur-unified-actions"><button class="ur-unified-secondary" onclick="{{onboardBack}}">{{t.onboard.back}}</button></div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ob2}}" hint-placeholder-val="{{false}}">
+              <div class="ur-unified-step">
+                <p class="ur-unified-kicker"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متجرك</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Your store</sc-if></p>
+                <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h2>عرّف متجرك بالأساسيات.</h2><p>نحتاج الاسم والمحافظة والنوع حتى نجهز لك لوحة مناسبة. رقم التواصل اختياري وتقدر تضيفه لاحقاً.</p></sc-if>
+                <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h2>Add the essentials for your store.</h2><p>We need its name, governorate, and type to set up the right workspace. A contact number is optional.</p></sc-if>
+                <div class="ur-unified-form">
+                  <label class="ur-unified-field"><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">اسم المتجر</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Store name</sc-if></span><input value="{{onboardStoreName}}" onChange="{{setOnboardStoreName}}" maxlength="{{storeNameMaxLength}}" autocomplete="organization"/></label>
+                  <label class="ur-unified-field"><span>{{storeGovernorateLabel}}</span><select value="{{onboardStoreAddress}}" onChange="{{setOnboardStoreAddress}}"><option value="">{{storeGovernoratePlaceholder}}</option><sc-for list="{{iraqGovernorateOptions}}" as="gov" hint-placeholder-count="18"><option value="{{gov.value}}">{{gov.label}}</option></sc-for></select></label>
+                  <div class="ur-unified-inline-fields">
+                    <label class="ur-unified-field"><span>{{phoneCountryLabel}}</span><select value="{{onboardPhoneCountry}}" onChange="{{setOnboardPhoneCountry}}"><sc-for list="{{phoneCountryList}}" as="country" hint-placeholder-count="8"><option value="{{country.iso}}">{{country.label}}</option></sc-for></select></label>
+                    <label class="ur-unified-field"><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">رقم للتواصل (اختياري)</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Contact phone (optional)</sc-if></span><input value="{{onboardStorePhone}}" onChange="{{setOnboardStorePhone}}" inputmode="tel" placeholder="{{storePhoneLocalPlaceholder}}" dir="ltr" autocomplete="tel"/></label>
+                  </div>
+                  <label class="ur-unified-field"><span>{{businessTypeSelectLabel}}</span><select value="{{onboardBusinessTypeValue}}" onChange="{{setBusinessTypeFromSelect}}"><option value="">{{businessTypePrompt}}</option><sc-for list="{{businessProfileSelectOptions}}" as="profile" hint-placeholder-count="12"><option value="{{profile.key}}">{{profile.label}}</option></sc-for></select></label>
+                </div>
+                <div class="ur-unified-actions"><button class="ur-unified-secondary" onclick="{{onboardBack}}">{{t.onboard.back}}</button><button class="ur-unified-primary" onclick="{{onboardNext}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متابعة</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Continue</sc-if></button></div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ob3}}" hint-placeholder-val="{{false}}">
+              <div class="ur-unified-step">
+                <p class="ur-unified-kicker"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">البداية</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">First steps</sc-if></p>
+                <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h2>ما نحتاج نثقل عليك من البداية.</h2><p>بعد فتح اللوحة تختار شنو تسوي أولاً. المنتجات، الشحن، والدفع كلها تظل قابلة للتعديل بدون ما توقف شغلك.</p></sc-if>
+                <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h2>You do not need to finish everything now.</h2><p>After entering the dashboard, choose what to handle first. Products, delivery, and payments stay editable without blocking your work.</p></sc-if>
+                <div class="ur-unified-list">
+                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>أضف أول منتج لما تكون جاهز</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h10v8H4zM14 11h3l3 3v2h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>اربط التوصيل فقط إذا تحتاجه</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>أضف باقي الفريق من الإعدادات لاحقاً</div></sc-if>
+                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Add your first product when ready</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h10v8H4zM14 11h3l3 3v2h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Connect delivery only when needed</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>Add team members later from settings</div></sc-if>
+                </div>
+                <div class="ur-unified-actions"><button class="ur-unified-secondary" onclick="{{onboardBack}}">{{t.onboard.back}}</button><button class="ur-unified-primary" onclick="{{onboardNext}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">تمام، متابعة</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Continue</sc-if></button></div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ob4}}" hint-placeholder-val="{{false}}">
+              <div class="ur-unified-step">
+                <p class="ur-unified-kicker"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الهوية</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Brand</sc-if></p>
+                <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h2>شعار المتجر اختياري.</h2><p>تقدر تضيفه هسه أو من الإعدادات لاحقاً. ما راح نطلب منك رابط متجر أو جدول دوام حتى تكمل.</p></sc-if>
+                <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h2>Your store logo is optional.</h2><p>Add it now or later from settings. You will not need a public link or opening hours to finish.</p></sc-if>
+                <label class="ur-unified-logo-upload">
+                  <span class="ur-unified-logo-preview" style="background:{{storeLogoBg}};background-size:cover;background-position:center;"><span style="display:{{storeInitialDisplay}};">{{storeInitial}}</span></span>
+                  <span><b style="display:block;font-size:15px;color:#2A2621;">{{onboardLogoTitle}}</b><small style="display:block;margin-top:4px;color:#776F63;font-size:12px;line-height:1.6;">{{onboardLogoSub}}</small></span>
+                  <input type="file" accept="image/*" onChange="{{setStoreLogo}}" style="display:none;"/>
+                </label>
+                <div class="ur-unified-actions"><button class="ur-unified-secondary" onclick="{{onboardBack}}">{{t.onboard.back}}</button><button class="ur-unified-primary" onclick="{{onboardNext}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">متابعة</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Continue</sc-if></button></div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ob5}}" hint-placeholder-val="{{false}}">
+              <div class="ur-unified-step">
+                <p class="ur-unified-kicker"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">جاهز</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Ready</sc-if></p>
+                <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h2>كل شيء الأساسي صار جاهز.</h2><p>افتح لوحة التحكم وابدأ باللي تحتاجه الآن. تقدر تكمل أي إعداد آخر من داخل المتجر.</p></sc-if>
+                <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h2>The essentials are ready.</h2><p>Open your dashboard and start with what you need now. Every remaining setting is available inside the store.</p></sc-if>
+                <div class="ur-unified-summary"><div><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">اسم المتجر</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Store name</sc-if></span><b>{{onboardStoreName}}</b></div><div><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">نوع المتجر</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Store type</sc-if></span><b>{{activeBusinessProfileLabel}}</b></div><div><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">المحافظة</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Governorate</sc-if></span><b>{{onboardStoreAddress}}</b></div><div><span><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">الحساب</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Account</sc-if></span><b>{{onboardAuthMethodLabel}}</b></div></div>
+                <div class="ur-unified-actions"><button class="ur-unified-secondary" onclick="{{onboardBack}}">{{t.onboard.back}}</button><button class="ur-unified-primary" onclick="{{onboardFinish}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">فتح لوحة التحكم</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Open dashboard</sc-if></button></div>
+              </div>
+            </sc-if>
+          </div>
+        </main>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{mobileWorkspaceVisible}}" hint-placeholder-val="{{true}}">
       <x-import component-from-global-scope="IOSDevice" from="./ios-frame.js?v=20260709-precompiled" width="{{402}}" height="{{874}}" hint-size="402,874">
         <div class="ur-app-shell {{screenMotionClass}}" dir="{{dir}}" style="{{themeVars}}height:100%;display:flex;flex-direction:column;background:var(--c-bg,#F7F4EE);font-family:{{appFontFamily}};position:relative;overflow:hidden;transition:background 0.3s ease;">
 
@@ -6006,7 +6472,7 @@
       </x-import>
     </sc-if>
 
-    <sc-if value="{{desktopWizardVisible}}" hint-placeholder-val="{{false}}">
+    <sc-if value="{{desktopWorkspaceVisible}}" hint-placeholder-val="{{false}}">
       <x-import component-from-global-scope="ChromeWindow" from="./browser-window.js?v=20260710-viewport-native" width="{{frameWidth}}" height="{{frameHeight}}" url="{{desktopUrl}}" hint-size="1440,900">
         <div class="ur-app-shell {{screenMotionClass}}" dir="{{dir}}" style="{{themeVars}}height:100%;display:flex;background:var(--c-bg,#F7F4EE);font-family:{{appFontFamily}};position:relative;overflow:hidden;transition:background 0.3s ease;{{desktopWizardShellStyle}}">
 
@@ -10290,6 +10756,7 @@ class Component extends DCLogic {
     onboardTeachStep: 0,
     onboardTeachMotionTick: 0,
     businessTypeMenuOpen: false,
+    onboardBusinessTypeTouched: false,
     profileIslandOpen: false,
     googleConnected: false,
     onboardChecks: { imp: false, pay: false, team: false, branch: false },
@@ -12241,9 +12708,19 @@ ZW|Zimbabwe|263
   }
   resetScrollSoon = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    if (this._scrollResetQueued) return;
+    this._scrollResetQueued = true;
     const reset = () => {
-      const scrollSelector = '[data-scroll-root],[style*="overflow:auto"],[style*="overflow: auto"],[style*="overflow-y:auto"],[style*="overflow-y: auto"]';
-      const nodes = [document.scrollingElement, document.documentElement, document.body, ...document.querySelectorAll(scrollSelector)];
+      const nodes = [
+        document.scrollingElement,
+        document.documentElement,
+        document.body,
+        document.querySelector('#dc-root .ur-unified-onboard-main'),
+        document.querySelector('#dc-root .ios-device-scroll'),
+        document.querySelector('#dc-root .ur-mobile-main'),
+        document.querySelector('#dc-root .ur-desktop-main'),
+        document.querySelector('#dc-root [data-scroll-root]'),
+      ];
       const seen = new Set();
       nodes.forEach(el => {
         if (!el || seen.has(el)) return;
@@ -12257,8 +12734,14 @@ ZW|Zimbabwe|263
       if (window.scrollTo) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     };
     reset();
-    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(() => requestAnimationFrame(reset));
-    [0, 40, 120, 260, 520].forEach(delay => setTimeout(reset, delay));
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => {
+        reset();
+        this._scrollResetQueued = false;
+      });
+    } else {
+      this._scrollResetQueued = false;
+    }
   };
   bootAnalyticsWebglSoon = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
@@ -15152,22 +15635,25 @@ ZW|Zimbabwe|263
     if (this._onboardStartTimer) clearTimeout(this._onboardStartTimer);
     this.setState({ onboardLeaving: true, onboardLaunching: false });
     this._onboardStartTimer = setTimeout(() => {
-      this.setState({ onboardStep: 1, onboardLeaving: false, onboardAuthMode: mode, onboardAuthMethod: 'google', onboardAuthInput: '', onboardAuthPassword: '', onboardAuthPasswordConfirm: '' });
+      this.setState({ onboardStep: 1, onboardLeaving: false, onboardAuthMode: mode, onboardAuthMethod: 'google', onboardAuthInput: '', onboardAuthPassword: '', onboardAuthPasswordConfirm: '', onboardBusinessTypeTouched: false });
       this.resetScrollSoon();
     }, 340);
   };
   startGoogleSignup = () => this.playOnboardStart('signup');
   startGoogleLogin = () => this.playOnboardStart('login');
   continueGoogleAuth = async () => {
-    const usedGoogle = await this.startGoogleOAuthFlow(this.state.onboardAuthMode || 'login');
+    const mode = this.state.onboardAuthMode || 'login';
+    if (mode === 'signup') {
+      this.setState({ onboardStep: 2, googleConnected: false, onboardAuthMethod: 'google' });
+      this.resetScrollSoon();
+      return;
+    }
+    const usedGoogle = await this.startGoogleOAuthFlow(mode);
     if (usedGoogle !== true) {
       this.setState({ authLoading: false, onboardLaunching: false });
       if (usedGoogle === false) this.showToast(this.state.lang === 'ar' ? 'تسجيل Google غير مهيأ حالياً' : 'Google sign-in is not configured');
       return;
     }
-    if (this.state.onboardAuthMode === 'login') return;
-    this.setState({ onboardStep: 2, googleConnected: true, onboardAuthMethod: 'google' });
-    this.resetScrollSoon();
   };
   chooseEmailAuth = () => this.setState({ onboardAuthMethod: 'email', onboardAuthInput: '', onboardAuthPassword: '', onboardAuthPasswordConfirm: '' });
   choosePhoneAuth = () => this.setState({ onboardAuthMethod: 'phone', onboardAuthInput: '', onboardAuthPassword: '', onboardAuthPasswordConfirm: '' });
@@ -15188,13 +15674,29 @@ ZW|Zimbabwe|263
     }
     return true;
   }
+  validateOnboardAuthIdentifier(method = this.state.onboardAuthMethod) {
+    const isAr = this.state.lang === 'ar';
+    const raw = String(this.state.onboardAuthInput || '').trim();
+    if (method === 'email') {
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) && raw.length <= 254) return true;
+      this.showToast(isAr ? 'اكتب بريد إلكتروني صحيح' : 'Enter a valid email address');
+      return false;
+    }
+    if (method === 'phone') {
+      const phone = this.normalizeOnboardPhone(raw);
+      if (/^\+[1-9]\d{7,14}$/.test(phone)) return true;
+      this.showToast(isAr ? 'اكتب رقم هاتف صحيح مع رمز الدولة' : 'Enter a valid phone number with country code');
+      return false;
+    }
+    return true;
+  }
   selectedOnboardDial(state = this.state) {
     const country = this.PHONE_COUNTRIES.find(c => c.iso === state.onboardPhoneCountry) || this.PHONE_COUNTRIES.find(c => c.iso === 'IQ') || this.PHONE_COUNTRIES[0] || {};
     return String(country.dial || '964').replace(/[^\d-]/g, '');
   }
   sanitizeStoreName(value) {
     return String(value || '')
-      .replace(/[^A-Za-z\u0621-\u064A\s]/g, '')
+      .replace(/[^A-Za-z0-9\u0621-\u0652\u0660-\u0669\s&.'-]/g, '')
       .replace(/\s+/g, ' ')
       .slice(0, 40);
   }
@@ -15277,7 +15779,7 @@ ZW|Zimbabwe|263
   toggleBusinessTypeMenu = () => this.setState(s => ({ businessTypeMenuOpen: !s.businessTypeMenuOpen }));
   selectBusinessType = (bt) => {
     this.setBusinessType(bt);
-    this.setState({ businessTypeMenuOpen: false });
+    this.setState({ businessTypeMenuOpen: false, onboardBusinessTypeTouched: true });
   };
   onboardStoreInfo(options = {}) {
     const rawPhone = options.storePhone || this.state.onboardStorePhone || '';
@@ -15289,13 +15791,12 @@ ZW|Zimbabwe|263
   }
   hasRequiredStoreInfo(storeSettings = this.state.storeSettings) {
     const info = storeSettings || {};
-    return !!(String(info.storeName || '').trim() && String(info.phone || '').trim() && String(info.address || '').trim() && ((info.businessProfile && info.businessProfile.key) || info.businessType));
+    return !!(String(info.storeName || '').trim() && String(info.address || '').trim() && ((info.businessProfile && info.businessProfile.key) || info.businessType));
   }
   storeProfileCompletion(storeSettings = this.state.storeSettings, isAr = this.state.lang === 'ar') {
     const info = storeSettings || {};
     const checks = [
       { key: 'storeName', done: !!String(info.storeName || '').trim(), label: isAr ? 'اسم المتجر' : 'Store name' },
-      { key: 'phone', done: !!String(info.phone || '').trim(), label: isAr ? 'رقم الهاتف' : 'Phone number' },
       { key: 'address', done: !!String(info.address || '').trim(), label: isAr ? 'المحافظة' : 'Governorate' },
       { key: 'businessType', done: !!((info.businessProfile && info.businessProfile.key) || info.businessType || this.state.bizType), label: isAr ? 'نوع المتجر' : 'Store type' },
     ];
@@ -15314,25 +15815,26 @@ ZW|Zimbabwe|263
   validateOnboardStoreInfo() {
     const info = this.onboardStoreInfo();
     const isAr = this.state.lang === 'ar';
-    if (info.storeName && info.storeName.length < 2) {
+    if (info.storeName.length < 2) {
       this.showToast(isAr ? 'اسم المتجر لازم يكون حرفين على الأقل' : 'Store name needs at least 2 letters');
       return false;
     }
-    if (info.storeName && info.storeName !== String(this.state.onboardStoreName || '').trim()) {
-      this.showToast(isAr ? 'اسم المتجر يقبل حروف عربي أو إنكليزي فقط' : 'Store name accepts Arabic or English letters only');
+    if (!this.IRAQ_GOVERNORATES.some(governorate => governorate.value === info.address)) {
+      this.showToast(isAr ? 'اختار محافظة المتجر' : 'Choose the store governorate');
       return false;
     }
-    if (info.storeName && info.phone && info.address) return true;
-    this.showToast((this.T[this.state.lang] && this.T[this.state.lang].onboard.completeStoreInfoToast) || 'Complete store information first');
-    return false;
+    if (info.phone && !/^\+[1-9]\d{7,14}$/.test(info.phone)) {
+      this.showToast(isAr ? 'اكتب رقم تواصل صحيح أو اتركه فارغاً' : 'Enter a valid contact number or leave it blank');
+      return false;
+    }
+    const profileKey = (this.state.storeSettings && this.state.storeSettings.businessProfile && this.state.storeSettings.businessProfile.key) || this.state.bizType;
+    if (!this.state.onboardBusinessTypeTouched || !this.businessProfileCatalog().some(profile => profile.key === profileKey)) {
+      this.showToast(isAr ? 'اختار نوع المتجر' : 'Choose the store type');
+      return false;
+    }
+    return true;
   }
   validateOnboardBrandSetup() {
-    const slug = this.currentOnboardSlug();
-    const isAr = this.state.lang === 'ar';
-    if (!slug || slug.length < 3) {
-      this.showToast(isAr ? 'رابط المتجر لازم يكون 3 أحرف على الأقل' : 'Store link needs at least 3 characters');
-      return false;
-    }
     return true;
   }
   applyOnboardStoreInfo(nextState = {}) {
@@ -15350,17 +15852,9 @@ ZW|Zimbabwe|263
   applyOnboardBrandSetup(nextState = {}) {
     const currentStore = this.state.storeSettings || {};
     const nextStore = nextState.storeSettings || {};
-    const slug = this.currentOnboardSlug();
-    const openingSchedule = {
-      daysPerWeek: this.onboardOpenDaysValue(),
-      hoursPerDay: this.onboardOpenHoursValue(),
-    };
     nextState.storeSettings = {
       ...currentStore,
       ...nextStore,
-      storeSlug: slug,
-      publicUrl: `https://ur.store/${slug}`,
-      openingSchedule,
       websiteSettings: {
         ...(currentStore.websiteSettings || {}),
         ...(nextStore.websiteSettings || {}),
@@ -15402,7 +15896,7 @@ ZW|Zimbabwe|263
     const productSettings = this.productSettingsForBusinessProfile(profile, {});
     const profileModules = new Set((profile && profile.modules) || []);
     const baseConnected = new Set(['m1', 'm3', 'm4', 'm10', 'm15', 'm17', 'm18']);
-    const storeSlug = this.sanitizeStoreSlug(options.storeSlug) || this.currentOnboardSlug({ ...this.state, onboardStoreName: storeName, onboardStorePhone: storeInfo.phone });
+    const storeSlug = this.sanitizeStoreSlug(options.storeSlug);
     const openingSchedule = {
       daysPerWeek: this.onboardOpenDaysValue(options.openDays || this.state.onboardOpenDays || (currentStore.openingSchedule || {}).daysPerWeek),
       hoursPerDay: this.onboardOpenHoursValue(options.openHours || this.state.onboardOpenHours || (currentStore.openingSchedule || {}).hoursPerDay),
@@ -15430,7 +15924,7 @@ ZW|Zimbabwe|263
       brandColor: designSettings.brand,
       fontStyle: currentStore.brandTheme === 'logo' ? (currentStore.fontStyle || defaultStyle.fontStyle) : defaultStyle.fontStyle,
       storeSlug,
-      publicUrl: `https://ur.store/${storeSlug}`,
+      publicUrl: '',
       openingSchedule,
       businessType: profile.key,
       businessProfile: { key: profile.key, label: profile.label },
@@ -15473,6 +15967,7 @@ ZW|Zimbabwe|263
       this.showToast(this.state.lang === 'ar' ? 'أدخل بيانات التسجيل أولاً' : 'Enter your sign-in details first');
       return;
     }
+    if (!this.validateOnboardAuthIdentifier(this.state.onboardAuthMethod)) return;
     if (!this.validateOnboardAuthPassword(this.state.onboardAuthMode)) return;
     if (this.state.onboardAuthMode === 'login') {
       const result = await this.completeBackendAuth({ mode: 'login', method: this.state.onboardAuthMethod, identifier: value, password: this.state.onboardAuthPassword });
@@ -15480,8 +15975,7 @@ ZW|Zimbabwe|263
     }
     const next = { onboardStep: 2, googleConnected: false };
     if (this.state.onboardAuthMethod === 'phone' && !this.state.onboardStorePhone) {
-      const dial = (this.PHONE_COUNTRIES.find(c => c.iso === this.state.onboardPhoneCountry) || {}).dial || '964';
-      next.onboardStorePhone = `+${dial}${value.replace(/^0+/, '')}`;
+      next.onboardStorePhone = this.normalizeOnboardPhone(value);
     }
     this.setState(next);
     this.resetScrollSoon();
@@ -15498,21 +15992,8 @@ ZW|Zimbabwe|263
   };
   onboardNext = () => {
     if (this.state.onboardStep === 2 && !this.validateOnboardStoreInfo()) return;
-    if (this.state.onboardStep === 4 && !this.validateOnboardBrandSetup()) return;
-    if (this.state.onboardStep === 3) {
-      const total = this.onboardTeachStageCount();
-      const current = Math.max(0, Math.min(total - 1, Number(this.state.onboardTeachStep) || 0));
-      if (current < total - 1) {
-        this.setState(s => ({ onboardTeachStep: current + 1, onboardTeachMotionTick: (s.onboardTeachMotionTick || 0) + 1 }));
-        this.resetScrollSoon();
-        return;
-      }
-    }
+    if (this.state.onboardStep >= 5) return this.onboardFinish();
     const patch = { onboardStep: this.state.onboardStep + 1 };
-    if (this.state.onboardStep === 2) {
-      patch.onboardTeachStep = 0;
-      patch.onboardTeachMotionTick = (this.state.onboardTeachMotionTick || 0) + 1;
-    }
     let next = this.applyOnboardStoreInfo(patch);
     if (this.state.onboardStep === 4) next = this.applyOnboardBrandSetup(next);
     this.setState(next);
@@ -15520,21 +16001,7 @@ ZW|Zimbabwe|263
     this.resetScrollSoon();
   };
   onboardBack = () => {
-    this.setState(s => {
-      const currentTeach = Math.max(0, Number(s.onboardTeachStep) || 0);
-      if (s.onboardStep === 3 && currentTeach > 0) {
-        return { onboardTeachStep: currentTeach - 1, onboardTeachMotionTick: (s.onboardTeachMotionTick || 0) + 1 };
-      }
-      const nextStep = Math.max(0, s.onboardStep - 1);
-      const patch = { onboardStep: nextStep };
-      if (nextStep === 3) {
-        patch.onboardTeachStep = this.onboardTeachStageCount(this.activeBusinessProfile(s)) - 1;
-        patch.onboardTeachMotionTick = (s.onboardTeachMotionTick || 0) + 1;
-      } else if (s.onboardStep === 3 || nextStep < 3) {
-        patch.onboardTeachStep = 0;
-      }
-      return patch;
-    });
+    this.setState(s => ({ onboardStep: Math.max(0, Number(s.onboardStep || 0) - 1), onboardTeachStep: 0 }));
     this.resetScrollSoon();
   };
   onboardSkip = () => { this.setState({ onboarded: true, authStatus: 'local' }); this.resetScrollSoon(); };
@@ -15556,7 +16023,7 @@ ZW|Zimbabwe|263
       brandColor: currentStore.brandColor || designSettings.brand,
       fontStyle: currentStore.fontStyle || defaultStyle.fontStyle,
       storeSlug,
-      publicUrl: currentStore.publicUrl || `https://ur.store/${storeSlug}`,
+      publicUrl: currentStore.publicUrl || '',
       businessType: profile.key,
       businessProfile: currentStore.businessProfile || { key: profile.key, label: profile.label },
       websiteSettings: this.websiteSettingsForBusinessProfile(profile, currentStore.websiteSettings || {}),
@@ -15736,7 +16203,10 @@ ZW|Zimbabwe|263
     });
     this.persistSettingsSoon();
   };
-  setBusinessTypeFromSelect = (e) => this.setBusinessType(e && e.target ? e.target.value : e);
+  setBusinessTypeFromSelect = (e) => {
+    const value = e && e.target ? e.target.value : e;
+    if (value) this.selectBusinessType(value);
+  };
   setProductSearch = (e) => this.setState({ productSearch: e.target.value });
   setProductCategory = (key) => this.setState({ productCategory: key });
   setOrderStatusFilter = (key) => this.setState({ orderStatusFilter: key });
@@ -19288,9 +19758,14 @@ ZW|Zimbabwe|263
     vals.isDesktopOrTablet = layoutDevice !== 'mobile';
     vals.mobileLayoutActive = layoutDevice === 'mobile';
     vals.desktopLayoutActive = layoutDevice !== 'mobile';
-    vals.desktopIntroVisible = layoutDevice !== 'mobile' && !s.onboarded && Number(s.onboardStep || 0) === 0;
-    vals.desktopWizardVisible = layoutDevice !== 'mobile';
-    vals.legacyDesktopOnboardVisible = !s.onboarded && Number(s.onboardStep || 0) > 0;
+    vals.unifiedOnboardVisible = !s.onboarded;
+    vals.mobileWorkspaceVisible = layoutDevice === 'mobile' && s.onboarded;
+    vals.desktopWorkspaceVisible = layoutDevice !== 'mobile' && s.onboarded;
+    vals.legacyDesktopShellVisible = false;
+    vals.onboardPreviewStageClass = vals.unifiedOnboardVisible ? 'ur-preview-stage-onboarding' : '';
+    vals.desktopIntroVisible = false;
+    vals.desktopWizardVisible = false;
+    vals.legacyDesktopOnboardVisible = false;
     vals.desktopWizardShellStyle = vals.legacyDesktopOnboardVisible
       ? 'width:100%;height:100%;min-height:100%;margin:0;border:0;border-radius:0;box-shadow:none;'
       : 'width:0;height:0;min-height:0;pointer-events:none;';
@@ -19298,6 +19773,7 @@ ZW|Zimbabwe|263
     vals.legacyDesktopProfileIslandVisible = false;
     vals.onboarded = s.onboarded;
     vals.notOnboarded = !s.onboarded;
+    vals.notOb0 = Number(s.onboardStep || 0) !== 0;
     vals.onboardStep = s.onboardStep;
     vals.ob0 = s.onboardStep === 0;
     vals.ob1 = s.onboardStep === 1;
@@ -19307,8 +19783,8 @@ ZW|Zimbabwe|263
     vals.ob5 = s.onboardStep === 5;
     vals.onboardLeavingCss = s.onboardLeaving ? 'animation:urOnboardExit 0.34s ease both;pointer-events:none;' : '';
     const onboardTotalSteps = 5;
-    const onboardProgressByStep = { 0: 0.12, 1: 0.26, 2: 0.46, 3: 0.66, 4: 0.84, 5: 1 };
-    const onboardProgress = onboardProgressByStep[Math.max(0, Math.min(5, Number(s.onboardStep) || 0))] || 0.12;
+    const onboardProgressByStep = { 0: 0, 1: 0.2, 2: 0.4, 3: 0.6, 4: 0.8, 5: 1 };
+    const onboardProgress = onboardProgressByStep[Math.max(0, Math.min(5, Number(s.onboardStep) || 0))] || 0;
     vals.onboardProgressStyle = `--ob-progress:${onboardProgress};--ob-origin:${dir === 'rtl' ? 'right' : 'left'};`;
     vals.onboardProgressPercent = `${Math.round(onboardProgress * 100)}%`;
     vals.onboardProgressLabel = isAr ? 'اكتمال إعداد المتجر' : 'Store setup';
@@ -19964,6 +20440,12 @@ ZW|Zimbabwe|263
       ? (isAr ? 'name@example.com' : 'name@example.com')
       : (isAr ? 'رقم الهاتف بدون رمز الدولة' : 'Phone number without country code');
     vals.authInputMode = vals.authPhoneSelected ? 'tel' : 'email';
+    vals.authAutocomplete = s.onboardAuthMode === 'login' ? 'username' : (vals.authPhoneSelected ? 'tel' : 'email');
+    vals.onboardAuthMethodLabel = s.onboardAuthMethod === 'email'
+      ? vals.authEmailLabel
+      : s.onboardAuthMethod === 'phone'
+        ? vals.authPhoneLabel
+        : 'Google';
     vals.authPasswordLabel = isAr ? 'كلمة السر' : 'Password';
     vals.authPasswordPlaceholder = isAr ? '8 أحرف على الأقل' : 'At least 8 characters';
     vals.authPasswordConfirmLabel = isAr ? 'تأكيد كلمة السر' : 'Confirm password';
@@ -20051,6 +20533,8 @@ ZW|Zimbabwe|263
     vals.activeBusinessThemeChip = activeThemePreview.chipText;
     vals.activeBusinessThemeFeatures = activeThemePreview.featurePreview;
     vals.businessTypeSelectLabel = isAr ? 'اختار نوع متجرك' : 'Choose your store type';
+    vals.businessTypePrompt = isAr ? 'اختار النشاط' : 'Choose an activity';
+    vals.onboardBusinessTypeValue = s.onboardBusinessTypeTouched ? activeProfile.key : '';
     vals.businessTypeTapHint = isAr ? 'افتح القائمة' : 'Open list';
     const activeIconPaths = this.businessProfileIconPaths(activeProfile.key);
     vals.activeBusinessIconPathA = activeIconPaths.pathA;
@@ -20251,7 +20735,7 @@ ZW|Zimbabwe|263
       label: profile.label[s.lang] || profile.label.ar || profile.key,
     }));
     vals.businessProfileOptions = this.businessProfileCatalog().map((profile, index) => {
-      const active = profile.key === activeProfile.key;
+      const active = !!s.onboardBusinessTypeTouched && profile.key === activeProfile.key;
       const label = profile.label[s.lang] || profile.label.ar || profile.key;
       const sub = profile.sub[s.lang] || profile.sub.ar || '';
       const featureList = (profile.features && (profile.features[s.lang] || profile.features.ar)) || [];
