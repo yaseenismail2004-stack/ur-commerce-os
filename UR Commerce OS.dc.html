@@ -1224,6 +1224,356 @@
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:10px;
     }
+    #dc-root .ur-desktop-intro {
+      grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr) !important;
+      background:#F8FAFD !important;
+    }
+    #dc-root .ur-desktop-intro-content {
+      min-width:0;
+      padding:clamp(40px,5vw,80px);
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr) auto;
+      gap:clamp(24px,4vh,44px);
+    }
+    #dc-root .ur-desktop-intro-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    #dc-root .ur-desktop-intro-brand {
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-width:0;
+    }
+    #dc-root .ur-desktop-intro-brand-mark {
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:13px;
+      background:var(--c-inverse-bg,#1D1D1F);
+      color:var(--c-inverse-ink,#FFFFFF);
+      font-size:17px;
+      font-weight:950;
+      box-shadow:0 12px 26px color-mix(in srgb,var(--c-ink,#111827) 12%, transparent);
+    }
+    #dc-root .ur-desktop-intro-language {
+      display:flex;
+      align-items:center;
+      gap:4px;
+      padding:4px;
+      border:1px solid #DCE5EF;
+      border-radius:12px;
+      background:#FFFFFF;
+    }
+    #dc-root .ur-desktop-intro-language button {
+      min-width:36px;
+      min-height:32px;
+      padding:0 9px;
+      border:0;
+      border-radius:8px;
+      font:inherit;
+      font-size:11px;
+      font-weight:950;
+      cursor:pointer;
+    }
+    #dc-root .ur-desktop-intro-hero {
+      align-self:center;
+      max-width:570px;
+    }
+    #dc-root .ur-desktop-intro-eyebrow {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#2563EB;
+      font-size:12px;
+      font-weight:950;
+    }
+    #dc-root .ur-desktop-intro-eyebrow::before {
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#22C55E;
+      box-shadow:0 0 0 5px rgba(34,197,94,.12);
+    }
+    #dc-root .ur-desktop-intro-title {
+      margin:14px 0 0;
+      font-size:clamp(38px,3.7vw,58px);
+      line-height:1.18;
+      letter-spacing:0;
+    }
+    #dc-root .ur-desktop-intro-description {
+      max-width:510px;
+      margin:17px 0 0;
+      color:#526278;
+      font-size:16px;
+      font-weight:650;
+      line-height:1.9;
+    }
+    #dc-root .ur-desktop-intro-actions {
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:28px;
+    }
+    #dc-root .ur-desktop-intro-primary {
+      min-height:52px;
+      padding:0 20px;
+      border:0;
+      border-radius:13px;
+      background:#1479E9;
+      color:#FFFFFF;
+      box-shadow:0 14px 28px rgba(20,121,233,.23);
+      font:inherit;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+    }
+    #dc-root .ur-desktop-intro-secondary {
+      min-height:52px;
+      padding:0 18px;
+      border:1px solid #D5DEE9;
+      border-radius:13px;
+      background:#FFFFFF;
+      color:#202936;
+      font:inherit;
+      font-size:13.5px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    #dc-root .ur-desktop-intro-steps {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      border-top:1px solid #DDE5EF;
+    }
+    #dc-root .ur-desktop-intro-step {
+      min-width:0;
+      min-height:64px;
+      padding:12px 10px 0;
+      border:0;
+      border-inline-start:1px solid #E6EDF5;
+      background:transparent;
+      color:#273447;
+      display:flex;
+      align-items:flex-start;
+      gap:9px;
+      text-align:start;
+      font:inherit;
+      cursor:pointer;
+    }
+    #dc-root .ur-desktop-intro-step:first-child { border-inline-start:0; }
+    #dc-root .ur-desktop-intro-step-number {
+      width:24px;
+      height:24px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:8px;
+      background:#EAF3FF;
+      color:#1479E9;
+      font-size:11px;
+      font-weight:950;
+    }
+    #dc-root .ur-desktop-intro-step strong {
+      display:block;
+      overflow:hidden;
+      color:#273447;
+      font-size:12px;
+      font-weight:950;
+      line-height:1.45;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    #dc-root .ur-desktop-intro-step small {
+      display:block;
+      overflow:hidden;
+      margin-top:3px;
+      color:#718096;
+      font-size:10.5px;
+      font-weight:750;
+      line-height:1.4;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    #dc-root .ur-desktop-intro-visual {
+      padding:clamp(36px,4.8vw,76px) !important;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      background:#EFF6FF !important;
+    }
+    #dc-root .ur-desktop-workspace-preview {
+      width:min(540px,100%);
+      overflow:hidden;
+      border:1px solid #D8E4F0;
+      border-radius:22px;
+      background:#FFFFFF;
+      box-shadow:0 24px 60px rgba(31,49,72,.14);
+    }
+    #dc-root .ur-desktop-workspace-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:18px 20px;
+      border-bottom:1px solid #E6EDF4;
+    }
+    #dc-root .ur-desktop-workspace-brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    #dc-root .ur-desktop-workspace-mark {
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:11px;
+      background:#1479E9;
+      color:#FFFFFF;
+      font-size:14px;
+      font-weight:950;
+    }
+    #dc-root .ur-desktop-workspace-status {
+      flex:0 0 auto;
+      padding:6px 9px;
+      border-radius:999px;
+      background:#E9F8EF;
+      color:#16834A;
+      font-size:10.5px;
+      font-weight:950;
+    }
+    #dc-root .ur-desktop-workspace-metrics {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      border-bottom:1px solid #E6EDF4;
+    }
+    #dc-root .ur-desktop-workspace-metric {
+      min-width:0;
+      padding:16px 14px;
+    }
+    #dc-root .ur-desktop-workspace-metric + .ur-desktop-workspace-metric { border-inline-start:1px solid #E6EDF4; }
+    #dc-root .ur-desktop-workspace-metric span {
+      display:block;
+      overflow:hidden;
+      color:#718096;
+      font-size:10.5px;
+      font-weight:850;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    #dc-root .ur-desktop-workspace-metric b {
+      display:block;
+      margin-top:7px;
+      color:#172033;
+      font-size:24px;
+      font-weight:950;
+      line-height:1;
+    }
+    #dc-root .ur-desktop-workspace-metric b span {
+      display:inline;
+      color:#718096;
+      font-size:10px;
+      font-weight:850;
+    }
+    #dc-root .ur-desktop-workspace-body { padding:18px 20px 20px; }
+    #dc-root .ur-desktop-workspace-heading {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    #dc-root .ur-desktop-workspace-heading h2 {
+      margin:0;
+      color:#172033;
+      font-size:15px;
+      font-weight:950;
+    }
+    #dc-root .ur-desktop-workspace-heading span {
+      color:#718096;
+      font-size:11px;
+      font-weight:800;
+    }
+    #dc-root .ur-desktop-workspace-row {
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-width:0;
+      padding:12px 0;
+      border-top:1px solid #EEF2F6;
+    }
+    #dc-root .ur-desktop-workspace-row:first-of-type { border-top:0; }
+    #dc-root .ur-desktop-workspace-row-icon {
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:11px;
+      font-size:11px;
+      font-weight:950;
+    }
+    #dc-root .ur-desktop-workspace-row-copy { min-width:0; flex:1; }
+    #dc-root .ur-desktop-workspace-row-copy b {
+      display:block;
+      overflow:hidden;
+      color:#273447;
+      font-size:12px;
+      font-weight:950;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    #dc-root .ur-desktop-workspace-row-copy span {
+      display:block;
+      overflow:hidden;
+      margin-top:3px;
+      color:#718096;
+      font-size:10.5px;
+      font-weight:750;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    #dc-root .ur-desktop-workspace-row-index {
+      color:#99A8B9;
+      font-size:11px;
+      font-weight:950;
+    }
+    @media (min-width:1100px) {
+      #dc-root .ur-desktop-intro-content {
+        display:flex;
+        flex-direction:column;
+        gap:0;
+      }
+      #dc-root .ur-desktop-intro-hero {
+        align-self:auto;
+        margin-top:clamp(72px,11vh,128px);
+      }
+      #dc-root .ur-desktop-intro-title { font-size:clamp(38px,3.25vw,52px); }
+      #dc-root .ur-desktop-intro-steps {
+        width:min(560px,100%);
+        margin-top:30px;
+      }
+      #dc-root .ur-desktop-workspace-preview {
+        min-height:min(560px,64vh);
+        display:flex;
+        flex-direction:column;
+      }
+      #dc-root .ur-desktop-workspace-body {
+        display:flex;
+        flex:1;
+        flex-direction:column;
+      }
+      #dc-root .ur-desktop-workspace-row { flex:1; }
+    }
     @media (max-width:1180px) {
       #dc-root .ur-desktop-shell { width:calc(100vw - 28px); grid-template-columns:80px minmax(0,1fr); }
       #dc-root .ur-desktop-side { padding-inline:12px; }
@@ -8802,74 +9152,53 @@
     </sc-if>
     <sc-if value="{{isDesktopOrTablet}}" hint-placeholder-val="{{false}}">
       <sc-if value="{{desktopIntroVisible}}" hint-placeholder-val="{{true}}">
-        <div class="ur-desktop-intro" dir="{{dir}}" style="{{themeVars}}position:relative;z-index:120;width:100%;height:100%;min-height:0;border-radius:30px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--c-bg,#F5F5F7) 94%, white),var(--c-bg,#F5F5F7));border:1px solid color-mix(in srgb,var(--c-border,#EAE1D0) 74%, transparent);box-shadow:0 34px 90px color-mix(in srgb,var(--c-ink,#111827) 13%, transparent);display:grid;grid-template-columns:minmax(0,.92fr) minmax(420px,1.08fr);font-family:{{appFontFamily}};color:var(--c-ink,#111827);">
-          <div style="padding:42px;display:flex;flex-direction:column;gap:34px;min-width:0;">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
-              <div style="display:flex;align-items:center;gap:12px;min-width:0;">
-                <div style="width:44px;height:44px;border-radius:16px;background:var(--c-gold,#C8A96B);display:flex;align-items:center;justify-content:center;color:var(--c-on-gold,#2B2A27);font-weight:950;box-shadow:0 14px 30px color-mix(in srgb,var(--c-gold,#C8A96B) 25%, transparent);">{{introBrandInitial}}</div>
-                <div style="min-width:0;"><div style="font-size:18px;font-weight:950;color:var(--c-ink,#111827);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{introBrandName}}</div><div style="font-size:12px;font-weight:850;color:var(--c-sub,#64748B);margin-top:2px;">{{introBrandSub}}</div></div>
+        <div class="ur-desktop-intro" dir="{{dir}}" style="{{themeVars}}position:relative;z-index:120;width:100%;height:100%;min-height:0;border-radius:30px;overflow:hidden;border:1px solid color-mix(in srgb,var(--c-border,#EAE1D0) 74%, transparent);box-shadow:0 34px 90px color-mix(in srgb,var(--c-ink,#111827) 13%, transparent);display:grid;font-family:{{appFontFamily}};color:var(--c-ink,#111827);">
+          <div class="ur-desktop-intro-content">
+            <div class="ur-desktop-intro-header">
+              <div class="ur-desktop-intro-brand">
+                <div class="ur-desktop-intro-brand-mark">{{introBrandInitial}}</div>
+                <div style="min-width:0;"><div style="font-size:17px;font-weight:950;color:#172033;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{introBrandName}}</div><div style="font-size:11px;font-weight:850;color:#718096;margin-top:2px;">{{introBrandSub}}</div></div>
               </div>
-              <div style="display:flex;gap:8px;flex-shrink:0;">
-                <button onclick="{{setLangAr}}" style="padding:8px 12px;border-radius:999px;border:none;background:{{arBg}};color:{{arFg}};font-size:12px;font-weight:900;cursor:pointer;font-family:inherit;">AR</button>
-                <button onclick="{{setLangEn}}" style="padding:8px 12px;border-radius:999px;border:none;background:{{enBg}};color:{{enFg}};font-size:12px;font-weight:900;cursor:pointer;font-family:inherit;">EN</button>
-              </div>
-            </div>
-            <div class="ur-desktop-intro-copy" style="max-width:560px;margin:auto 0;">
-              <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div class="ur-desktop-intro-title">إدارة متجرك من مكان واحد</div></sc-if>
-              <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div class="ur-desktop-intro-title" style="font-family:{{appFontFamily}};">Run your store from one place</div></sc-if>
-              <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:15px;line-height:1.9;color:var(--c-sub,#64748B);margin-top:16px;max-width:520px;">تابع المنتجات والطلبات والشحن من لوحة واحدة.</div></sc-if>
-              <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:15px;line-height:1.9;color:var(--c-sub,#64748B);margin-top:16px;max-width:520px;">Manage products, orders, and shipping from one workspace.</div></sc-if>
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:28px;">
-                <button onclick="{{startGoogleSignup}}" style="padding:15px 22px;border-radius:16px;border:none;background:var(--c-gold,#C8A96B);color:var(--c-on-gold,#2B2A27);font-size:14px;font-weight:950;cursor:pointer;font-family:inherit;box-shadow:0 16px 32px color-mix(in srgb,var(--c-gold,#C8A96B) 24%, transparent);">{{t.onboard.getStarted}}</button>
-                <button onclick="{{startGoogleLogin}}" style="padding:14px 18px;border-radius:16px;border:1px solid var(--c-border,#EAE1D0);background:color-mix(in srgb,var(--c-surface,#FFFDF9) 84%, transparent);color:var(--c-ink,#111827);font-size:13.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{t.onboard.haveAccount}}</button>
+              <div class="ur-desktop-intro-language">
+                <button onclick="{{setLangAr}}" style="background:{{arBg}};color:{{arFg}};">AR</button>
+                <button onclick="{{setLangEn}}" style="background:{{enBg}};color:{{enFg}};">EN</button>
               </div>
             </div>
-            <div class="ur-desktop-intro-metrics">
+            <div class="ur-desktop-intro-hero">
+              <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div class="ur-desktop-intro-eyebrow">لوحة متجرك جاهزة إلك</div></sc-if>
+              <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div class="ur-desktop-intro-eyebrow">Your store workspace is ready</div></sc-if>
+              <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div class="ur-desktop-intro-title">كل شغل متجرك، بمكان واحد.</div></sc-if>
+              <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div class="ur-desktop-intro-title" style="font-family:{{appFontFamily}};">Your store, all in one place.</div></sc-if>
+              <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div class="ur-desktop-intro-description">من أول منتج لحد آخر طلب وشحنة، كل تفاصيل متجرك مرتبة بواجهة وحدة.</div></sc-if>
+              <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div class="ur-desktop-intro-description">From your first product to every order and delivery, keep your store organised in one workspace.</div></sc-if>
+              <div class="ur-desktop-intro-actions">
+                <button class="ur-desktop-intro-primary" onclick="{{startGoogleSignup}}">{{t.onboard.getStarted}}</button>
+                <button class="ur-desktop-intro-secondary" onclick="{{startGoogleLogin}}">{{t.onboard.haveAccount}}</button>
+              </div>
+            </div>
+            <div class="ur-desktop-intro-steps">
               <sc-for list="{{introFocusList}}" as="item" hint-placeholder-count="3">
-                <button onclick="{{item.actionFn}}" style="min-height:96px;border-radius:18px;border:1px solid var(--c-border,#EAE1D0);background:color-mix(in srgb,var(--c-surface,#FFFDF9) 86%, transparent);padding:14px;text-align:start;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;font-family:inherit;">
-                  <span style="font-size:10.5px;font-weight:950;color:{{item.fg}};background:{{item.bg}};padding:5px 8px;border-radius:999px;align-self:flex-start;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;">{{item.label}}</span>
-                  <span><b style="display:block;font-size:22px;font-weight:950;color:var(--c-ink,#111827);line-height:1;" dir="ltr">{{item.value}}</b><span style="display:block;font-size:11px;color:var(--c-sub,#64748B);line-height:1.45;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.sub}}</span></span>
-                </button>
+                <button class="ur-desktop-intro-step" onclick="{{item.actionFn}}"><span class="ur-desktop-intro-step-number" dir="ltr">{{item.value}}</span><span style="min-width:0;"><strong>{{item.label}}</strong><small>{{item.sub}}</small></span></button>
               </sc-for>
             </div>
           </div>
-          <div class="ur-desktop-intro-visual" style="position:relative;padding:42px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,color-mix(in srgb,var(--c-surface,#FFFDF9) 88%, transparent),color-mix(in srgb,var(--c-brand-soft,#F3E7D2) 70%, white));">
-            <div class="ur-desktop-intro-grid">
-              <div class="ur-desktop-intro-feature">
-                <div class="ur-desktop-intro-icon" style="background:linear-gradient(145deg,#EAF4FF,#CFE6FF);color:#007AFF;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
-                <div style="min-width:0;text-align:start;">
-                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:17px;font-weight:950;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">إدارة المنتجات</div></sc-if>
-                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:17px;font-weight:950;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Product management</div></sc-if>
-                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:12.5px;font-weight:800;color:#64748B;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">صور، ألوان، وقياسات</div></sc-if>
-                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:12.5px;font-weight:800;color:#64748B;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Photos, colors, sizes</div></sc-if>
-                </div>
+          <div class="ur-desktop-intro-visual">
+            <div class="ur-desktop-workspace-preview">
+              <div class="ur-desktop-workspace-header">
+                <div class="ur-desktop-workspace-brand"><div class="ur-desktop-workspace-mark">{{introBrandInitial}}</div><div style="min-width:0;"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:13px;font-weight:950;color:#172033;">متجرك الجديد</div><div style="font-size:10.5px;font-weight:800;color:#718096;margin-top:3px;">لوحة المتابعة</div></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:13px;font-weight:950;color:#172033;">Your new store</div><div style="font-size:10.5px;font-weight:800;color:#718096;margin-top:3px;">Store overview</div></sc-if></div></div>
+                <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><span class="ur-desktop-workspace-status">جاهز للبدء</span></sc-if>
+                <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><span class="ur-desktop-workspace-status">Ready to start</span></sc-if>
               </div>
-              <div class="ur-desktop-intro-feature" style="margin-inline-start:34px;">
-                <div class="ur-desktop-intro-icon" style="background:linear-gradient(145deg,#FFF3D7,#F3D18A);color:#9A6A1F;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 7h8M8 11h8M8 15h5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M6 4h12a1 1 0 0 1 1 1v14l-3-2-3 2-3-2-3 2V5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-                <div style="min-width:0;text-align:start;">
-                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:17px;font-weight:950;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">إدارة الطلبات</div></sc-if>
-                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:17px;font-weight:950;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Order management</div></sc-if>
-                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:12.5px;font-weight:800;color:#64748B;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">من التأكيد لحد التوصيل</div></sc-if>
-                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:12.5px;font-weight:800;color:#64748B;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">From confirm to delivery</div></sc-if>
-                </div>
+              <div class="ur-desktop-workspace-metrics">
+                <div class="ur-desktop-workspace-metric"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><span>المبيعات اليوم</span><b dir="ltr">0 <span>د.ع</span></b></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><span>Sales today</span><b dir="ltr">0 <span>IQD</span></b></sc-if></div>
+                <div class="ur-desktop-workspace-metric"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><span>الطلبات</span><b dir="ltr">0</b></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><span>Orders</span><b dir="ltr">0</b></sc-if></div>
+                <div class="ur-desktop-workspace-metric"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><span>المخزون</span><b style="font-size:16px;color:#16834A;">جاهز</b></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><span>Inventory</span><b style="font-size:16px;color:#16834A;">Ready</b></sc-if></div>
               </div>
-              <div class="ur-desktop-intro-feature">
-                <div class="ur-desktop-intro-icon" style="background:linear-gradient(145deg,#E9F9EF,#CFF1D8);color:#24935A;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M4 8h10v8H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 11h3l3 3v2h-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor" stroke-width="1.6"/></svg></div>
-                <div style="min-width:0;text-align:start;">
-                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:17px;font-weight:950;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">إعدادات الشحن</div></sc-if>
-                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:17px;font-weight:950;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Shipping settings</div></sc-if>
-                  <sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><div style="font-size:12.5px;font-weight:800;color:#64748B;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">اربط شركات الشحن</div></sc-if>
-                  <sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><div style="font-size:12.5px;font-weight:800;color:#64748B;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Connect shipping providers</div></sc-if>
-                </div>
-              </div>
-              <div style="margin-top:10px;border-radius:24px;background:color-mix(in srgb,var(--c-surface,#FFFDF9) 92%, transparent);border:1px solid color-mix(in srgb,var(--c-border,#EAE1D0) 82%, transparent);box-shadow:0 18px 44px color-mix(in srgb,var(--c-ink,#111827) 8%, transparent);padding:18px;">
-                <div style="font-size:13px;font-weight:950;color:var(--c-ink,#111827);">{{introPreviewTitle}}</div>
-                <div style="font-size:11.5px;color:var(--c-sub,#64748B);margin-top:3px;">{{introPreviewSub}}</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
-                  <sc-for list="{{introPreviewSteps}}" as="item" hint-placeholder-count="2">
-                    <div style="border-radius:16px;background:var(--c-bg,#F7F4EE);padding:14px;"><span class="ur-desk-kpi-label">{{item.label}}</span><b style="display:block;margin-top:8px;font-size:13px;font-weight:950;color:var(--c-ink,#111827);">{{item.value}}</b></div>
-                  </sc-for>
-                </div>
+              <div class="ur-desktop-workspace-body">
+                <div class="ur-desktop-workspace-heading"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><h2>بداية مرتبة</h2><span>3 خطوات وتبدي</span></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><h2>A clear start</h2><span>Three quick steps</span></sc-if></div>
+                <div class="ur-desktop-workspace-row"><span class="ur-desktop-workspace-row-icon" style="background:#EAF3FF;color:#1479E9;">01</span><div class="ur-desktop-workspace-row-copy"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><b>أضف أول منتج</b><span>صور، أسعار، ومقاسات بوضوح</span></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><b>Add your first product</b><span>Photos, prices, and variants</span></sc-if></div><span class="ur-desktop-workspace-row-index">›</span></div>
+                <div class="ur-desktop-workspace-row"><span class="ur-desktop-workspace-row-icon" style="background:#E9F8EF;color:#16834A;">02</span><div class="ur-desktop-workspace-row-copy"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><b>جهّز الشحن</b><span>اربط الشركات وحدد أجور التوصيل</span></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><b>Set up delivery</b><span>Connect providers and fees</span></sc-if></div><span class="ur-desktop-workspace-row-index">›</span></div>
+                <div class="ur-desktop-workspace-row"><span class="ur-desktop-workspace-row-icon" style="background:#FFF1D6;color:#B76B00;">03</span><div class="ur-desktop-workspace-row-copy"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}"><b>تابع الطلبات</b><span>كل طلب يوصل للوحة مباشرة</span></sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}"><b>Track orders</b><span>Every order appears here</span></sc-if></div><span class="ur-desktop-workspace-row-index">›</span></div>
               </div>
             </div>
           </div>
