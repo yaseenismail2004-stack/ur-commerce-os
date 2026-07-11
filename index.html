@@ -4901,8 +4901,9 @@
                       <sc-for list="{{modulesLocalized}}" as="m" hint-placeholder-count="16">
                         <button class="ur-module-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border-radius:18px;padding:14px;box-shadow:0 2px 14px rgba(43,42,39,0.05);border:1px solid var(--c-border,#EAE1D0);cursor:pointer;text-align:start;font-family:inherit;">
                           <div style="display:flex;align-items:center;justify-content:space-between;">
-                            <div class="ur-icon-3d" style="width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                            <span style="font-size:9px;font-weight:900;color:{{m.auditFg}};background:{{m.auditBg}};padding:4px 7px;border-radius:999px;">{{m.auditLabel}}</span>
+                            <sc-if value="{{m.showStandardIcon}}" hint-placeholder-val="{{true}}"><div class="ur-icon-3d" style="width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></sc-if>
+                            <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:34px;height:34px;border-radius:11px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 7px 14px rgba(42,171,238,0.2);overflow:hidden;"><img src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
+                            <span style="display:flex;align-items:center;gap:5px;"><sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="font-size:8.5px;font-weight:900;color:#1976B8;background:#E3F4FF;padding:4px 6px;border-radius:999px;">{{m.telegramActionLabel}}</span></sc-if><span style="font-size:9px;font-weight:900;color:{{m.auditFg}};background:{{m.auditBg}};padding:4px 7px;border-radius:999px;">{{m.auditLabel}}</span></span>
                           </div>
                           <div style="font-size:12px;font-weight:900;color:var(--c-ink,#2B2A27);line-height:1.35;">{{m.name}}</div>
                           <div style="font-size:10.5px;color:var(--c-tertiary,#B5AD9C);line-height:1.45;">{{m.desc}}</div>
@@ -6162,13 +6163,20 @@
 
                     <sc-if value="{{selectedModuleIsShipping}}" hint-placeholder-val="{{false}}">
                       <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:18px;padding:14px;margin-bottom:16px;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div><div style="font-size:13.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:2px;">{{alWaseetSub}}</div></div><span style="font-size:10px;font-weight:900;color:{{alWaseetStatusFg}};background:{{alWaseetStatusBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{alWaseetStatusLabel}}</span></div>
-                        <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                        <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
+                        <div style="display:flex;align-items:center;gap:11px;padding:4px;">
+                          <div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="{{alWaseetLogoUrl}}" alt="Al-Waseet" referrerpolicy="no-referrer" style="width:42px;height:42px;object-fit:contain;"/></div>
+                          <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:10px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div>
+                          <button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:11px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button>
                         </div>
+                        <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}">
+                          <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;">
+                            <div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div>
+                            <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
+                            <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div>
+                            <div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:11px;border-radius:11px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:11px 14px;border-radius:11px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div>
+                          </div>
+                        </sc-if>
                       </div>
                     </sc-if>
 
@@ -6194,17 +6202,30 @@
                       <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:18px;padding:14px;margin-bottom:16px;">
                         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="font-size:13.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramPanelTitle}}</div><span style="font-size:10px;font-weight:900;color:var(--c-info,#3B6FA0);background:var(--c-info-bg,#E4EDF5);padding:5px 8px;border-radius:999px;white-space:nowrap;">{{telegramEnabledLabel}}</span></div>
                         <div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.7;">{{telegramHelpText}}</div>
-                        <div style="display:flex;flex-direction:column;gap:8px;">
-                          <div style="font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramSetupTitle}}</div>
-                          <sc-for list="{{telegramSetupSteps}}" as="step" hint-placeholder-count="6">
-                            <div class="ur-step-card" style="--d:{{step.delay}};display:flex;gap:9px;align-items:flex-start;border-radius:14px;padding:10px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);box-shadow:none;">
-                              <span style="width:28px;height:28px;border-radius:10px;background:var(--c-surface-2,#F3E7D2);color:var(--c-gold-deep,#B8935A);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:950;flex-shrink:0;">{{step.n}}</span>
-                              <span style="min-width:0;"><span style="display:block;font-size:11.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{step.title}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;margin-top:2px;">{{step.desc}}</span></span>
-                            </div>
-                          </sc-for>
-                        </div>
-                        <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramBotTokenLabel}}</span><input type="password" value="{{telegramBotToken}}" onChange="{{setTelegramBotToken}}" dir="ltr" placeholder="123456:ABC..." style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                        <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramChatIdLabel}}</span><input value="{{telegramChatId}}" onChange="{{setTelegramChatId}}" dir="ltr" placeholder="-1001234567890" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
+                        <sc-if value="{{telegramUnavailable}}" hint-placeholder-val="{{false}}"><div style="font-size:11px;color:var(--c-sub,#8A8274);line-height:1.6;background:var(--c-bg,#F7F4EE);border-radius:12px;padding:10px;">{{telegramUnavailableHint}}</div></sc-if>
+                        <sc-if value="{{telegramNeedsBot}}" hint-placeholder-val="{{true}}">
+                          <div style="display:flex;flex-direction:column;gap:8px;">
+                            <div style="font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramSetupTitle}}</div>
+                            <sc-for list="{{telegramSetupSteps}}" as="step" hint-placeholder-count="3">
+                              <div class="ur-step-card" style="--d:{{step.delay}};display:flex;gap:9px;align-items:flex-start;border-radius:14px;padding:10px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);box-shadow:none;">
+                                <span style="width:28px;height:28px;border-radius:10px;background:var(--c-surface-2,#F3E7D2);color:var(--c-gold-deep,#B8935A);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:950;flex-shrink:0;">{{step.n}}</span>
+                                <span style="min-width:0;"><span style="display:block;font-size:11.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{step.title}}</span><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;margin-top:2px;">{{step.desc}}</span></span>
+                              </div>
+                            </sc-for>
+                          </div>
+                          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramBotTokenLabel}}</span><input type="password" value="{{telegramBotTokenDraft}}" onChange="{{setTelegramBotTokenDraft}}" dir="ltr" autocomplete="off" placeholder="123456:ABC..." style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/><span style="font-size:10px;color:var(--c-sub,#8A8274);line-height:1.55;">{{telegramBotTokenHint}}</span></label>
+                          <button onclick="{{connectTelegramStoreBot}}" style="padding:10px 13px;border-radius:11px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;align-self:flex-start;">{{telegramConnectBotLabel}}</button>
+                        </sc-if>
+                        <sc-if value="{{telegramBotConnected}}" hint-placeholder-val="{{false}}">
+                          <div style="font-size:11px;color:var(--c-success,#168A4B);line-height:1.6;background:var(--c-success-bg,#E7F7EC);border-radius:12px;padding:10px;">{{telegramConnectedLine}}</div>
+                          <div style="font-size:11px;color:var(--c-sub,#8A8274);line-height:1.6;background:var(--c-bg,#F7F4EE);border-radius:12px;padding:10px;">{{telegramLinkHint}}</div>
+                          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                            <sc-if value="{{telegramNeedsAccountLink}}" hint-placeholder-val="{{true}}"><button onclick="{{createTelegramBotLink}}" style="padding:10px 13px;border-radius:11px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramLinkActionLabel}}</button></sc-if>
+                            <sc-if value="{{telegramLinkReady}}" hint-placeholder-val="{{false}}"><button onclick="{{openTelegramBotLink}}" style="padding:10px 13px;border-radius:11px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramOpenLinkLabel}}</button></sc-if>
+                            <sc-if value="{{telegramLinked}}" hint-placeholder-val="{{false}}"><button onclick="{{unlinkTelegramBot}}" style="padding:10px 13px;border-radius:11px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-sub,#8A8274);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramDisconnectAccountLabel}}</button></sc-if>
+                            <button onclick="{{disconnectTelegramStoreBot}}" style="padding:10px 13px;border-radius:11px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-sub,#8A8274);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramDisconnectBotLabel}}</button>
+                          </div>
+                        </sc-if>
                       </div>
                     </sc-if>
 
@@ -8521,8 +8542,9 @@
                     <sc-for list="{{modulesLocalized}}" as="m" hint-placeholder-count="16">
                       <button class="ur-module-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:12px;background:var(--c-surface,#FFFDF9);border-radius:18px;padding:20px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));border:1px solid var(--c-border,#EAE1D0);cursor:pointer;text-align:start;font-family:inherit;transition:transform 0.18s ease;" style-hover="transform:translateY(-3px);">
                         <div style="display:flex;align-items:center;justify-content:space-between;">
-                          <div class="ur-icon-3d" style="width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                          <span style="font-size:9.5px;font-weight:900;color:{{m.auditFg}};background:{{m.auditBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.auditLabel}}</span>
+                          <sc-if value="{{m.showStandardIcon}}" hint-placeholder-val="{{true}}"><div class="ur-icon-3d" style="width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></sc-if>
+                          <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:40px;height:40px;border-radius:12px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(42,171,238,0.22);overflow:hidden;"><img src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
+                          <span style="display:flex;align-items:center;gap:6px;"><sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="font-size:9px;font-weight:900;color:#1976B8;background:#E3F4FF;padding:5px 7px;border-radius:999px;white-space:nowrap;">{{m.telegramActionLabel}}</span></sc-if><span style="font-size:9.5px;font-weight:900;color:{{m.auditFg}};background:{{m.auditBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.auditLabel}}</span></span>
                         </div>
                         <div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);">{{m.name}}</div>
                         <div style="font-size:11px;color:var(--c-tertiary,#B5AD9C);line-height:1.5;">{{m.desc}}</div>
@@ -9296,13 +9318,8 @@
 
                 <sc-if value="{{selectedModuleIsShipping}}" hint-placeholder-val="{{false}}">
                   <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:17px;padding:14px;margin-bottom:14px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:2px;">{{alWaseetSub}}</div></div><span style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};background:{{alWaseetStatusBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{alWaseetStatusLabel}}</span></div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                    </div>
+                    <div style="display:flex;align-items:center;gap:11px;padding:3px;"><div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="{{alWaseetLogoUrl}}" alt="Al-Waseet" referrerpolicy="no-referrer" style="width:42px;height:42px;object-fit:contain;"/></div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div><button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button></div>
+                    <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}"><div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div><div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:10px 14px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div></div></sc-if>
                   </div>
                 </sc-if>
 
@@ -9327,16 +9344,14 @@
                   <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:17px;padding:14px;margin-bottom:14px;">
                     <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramPanelTitle}}</div><span style="font-size:9.5px;font-weight:900;color:var(--c-info,#3B6FA0);background:var(--c-info-bg,#E4EDF5);padding:5px 8px;border-radius:999px;white-space:nowrap;">{{telegramEnabledLabel}}</span></div>
                     <div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.7;">{{telegramHelpText}}</div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                      <sc-for list="{{telegramSetupSteps}}" as="step" hint-placeholder-count="6">
-                        <div class="ur-step-card" style="--d:{{step.delay}};display:flex;gap:9px;align-items:flex-start;border-radius:13px;padding:10px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);box-shadow:none;">
-                          <span style="width:26px;height:26px;border-radius:9px;background:var(--c-surface-2,#F3E7D2);color:var(--c-gold-deep,#B8935A);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:950;flex-shrink:0;">{{step.n}}</span>
-                          <span style="min-width:0;"><span style="display:block;font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{step.title}}</span><span style="display:block;font-size:10px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:2px;">{{step.desc}}</span></span>
-                        </div>
-                      </sc-for>
-                    </div>
-                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramBotTokenLabel}}</span><input type="password" value="{{telegramBotToken}}" onChange="{{setTelegramBotToken}}" dir="ltr" placeholder="123456:ABC..." style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramChatIdLabel}}</span><input value="{{telegramChatId}}" onChange="{{setTelegramChatId}}" dir="ltr" placeholder="-1001234567890" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
+                    <sc-if value="{{telegramUnavailable}}" hint-placeholder-val="{{false}}"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;background:var(--c-bg,#F7F4EE);border-radius:11px;padding:10px;">{{telegramUnavailableHint}}</div></sc-if>
+                    <sc-if value="{{telegramNeedsBot}}" hint-placeholder-val="{{true}}">
+                      <div style="font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramSetupTitle}}</div>
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><sc-for list="{{telegramSetupSteps}}" as="step" hint-placeholder-count="3"><div class="ur-step-card" style="--d:{{step.delay}};display:flex;gap:9px;align-items:flex-start;border-radius:13px;padding:10px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);box-shadow:none;"><span style="width:26px;height:26px;border-radius:9px;background:var(--c-surface-2,#F3E7D2);color:var(--c-gold-deep,#B8935A);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:950;flex-shrink:0;">{{step.n}}</span><span style="min-width:0;"><span style="display:block;font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{step.title}}</span><span style="display:block;font-size:10px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:2px;">{{step.desc}}</span></span></div></sc-for></div>
+                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramBotTokenLabel}}</span><input type="password" value="{{telegramBotTokenDraft}}" onChange="{{setTelegramBotTokenDraft}}" dir="ltr" autocomplete="off" placeholder="123456:ABC..." style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/><span style="font-size:9.5px;color:var(--c-sub,#8A8274);line-height:1.55;">{{telegramBotTokenHint}}</span></label>
+                      <button onclick="{{connectTelegramStoreBot}}" style="padding:10px 12px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;align-self:flex-start;">{{telegramConnectBotLabel}}</button>
+                    </sc-if>
+                    <sc-if value="{{telegramBotConnected}}" hint-placeholder-val="{{false}}"><div style="font-size:10.5px;color:var(--c-success,#168A4B);line-height:1.6;background:var(--c-success-bg,#E7F7EC);border-radius:11px;padding:10px;">{{telegramConnectedLine}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;background:var(--c-bg,#F7F4EE);border-radius:11px;padding:10px;">{{telegramLinkHint}}</div><div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-if value="{{telegramNeedsAccountLink}}" hint-placeholder-val="{{true}}"><button onclick="{{createTelegramBotLink}}" style="padding:10px 12px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramLinkActionLabel}}</button></sc-if><sc-if value="{{telegramLinkReady}}" hint-placeholder-val="{{false}}"><button onclick="{{openTelegramBotLink}}" style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramOpenLinkLabel}}</button></sc-if><sc-if value="{{telegramLinked}}" hint-placeholder-val="{{false}}"><button onclick="{{unlinkTelegramBot}}" style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramDisconnectAccountLabel}}</button></sc-if><button onclick="{{disconnectTelegramStoreBot}}" style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramDisconnectBotLabel}}</button></div></sc-if>
                   </div>
                 </sc-if>
 
@@ -9988,7 +10003,20 @@
               <div class="ur-desktop-page">
                 <section class="ur-desk-card" style="display:flex;align-items:center;justify-content:space-between;gap:18px;"><div><div style="font-size:22px;font-weight:950;color:var(--c-ink,#2B2A27);">{{appsCenterTitle}}</div><div style="font-size:13px;color:var(--c-sub,#8A8274);line-height:1.8;margin-top:5px;max-width:720px;">{{appsCenterSub}}</div></div><span style="font-size:11px;font-weight:950;color:var(--c-gold-deep,#B8935A);background:var(--c-surface-2,#F3E7D2);padding:8px 11px;border-radius:999px;white-space:nowrap;">{{appsCenterMeta}}</span></section>
                 <div class="ur-desk-grid" style="grid-template-columns:repeat(5,minmax(0,1fr));"><sc-for list="{{moduleAuditStats}}" as="stat" hint-placeholder-count="5"><div style="border-radius:15px;background:{{stat.bg}};color:{{stat.fg}};padding:11px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-size:11px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{stat.label}}</span><b style="font-size:15px;font-weight:950;" dir="ltr">{{stat.count}}</b></div></sc-for></div>
-                <div class="ur-desk-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));"><sc-for list="{{modulesLocalized}}" as="m" hint-placeholder-count="16"><button class="ur-desk-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:12px;text-align:start;cursor:pointer;font-family:inherit;"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span class="ur-icon-3d" style="width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span style="font-size:9.5px;font-weight:950;color:{{m.auditFg}};background:{{m.auditBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.auditLabel}}</span></div><b style="font-size:13px;color:var(--c-ink,#2B2A27);">{{m.name}}</b><span style="font-size:11.5px;color:var(--c-sub,#8A8274);line-height:1.6;">{{m.desc}}</span><span style="font-size:10px;color:var(--c-sub,#8A8274);font-weight:950;background:var(--c-bg,#F7F4EE);border-radius:999px;padding:5px 9px;width:max-content;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{m.auditCategory}}</span></button></sc-for></div>
+                <div class="ur-desk-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));">
+                  <sc-for list="{{modulesLocalized}}" as="m" hint-placeholder-count="16">
+                    <button class="ur-desk-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:12px;text-align:start;cursor:pointer;font-family:inherit;">
+                      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                        <sc-if value="{{m.showStandardIcon}}" hint-placeholder-val="{{true}}"><span class="ur-icon-3d" style="width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></sc-if>
+                        <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:42px;height:42px;border-radius:14px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(42,171,238,0.22);overflow:hidden;"><img src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
+                        <span style="display:flex;align-items:center;gap:6px;"><sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="font-size:9.5px;font-weight:950;color:#1976B8;background:#E3F4FF;padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.telegramActionLabel}}</span></sc-if><span style="font-size:9.5px;font-weight:950;color:{{m.auditFg}};background:{{m.auditBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.auditLabel}}</span></span>
+                      </div>
+                      <b style="font-size:13px;color:var(--c-ink,#2B2A27);">{{m.name}}</b>
+                      <span style="font-size:11.5px;color:var(--c-sub,#8A8274);line-height:1.6;">{{m.desc}}</span>
+                      <span style="font-size:10px;color:var(--c-sub,#8A8274);font-weight:950;background:var(--c-bg,#F7F4EE);border-radius:999px;padding:5px 9px;width:max-content;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{m.auditCategory}}</span>
+                    </button>
+                  </sc-for>
+                </div>
               </div>
             </sc-if>
 
@@ -10015,6 +10043,14 @@
                     <section class="ur-desk-card"><div style="font-size:16px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminListTitle}}</div><div style="display:flex;flex-direction:column;gap:8px;"><sc-for list="{{subscriptionAdminStores}}" as="store" hint-placeholder-count="6"><button onclick="{{store.selectFn}}" style="display:grid;grid-template-columns:minmax(0,1.25fr) 92px 102px 112px 116px;align-items:center;gap:12px;padding:13px 12px;border-radius:15px;border:none;background:var(--c-bg,#F7F4EE);cursor:pointer;text-align:start;font-family:inherit;"><div style="min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{store.name}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);margin-top:3px;">{{store.owner}} · {{store.phone}}</div></div><div style="font-size:12px;font-weight:950;color:var(--c-ink,#2B2A27);">{{store.planLabel}}</div><div><span style="display:inline-block;font-size:10px;font-weight:950;color:{{store.statusFg}};background:{{store.statusBg}};padding:5px 9px;border-radius:999px;">{{store.statusLabel}}</span></div><div><div style="display:flex;align-items:center;justify-content:space-between;gap:7px;"><span style="font-size:10px;font-weight:950;color:{{store.readinessFg}};">{{store.readinessScore}}</span><span style="font-size:9px;color:var(--c-sub,#8A8274);">{{store.readinessLabel}}</span></div><div style="height:5px;border-radius:999px;background:var(--c-divider,#F1EADC);overflow:hidden;margin-top:6px;"><div style="width:{{store.readinessBarWidth}};height:100%;background:var(--c-gold,#C8A96B);border-radius:999px;"></div></div></div><div style="text-align:end;"><div style="font-size:12px;font-weight:950;color:var(--c-ink,#2B2A27);">{{store.amountFmt}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{store.daysAbs}} {{store.daysLabel}}</div></div></button></sc-for></div></section>
                   </div>
                   <div style="position:sticky;top:104px;display:flex;flex-direction:column;gap:14px;min-width:0;"><section class="ur-desk-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;"><div style="min-width:0;"><div style="font-size:17px;font-weight:950;color:var(--c-ink,#2B2A27);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{subscriptionAdminSelected.name}}</div><div style="font-size:12px;color:var(--c-sub,#8A8274);margin-top:5px;">{{subscriptionAdminSelected.owner}} · {{subscriptionAdminSelected.phone}}</div></div><span style="font-size:10.5px;font-weight:950;color:{{subscriptionAdminSelected.statusFg}};background:{{subscriptionAdminSelected.statusBg}};padding:6px 10px;border-radius:999px;white-space:nowrap;">{{subscriptionAdminSelected.statusLabel}}</span></div><div style="margin-top:14px;border-radius:16px;background:var(--c-bg,#F7F4EE);padding:12px;border:1px solid var(--c-border,#EAE1D0);"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="font-size:12px;font-weight:950;color:var(--c-ink,#2B2A27);">{{subscriptionAdminReadinessTitle}}</div><span style="font-size:10px;font-weight:950;color:{{subscriptionAdminSelected.readinessFg}};background:{{subscriptionAdminSelected.readinessBg}};padding:5px 8px;border-radius:999px;">{{subscriptionAdminSelected.readinessScore}} · {{subscriptionAdminSelected.readinessLabel}}</span></div><div style="height:7px;border-radius:999px;background:var(--c-divider,#F1EADC);overflow:hidden;margin-top:10px;"><div style="width:{{subscriptionAdminSelected.readinessBarWidth}};height:100%;border-radius:999px;background:var(--c-gold,#C8A96B);"></div></div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:8px;">{{subscriptionAdminSelected.readinessSummary}}</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;"><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionRenewalTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.renewsAt}}</div></div><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionPlansTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.planLabel}}</div></div><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionPaymentTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.paymentMethod}}</div></div><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionInvoiceTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.amountFmt}}</div></div></div></section><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;"><button onclick="{{subscriptionAdminSelected.openSiteFn}}" style="padding:12px;border-radius:13px;border:none;background:var(--c-inverse-bg,#2B2A27);color:var(--c-inverse-ink,#F7F4EE);font-size:12px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminOpenSiteLabel}}</button><button onclick="{{subscriptionAdminSelected.contactFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:12px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminContactLabel}}</button></div><section class="ur-desk-card"><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminReadinessTitle}}</div><sc-for list="{{subscriptionAdminSelected.readinessRows}}" as="row" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border-radius:14px;background:var(--c-bg,#F7F4EE);margin-top:8px;"><div><div style="font-size:11.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{row.label}}</div><div style="font-size:10px;color:var(--c-sub,#8A8274);line-height:1.45;margin-top:3px;">{{row.detail}}</div></div><span style="font-size:9.5px;font-weight:950;color:{{row.toneFg}};background:{{row.toneBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{row.stateLabel}}</span></div></sc-for></section><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;"><button onclick="{{subscriptionAdminSelected.extendFn}}" style="padding:12px;border-radius:13px;border:none;background:var(--c-gold,#C8A96B);color:var(--c-on-gold,#2B2A27);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminExtendLabel}}</button><button onclick="{{subscriptionAdminSelected.markPaidFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminPaidLabel}}</button><button onclick="{{subscriptionAdminSelected.activateFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-success,#3F6B3A);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminActivateLabel}}</button><button onclick="{{subscriptionAdminSelected.pauseFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-error,#B2583F);background:var(--c-surface,#FFFDF9);color:var(--c-error,#B2583F);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminPauseLabel}}</button></div><section class="ur-desk-card"><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminAuditTitle}}</div><sc-for list="{{subscriptionAdminAuditRows}}" as="log" hint-placeholder-count="6"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--c-divider,#F1EADC);margin-top:10px;"><span style="min-width:0;"><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{log.actionLabel}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{log.storeName}} · {{log.actorLabel}}</span></span><span style="font-size:10px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{log.timeLabel}}</span></div></sc-for></section></div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;">
+                  <div class="ur-desk-grid" style="grid-template-columns:repeat(4,1fr);gap:10px;"><sc-for list="{{subscriptionAdminOpsStats}}" as="stat" hint-placeholder-count="4"><div class="ur-desk-card" style="padding:13px;border-top:3px solid {{stat.tone}};"><div style="font-size:18px;font-weight:950;color:var(--c-ink,#2B2A27);" dir="ltr">{{stat.value}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:4px;">{{stat.label}}</div></div></sc-for></div>
+                  <div class="ur-desk-grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:start;">
+                    <section class="ur-desk-card"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px;"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#2B2A27);">{{subscriptionAdminAttentionTitle}}</div><button onclick="{{exportSubscriptionAdminCsv}}" style="padding:8px 11px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminExportLabel}}</button></div><div style="display:flex;flex-direction:column;gap:8px;"><sc-for list="{{subscriptionAdminAttentionRows}}" as="item" hint-placeholder-count="3"><button onclick="{{item.selectFn}}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;border-radius:13px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);text-align:start;cursor:pointer;font-family:inherit;"><span style="min-width:0;"><b style="display:block;font-size:11.5px;color:var(--c-ink,#2B2A27);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{item.name}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{item.reasonLabel}}</span></span><span style="width:8px;height:8px;border-radius:999px;background:{{item.tone}};flex-shrink:0;"></span></button></sc-for></div></section>
+                    <section class="ur-desk-card"><div style="font-size:16px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminMerchantTitle}}</div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;"><sc-for list="{{subscriptionAdminMerchantRows}}" as="row" hint-placeholder-count="6"><div style="padding:11px;border-radius:13px;background:var(--c-bg,#F7F4EE);min-width:0;"><div style="font-size:9.5px;color:var(--c-sub,#8A8274);">{{row.label}}</div><div style="font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" dir="auto">{{row.value}}</div></div></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;"><sc-for list="{{subscriptionAdminQuickActions}}" as="action" hint-placeholder-count="4"><button onclick="{{action.fn}}" style="padding:9px 11px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for><sc-if value="{{subscriptionAdminCanRevokeSessions}}" hint-placeholder-val="false"><button onclick="{{revokeSelectedMerchantSessions}}" style="padding:9px 11px;border-radius:10px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminRevokeSessionsLabel}}</button></sc-if></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid var(--c-divider,#F1EADC);"><sc-for list="{{subscriptionAdminPlanOptions}}" as="plan" hint-placeholder-count="4"><button onclick="{{plan.fn}}" style="padding:8px 11px;border-radius:999px;border:1px solid {{plan.border}};background:{{plan.bg}};color:{{plan.fg}};font-size:10px;font-weight:950;cursor:pointer;font-family:inherit;">{{plan.label}}</button></sc-for></div></section>
+                  </div>
+                  <section class="ur-desk-card"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div class="ur-desk-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:9px;align-items:start;padding:10px;border-radius:13px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:11px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:9px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div></section>
                 </div>
               </div>
             </sc-if>
@@ -10440,13 +10476,8 @@
 
                 <sc-if value="{{selectedModuleIsShipping}}" hint-placeholder-val="{{false}}">
                   <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:17px;padding:14px;margin-bottom:14px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:2px;">{{alWaseetSub}}</div></div><span style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};background:{{alWaseetStatusBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{alWaseetStatusLabel}}</span></div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                    </div>
+                    <div style="display:flex;align-items:center;gap:11px;padding:3px;"><div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="{{alWaseetLogoUrl}}" alt="Al-Waseet" referrerpolicy="no-referrer" style="width:42px;height:42px;object-fit:contain;"/></div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div><button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button></div>
+                    <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}"><div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div><div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:10px 14px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div></div></sc-if>
                   </div>
                 </sc-if>
 
@@ -10471,16 +10502,14 @@
                   <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:17px;padding:14px;margin-bottom:14px;">
                     <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramPanelTitle}}</div><span style="font-size:9.5px;font-weight:900;color:var(--c-info,#3B6FA0);background:var(--c-info-bg,#E4EDF5);padding:5px 8px;border-radius:999px;white-space:nowrap;">{{telegramEnabledLabel}}</span></div>
                     <div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.7;">{{telegramHelpText}}</div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                      <sc-for list="{{telegramSetupSteps}}" as="step" hint-placeholder-count="6">
-                        <div class="ur-step-card" style="--d:{{step.delay}};display:flex;gap:9px;align-items:flex-start;border-radius:13px;padding:10px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);box-shadow:none;">
-                          <span style="width:26px;height:26px;border-radius:9px;background:var(--c-surface-2,#F3E7D2);color:var(--c-gold-deep,#B8935A);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:950;flex-shrink:0;">{{step.n}}</span>
-                          <span style="min-width:0;"><span style="display:block;font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{step.title}}</span><span style="display:block;font-size:10px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:2px;">{{step.desc}}</span></span>
-                        </div>
-                      </sc-for>
-                    </div>
-                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramBotTokenLabel}}</span><input type="password" value="{{telegramBotToken}}" onChange="{{setTelegramBotToken}}" dir="ltr" placeholder="123456:ABC..." style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
-                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramChatIdLabel}}</span><input value="{{telegramChatId}}" onChange="{{setTelegramChatId}}" dir="ltr" placeholder="-1001234567890" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
+                    <sc-if value="{{telegramUnavailable}}" hint-placeholder-val="{{false}}"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;background:var(--c-bg,#F7F4EE);border-radius:11px;padding:10px;">{{telegramUnavailableHint}}</div></sc-if>
+                    <sc-if value="{{telegramNeedsBot}}" hint-placeholder-val="{{true}}">
+                      <div style="font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{telegramSetupTitle}}</div>
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><sc-for list="{{telegramSetupSteps}}" as="step" hint-placeholder-count="3"><div class="ur-step-card" style="--d:{{step.delay}};display:flex;gap:9px;align-items:flex-start;border-radius:13px;padding:10px;background:var(--c-bg,#F7F4EE);border:1px solid var(--c-border,#EAE1D0);box-shadow:none;"><span style="width:26px;height:26px;border-radius:9px;background:var(--c-surface-2,#F3E7D2);color:var(--c-gold-deep,#B8935A);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:950;flex-shrink:0;">{{step.n}}</span><span style="min-width:0;"><span style="display:block;font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);">{{step.title}}</span><span style="display:block;font-size:10px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:2px;">{{step.desc}}</span></span></div></sc-for></div>
+                      <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">{{telegramBotTokenLabel}}</span><input type="password" value="{{telegramBotTokenDraft}}" onChange="{{setTelegramBotTokenDraft}}" dir="ltr" autocomplete="off" placeholder="123456:ABC..." style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/><span style="font-size:9.5px;color:var(--c-sub,#8A8274);line-height:1.55;">{{telegramBotTokenHint}}</span></label>
+                      <button onclick="{{connectTelegramStoreBot}}" style="padding:10px 12px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;align-self:flex-start;">{{telegramConnectBotLabel}}</button>
+                    </sc-if>
+                    <sc-if value="{{telegramBotConnected}}" hint-placeholder-val="{{false}}"><div style="font-size:10.5px;color:var(--c-success,#168A4B);line-height:1.6;background:var(--c-success-bg,#E7F7EC);border-radius:11px;padding:10px;">{{telegramConnectedLine}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;background:var(--c-bg,#F7F4EE);border-radius:11px;padding:10px;">{{telegramLinkHint}}</div><div style="display:flex;flex-wrap:wrap;gap:8px;"><sc-if value="{{telegramNeedsAccountLink}}" hint-placeholder-val="{{true}}"><button onclick="{{createTelegramBotLink}}" style="padding:10px 12px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramLinkActionLabel}}</button></sc-if><sc-if value="{{telegramLinkReady}}" hint-placeholder-val="{{false}}"><button onclick="{{openTelegramBotLink}}" style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramOpenLinkLabel}}</button></sc-if><sc-if value="{{telegramLinked}}" hint-placeholder-val="{{false}}"><button onclick="{{unlinkTelegramBot}}" style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramDisconnectAccountLabel}}</button></sc-if><button onclick="{{disconnectTelegramStoreBot}}" style="padding:10px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{telegramDisconnectBotLabel}}</button></div></sc-if>
                   </div>
                 </sc-if>
 
@@ -10942,6 +10971,9 @@ class Component extends DCLogic {
     subscriptionAdminLoading: false,
     subscriptionAdminLastSync: '',
     subscriptionAdminCapacity: null,
+    subscriptionAdminOverview: null,
+    subscriptionAdminMerchant: null,
+    subscriptionAdminMerchantLoading: false,
     connectedPrinters: [{ id: 'pr1', name: 'Epson TM-T88VI', connection: 'Bluetooth', role: 'receipt', paper: '80mm', health: 'ready', lastTestAt: '', active: true }],
     newPrinterName: '',
     newPrinterConnection: 'Bluetooth',
@@ -10952,6 +10984,7 @@ class Component extends DCLogic {
     securityConfirm: '',
     securityPin: '',
     moduleId: null,
+    alWaseetConnectOpen: false,
     desktopScreen: 'dashboard',
     analyticsRange: 'week',
     toast: null,
@@ -10967,6 +11000,8 @@ class Component extends DCLogic {
     authUser: null,
     authStatus: 'local',
     authLoading: false,
+    telegramBotStatus: { available: false, botConnected: false, botUsername: '', botDisplayName: '', linked: false, linkedAt: '', linkUrl: '', expiresAt: '' },
+    telegramBotTokenDraft: '',
     customerSearch: '',
     topSearch: '',
     discountOverrides: {},
@@ -11278,7 +11313,7 @@ class Component extends DCLogic {
     { id: 'm10', icon: 'lang', name: { ar: 'إعدادات اللغة', en: 'Language settings' }, desc: { ar: 'العربية والإنكليزية للمتجر ولوحة الإدارة', en: 'Arabic and English for the store and dashboard' }, status: 'connected' },
     { id: 'm13', icon: 'code', name: { ar: 'ربط خارجي', en: 'External connections' }, desc: { ar: 'إعدادات الربط المخصصة', en: 'Custom connection settings' }, status: 'available' },
     { id: 'm14', icon: 'headset', name: { ar: 'مركز دعم العملاء', en: 'Customer Support Center' }, desc: { ar: 'أدر تذاكر ورسائل عملائك', en: 'Manage tickets & messages' }, status: 'available' },
-    { id: 'm19', icon: 'telegram', name: { ar: 'تنبيهات تيليجرام', en: 'Telegram alerts' }, desc: { ar: 'استلم إشعارات الطلبات والمخزون عبر تيليجرام', en: 'Receive order and stock alerts on Telegram' }, status: 'available' },
+    { id: 'm19', icon: 'telegram', name: { ar: 'بوت مخزون تيليجرام', en: 'Telegram inventory bot' }, desc: { ar: 'اربط بوتاً خاصاً بمتجرك لمتابعة المخزون', en: 'Connect a dedicated store bot for inventory updates' }, status: 'available' },
     { id: 'm15', icon: 'ship', name: { ar: 'شركات الشحن', en: 'Shipping Providers' }, desc: { ar: 'اربط شركات التوصيل المحلية', en: 'Connect local delivery carriers' }, status: 'connected' },
     { id: 'm16', icon: 'calc', name: { ar: 'التقارير المحاسبية', en: 'Accounting reports' }, desc: { ar: 'ملخص للمبيعات والكلفة والربح', en: 'Sales, cost, and profit summary' }, status: 'available' },
     { id: 'm17', icon: 'code', name: { ar: 'الحسابات والصلاحيات', en: 'Accounts & Permissions' }, desc: { ar: 'أدر أدوار الفريق ومن يقدر يدخل لكل قسم', en: 'Manage team roles and access' }, status: 'connected' },
@@ -11287,7 +11322,8 @@ class Component extends DCLogic {
 
   coreModuleAdditions() {
     return [
-      { id: 'm19', icon: 'telegram', name: { ar: 'تنبيهات تيليجرام', en: 'Telegram alerts' }, desc: { ar: 'استلم إشعارات الطلبات والمخزون عبر تيليجرام', en: 'Receive order and stock alerts on Telegram' }, status: 'available' },
+      { id: 'm19', icon: 'telegram', name: { ar: 'بوت مخزون تيليجرام', en: 'Telegram inventory bot' }, desc: { ar: 'اربط بوتاً خاصاً بمتجرك لمتابعة المخزون', en: 'Connect a dedicated store bot for inventory updates' }, status: 'available' },
+      { id: 'm15', icon: 'ship', name: { ar: 'شركات الشحن', en: 'Shipping Providers' }, desc: { ar: 'اربط شركات التوصيل المحلية', en: 'Connect local delivery carriers' }, status: 'available' },
     ];
   }
   deprecatedModuleIds() {
@@ -11325,6 +11361,7 @@ class Component extends DCLogic {
     const app = this.normalizeAppSettings(options.appSettings || ((this.state.storeSettings || {}).appSettings || {}));
     const shipping = this.normalizeShippingSettings(options.shippingSettings || ((this.state.storeSettings || {}).shippingSettings || {}));
     const payment = this.normalizePaymentSettings(options.paymentSettings || ((this.state.storeSettings || {}).paymentSettings || {}));
+    const telegram = this.telegramBotState();
     const base = {
       m1: { kind: 'partial', categoryAr: 'توصيات', categoryEn: 'Recommendations', ar: 'يعرض توصيات للمتابعة اليومية للمبيعات والمخزون والطلبات.', en: 'Shows sales, stock, and order recommendations for daily follow-up.' },
       m2: { kind: app.n8nEnabled ? 'ready' : 'connect', categoryAr: 'أتمتة', categoryEn: 'Automation', ar: app.n8nEnabled ? 'الأتمتة مفعّلة لتنبيهات الطلبات والقواعد.' : 'أضف رابط الأتمتة لتفعيل التنبيهات والقواعد.', en: app.n8nEnabled ? 'Automation is active for order alerts and rules.' : 'Add an automation URL to enable alerts and rules.' },
@@ -11341,7 +11378,7 @@ class Component extends DCLogic {
       m16: { kind: (this.ORDERS || []).length ? 'ready' : 'connect', categoryAr: 'محاسبة', categoryEn: 'Accounting', ar: (this.ORDERS || []).length ? 'تقرير المبيعات جاهز للطباعة PDF والتصدير للإكسل.' : 'استقبل أول طلب حتى يظهر تقرير محاسبي مفيد.', en: (this.ORDERS || []).length ? 'Sales report is ready for PDF printing and Excel export.' : 'Receive the first order to build a useful accounting report.' },
       m17: { kind: 'ready', categoryAr: 'أمان', categoryEn: 'Security', ar: 'حدد صلاحيات كل عضو في فريق المتجر.', en: 'Set permissions for every member of your store team.' },
       m18: { kind: payment.cardConnected ? 'ready' : 'partial', categoryAr: 'دفع', categoryEn: 'Payments', ar: payment.cardConnected ? 'إعدادات الدفع محفوظة وجاهزة للاستخدام.' : 'اختر طرق الدفع الظاهرة للزبون واربط مزود الدفع الإلكتروني عند الحاجة.', en: payment.cardConnected ? 'Payment settings are saved and ready to use.' : 'Choose customer payment methods and connect an online provider when needed.' },
-      m19: { kind: app.telegramEnabled ? 'ready' : 'connect', categoryAr: 'تنبيهات', categoryEn: 'Alerts', ar: app.telegramEnabled ? 'تنبيهات تيليجرام مفعّلة للطلبات والمخزون.' : 'أدخل بيانات الربط لتفعيل تنبيهات تيليجرام.', en: app.telegramEnabled ? 'Telegram alerts are active for orders and stock.' : 'Enter the connection details to enable Telegram alerts.' },
+      m19: { kind: telegram.linked ? 'ready' : (telegram.botConnected ? 'partial' : 'connect'), categoryAr: 'مخزون', categoryEn: 'Inventory', ar: telegram.linked ? 'بوت مخزون متجرك جاهز لحسابك ويعرض بيانات متجرك فقط.' : (telegram.botConnected ? 'بوت المتجر مربوط. اربط حسابك الشخصي لتبدأ استخدامه.' : 'اربط بوتاً خاصاً بمتجرك حتى تتابع المخزون من تيليجرام.'), en: telegram.linked ? 'Your store inventory bot is ready for your account and only shows your store data.' : (telegram.botConnected ? 'The store bot is connected. Link your personal account to start using it.' : 'Connect a dedicated store bot to follow inventory on Telegram.') },
     };
     const info = base[module && module.id] || { kind: 'partial', categoryAr: 'أداة', categoryEn: 'Tool', ar: 'أكمل الإعدادات قبل استخدام هذه الأداة.', en: 'Complete setup before using this tool.' };
     const tone = this.moduleReadinessTone(info.kind);
@@ -14725,7 +14762,7 @@ ZW|Zimbabwe|263
       inFlight.delete(dispatchKey);
       return false;
     }
-    if (!shippingSettings.token && (!shippingSettings.username || !shippingSettings.password)) {
+    if (!shippingSettings.connected && !shippingSettings.token && (!shippingSettings.username || !shippingSettings.password)) {
       this.showToast(isAr ? 'اربط حساب الوسيط من شركات الشحن أولاً' : 'Connect Al-Waseet in shipping providers first');
       inFlight.delete(dispatchKey);
       return false;
@@ -15442,9 +15479,12 @@ ZW|Zimbabwe|263
         this.restorePersistedBusinessData();
       }
       const setupComplete = this.hasRequiredStoreInfo(this.state.storeSettings);
-      this.setState({ authUser: body.user, currentUserRole: body.user.role || 'cashier', authStatus: 'connected', authLoading: false, onboarded: true, onboardStep: setupComplete ? this.state.onboardStep : 0, profileIslandOpen: false });
+      this.setState({ authUser: body.user, currentUserRole: body.user.role || 'cashier', authStatus: 'connected', authLoading: false, telegramBotStatus: { available: false, botConnected: false, botUsername: '', botDisplayName: '', linked: false, linkedAt: '', linkUrl: '', expiresAt: '' }, telegramBotTokenDraft: '', onboarded: true, onboardStep: setupComplete ? this.state.onboardStep : 0, profileIslandOpen: false });
       if (typeof setTimeout !== 'undefined') setTimeout(() => {
-        this.loadCommerceSnapshotFromBackend(true).then(() => this.startBackendLiveUpdates());
+        this.loadCommerceSnapshotFromBackend(true).then(() => {
+          this.startBackendLiveUpdates();
+          this.refreshTelegramBotStatus(true);
+        });
       }, 0);
     } catch (err) {
       this.clearPersistedAuth();
@@ -15463,6 +15503,8 @@ ZW|Zimbabwe|263
       authStatus: 'connected',
       authLoading: false,
       currentUserRole: user.role || 'cashier',
+      telegramBotStatus: { available: false, botConnected: false, botUsername: '', botDisplayName: '', linked: false, linkedAt: '', linkUrl: '', expiresAt: '' },
+      telegramBotTokenDraft: '',
       onboarded: true,
       onboardLaunching: false,
       onboardStep: 0,
@@ -15492,7 +15534,10 @@ ZW|Zimbabwe|263
       this.persistBusinessData({ localOnly: true });
     }
     if (typeof setTimeout !== 'undefined') setTimeout(() => {
-      this.afterBackendAuthSuccess(options).then(() => this.startBackendLiveUpdates());
+      this.afterBackendAuthSuccess(options).then(() => {
+        this.startBackendLiveUpdates();
+        this.refreshTelegramBotStatus(true);
+      });
     }, 0);
     this.showToast(isAr ? `أهلاً ${user.name}` : `Welcome ${user.name}`);
     this.resetScrollSoon();
@@ -15628,7 +15673,7 @@ ZW|Zimbabwe|263
     }
     this.stopBackendLiveUpdates();
     this.clearPersistedAuth();
-    this.setState({ onboarded: false, onboardLaunching: false, authToken: '', authUser: null, authStatus: 'local', drawerOpen: false, selectedProductId: null, selectedOrderId: null, selectedCustomerId: null, posOpen: false, posVariantProductId: null });
+    this.setState({ onboarded: false, onboardLaunching: false, authToken: '', authUser: null, authStatus: 'local', telegramBotStatus: { available: false, botConnected: false, botUsername: '', botDisplayName: '', linked: false, linkedAt: '', linkUrl: '', expiresAt: '' }, telegramBotTokenDraft: '', drawerOpen: false, selectedProductId: null, selectedOrderId: null, selectedCustomerId: null, posOpen: false, posVariantProductId: null });
     this.resetScrollSoon();
     this.showToast(this.state.lang === 'ar' ? 'تم تسجيل الخروج' : 'Logged out');
   };
@@ -16253,7 +16298,11 @@ ZW|Zimbabwe|263
     });
     this.persistSettingsSoon();
   };
-  openModule = (id) => { this.setState({ moduleId: id, drawerOpen: false }); this.resetScrollSoon(); };
+  openModule = (id) => {
+    this.setState({ moduleId: id, drawerOpen: false });
+    if (id === 'm19') this.refreshTelegramBotStatus(true);
+    this.resetScrollSoon();
+  };
   closeModule = () => { this.setState({ moduleId: null, drawerOpen: false }); this.resetScrollSoon(); };
   openModuleSettingsScreen = (section) => {
     this.setState({
@@ -16272,7 +16321,7 @@ ZW|Zimbabwe|263
       return;
     }
     if (id === 'm19') {
-      this.testTelegramBot();
+      this.openModule('m19');
       return;
     }
     if (id === 'm15') {
@@ -16788,15 +16837,21 @@ ZW|Zimbabwe|263
         addAction(isAr ? 'فتح إعدادات الدفع' : 'Open payment settings', () => this.runModulePrimaryAction('m18'));
         break;
       case 'm19':
+        const telegramStatus = this.telegramBotState();
         metrics = [
-          { label: isAr ? 'تيليجرام' : 'Telegram', value: app.telegramEnabled ? (isAr ? 'مفعّل' : 'On') : (isAr ? 'غير مفعّل' : 'Off') },
-          { label: isAr ? 'معرّف المحادثة' : 'Chat identifier', value: app.telegramChatId ? (isAr ? 'موجود' : 'Set') : (isAr ? 'ناقص' : 'Missing') },
+          { label: isAr ? 'بوت المتجر' : 'Store bot', value: telegramStatus.botConnected ? (telegramStatus.botUsername ? `@${telegramStatus.botUsername.replace(/^@/, '')}` : (isAr ? 'مربوط' : 'Connected')) : (telegramStatus.available ? (isAr ? 'غير مربوط' : 'Not connected') : (isAr ? 'غير متاح' : 'Unavailable')) },
+          { label: isAr ? 'حسابك' : 'Your account', value: telegramStatus.linked ? (isAr ? 'مربوط' : 'Linked') : (isAr ? 'غير مربوط' : 'Not linked') },
         ];
-        features = isAr ? ['تنبيه طلب جديد', 'تنبيه مخزون منخفض', 'بيانات ربط خاصة بتيليجرام'] : ['New order alert', 'Low-stock alert', 'Telegram connection details'];
-        addManage(isAr ? 'رمز الوصول' : 'Access code', app.telegramBotToken ? '••••••••' : '—', isAr ? 'فحص' : 'Test', () => this.testTelegramBot());
-        addManage(isAr ? 'معرّف المحادثة' : 'Chat identifier', app.telegramChatId || '—', '', null);
-        note = isAr ? 'أنشئ بوتاً في تيليجرام ثم أدخل رمز الوصول ومعرّف المحادثة التي تستلم التنبيهات.' : 'Create a Telegram bot, then enter its access code and the chat identifier that receives alerts.';
-        addAction(app.telegramEnabled ? (isAr ? 'إيقاف تيليجرام' : 'Disable Telegram') : (isAr ? 'حفظ وتفعيل تيليجرام' : 'Save and enable Telegram'), app.telegramEnabled ? () => this.toggleTelegramEnabled() : () => this.testTelegramBot());
+        features = isAr ? ['إجابات من مخزون متجرك', 'لكل متجر بوت مستقل', 'ربط آمن لحسابك الشخصي'] : ['Answers from your store inventory', 'One dedicated bot per store', 'Secure personal account link'];
+        addManage(isAr ? 'حالة البوت' : 'Bot status', telegramStatus.botConnected ? (isAr ? 'مربوط' : 'Connected') : (isAr ? 'غير مربوط' : 'Not connected'), isAr ? 'تحديث' : 'Refresh', () => this.refreshTelegramBotStatus(false));
+        addManage(isAr ? 'حماية البيانات' : 'Data access', isAr ? 'متجرك فقط' : 'Your store only', '', null);
+        note = telegramStatus.botConnected
+          ? (isAr ? 'بوت متجرك مربوط. اربط حسابك الشخصي حتى تسأل عن المخزون من تيليجرام.' : 'Your store bot is connected. Link your personal account to ask about inventory on Telegram.')
+          : (isAr ? 'أنشئ بوتاً باسم متجرك من BotFather، ثم الصق رمزه هنا مرة واحدة.' : 'Create a bot for your store in BotFather, then paste its token here once.');
+        if (telegramStatus.botConnected && telegramStatus.linked) addAction(isAr ? 'فصل حساب تيليجرام' : 'Unlink Telegram account', () => this.unlinkTelegramBot(), 'secondary');
+        else if (telegramStatus.botConnected) addAction(isAr ? 'ربط حسابي على تيليجرام' : 'Link my Telegram account', () => this.createTelegramBotLink());
+        if (telegramStatus.linkUrl) addAction(isAr ? 'فتح تيليجرام' : 'Open Telegram', () => this.openTelegramBotLink(), 'secondary');
+        if (telegramStatus.botConnected) addAction(isAr ? 'فصل بوت المتجر' : 'Disconnect store bot', () => this.disconnectTelegramStoreBot(), 'secondary');
         break;
       default:
         metrics = [{ label: isAr ? 'الحالة' : 'Status', value: selM.status }];
@@ -17372,22 +17427,26 @@ ZW|Zimbabwe|263
     if (this.state.subscriptionAdminLoading) return;
     this.setState({ subscriptionAdminLoading: true, subscriptionBackendStatus: 'connecting' });
     try {
-      const [subscriptions, audit, capacity] = await Promise.all([
+      const [subscriptions, audit, capacity, overview] = await Promise.all([
         this.subscriptionApiRequest('/api/subscriptions'),
         this.subscriptionApiRequest('/api/audit?limit=50'),
         this.subscriptionApiRequest('/api/capacity?users=1000'),
+        this.subscriptionApiRequest('/api/admin/overview'),
       ]);
       if (Array.isArray(subscriptions.stores) && subscriptions.stores.length) this.SUBSCRIPTION_STORES = subscriptions.stores;
       if (Array.isArray(audit.audit)) this.SUBSCRIPTION_AUDIT = audit.audit.slice(0, 80);
       const selectedExists = this.SUBSCRIPTION_STORES.some(store => store.id === this.state.selectedSubscriptionStoreId);
       this.persistSubscriptionAdminData();
+      const selectedId = selectedExists ? this.state.selectedSubscriptionStoreId : ((this.SUBSCRIPTION_STORES[0] || {}).id || 'sub1');
       this.setState({
-        selectedSubscriptionStoreId: selectedExists ? this.state.selectedSubscriptionStoreId : ((this.SUBSCRIPTION_STORES[0] || {}).id || 'sub1'),
+        selectedSubscriptionStoreId: selectedId,
         subscriptionAdminCapacity: capacity && capacity.capacity ? capacity.capacity : null,
+        subscriptionAdminOverview: overview || null,
         subscriptionBackendStatus: 'connected',
         subscriptionAdminLastSync: new Date().toISOString(),
         subscriptionAdminLoading: false,
       });
+      this.refreshSubscriptionMerchant360(selectedId, true);
       if (!silent) this.showToast(isAr ? 'تم تحديث الاشتراكات' : 'Subscriptions synced');
       this.forceUpdate();
     } catch (err) {
@@ -17398,7 +17457,85 @@ ZW|Zimbabwe|263
   setSubscriptionAdminSearch = (e) => this.setState({ subscriptionAdminSearch: e && e.target ? e.target.value : e });
   setSubscriptionAdminStatusFilter = (filter) => this.setState({ subscriptionAdminStatusFilter: filter });
   setSubscriptionAdminPlanFilter = (filter) => this.setState({ subscriptionAdminPlanFilter: filter });
-  selectSubscriptionStore = (id) => this.setState({ selectedSubscriptionStoreId: id });
+  refreshSubscriptionMerchant360 = async (id = this.state.selectedSubscriptionStoreId, silent = false) => {
+    if (!id || !this.canManageSubscriptionAdmin()) return;
+    this.setState({ subscriptionAdminMerchantLoading: true });
+    try {
+      const result = await this.subscriptionApiRequest(`/api/admin/stores/${encodeURIComponent(id)}`);
+      this.setState({ subscriptionAdminMerchant: result.merchant || null, subscriptionAdminMerchantLoading: false });
+    } catch (err) {
+      this.setState({ subscriptionAdminMerchant: null, subscriptionAdminMerchantLoading: false });
+      if (!silent) this.showToast(this.state.lang === 'ar' ? 'تعذر تحميل ملف التاجر' : 'Could not load merchant profile');
+    }
+  };
+  selectSubscriptionStore = (id) => {
+    this.setState({ selectedSubscriptionStoreId: id, subscriptionAdminMerchant: null });
+    this.refreshSubscriptionMerchant360(id, true);
+  };
+  createSubscriptionAdminEvent = async (kind) => {
+    const storeId = this.state.selectedSubscriptionStoreId;
+    if (!storeId || !this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
+    const isAr = this.state.lang === 'ar';
+    const labels = {
+      note: isAr ? 'اكتب الملاحظة الداخلية' : 'Enter the internal note',
+      payment: isAr ? 'اكتب وصف الدفعة أو رقم الوصل' : 'Enter payment description or receipt number',
+      ticket: isAr ? 'اكتب عنوان مشكلة الدعم' : 'Enter support issue title',
+      notification: isAr ? 'اكتب رسالة التنبيه للتاجر' : 'Enter merchant notification',
+    };
+    const title = String(window.prompt(labels[kind] || labels.note, '') || '').trim();
+    if (!title) return;
+    const details = {};
+    let status = kind === 'payment' ? 'recorded' : 'open';
+    if (kind === 'payment') {
+      const amount = Number(window.prompt(isAr ? 'مبلغ الدفعة بالدينار' : 'Payment amount in IQD', '0') || 0);
+      if (Number.isFinite(amount) && amount >= 0) details.amount = Math.round(amount);
+    }
+    if (kind === 'notification') { details.channel = 'in_app'; status = 'queued'; }
+    if (kind === 'ticket') details.priority = 'normal';
+    try {
+      await this.subscriptionApiRequest(`/api/admin/stores/${encodeURIComponent(storeId)}/events`, { method: 'POST', body: JSON.stringify({ kind, title, status, details }) });
+      await Promise.all([this.refreshSubscriptionMerchant360(storeId, true), this.refreshSubscriptionAdminFromApi(true)]);
+      this.showToast(isAr ? 'تم حفظ العملية في ملف التاجر' : 'Saved to the merchant timeline');
+    } catch (err) {
+      this.showToast(isAr ? 'تعذر حفظ العملية' : 'Could not save the action');
+    }
+  };
+  updateSelectedSubscriptionPlan = async (plan) => {
+    const storeId = this.state.selectedSubscriptionStoreId;
+    if (!storeId || !this.canManageSubscriptionAdmin()) return;
+    try {
+      const result = await this.subscriptionApiRequest(`/api/admin/stores/${encodeURIComponent(storeId)}`, { method: 'PATCH', body: JSON.stringify({ plan }) });
+      if (result.store) this.SUBSCRIPTION_STORES = this.SUBSCRIPTION_STORES.map(store => store.id === storeId ? { ...store, ...result.store } : store);
+      await Promise.all([this.refreshSubscriptionMerchant360(storeId, true), this.refreshSubscriptionAdminFromApi(true)]);
+      this.showToast(this.state.lang === 'ar' ? 'تم تغيير باقة المتجر' : 'Store plan updated');
+    } catch (err) { this.showToast(this.state.lang === 'ar' ? 'تعذر تغيير الباقة' : 'Could not update plan'); }
+  };
+  revokeSelectedMerchantSessions = async () => {
+    const storeId = this.state.selectedSubscriptionStoreId;
+    if (!storeId || !this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
+    const isAr = this.state.lang === 'ar';
+    if (!window.confirm(isAr ? 'تسجيل خروج كل مستخدمي هذا المتجر؟' : 'Sign out every user in this store?')) return;
+    try {
+      const result = await this.subscriptionApiRequest(`/api/admin/stores/${encodeURIComponent(storeId)}/revoke-sessions`, { method: 'POST', body: '{}' });
+      await this.refreshSubscriptionMerchant360(storeId, true);
+      this.showToast(isAr ? `تم إلغاء ${Number(result.revoked || 0)} جلسة` : `${Number(result.revoked || 0)} sessions revoked`);
+    } catch (err) { this.showToast(isAr ? 'تعذر إلغاء الجلسات' : 'Could not revoke sessions'); }
+  };
+  exportSubscriptionAdminCsv = async () => {
+    if (!this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
+    try {
+      const params = new URLSearchParams();
+      if (this.state.subscriptionAdminSearch) params.set('search', this.state.subscriptionAdminSearch);
+      if (this.state.subscriptionAdminStatusFilter !== 'all') params.set('status', this.state.subscriptionAdminStatusFilter);
+      if (this.state.subscriptionAdminPlanFilter !== 'all') params.set('plan', this.state.subscriptionAdminPlanFilter);
+      const url = this.subscriptionApiUrl(`/api/admin/export.csv?${params.toString()}`);
+      const response = await this.backendFetch(url, { method: 'GET' }, { absolute: true });
+      if (!response.ok) throw new Error('Export failed');
+      const blobUrl = URL.createObjectURL(await response.blob());
+      const link = document.createElement('a'); link.href = blobUrl; link.download = 'ur-merchants.csv'; link.click();
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    } catch (err) { this.showToast(this.state.lang === 'ar' ? 'تعذر تصدير التقرير' : 'Could not export report'); }
+  };
   subscriptionStoreWhatsAppPhone(store = {}) {
     const raw = String((store && store.phone) || '').replace(/[^\d+]/g, '');
     if (raw.startsWith('+')) return raw.slice(1);
@@ -17450,9 +17587,7 @@ ZW|Zimbabwe|263
   isPlatformOwner = () => {
     const user = this.state.authUser || {};
     const role = user.role || this.state.currentUserRole || '';
-    const email = String(user.email || '').toLowerCase();
-    const storeId = String(user.storeId || '');
-    return role === 'owner' && (storeId === 'sub1' || email === 'owner@ur.local');
+    return role === 'owner' && user.platformOwner === true;
   };
   canManageSubscriptionAdmin = () => this.canUsePermission('subscriptions') && this.isPlatformOwner();
   subscriptionActionText(action, isAr = this.state.lang === 'ar') {
@@ -17689,22 +17824,19 @@ ZW|Zimbabwe|263
       sendMode: shippingSettings.sendMode,
     };
     const { securitySettings, printerSettings, ...safeStoreSettings } = (storeSettings || {});
-    return { ...safeStoreSettings, brandColor: designSettings.brand, designSettings, shippingSettings: publicShipping };
+    return {
+      ...safeStoreSettings,
+      appSettings: this.normalizeAppSettings((storeSettings || {}).appSettings),
+      brandColor: designSettings.brand,
+      designSettings,
+      shippingSettings: publicShipping,
+    };
   }
   persistShippingSecrets(shippingSettings = (this.state.storeSettings || {}).shippingSettings) {
     try {
       if (typeof localStorage === 'undefined') return;
-      const settings = this.normalizeShippingSettings(shippingSettings);
-      this.writeTenantStorage('shippingSecrets', JSON.stringify({
-        alwaseet: {
-          username: settings.username,
-          password: settings.password,
-          token: settings.token,
-          connected: settings.connected,
-          connectionStatus: settings.connectionStatus,
-          lastConnectedAt: settings.lastConnectedAt,
-        },
-      }));
+      localStorage.removeItem(this.tenantStorageKey('shippingSecrets'));
+      localStorage.removeItem(this.legacyStorageKey('shippingSecrets'));
     } catch (err) {}
   }
   persistAppSettings(options = {}) {
@@ -17761,6 +17893,7 @@ ZW|Zimbabwe|263
         next.bizType = profile.key;
         next.storeSettings = {
           ...storeSettings,
+          appSettings: this.normalizeAppSettings(storeSettings.appSettings),
           businessType: profile.key,
           businessProfile: storeSettings.businessProfile || { key: profile.key, label: profile.label },
           brandTheme: normalizedTheme,
@@ -17768,21 +17901,13 @@ ZW|Zimbabwe|263
           designSettings,
         };
       }
-      const secretRaw = this.readTenantStorage('shippingSecrets', { migrateLegacy: true });
-      if (secretRaw) {
-        const secrets = JSON.parse(secretRaw);
-        const alwaseet = secrets && secrets.alwaseet && typeof secrets.alwaseet === 'object' ? secrets.alwaseet : {};
-        const baseStore = next.storeSettings || this.state.storeSettings;
-        next.storeSettings = {
-          ...baseStore,
-          shippingSettings: { ...((baseStore || {}).shippingSettings || {}), ...alwaseet },
-        };
-      }
+      this.persistShippingSecrets();
       if (Array.isArray(saved.connectedPrinters) && saved.connectedPrinters.length) next.connectedPrinters = this.normalizedPrinters(saved.connectedPrinters);
       if (saved.paymentMethodsEnabled && typeof saved.paymentMethodsEnabled === 'object') next.paymentMethodsEnabled = { ...this.state.paymentMethodsEnabled, ...saved.paymentMethodsEnabled };
       if (saved.productSettings && typeof saved.productSettings === 'object') next.productSettings = { ...this.state.productSettings, ...saved.productSettings };
       if (saved.subscription && typeof saved.subscription === 'object') next.subscription = this.normalizedSubscription(saved.subscription);
       this.state = { ...this.state, ...next };
+      this.persistAppSettings({ localOnly: true });
     } catch (err) {}
   }
   persistProducts(options = {}) {
@@ -17907,10 +18032,6 @@ ZW|Zimbabwe|263
       n8nSecret: '',
       n8nEnabled: false,
       n8nLastTest: '',
-      telegramBotToken: '',
-      telegramChatId: '',
-      telegramEnabled: false,
-      telegramLastTest: '',
     };
   }
   normalizeAppSettings(settings = {}) {
@@ -17941,10 +18062,11 @@ ZW|Zimbabwe|263
     next.n8nSecret = String(next.n8nSecret || '').slice(0, 80);
     next.n8nEnabled = !!next.n8nEnabled;
     next.n8nLastTest = String(next.n8nLastTest || '');
-    next.telegramBotToken = String(next.telegramBotToken || '').slice(0, 120);
-    next.telegramChatId = String(next.telegramChatId || '').slice(0, 80);
-    next.telegramEnabled = !!next.telegramEnabled;
-    next.telegramLastTest = String(next.telegramLastTest || '');
+    delete next.telegramBotToken;
+    delete next.telegramBotTokenDraft;
+    delete next.telegramChatId;
+    delete next.telegramEnabled;
+    delete next.telegramLastTest;
     next.accountingLastExportAt = String(next.accountingLastExportAt || '');
     next.accountingAutoExport = !!next.accountingAutoExport;
     return next;
@@ -18003,26 +18125,101 @@ ZW|Zimbabwe|263
     this.setAppSettings(s => ({ ...s, n8nEnabled: !s.n8nEnabled }));
     this.setModuleStatus('m2', app.n8nEnabled ? 'available' : 'connected');
   };
-  testTelegramBot = () => {
-    const isAr = this.state.lang === 'ar';
-    const app = this.normalizeAppSettings((this.state.storeSettings || {}).appSettings);
-    if (!app.telegramBotToken || !app.telegramChatId) {
-      this.showToast(isAr ? 'أضف رمز الوصول ومعرّف المحادثة لتفعيل تيليجرام' : 'Add the access code and chat identifier to enable Telegram');
-      return;
+  telegramBotState() {
+    const current = this.state.telegramBotStatus;
+    return current && typeof current === 'object'
+      ? { available: false, botConnected: false, botUsername: '', botDisplayName: '', linked: false, linkedAt: '', linkUrl: '', expiresAt: '', ...current }
+      : { available: false, botConnected: false, botUsername: '', botDisplayName: '', linked: false, linkedAt: '', linkUrl: '', expiresAt: '' };
+  }
+  refreshTelegramBotStatus = async (silent = true) => {
+    if (!this.hasBackendSession()) return false;
+    try {
+      const { body } = await this.backendJson('/api/integrations/telegram/status', {}, { errorMessage: 'Telegram assistant status is unavailable' });
+      const previous = this.telegramBotState();
+      const status = { ...previous, ...body, linkUrl: body.linked ? '' : String(body.linkUrl || ''), expiresAt: body.linked ? '' : String(body.expiresAt || '') };
+      this.setState({ telegramBotStatus: status });
+      return true;
+    } catch (err) {
+      if (!silent) this.showToast(this.state.lang === 'ar' ? 'تعذر الوصول لمساعد المخزون حالياً' : 'Inventory assistant is unavailable');
+      return false;
     }
-    this.setAppSettings(s => ({ ...s, telegramEnabled: true, telegramLastTest: new Date().toISOString() }));
-    this.setModuleStatus('m19', 'connected');
-    this.showToast(isAr ? 'تم حفظ تنبيهات تيليجرام وتفعيلها' : 'Telegram alerts saved and enabled');
   };
-  toggleTelegramEnabled = () => {
+  setTelegramBotTokenDraft = (e) => {
+    const value = e && e.target ? e.target.value : e;
+    this.setState({ telegramBotTokenDraft: String(value || '').trim() });
+  };
+  connectTelegramStoreBot = async () => {
     const isAr = this.state.lang === 'ar';
-    const app = this.normalizeAppSettings((this.state.storeSettings || {}).appSettings);
-    if ((!app.telegramBotToken || !app.telegramChatId) && !app.telegramEnabled) {
-      this.showToast(isAr ? 'أكمل بيانات تيليجرام قبل التفعيل' : 'Complete the Telegram details before enabling it');
+    if (!this.hasBackendSession()) {
+      this.showToast(isAr ? 'سجل الدخول أولاً حتى تربط بوت متجرك' : 'Sign in before connecting your store bot');
+      return false;
+    }
+    const token = String(this.state.telegramBotTokenDraft || '').trim();
+    if (!token) {
+      this.showToast(isAr ? 'ألصق رمز البوت من BotFather أولاً' : 'Paste the bot token from BotFather first');
+      return false;
+    }
+    const payload = JSON.stringify({ token });
+    this.setState({ telegramBotTokenDraft: '' });
+    try {
+      const { body } = await this.backendJson('/api/integrations/telegram/bot/connect', { method: 'POST', body: payload }, { errorMessage: 'Telegram bot connection failed' });
+      this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body, linkUrl: String(body.linkUrl || ''), expiresAt: String(body.expiresAt || '') } });
+      this.showToast(isAr ? 'تم ربط بوت متجرك. اربط حسابك حتى تبدأ الاستخدام.' : 'Your store bot is connected. Link your account to start using it.');
+      return true;
+    } catch (err) {
+      this.showToast(isAr ? 'تعذر ربط بوت المتجر. تأكد من الرمز وحاول مرة ثانية.' : 'Could not connect the store bot. Check the token and try again.');
+      return false;
+    }
+  };
+  createTelegramBotLink = async () => {
+    const isAr = this.state.lang === 'ar';
+    if (!this.hasBackendSession()) {
+      this.showToast(isAr ? 'سجل الدخول أولاً حتى تربط حسابك' : 'Sign in before linking Telegram');
+      return false;
+    }
+    if (!this.telegramBotState().botConnected) {
+      this.showToast(isAr ? 'اربط بوت المتجر أولاً' : 'Connect the store bot first');
+      return false;
+    }
+    try {
+      const { body } = await this.backendJson('/api/integrations/telegram/link', { method: 'POST', body: '{}' }, { errorMessage: 'Telegram assistant is unavailable' });
+      this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body } });
+      this.showToast(isAr ? 'تم تجهيز رابط الربط. افتح تيليجرام وأكمل الربط.' : 'Your Telegram link is ready. Open Telegram to finish linking.');
+      return true;
+    } catch (err) {
+      this.showToast(isAr ? 'تعذر تجهيز رابط تيليجرام حالياً' : 'Could not create a Telegram link');
+      return false;
+    }
+  };
+  openTelegramBotLink = () => {
+    const link = this.telegramBotState().linkUrl;
+    if (!link) {
+      this.showToast(this.state.lang === 'ar' ? 'جهّز رابط الربط أولاً' : 'Create a link first');
       return;
     }
-    this.setAppSettings(s => ({ ...s, telegramEnabled: !s.telegramEnabled }));
-    this.setModuleStatus('m19', app.telegramEnabled ? 'available' : 'connected');
+    if (typeof window !== 'undefined') window.open(link, '_blank', 'noopener,noreferrer');
+  };
+  unlinkTelegramBot = async () => {
+    const isAr = this.state.lang === 'ar';
+    if (!this.hasBackendSession()) return;
+    try {
+      const { body } = await this.backendJson('/api/integrations/telegram/link', { method: 'DELETE' }, { errorMessage: 'Telegram unlink failed' });
+      this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body, linkUrl: '', expiresAt: '' } });
+      this.showToast(isAr ? 'تم فصل حساب تليجرام' : 'Telegram account unlinked');
+    } catch (err) {
+      this.showToast(isAr ? 'تعذر فصل حساب تيليجرام' : 'Could not unlink Telegram');
+    }
+  };
+  disconnectTelegramStoreBot = async () => {
+    const isAr = this.state.lang === 'ar';
+    if (!this.hasBackendSession()) return;
+    try {
+      const { body } = await this.backendJson('/api/integrations/telegram/bot', { method: 'DELETE' }, { errorMessage: 'Telegram bot disconnect failed' });
+      this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body, linkUrl: '', expiresAt: '' }, telegramBotTokenDraft: '' });
+      this.showToast(isAr ? 'تم فصل بوت المتجر' : 'Store bot disconnected');
+    } catch (err) {
+      this.showToast(isAr ? 'تعذر فصل بوت المتجر' : 'Could not disconnect the store bot');
+    }
   };
   setPaymentSetting = (key, value) => {
     this.setState(s => {
@@ -18207,6 +18404,8 @@ ZW|Zimbabwe|263
     });
     this.persistSettingsSoon();
   };
+  openAlWaseetConnection = () => this.setState({ alWaseetConnectOpen: true });
+  closeAlWaseetConnection = () => this.setState({ alWaseetConnectOpen: false });
   connectAlWaseet = async () => {
     const current = this.normalizeShippingSettings((this.state.storeSettings || {}).shippingSettings);
     if (!current.username || !current.password) {
@@ -18226,15 +18425,17 @@ ZW|Zimbabwe|263
         method: 'POST',
         body: JSON.stringify({ username: current.username, password: current.password }),
       }, { errorMessage: 'login failed' });
-      if (!data || !data.ok || !data.token) throw Object.assign(new Error((data && data.error) || 'login failed'), { status: res.status });
+      if (!data || !data.ok || !data.connected) throw Object.assign(new Error((data && data.error) || 'login failed'), { status: res.status });
       const shippingSettings = this.normalizeShippingSettings({
         ...current,
-        token: data.token,
+        username: '',
+        password: '',
+        token: '',
         connected: true,
         connectionStatus: 'connected',
         lastConnectedAt: new Date().toISOString(),
       });
-      this.setState(s => ({ storeSettings: { ...s.storeSettings, shippingSettings } }));
+      this.setState(s => ({ storeSettings: { ...s.storeSettings, shippingSettings }, alWaseetConnectOpen: false }));
       this.persistSettingsSoon();
       this.showToast(this.state.lang === 'ar' ? 'تم ربط الوسيط' : 'Connected to Al-Waseet');
     } catch (err) {
@@ -20172,6 +20373,27 @@ ZW|Zimbabwe|263
       { label: isAr ? 'تحتاج متابعة' : 'Needs follow-up', value: String(followUpStoreCount) },
       { label: isAr ? 'متوسط الجاهزية' : 'Avg readiness', value: `${avgReadiness}%` },
     ];
+    const adminOverview = s.subscriptionAdminOverview || {};
+    const adminMetrics = adminOverview.metrics || {};
+    vals.subscriptionAdminStats = [
+      { label: isAr ? 'كل المتاجر' : 'Stores', value: String(adminMetrics.totalStores ?? this.SUBSCRIPTION_STORES.length) },
+      { label: isAr ? 'فعالة' : 'Active', value: String(adminMetrics.activeStores ?? activeStoreCount) },
+      { label: isAr ? 'تجديد خلال 7 أيام' : 'Renew in 7 days', value: String(adminMetrics.renewSoon7d ?? followUpStoreCount) },
+      { label: isAr ? 'الإيراد الشهري' : 'Monthly revenue', value: `${Number(adminMetrics.monthlyRevenue ?? monthlyRevenue).toLocaleString('en-US')} ${isAr ? 'د.ع' : 'IQD'}` },
+    ];
+    vals.subscriptionAdminOpsStats = [
+      { label: isAr ? 'تسجيلات جديدة' : 'New signups', value: String(adminMetrics.newStores7d || 0), tone: TK.info },
+      { label: isAr ? 'تجارب' : 'Trials', value: String(adminMetrics.trialStores || 0), tone: TK.warning },
+      { label: isAr ? 'تذاكر مفتوحة' : 'Open tickets', value: String(adminMetrics.openTickets || 0), tone: TK.error },
+      { label: isAr ? 'دفعات معلقة' : 'Pending payments', value: String(adminMetrics.pendingPayments || 0), tone: TK.goldDeep },
+    ];
+    vals.subscriptionAdminAttentionTitle = isAr ? 'طابور المتابعة' : 'Attention queue';
+    vals.subscriptionAdminAttentionRows = (Array.isArray(adminOverview.attention) ? adminOverview.attention : []).slice(0, 6).map(item => ({
+      ...item,
+      reasonLabel: (item.reasons || []).map(reason => ({ past_due: isAr ? 'دفع متأخر' : 'Past due', paused: isAr ? 'متوقف' : 'Paused', renews_soon: isAr ? 'تجديد قريب' : 'Renewal soon', inactive_login: isAr ? 'دخول غير نشط' : 'Inactive login' }[reason] || reason)).join(' · '),
+      tone: item.severity === 'high' ? TK.error : (item.severity === 'medium' ? TK.warning : TK.info),
+      selectFn: () => this.selectSubscriptionStore(item.storeId),
+    }));
     const backendStatusLabels = {
       connected: isAr ? 'المزامنة شغالة' : 'Sync active',
       connecting: isAr ? 'جاري التحديث...' : 'Syncing...',
@@ -20229,6 +20451,36 @@ ZW|Zimbabwe|263
       timeLabel: this.subscriptionAuditTimeLabel(log, isAr),
       actorLabel: `${log.actor || (isAr ? 'النظام' : 'System')} · ${log.role || 'owner'}`,
     }));
+    const merchant360 = s.subscriptionAdminMerchant && s.subscriptionAdminMerchant.store && s.subscriptionAdminMerchant.store.id === (vals.subscriptionAdminSelected && vals.subscriptionAdminSelected.id) ? s.subscriptionAdminMerchant : null;
+    const merchantUser = merchant360 && Array.isArray(merchant360.users) ? merchant360.users[0] : null;
+    const adminDateLabel = value => {
+      const date = new Date(value || '');
+      return Number.isNaN(date.getTime()) ? (isAr ? 'غير متوفر' : 'Unavailable') : date.toLocaleString(isAr ? 'ar-IQ' : 'en-US', { dateStyle: 'medium', timeStyle: 'short' });
+    };
+    vals.subscriptionAdminMerchantTitle = isAr ? 'ملف التاجر 360°' : 'Merchant 360°';
+    vals.subscriptionAdminMerchantLoading = !!s.subscriptionAdminMerchantLoading;
+    vals.subscriptionAdminMerchantRows = merchant360 ? [
+      { label: isAr ? 'البريد' : 'Email', value: merchantUser && merchantUser.email ? merchantUser.email : '—' },
+      { label: isAr ? 'تأكيد البريد' : 'Email verification', value: merchantUser && merchantUser.emailVerified ? (isAr ? 'مؤكد' : 'Verified') : (isAr ? 'غير مؤكد' : 'Unverified') },
+      { label: isAr ? 'تاريخ التسجيل' : 'Signed up', value: adminDateLabel((merchantUser && merchantUser.createdAt) || merchant360.store.accountCreatedAt || merchant360.store.createdAt) },
+      { label: isAr ? 'آخر دخول' : 'Last login', value: adminDateLabel((merchantUser && merchantUser.lastLoginAt) || merchant360.store.lastLoginAt) },
+      { label: isAr ? 'المستخدمون' : 'Users', value: String(merchant360.store.usersCount || (merchant360.users || []).length || 0) },
+      { label: isAr ? 'الجلسات النشطة' : 'Active sessions', value: String(merchant360.activeSessions || 0) },
+    ] : [];
+    vals.subscriptionAdminTimelineTitle = isAr ? 'سجل التاجر' : 'Merchant timeline';
+    vals.subscriptionAdminTimelineRows = merchant360 && Array.isArray(merchant360.events) ? merchant360.events.slice(0, 8).map(event => ({ ...event, kindLabel: ({ note: isAr ? 'ملاحظة' : 'Note', payment: isAr ? 'دفعة' : 'Payment', ticket: isAr ? 'دعم' : 'Support', notification: isAr ? 'تنبيه' : 'Notification' })[event.kind] || event.kind, timeLabel: adminDateLabel(event.createdAt), tone: event.kind === 'ticket' ? TK.error : (event.kind === 'payment' ? TK.success : (event.kind === 'notification' ? TK.info : TK.goldDeep)) })) : [];
+    vals.subscriptionAdminQuickActions = [
+      { key: 'note', label: isAr ? 'إضافة ملاحظة' : 'Add note', fn: () => this.createSubscriptionAdminEvent('note') },
+      { key: 'payment', label: isAr ? 'تسجيل دفعة' : 'Record payment', fn: () => this.createSubscriptionAdminEvent('payment') },
+      { key: 'ticket', label: isAr ? 'فتح تذكرة' : 'Open ticket', fn: () => this.createSubscriptionAdminEvent('ticket') },
+      { key: 'notification', label: isAr ? 'إرسال تنبيه' : 'Send notification', fn: () => this.createSubscriptionAdminEvent('notification') },
+    ];
+    vals.subscriptionAdminPlanOptions = ['free', 'starter', 'pro', 'business'].map(plan => { const active = !!vals.subscriptionAdminSelected && vals.subscriptionAdminSelected.plan === plan; return { key: plan, label: planLabel(plan), active, bg: active ? TK.inverseBg : TK.surface, fg: active ? TK.inverseInk : TK.sub, border: active ? TK.inverseBg : TK.border, fn: () => this.updateSelectedSubscriptionPlan(plan) }; });
+    vals.subscriptionAdminExportLabel = isAr ? 'تصدير CSV' : 'Export CSV';
+    vals.exportSubscriptionAdminCsv = this.exportSubscriptionAdminCsv;
+    vals.subscriptionAdminRevokeSessionsLabel = isAr ? 'تسجيل خروج كل الجلسات' : 'Revoke all sessions';
+    vals.revokeSelectedMerchantSessions = this.revokeSelectedMerchantSessions;
+    vals.subscriptionAdminCanRevokeSessions = !!vals.subscriptionAdminSelected && vals.subscriptionAdminSelected.id !== String((s.authUser || {}).storeId || '');
     vals.setSubscriptionAdminSearch = this.setSubscriptionAdminSearch;
 
     vals.swatches = [
@@ -21063,6 +21315,11 @@ ZW|Zimbabwe|263
     vals.shippingCompaniesSub = isAr ? 'اربط شركات التوصيل وحدد إعدادات إرسال الطلبات.' : 'Connect delivery providers and configure order dispatch.';
     vals.alWaseetTitle = isAr ? 'الوسيط للتوصيل' : 'Al-Waseet delivery';
     vals.alWaseetSub = isAr ? 'أدخل بيانات حسابك في الوسيط واحفظها حتى تستخدمها الطلبات.' : 'Enter your Al-Waseet merchant credentials for order dispatch.';
+    vals.alWaseetLogoUrl = 'https://alwaseet-iq.net/app-assets/images/ico/Icon@4x.png';
+    vals.alWaseetConnectOpen = !!s.alWaseetConnectOpen;
+    vals.alWaseetProviderActionLabel = shippingSettings.connected ? (isAr ? 'إدارة الربط' : 'Manage') : (isAr ? 'ربط' : 'Connect');
+    vals.alWaseetSubmitLabel = shippingSettings.connectionStatus === 'connecting' ? (isAr ? 'جاري الربط...' : 'Connecting...') : (isAr ? 'ربط الحساب' : 'Connect account');
+    vals.alWaseetCancelLabel = isAr ? 'إلغاء' : 'Cancel';
     const alWaseetStatusMap = {
       not_configured: { label: isAr ? 'غير مهيأ' : 'Not configured', bg: TK.warningBg, fg: TK.warning },
       saved: { label: isAr ? 'محفوظ' : 'Saved', bg: TK.infoBg, fg: TK.info },
@@ -21081,6 +21338,8 @@ ZW|Zimbabwe|263
     vals.setAlWaseetPassword = (e) => this.setShippingSetting('password', e);
     vals.connectAlWaseet = this.connectAlWaseet;
     vals.disconnectAlWaseet = this.disconnectAlWaseet;
+    vals.openAlWaseetConnection = this.openAlWaseetConnection;
+    vals.closeAlWaseetConnection = this.closeAlWaseetConnection;
     vals.alWaseetConnectLabel = shippingSettings.connectionStatus === 'connecting' ? (isAr ? 'جاري الاتصال...' : 'Connecting...') : (isAr ? 'حفظ وتجربة الاتصال' : 'Save & test connection');
     vals.alWaseetToggleLabel = shippingSettings.enabled ? (isAr ? 'إيقاف التوصيل' : 'Pause delivery') : (isAr ? 'تفعيل التوصيل' : 'Enable delivery');
     vals.alWaseetDisconnectLabel = isAr ? 'فصل الاتصال وحذف بيانات الربط' : 'Disconnect and clear connection data';
@@ -21115,26 +21374,43 @@ ZW|Zimbabwe|263
     vals.setN8nSecret = (e) => this.setAppSettingField('n8nSecret', e);
     vals.testN8nWebhook = this.testN8nWebhook;
     vals.toggleN8nEnabled = this.toggleN8nEnabled;
-    vals.telegramBotToken = appSettings.telegramBotToken;
-    vals.telegramChatId = appSettings.telegramChatId;
-    vals.telegramPanelTitle = isAr ? 'تنبيهات تيليجرام' : 'Telegram alerts';
-    vals.telegramBotTokenLabel = isAr ? 'رمز وصول البوت' : 'Bot access code';
-    vals.telegramChatIdLabel = isAr ? 'معرّف المحادثة أو المجموعة' : 'Chat or group identifier';
-    vals.telegramEnabledLabel = appSettings.telegramEnabled ? (isAr ? 'تيليجرام مفعّل' : 'Telegram enabled') : (isAr ? 'تيليجرام غير مفعّل' : 'Telegram disabled');
-    vals.telegramHelpText = isAr ? 'أنشئ بوتاً في تيليجرام، ثم أدخل رمز الوصول ومعرّف المحادثة التي تستلم التنبيهات.' : 'Create a Telegram bot, then enter its access code and the chat identifier that receives alerts.';
-    vals.telegramSetupTitle = isAr ? 'إعداد تنبيهات تيليجرام' : 'Telegram alerts setup';
+    const telegramStatus = this.telegramBotState();
+    vals.telegramPanelTitle = isAr ? 'بوت مخزون متجرك' : 'Your store inventory bot';
+    vals.telegramEnabledLabel = !telegramStatus.available ? (isAr ? 'غير متاح حالياً' : 'Unavailable') : (telegramStatus.linked ? (isAr ? 'حسابك مربوط' : 'Account linked') : (telegramStatus.botConnected ? (isAr ? 'البوت جاهز' : 'Bot ready') : (isAr ? 'يحتاج ربط البوت' : 'Bot setup needed')));
+    vals.telegramHelpText = isAr ? 'اربط بوتاً خاصاً بمتجرك، ثم اسأل عن الكميات أو المخزون المنخفض من حسابك في تيليجرام.' : 'Connect a dedicated bot for your store, then ask about quantities or low stock from your Telegram account.';
+    vals.telegramSetupTitle = isAr ? 'إعداد بوت المتجر' : 'Set up your store bot';
     vals.telegramSetupSteps = [
-      { n: '01', title: isAr ? 'افتح تيليجرام' : 'Open Telegram', desc: isAr ? 'ابحث عن BotFather الرسمي داخل تيليجرام.' : 'Search for the official BotFather in Telegram.' },
-      { n: '02', title: isAr ? 'أنشئ بوتاً' : 'Create a bot', desc: isAr ? 'أنشئ بوتاً جديداً واختر اسماً له.' : 'Create a new bot and choose its name.' },
-      { n: '03', title: isAr ? 'انسخ رمز الوصول' : 'Copy the access code', desc: isAr ? 'انسخ رمز الوصول الذي يظهر لك والصقه في الحقل أعلاه.' : 'Copy the access code you receive and paste it in the field above.' },
-      { n: '04', title: isAr ? 'فعّل المحادثة' : 'Start the chat', desc: isAr ? 'افتح البوت واضغط Start حتى يستقبل الرسائل.' : 'Open the bot and press Start so it can receive messages.' },
-      { n: '05', title: isAr ? 'أدخل معرّف المحادثة' : 'Enter the chat identifier', desc: isAr ? 'أدخل معرّف المحادثة أو المجموعة التي تستلم التنبيهات.' : 'Enter the chat or group identifier that receives alerts.' },
-      { n: '06', title: isAr ? 'احفظ وجرب' : 'Save and test', desc: isAr ? 'احفظ الإعدادات وجرّب التنبيهات.' : 'Save the settings and test the alerts.' },
+      { n: '01', title: isAr ? 'أنشئ بوت متجرك' : 'Create your store bot', desc: isAr ? 'افتح @BotFather في تيليجرام وأنشئ بوتاً باسم متجرك.' : 'Open @BotFather in Telegram and create a bot for your store.' },
+      { n: '02', title: isAr ? 'انسخ رمز البوت' : 'Copy the bot token', desc: isAr ? 'أرسل /newbot ثم انسخ الرمز الذي يعطيك BotFather.' : 'Send /newbot, then copy the token BotFather gives you.' },
+      { n: '03', title: isAr ? 'اربطه هنا' : 'Connect it here', desc: isAr ? 'الصق الرمز مرة واحدة حتى يصير البوت جاهز لمتجرك.' : 'Paste the token once to make the bot ready for your store.' },
     ].map((step, index) => ({ ...step, delay: `${index * 55}ms` }));
-    vals.setTelegramBotToken = (e) => this.setAppSettingField('telegramBotToken', e);
-    vals.setTelegramChatId = (e) => this.setAppSettingField('telegramChatId', e);
-    vals.testTelegramBot = this.testTelegramBot;
-    vals.toggleTelegramEnabled = this.toggleTelegramEnabled;
+    vals.telegramUnavailable = !telegramStatus.available;
+    vals.telegramNeedsBot = !!telegramStatus.available && !telegramStatus.botConnected;
+    vals.telegramBotConnected = !!telegramStatus.botConnected;
+    vals.telegramLinked = !!telegramStatus.linked;
+    vals.telegramNeedsAccountLink = !!telegramStatus.botConnected && !telegramStatus.linked;
+    vals.telegramLinkReady = !!telegramStatus.linkUrl;
+    vals.telegramBotTokenDraft = s.telegramBotTokenDraft || '';
+    vals.setTelegramBotTokenDraft = this.setTelegramBotTokenDraft;
+    vals.telegramBotTokenLabel = isAr ? 'رمز البوت من BotFather' : 'BotFather bot token';
+    vals.telegramBotTokenHint = isAr ? 'يُستخدم للربط مرة واحدة ولا يظهر لك بعد الحفظ.' : 'Used once for connection and not shown again after saving.';
+    vals.telegramConnectBotLabel = isAr ? 'ربط بوت المتجر' : 'Connect store bot';
+    vals.telegramUnavailableHint = isAr ? 'خدمة بوت المتجر غير متاحة حالياً. جرّب مرة ثانية لاحقاً.' : 'Store bot setup is unavailable right now. Try again later.';
+    vals.telegramConnectedLine = telegramStatus.botUsername
+      ? (isAr ? `تم ربط @${String(telegramStatus.botUsername).replace(/^@/, '')} بمتجرك.` : `@${String(telegramStatus.botUsername).replace(/^@/, '')} is connected to your store.`)
+      : (isAr ? 'تم ربط بوت متجرك.' : 'Your store bot is connected.');
+    vals.telegramLinkHint = telegramStatus.linkUrl
+      ? (isAr ? 'رابط الربط جاهز لمدة 10 دقائق.' : 'Your link is ready for 10 minutes.')
+      : (telegramStatus.linked ? (isAr ? 'حسابك مربوط وتكدر تفصله من هنا بأي وقت.' : 'Your account is linked and can be unlinked here at any time.') : (isAr ? 'اربط حسابك الشخصي حتى تستخدم بوت المخزون.' : 'Link your personal account to use the inventory bot.'));
+    vals.telegramLinkActionLabel = isAr ? 'ربط حسابي' : 'Link my account';
+    vals.telegramOpenLinkLabel = isAr ? 'فتح تيليجرام' : 'Open Telegram';
+    vals.telegramDisconnectAccountLabel = isAr ? 'فصل حسابي' : 'Unlink my account';
+    vals.telegramDisconnectBotLabel = isAr ? 'فصل بوت المتجر' : 'Disconnect store bot';
+    vals.connectTelegramStoreBot = this.connectTelegramStoreBot;
+    vals.createTelegramBotLink = this.createTelegramBotLink;
+    vals.openTelegramBotLink = this.openTelegramBotLink;
+    vals.unlinkTelegramBot = this.unlinkTelegramBot;
+    vals.disconnectTelegramStoreBot = this.disconnectTelegramStoreBot;
 
     // products screen: search + category filter
     vals.productSearch = s.productSearch;
@@ -23371,9 +23647,14 @@ ZW|Zimbabwe|263
     });
 
     // integrations / modules
+    const telegramCardStatus = this.telegramBotState();
     vals.modulesLocalized = moduleAuditItems.map(({ module: m, audit }) => ({
       ...m, name: L(m.name), desc: L(m.desc),
       iconD1: (this.ICONS[m.icon] || this.ICONS.grid)[0], iconD2: (this.ICONS[m.icon] || this.ICONS.grid)[1],
+      isTelegram: m.id === 'm19',
+      showStandardIcon: m.id !== 'm19',
+      brandImage: m.id === 'm19' ? 'assets/telegram-logo.svg' : '',
+      telegramActionLabel: m.id === 'm19' ? (telegramCardStatus.botConnected ? (isAr ? 'إدارة' : 'Manage') : (isAr ? 'ربط' : 'Connect')) : '',
       statusLabel: m.status === 'connected' ? t.integrationsT.connected : t.integrationsT.available,
       statusColor: m.status === 'connected' ? TK.success : TK.sub,
       statusBg: m.status === 'connected' ? TK.successBg : TK.divider,
