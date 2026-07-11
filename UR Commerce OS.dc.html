@@ -18402,7 +18402,7 @@ ZW|Zimbabwe|263
     try {
       const { body } = await this.backendJson('/api/integrations/telegram/bot/connect', { method: 'POST', body: payload }, { errorMessage: 'Telegram bot connection failed' });
       this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body, linkUrl: String(body.linkUrl || ''), expiresAt: String(body.expiresAt || '') } });
-      this.showToast(isAr ? 'تم ربط بوت متجرك. اربط حسابك حتى تبدأ الاستخدام.' : 'Your store bot is connected. Link your account to start using it.');
+      this.showToast(isAr ? 'تم ربط البوت. أضفه للمجموعة ثم اربط Chat ID.' : 'Bot connected. Add it to a group, then link the chat ID.');
       return true;
     } catch (err) {
       this.showToast(isAr ? 'تعذر ربط بوت المتجر. تأكد من الرمز وحاول مرة ثانية.' : 'Could not connect the store bot. Check the token and try again.');
@@ -18466,7 +18466,7 @@ ZW|Zimbabwe|263
     try {
       const { body } = await this.backendJson('/api/integrations/telegram/group', { method: 'POST', body: JSON.stringify({ chatId }) }, { errorMessage: 'Telegram group connection failed' });
       this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body, groups: Array.isArray(body.groups) ? body.groups : [] }, telegramGroupChatIdDraft: '' });
-      this.showToast(isAr ? 'تم ربط المجموعة. أضف البوت إليها ثم جرّب سؤالاً عن المخزون.' : 'Group linked. Add the bot to it, then try an inventory question.');
+      this.showToast(isAr ? 'تم ربط المجموعة والبوت جاهز للرد فيها.' : 'Group linked and the bot is ready to reply there.');
       return true;
     } catch (err) {
       this.showToast(isAr ? 'تعذر ربط المجموعة. تأكد من Chat ID وحاول مرة ثانية.' : 'Could not link the group. Check the chat ID and try again.');
@@ -18491,7 +18491,7 @@ ZW|Zimbabwe|263
     try {
       const { body } = await this.backendJson('/api/integrations/telegram/bot', { method: 'DELETE' }, { errorMessage: 'Telegram bot disconnect failed' });
       this.setState({ telegramBotStatus: { ...this.telegramBotState(), ...body, linkUrl: '', expiresAt: '', groups: Array.isArray(body.groups) ? body.groups : [] }, telegramBotTokenDraft: '', telegramGroupChatIdDraft: '' });
-      this.showToast(isAr ? 'تم فصل بوت المتجر' : 'Store bot disconnected');
+      this.showToast(isAr ? 'تم إيقاف البوت وفصله عن متجرك' : 'Bot stopped and disconnected from your store');
     } catch (err) {
       this.showToast(isAr ? 'تعذر فصل بوت المتجر' : 'Could not disconnect the store bot');
     }
@@ -21751,21 +21751,17 @@ ZW|Zimbabwe|263
     vals.testN8nWebhook = this.testN8nWebhook;
     vals.toggleN8nEnabled = this.toggleN8nEnabled;
     const telegramStatus = this.telegramBotState();
-    vals.telegramPanelTitle = isAr ? 'بوت مخزون متجرك' : 'Your store inventory bot';
-    vals.telegramEnabledLabel = !telegramStatus.available ? (isAr ? 'غير متاح حالياً' : 'Unavailable') : ((telegramStatus.linked || telegramStatus.groupCount > 0) ? (isAr ? 'البوت جاهز' : 'Bot ready') : (telegramStatus.botConnected ? (isAr ? 'البوت جاهز' : 'Bot ready') : (isAr ? 'يحتاج ربط البوت' : 'Bot setup needed')));
-    vals.telegramHelpText = isAr ? 'اربط بوتاً خاصاً بمتجرك، ثم اسأل عن الكميات أو المخزون المنخفض من حسابك أو من مجموعة فريقك في تيليجرام.' : 'Connect a dedicated bot for your store, then ask about quantities or low stock from your Telegram account or team group.';
-    vals.telegramSetupTitle = isAr ? 'إعداد بوت المتجر' : 'Set up your store bot';
-    vals.telegramSetupSteps = [
-      { n: '01', title: isAr ? 'أنشئ بوت متجرك' : 'Create your store bot', desc: isAr ? 'افتح @BotFather في تيليجرام وأنشئ بوتاً باسم متجرك.' : 'Open @BotFather in Telegram and create a bot for your store.' },
-      { n: '02', title: isAr ? 'انسخ رمز البوت' : 'Copy the bot token', desc: isAr ? 'أرسل /newbot ثم انسخ الرمز الذي يعطيك BotFather.' : 'Send /newbot, then copy the token BotFather gives you.' },
-      { n: '03', title: isAr ? 'اربطه هنا' : 'Connect it here', desc: isAr ? 'الصق الرمز مرة واحدة حتى يصير البوت جاهز لمتجرك.' : 'Paste the token once to make the bot ready for your store.' },
-    ].map((step, index) => ({ ...step, delay: `${index * 55}ms` }));
+    vals.telegramPanelTitle = isAr ? 'بوت المخزون في تيليجرام' : 'Telegram inventory bot';
+    vals.telegramEnabledLabel = !telegramStatus.available ? (isAr ? 'غير متاح حالياً' : 'Unavailable') : (telegramStatus.groupCount > 0 ? (isAr ? 'جاهز للمجموعة' : 'Ready for groups') : (telegramStatus.botConnected ? (isAr ? 'بانتظار ربط مجموعة' : 'Waiting for a group') : (isAr ? 'غير مربوط' : 'Not connected')));
+    vals.telegramHelpText = isAr ? 'اربط البوت مرة واحدة، ثم اختر المجموعات التي يجاوب فيها عن المخزون.' : 'Connect the bot once, then choose the groups where it can answer inventory questions.';
+    vals.telegramSetupTitle = '';
+    vals.telegramSetupSteps = [];
     vals.telegramUnavailable = !telegramStatus.available;
     vals.telegramNeedsBot = !!telegramStatus.available && !telegramStatus.botConnected;
     vals.telegramBotConnected = !!telegramStatus.botConnected;
-    vals.telegramLinked = !!telegramStatus.linked;
-    vals.telegramNeedsAccountLink = !!telegramStatus.botConnected && !telegramStatus.linked;
-    vals.telegramLinkReady = !!telegramStatus.linkUrl;
+    vals.telegramLinked = false;
+    vals.telegramNeedsAccountLink = false;
+    vals.telegramLinkReady = false;
     vals.telegramBotTokenDraft = s.telegramBotTokenDraft || '';
     vals.setTelegramBotTokenDraft = this.setTelegramBotTokenDraft;
     vals.telegramBotTokenLabel = isAr ? 'رمز البوت من BotFather' : 'BotFather bot token';
@@ -21775,9 +21771,9 @@ ZW|Zimbabwe|263
     vals.telegramConnectedLine = telegramStatus.botUsername
       ? (isAr ? `تم ربط @${String(telegramStatus.botUsername).replace(/^@/, '')} بمتجرك.` : `@${String(telegramStatus.botUsername).replace(/^@/, '')} is connected to your store.`)
       : (isAr ? 'تم ربط بوت متجرك.' : 'Your store bot is connected.');
-    vals.telegramLinkHint = telegramStatus.linkUrl
-      ? (isAr ? 'رابط الربط جاهز لمدة 10 دقائق.' : 'Your link is ready for 10 minutes.')
-      : (telegramStatus.linked ? (isAr ? 'حسابك مربوط وتكدر تفصله من هنا بأي وقت.' : 'Your account is linked and can be unlinked here at any time.') : (isAr ? 'اربط حسابك الشخصي حتى تستخدم بوت المخزون.' : 'Link your personal account to use the inventory bot.'));
+    vals.telegramLinkHint = telegramStatus.groupCount > 0
+      ? (isAr ? 'البوت يرد داخل المجموعات التي تربطها هنا فقط.' : 'The bot replies only inside the groups linked here.')
+      : (isAr ? 'أضف البوت للمجموعة، اكتب /chatid داخلها، ثم الصق الرقم بالأسفل.' : 'Add the bot to the group, type /chatid there, then paste the number below.');
     const telegramGroups = telegramStatus.groups
       .filter(group => group && group.id && group.chatId)
       .map(group => ({
@@ -21789,10 +21785,10 @@ ZW|Zimbabwe|263
     vals.telegramGroups = telegramGroups;
     vals.telegramHasGroups = telegramGroups.length > 0;
     vals.telegramGroupSectionTitle = isAr ? 'ربط مجموعة' : 'Link a group';
-    vals.telegramGroupHelpText = isAr ? 'الصق Chat ID السالب للمجموعة. البوت يجاوب عن مخزون متجرك داخل المجموعات المربوطة فقط، وكل أعضاء المجموعة يقدرون يشوفون الردود.' : 'Paste the group’s negative chat ID. The bot answers only in linked groups and every member can see the replies.';
-    vals.telegramGroupPrivacyNote = isAr ? 'أضف البوت للمجموعة. حتى يجاوب على الأسئلة العادية، أرسل /setprivacy إلى @BotFather واختر Disable ثم أعد إضافة البوت للمجموعة.' : 'Add the bot to the group. To answer ordinary messages, send /setprivacy to @BotFather, choose Disable, then add the bot again.';
-    vals.telegramGroupChatIdLabel = isAr ? 'Chat ID المجموعة' : 'Group chat ID';
-    vals.telegramGroupChatIdHint = isAr ? 'يبدي بسالب، مثل -1001234567890' : 'Starts with a minus sign, for example -1001234567890';
+    vals.telegramGroupHelpText = isAr ? 'اكتب /chatid داخل المجموعة بعد إضافة البوت، ثم الصق الرقم هنا.' : 'After adding the bot, type /chatid in the group and paste the number here.';
+    vals.telegramGroupPrivacyNote = isAr ? 'للرد على الكلام العادي: @BotFather ثم /setprivacy ثم Disable، وبعدها أعد إضافة البوت للمجموعة.' : 'For ordinary messages: @BotFather, then /setprivacy, choose Disable, then add the bot to the group again.';
+    vals.telegramGroupChatIdLabel = isAr ? 'Chat ID للمجموعة' : 'Group chat ID';
+    vals.telegramGroupChatIdHint = isAr ? 'يظهر لك بعد كتابة /chatid، ويبدأ بعلامة سالب.' : 'Type /chatid to get it. It starts with a minus sign.';
     vals.telegramGroupChatIdDraft = s.telegramGroupChatIdDraft || '';
     vals.setTelegramGroupChatIdDraft = this.setTelegramGroupChatIdDraft;
     vals.telegramAddGroupLabel = isAr ? 'ربط المجموعة' : 'Link group';
@@ -21801,7 +21797,7 @@ ZW|Zimbabwe|263
     vals.telegramLinkActionLabel = isAr ? 'ربط حسابي' : 'Link my account';
     vals.telegramOpenLinkLabel = isAr ? 'فتح تيليجرام' : 'Open Telegram';
     vals.telegramDisconnectAccountLabel = isAr ? 'فصل حسابي' : 'Unlink my account';
-    vals.telegramDisconnectBotLabel = isAr ? 'فصل بوت المتجر' : 'Disconnect store bot';
+    vals.telegramDisconnectBotLabel = isAr ? 'إيقاف وفصل البوت' : 'Stop and disconnect bot';
     vals.connectTelegramStoreBot = this.connectTelegramStoreBot;
     vals.createTelegramBotLink = this.createTelegramBotLink;
     vals.openTelegramBotLink = this.openTelegramBotLink;
