@@ -15544,7 +15544,13 @@ ZW|Zimbabwe|263
       }
       const migratedProducts = await this.migrateProductImagesToBackend();
       changed = migratedProducts || changed;
-      this.setState({ commerceSyncStatus: 'connected', commerceUpdatedAt: body.updatedAt || '' });
+      this.setState({
+        commerceSyncStatus: 'connected',
+        commerceUpdatedAt: body.updatedAt || '',
+        ...(body.revision !== undefined && Number.isFinite(Number(body.revision))
+          ? { commerceRevision: Math.max(0, Number(body.revision)) }
+          : {}),
+      });
       if (changed) this.forceUpdate();
       if ((migratedProducts || !hasProducts) && (this.PRODUCTS || []).length && this.hasBackendPermission('products')) this.syncProductsToBackendSoon(20);
       if (!hasBusiness && this.hasCommerceBusinessData(this.commerceBusinessPayload()) && this.hasBackendPermission('orders')) this.syncBusinessToBackendSoon(40);
@@ -18711,7 +18717,15 @@ ZW|Zimbabwe|263
       this.persistSettingsSoon();
       this.showToast(this.state.lang === 'ar' ? 'تم ربط الوسيط' : 'Connected to Al-Waseet');
     } catch (err) {
-      const reason = String((err && err.message) || (this.state.lang === 'ar' ? 'تعذر تسجيل الدخول' : 'Login failed')).trim().slice(0, 240);
+      const rawReason = String((err && err.message) || '').trim();
+      const upstreamBlocked = err && err.code === 'ALWASEET_UPSTREAM_BLOCKED';
+      const invalidResponse = err && err.code === 'ALWASEET_INVALID_RESPONSE';
+      const containsHtml = /<!doctype\s+html|<html\b|<head\b|<body\b|<\/?[a-z][^>]*>/i.test(rawReason);
+      const reason = upstreamBlocked
+        ? (this.state.lang === 'ar' ? 'خادم الوسيط منع عنوان خادم أور من الوصول إلى الـAPI. يجب أن تسمح شركة الوسيط بعنوان الخادم.' : 'Al-Waseet blocked the UR server from its API. Al-Waseet must allow the server address.')
+        : ((invalidResponse || containsHtml)
+          ? (this.state.lang === 'ar' ? 'خادم الوسيط أعاد صفحة ويب بدل استجابة API. تواصل مع شركة الوسيط لتفعيل وصول API للحساب.' : 'Al-Waseet returned a web page instead of an API response. Ask Al-Waseet to enable API access for the account.')
+          : String(rawReason || (this.state.lang === 'ar' ? 'تعذر تسجيل الدخول' : 'Login failed')).slice(0, 240));
       const blocked = /failed to fetch|fetch failed|load failed|network(?:error| request)?|cors/i.test(reason);
       const connectionError = blocked
         ? (this.state.lang === 'ar' ? 'تعذر الوصول إلى خادم الربط. تحقق من اتصال الإنترنت ثم أعد المحاولة.' : 'Could not reach the connection server. Check your internet connection and retry.')
@@ -18748,7 +18762,7 @@ ZW|Zimbabwe|263
       }
       this.setState(s => {
         const current = this.normalizeShippingSettings((s.storeSettings || {}).shippingSettings);
-        const shippingSettings = this.normalizeShippingSettings({ ...current, token: '', connected: false, connectionStatus: current.username ? 'saved' : 'not_configured', lastConnectedAt: '' });
+        const shippingSettings = this.normalizeShippingSettings({ ...current, token: '', connected: false, connectionStatus: current.username ? 'saved' : 'not_configured', connectionError: '', lastConnectedAt: '' });
         return { storeSettings: { ...s.storeSettings, shippingSettings } };
       });
       this.persistSettingsSoon();
