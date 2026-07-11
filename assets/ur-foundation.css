@@ -1,0 +1,57 @@
+:root {
+  --ur-color-brand: #167a68;
+  --ur-color-brand-strong: #0f5d50;
+  --ur-color-action: #087cf0;
+  --ur-color-ink: #18211d;
+  --ur-color-muted: #5f6d65;
+  --ur-color-surface: #ffffff;
+  --ur-color-canvas: #f5f8f6;
+  --ur-color-border: #d8e2dc;
+  --ur-color-danger: #c9362b;
+  --ur-color-warning: #b76508;
+  --ur-color-success: #16864d;
+  --ur-radius-sm: 8px;
+  --ur-radius-md: 12px;
+  --ur-radius-lg: 16px;
+  --ur-shadow-raised: 0 10px 30px rgba(20, 43, 34, 0.08);
+  --ur-focus-ring: 0 0 0 3px rgba(8, 124, 240, 0.3);
+  --ur-motion-fast: 140ms;
+  --ur-motion-standard: 220ms;
+}
+
+:where(button, a, input, select, textarea, summary, [role="button"], [tabindex]):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--ur-color-action) 78%, white) !important;
+  outline-offset: 3px !important;
+  box-shadow: var(--ur-focus-ring);
+}
+
+:where(input, select, textarea)[aria-invalid="true"] {
+  border-color: var(--ur-color-danger) !important;
+}
+
+.ur-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 760px) {
+  :where(button, a, input, select, textarea, [role="button"]) {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

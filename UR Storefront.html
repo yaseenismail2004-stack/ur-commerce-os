@@ -8,14 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@500;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="./assets/ur-foundation.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
     * { box-sizing: border-box; }
     :root {
       --bg:#F5F8F4; --surface:#FFFFFF; --surface2:#E5EFE8; --ink:#17211C; --sub:#66736B;
       --brand:#6F8A4F; --accent:#1F7668; --border:#DAE5DC; --shadow:0 20px 50px rgba(23,33,28,0.1);
-      --radius:18px; --font:'IBM Plex Sans Arabic','Noto Kufi Arabic',sans-serif;
+      --radius:var(--ur-radius-lg,18px); --font:var(--ur-font-ar,'IBM Plex Sans Arabic','Noto Kufi Arabic',sans-serif);
     }
     html { scroll-behavior: smooth; }
     body { margin:0; background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 92%, white),var(--bg)); color:var(--ink); font-family:var(--font); -webkit-font-smoothing:antialiased; }
@@ -195,6 +196,37 @@
     .magnetic { will-change:transform; }
     .toast { position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(18px); opacity:0; background:var(--ink); color:var(--surface); border-radius:999px; padding:11px 16px; font-size:12px; font-weight:900; z-index:90; transition:.2s ease; pointer-events:none; }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+    :focus-visible { outline:3px solid color-mix(in srgb,var(--accent) 72%, white); outline-offset:3px; }
+    .skip-link { position:fixed; top:8px; inset-inline-start:8px; z-index:200; transform:translateY(-150%); background:var(--ink); color:var(--surface); padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:900; }
+    .skip-link:focus { transform:none; }
+    .status-shell { min-height:72vh; display:grid; place-items:center; padding:32px 16px; }
+    .status-card { width:min(520px,100%); text-align:center; padding:32px; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); box-shadow:var(--shadow); }
+    .status-card h1 { font-size:28px; margin:8px 0; }
+    .status-card p { color:var(--sub); line-height:1.8; }
+    .spinner { width:42px; height:42px; margin:auto; border-radius:50%; border:4px solid var(--surface2); border-top-color:var(--accent); animation:spin .8s linear infinite; }
+    .storefront-loading-banner { width:min(1180px,calc(100% - 32px)); margin:16px auto 0; padding:12px 16px; display:flex; align-items:center; gap:12px; text-align:start; }
+    .storefront-loading-banner .spinner { width:26px; height:26px; margin:0; flex:0 0 auto; border-width:3px; }
+    .storefront-loading-banner p { margin:2px 0 0; font-size:12px; line-height:1.5; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .hero-proof { position:relative; display:flex; flex-wrap:wrap; gap:14px; margin-top:24px; color:rgba(255,255,255,.82); font-size:12px; font-weight:800; }
+    .hero-proof span:before { content:'✓'; margin-inline-end:6px; }
+    .product-media, .feature-media, .cart-media, .detail-media-img, .thumb-img { width:100%; height:100%; object-fit:cover; display:block; }
+    .product-media { aspect-ratio:4/5; }
+    .product-img { height:auto; aspect-ratio:4/5; }
+    .feature-media { position:absolute; inset:0; }
+    .section-row { display:flex; gap:14px; overflow:auto; scroll-snap-type:x proximity; padding:2px 2px 12px; }
+    .section-row .product { min-width:min(270px,76vw); scroll-snap-align:start; }
+    .category-showcase { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:14px; }
+    .category-tile { border:1px solid var(--border); background:linear-gradient(145deg,var(--surface),var(--surface2)); color:var(--ink); border-radius:var(--radius); min-height:92px; padding:16px; text-align:start; cursor:pointer; font-weight:900; }
+    .category-tile small { display:block; color:var(--sub); margin-top:5px; }
+    .contact-bar { margin-top:34px; padding:18px; border-radius:var(--radius); background:var(--ink); color:var(--surface); display:flex; align-items:center; justify-content:space-between; gap:14px; }
+    .contact-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .contact-actions a { color:var(--ink); background:var(--surface); border-radius:999px; padding:10px 14px; text-decoration:none; font-size:12px; font-weight:900; }
+    .mobile-nav { display:none; }
+    .lang-btn { border:1px solid var(--border); background:var(--surface); color:var(--ink); border-radius:999px; min-width:42px; min-height:42px; font-weight:900; cursor:pointer; }
+    .search-results { color:var(--sub); font-size:12px; min-height:18px; }
+    .field-error { color:#B42318; font-size:11px; font-weight:800; margin-top:4px; }
+    [aria-invalid="true"] { border-color:#B42318 !important; }
     [hidden] { display:none !important; }
     @media (max-width:900px) {
       .nav { display:none; }
@@ -212,6 +244,12 @@
       .success-facts { grid-template-columns:1fr; }
       .spec-grid, .policy-grid, .status-steps { grid-template-columns:1fr; }
       .coupon-box, .payment-options { grid-template-columns:1fr; }
+      body { padding-bottom:76px; }
+      .category-showcase { grid-template-columns:repeat(2,1fr); }
+      .contact-bar { align-items:flex-start; flex-direction:column; }
+      .mobile-nav { position:fixed; display:grid; grid-template-columns:repeat(4,1fr); inset-inline:10px; bottom:10px; z-index:45; border:1px solid color-mix(in srgb,var(--border) 80%,transparent); background:color-mix(in srgb,var(--surface) 90%,transparent); backdrop-filter:blur(18px); border-radius:18px; box-shadow:0 16px 36px rgba(23,33,28,.16); padding:7px; }
+      .mobile-nav button { border:0; background:transparent; color:var(--sub); min-height:46px; border-radius:12px; font-size:10px; font-weight:900; cursor:pointer; }
+      .mobile-nav button span { display:block; font-size:17px; margin-bottom:2px; }
     }
     @media (max-width:520px) {
       .topbar-inner { padding:12px 14px; }
@@ -228,7 +266,7 @@
 <body data-motion="smooth">
   <div class="wrap" id="app"></div>
   <div class="scroll-progress" id="scrollProgress"></div>
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
   <script>
     const Storefront = (() => {
@@ -290,6 +328,8 @@
         query: '',
         sort: 'featured',
         availableOnly: false,
+        locale: (typeof localStorage !== 'undefined' && localStorage.getItem('urCommerceOS.storefront.locale.v1')) || 'ar',
+        loadAttempt: 0,
         cart: [],
         detailId: null,
         detailImages: {},
@@ -308,6 +348,36 @@
         checkout: { name: '', phone: '', cityId: '1', regionId: '1', address: '', notes: '', payment: 'cash' },
       };
       const motion = { booted: false };
+      let searchTimer = 0;
+      const messages = {
+        ar: {
+          products:'المنتجات', offers:'العروض', service:'الخدمة', track:'تتبع الطلب', policies:'السياسات', cart:'السلة',
+          search:'ابحث عن منتج أو لون أو قياس', featured:'الأكثر مبيعاً', newest:'وصل حديثاً', continue:'أكمل تسوقك',
+          available:'المتوفر فقط', all:'الكل', loading:'نجهّز المتجر لك', loadingSub:'لحظات ونحمّل المنتجات والأسعار الحالية.',
+          loadError:'تعذّر فتح المتجر', timeout:'استغرق الاتصال وقتاً أطول من المعتاد.', retry:'إعادة المحاولة',
+          empty:'المنتجات قيد التجهيز', emptySub:'تواصل مع المتجر أو ارجع قريباً للاطلاع على الجديد.',
+          noResults:'ما لقينا منتجات مطابقة', clear:'مسح البحث والفلاتر', add:'إضافة للسلة', inStock:'متوفر', soldOut:'نفذ',
+          shipping:'توصيل واضح', returns:'استبدال منظم', support:'دعم مباشر', whatsapp:'واتساب', telegram:'تلغرام',
+          skip:'انتقل إلى المحتوى', home:'الرئيسية', categories:'الأقسام', secure:'طلب آمن', cash:'الدفع عند الاستلام', local:'توصيل لكل المحافظات'
+        },
+        en: {
+          products:'Products', offers:'Offers', service:'Service', track:'Track order', policies:'Policies', cart:'Cart',
+          search:'Search products, colors, or sizes', featured:'Best sellers', newest:'New arrivals', continue:'Continue shopping',
+          available:'In stock only', all:'All', loading:'Preparing the store', loadingSub:'Just a moment while we load current products and prices.',
+          loadError:'We could not open the store', timeout:'The connection took longer than expected.', retry:'Try again',
+          empty:'Products are being prepared', emptySub:'Contact the store or check back soon for new arrivals.',
+          noResults:'No matching products found', clear:'Clear search and filters', add:'Add to cart', inStock:'In stock', soldOut:'Sold out',
+          shipping:'Clear delivery', returns:'Easy exchange', support:'Direct support', whatsapp:'WhatsApp', telegram:'Telegram',
+          skip:'Skip to content', home:'Home', categories:'Categories', secure:'Secure order', cash:'Cash on delivery', local:'Delivery across Iraq'
+        }
+      };
+      function t(key) { return (messages[state.locale] && messages[state.locale][key]) || messages.ar[key] || key; }
+      function setLocale(locale) {
+        state.locale = locale === 'en' ? 'en' : 'ar';
+        document.documentElement.lang = state.locale;
+        document.documentElement.dir = state.locale === 'ar' ? 'rtl' : 'ltr';
+        try { localStorage.setItem('urCommerceOS.storefront.locale.v1', state.locale); } catch (err) {}
+      }
 
       const defaults = {
         design: { bg:'#F5F8F4', surface:'#FFFFFF', surface2:'#E5EFE8', ink:'#17211C', brand:'#6F8A4F', accent:'#1F7668', radius:18 },
@@ -353,11 +423,11 @@
       }
       function text(value, fallback = '') {
         if (value == null) return fallback;
-        if (typeof value === 'object') return value.ar || value.en || fallback;
+        if (typeof value === 'object') return value[state.locale] || value.ar || value.en || fallback;
         return String(value);
       }
       function money(value) {
-        return Math.round(Number(value) || 0).toLocaleString('en-US') + ' د.ع';
+        return new Intl.NumberFormat(state.locale === 'ar' ? 'ar-IQ' : 'en-IQ', { style:'currency', currency:'IQD', maximumFractionDigits:0 }).format(Math.round(Number(value) || 0));
       }
       function esc(value) {
         return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
@@ -462,13 +532,16 @@
       }
       async function loadRemoteStorefront() {
         const access = storefrontParams();
-        state.storefront = { ...state.storefront, ...access, remote: !!(access.storeId && access.key), loading: !!(access.storeId && access.key), error: '' };
+        state.loadAttempt += 1;
+        state.storefront = { ...state.storefront, ...access, remote: !!(access.storeId && access.key), loading: !!(access.storeId && access.key), error: '', timedOut:false };
         if (!access.storeId || !access.key || typeof fetch === 'undefined') {
           state.storefront.loading = false;
           return false;
         }
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timeoutId = setTimeout(() => controller && controller.abort(), 10000);
         try {
-          const response = await fetch(`${backendBase}/api/storefront/site?storeId=${encodeURIComponent(access.storeId)}&key=${encodeURIComponent(access.key)}`);
+          const response = await fetch(`${backendBase}/api/storefront/site?storeId=${encodeURIComponent(access.storeId)}&key=${encodeURIComponent(access.key)}`, controller ? { signal:controller.signal } : undefined);
           const body = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(body.error || 'Storefront load failed');
            if (body.settings && typeof body.settings === 'object') state.settings = body.settings;
@@ -486,8 +559,11 @@
           } catch (err) {}
           return true;
         } catch (err) {
-          state.storefront = { ...state.storefront, remote: true, loading: false, error: err.message || 'Storefront load failed' };
+          const timedOut = err && err.name === 'AbortError';
+          state.storefront = { ...state.storefront, remote: true, loading: false, timedOut, error: timedOut ? t('timeout') : (err.message || t('loadError')) };
           return false;
+        } finally {
+          clearTimeout(timeoutId);
         }
       }
       function normalize() {
@@ -551,6 +627,34 @@
         if (p.imageDataUrl) return cssUrl(p.imageDataUrl);
         if (p.imageUrl) return cssUrl(p.imageUrl);
         return productFallbackBackground(p || {});
+      }
+      function productImageHtml(p, className = 'product-media', eager = false) {
+        const src = productImages(p)[0];
+        if (!src) return '';
+        const alt = esc(text(p.name, state.locale === 'ar' ? 'صورة المنتج' : 'Product image'));
+        return `<img class="${esc(className)}" src="${esc(src)}" alt="${alt}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" ${eager ? 'fetchpriority="high"' : ''}>`;
+      }
+      function contactLinks(store) {
+        const rawPhone = String(store.whatsapp || store.whatsappNumber || store.phone || store.storePhone || '').replace(/[^0-9]/g, '');
+        const telegram = String(store.telegram || store.telegramUsername || '').trim().replace(/^@/, '');
+        return {
+          whatsapp: rawPhone ? `https://wa.me/${rawPhone}` : '',
+          telegram: telegram ? (telegram.startsWith('http') ? telegram : `https://t.me/${encodeURIComponent(telegram)}`) : '',
+        };
+      }
+      function installThemePreviewHooks() {
+        if (typeof window === 'undefined' || window.__UR_THEME_HOOKS__) return;
+        window.__UR_THEME_HOOKS__ = true;
+        window.addEventListener('message', event => {
+          const payload = event && event.data;
+          if (!payload || payload.type !== 'ur-storefront-theme-preview' || !payload.design) return;
+          const { store, website } = normalize();
+          applyTheme({ ...defaults.design, ...payload.design }, store, website);
+        });
+        window.URStorefrontTheme = {
+          preview(design = {}) { const { store, website } = normalize(); applyTheme({ ...defaults.design, ...design }, store, website); },
+          reset() { const { store, design, website } = normalize(); applyTheme(design, store, website); }
+        };
       }
       function colors(p) {
         const list = colorOptions(p).map(c => c.color);
@@ -879,6 +983,14 @@
       function render() {
         const { store, design, website } = normalize();
         applyTheme(design, store, website);
+        setLocale(state.locale);
+        const loadingBanner = state.storefront.loading && !state.products.length
+          ? `<section class="status-card storefront-loading-banner" data-state="loading" role="status" aria-live="polite" aria-busy="true"><div class="spinner" aria-hidden="true"></div><div><strong>${t('loading')}</strong><p>${t('loadingSub')}</p></div></section>`
+          : '';
+        if (state.storefront.error && !state.products.length) {
+          document.getElementById('app').innerHTML = `<a class="skip-link" href="#main">${t('skip')}</a><main id="main" class="status-shell"><section class="status-card" role="alert"><div aria-hidden="true" style="font-size:38px;">⚠</div><h1>${t('loadError')}</h1><p>${esc(state.storefront.error)}</p><button class="checkout" data-action="retry-store">${t('retry')}</button></section></main>`;
+          return;
+        }
         const logoBg = store.logoDataUrl ? cssUrl(store.logoDataUrl) : '';
         const brandName = store.storeName || 'متجر أور';
         const cats = categories(state.products);
@@ -888,12 +1000,16 @@
           return publishStatus !== 'hidden' && publishStatus !== 'archived';
         });
         const top = publicProducts.slice(0, 4);
+        const bestSellers = [...publicProducts].sort((a, b) => (Number(b.sold || b.sales || 0) - Number(a.sold || a.sales || 0)) || Number(!!b.featured) - Number(!!a.featured)).slice(0, 8);
+        const newest = [...publicProducts].sort((a, b) => Number(new Date(b.createdAt || b.updatedAt || 0)) - Number(new Date(a.createdAt || a.updatedAt || 0))).slice(0, 8);
+        const recentIds = safeJson(typeof localStorage !== 'undefined' ? localStorage.getItem('urCommerceOS.storefront.recent.v1') : '', []);
+        const continueProducts = Array.isArray(recentIds) ? recentIds.map(id => publicProducts.find(p => String(p.id) === String(id))).filter(Boolean).slice(0, 8) : [];
         const hasProducts = top.length > 0;
         const feature = top[0] || {};
         const filtersActive = state.category !== 'all' || !!state.query.trim() || !!state.availableOnly;
         const emptyProductHtml = filtersActive
-          ? '<div class="empty">ما لقينا منتجات مطابقة. جرّب تغيير البحث أو الفلاتر.<div style="margin-top:14px;"><button class="secondary" data-action="clear-filters">مسح البحث والفلاتر</button></div></div>'
-          : '<div class="empty">المنتجات قيد التجهيز. راح يضيف المتجر منتجات جديدة قريباً.<div style="margin-top:14px;"><button class="secondary" data-action="open-policy" data-topic="support">معلومات المتجر والسياسات</button></div></div>';
+          ? `<div class="empty"><strong>${t('noResults')}</strong><div style="margin-top:14px;"><button class="checkout" data-action="clear-filters">${t('clear')}</button></div></div>`
+          : `<div class="empty"><strong>${t('empty')}</strong><div style="margin-top:8px;font-size:12px;line-height:1.8;">${t('emptySub')}</div></div>`;
         const cartCount = state.cart.reduce((sum, x) => sum + x.qty, 0);
         const shipping = currentShipping();
         if (!state.checkout.cityId && shipping.defaultCityId) state.checkout.cityId = shipping.defaultCityId;
@@ -907,7 +1023,9 @@
         };
 
         document.title = brandName;
+        const contacts = contactLinks(store);
         document.getElementById('app').innerHTML = `
+          <a class="skip-link" href="#main">${t('skip')}</a>
           <header class="topbar">
             <div class="topbar-inner">
               <div class="brand">
@@ -915,20 +1033,22 @@
                 <div class="brand-name">${esc(brandName)}</div>
               </div>
               <nav class="nav">
-                ${sections.featured ? '<a href="#products">المنتجات</a>' : ''}
-                ${sections.offers ? '<a href="#offers">العروض</a>' : ''}
-                ${sections.trust ? '<a href="#trust">الخدمة</a>' : ''}
-                <button data-action="open-tracking">تتبع الطلب</button>
-                <button data-action="open-policy" data-topic="shipping">السياسات</button>
+                ${sections.featured ? `<a href="#products">${t('products')}</a>` : ''}
+                ${sections.offers ? `<a href="#offers">${t('offers')}</a>` : ''}
+                ${sections.trust ? `<a href="#trust">${t('service')}</a>` : ''}
+                <button data-action="open-tracking">${t('track')}</button>
+                <button data-action="open-policy" data-topic="shipping">${t('policies')}</button>
               </nav>
               <div class="mobile-actions">
                 <button data-action="open-tracking">تتبع</button>
                 <button data-action="open-policy" data-topic="shipping">السياسات</button>
               </div>
-              <button class="cart-btn" data-action="cart">السلة <span class="cart-count">${cartCount}</span></button>
+              <button class="lang-btn" data-action="toggle-locale" aria-label="${state.locale === 'ar' ? 'English' : 'العربية'}">${state.locale === 'ar' ? 'EN' : 'ع'}</button>
+              <button class="cart-btn" data-action="cart">${t('cart')} <span class="cart-count">${cartCount}</span></button>
             </div>
           </header>
-          <main>
+          <main id="main">
+            ${loadingBanner}
             <section class="hero" ${sections.hero ? '' : 'hidden'}>
               <div class="hero-copy">
                 <div>
@@ -940,10 +1060,12 @@
                       ? `<button class="primary" data-action="scroll-products">${esc(website.cta)}</button><button class="secondary" data-action="cart">مراجعة السلة</button>`
                       : '<button class="primary" data-action="open-policy" data-topic="support">معلومات المتجر</button><button class="secondary" data-action="open-tracking">تتبع طلب سابق</button>'}
                   </div>
+                  <div class="hero-proof"><span>${t('secure')}</span><span>${t('cash')}</span><span>${t('local')}</span></div>
                 </div>
               </div>
               <div class="hero-panel float">
       <div class="feature-image" style="background:${hasProducts ? productImage(feature) : 'linear-gradient(145deg,var(--surface2),color-mix(in srgb,var(--brand) 34%, var(--surface)),color-mix(in srgb,var(--accent) 18%, var(--surface)))'}">
+                  ${hasProducts ? productImageHtml(feature, 'feature-media', true) : ''}
                   <span class="badge">${hasProducts ? 'الأكثر مشاهدة' : 'بانتظار المنتجات'}</span>
                 </div>
                 <div class="feature-row">
@@ -967,7 +1089,7 @@
               <div class="section-head">
                 <div class="section-title">تصفح حسب القسم</div>
                 <div class="filters">
-                  <div class="search"><span>⌕</span><input id="search" value="${esc(state.query)}" placeholder="ابحث عن منتج أو لون أو قياس"></div>
+                  <label class="search"><span aria-hidden="true">⌕</span><input id="search" value="${esc(state.query)}" placeholder="${t('search')}" autocomplete="off" aria-describedby="searchResults"></label>
                   <select id="sort" class="filter-select">
                     <option value="featured" ${state.sort === 'featured' ? 'selected' : ''}>المميز أولاً</option>
                     <option value="newest" ${state.sort === 'newest' ? 'selected' : ''}>الأحدث</option>
@@ -975,13 +1097,24 @@
                     <option value="price-high" ${state.sort === 'price-high' ? 'selected' : ''}>السعر الأعلى</option>
                     <option value="stock" ${state.sort === 'stock' ? 'selected' : ''}>الأكثر توفر</option>
                   </select>
-                  <button class="toggle-chip ${state.availableOnly ? 'active' : ''}" data-action="toggle-available">المتوفر فقط</button>
+                  <button class="toggle-chip ${state.availableOnly ? 'active' : ''}" data-action="toggle-available" aria-pressed="${state.availableOnly}">${t('available')}</button>
                 </div>
               </div>
+              <div class="search-results" id="searchResults" aria-live="polite">${new Intl.NumberFormat(state.locale === 'ar' ? 'ar-IQ' : 'en').format(products.length)} ${t('products')}</div>
               <div class="chips">
                 ${cats.map(c => `<button class="chip ${state.category === c.key ? 'active' : ''}" data-action="category" data-key="${esc(c.key)}">${esc(c.label)}</button>`).join('')}
               </div>
+              <div class="category-showcase">
+                ${cats.filter(c => c.key !== 'all').slice(0, 8).map(c => {
+                  const count = publicProducts.filter(p => (p.catKey || text(p.category, 'other')) === c.key).length;
+                  return `<button class="category-tile" data-action="category-scroll" data-key="${esc(c.key)}">${esc(c.label)}<small>${new Intl.NumberFormat(state.locale === 'ar' ? 'ar-IQ' : 'en').format(count)} ${t('products')}</small></button>`;
+                }).join('')}
+              </div>
             </section>
+
+            ${bestSellers.length ? `<section class="section"><div class="section-head"><div class="section-title">${t('featured')}</div></div><div class="section-row">${bestSellers.map((p, index) => productCard(p, index)).join('')}</div></section>` : ''}
+            ${newest.length ? `<section class="section"><div class="section-head"><div class="section-title">${t('newest')}</div></div><div class="section-row">${newest.map((p, index) => productCard(p, index)).join('')}</div></section>` : ''}
+            ${continueProducts.length ? `<section class="section"><div class="section-head"><div class="section-title">${t('continue')}</div></div><div class="section-row">${continueProducts.map((p, index) => productCard(p, index)).join('')}</div></section>` : ''}
 
             <section id="products" class="section" ${sections.featured ? '' : 'hidden'}>
               <div class="section-head">
@@ -994,12 +1127,26 @@
 
             <section id="trust" class="section" ${sections.trust ? '' : 'hidden'}>
               <div class="trust">
-                <button class="trust-card" data-action="open-policy" data-topic="shipping"><div class="trust-icon">1</div><div><div class="trust-title">توصيل واضح</div><div class="trust-sub">المحافظة والمنطقة والإجمالي قبل الطلب</div></div></button>
-                <button class="trust-card" data-action="open-policy" data-topic="returns"><div class="trust-icon">2</div><div><div class="trust-title">استبدال منظم</div><div class="trust-sub">سياسة واضحة قبل الشراء</div></div></button>
-                <button class="trust-card" data-action="open-tracking"><div class="trust-icon">3</div><div><div class="trust-title">تتبع الطلب</div><div class="trust-sub">برقم الطلب أو الهاتف</div></div></button>
+                <button class="trust-card" data-action="open-policy" data-topic="shipping"><div class="trust-icon" aria-hidden="true">🚚</div><div><div class="trust-title">${t('shipping')}</div><div class="trust-sub">المحافظة والمنطقة والإجمالي قبل الطلب</div></div></button>
+                <button class="trust-card" data-action="open-policy" data-topic="returns"><div class="trust-icon" aria-hidden="true">↺</div><div><div class="trust-title">${t('returns')}</div><div class="trust-sub">سياسة واضحة قبل الشراء</div></div></button>
+                <button class="trust-card" data-action="open-tracking"><div class="trust-icon" aria-hidden="true">✓</div><div><div class="trust-title">${t('track')}</div><div class="trust-sub">برقم الطلب أو الهاتف</div></div></button>
+              </div>
+            </section>
+            <section class="contact-bar" aria-label="${t('support')}">
+              <div><strong>${t('support')}</strong><div style="opacity:.72;font-size:12px;margin-top:4px;">نساعدك قبل الطلب وبعده.</div></div>
+              <div class="contact-actions">
+                ${contacts.whatsapp ? `<a href="${esc(contacts.whatsapp)}" target="_blank" rel="noopener">${t('whatsapp')}</a>` : ''}
+                ${contacts.telegram ? `<a href="${esc(contacts.telegram)}" target="_blank" rel="noopener">${t('telegram')}</a>` : ''}
+                ${!contacts.whatsapp && !contacts.telegram ? `<button class="primary" data-action="open-policy" data-topic="support">${t('service')}</button>` : ''}
               </div>
             </section>
           </main>
+          <nav class="mobile-nav" aria-label="${state.locale === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'}">
+            <button data-action="scroll-home"><span aria-hidden="true">⌂</span>${t('home')}</button>
+            <button data-action="scroll-categories"><span aria-hidden="true">▦</span>${t('categories')}</button>
+            <button data-action="scroll-products"><span aria-hidden="true">▣</span>${t('products')}</button>
+              <button data-action="cart" aria-label="${state.locale === 'ar' ? 'مشترياتك' : 'Your purchases'}"><span aria-hidden="true">🛒</span>${t('cart')} (${cartCount})</button>
+          </nav>
           ${drawerHtml()}
           ${detailHtml()}
           ${checkoutHtml(shipping)}
@@ -1008,7 +1155,17 @@
           ${policyHtml()}
         `;
         const search = document.getElementById('search');
-        if (search) search.addEventListener('input', e => { state.query = e.target.value; render(); setTimeout(() => document.getElementById('search')?.focus(), 0); });
+        if (search) search.addEventListener('input', e => {
+          state.query = e.target.value;
+          clearTimeout(searchTimer);
+          searchTimer = setTimeout(() => {
+            const grid = document.querySelector('#products .grid');
+            const result = document.getElementById('searchResults');
+            const next = filteredProducts();
+            if (grid) grid.innerHTML = next.length ? next.map((p, index) => productCard(p, index)).join('') : `<div class="empty"><strong>${t('noResults')}</strong><div style="margin-top:14px;"><button class="checkout" data-action="clear-filters">${t('clear')}</button></div></div>`;
+            if (result) result.textContent = `${new Intl.NumberFormat(state.locale === 'ar' ? 'ar-IQ' : 'en').format(next.length)} ${t('products')}`;
+          }, 220);
+        });
         const sort = document.getElementById('sort');
         if (sort) sort.addEventListener('change', e => { state.sort = e.target.value; render(); });
         const couponInput = document.getElementById('couponInput');
@@ -1026,17 +1183,24 @@
         initMotion();
         initGsapMotion();
         updateScrollMotion();
+        requestAnimationFrame(() => {
+          const dialog = document.querySelector('.modal.open .modal-card, .drawer.open .drawer-panel');
+          if (dialog && !dialog.contains(document.activeElement)) {
+            const first = dialog.querySelector('button:not([disabled]),input,select,textarea,a[href]');
+            (first || dialog).focus();
+          }
+        });
       }
       function productCard(p, index) {
         return `
-          <article class="product" style="animation-delay:${Math.min(index * 35, 280)}ms" data-action="detail" data-id="${esc(p.id)}">
-            <div class="product-img" style="background:${productImage(p)}"><span class="badge">${Number(p.stock) > 0 ? 'متوفر' : 'نفذ'}</span></div>
+          <article class="product" style="animation-delay:${Math.min(index * 35, 280)}ms" data-action="detail" data-id="${esc(p.id)}" tabindex="0" role="button" aria-label="${esc(text(p.name))}">
+            <div class="product-img" style="background:${productImage(p)}">${productImageHtml(p)}<span class="badge">${Number(p.stock) > 0 ? t('inStock') : t('soldOut')}</span></div>
             <div class="product-name">${esc(text(p.name))}</div>
             <div class="product-meta">
               <div class="price">${money(p.price)}</div>
               <div class="dots">${colors(p).map(c => `<span class="dot" style="background:${esc(c)}"></span>`).join('')}</div>
             </div>
-            <button class="add" data-action="add" data-id="${esc(p.id)}">إضافة للسلة</button>
+            <button class="add" data-action="add" data-id="${esc(p.id)}" ${Number(p.stock) > 0 ? '' : 'disabled'}>${t('add')}</button>
           </article>
         `;
       }
@@ -1048,10 +1212,10 @@
         const fee = deliveryFee(shipping);
         const total = Math.max(0, subtotal - discount) + fee;
         return `
-          <div class="drawer ${state.cartOpen ? 'open' : ''}">
+          <div class="drawer ${state.cartOpen ? 'open' : ''}" aria-hidden="${!state.cartOpen}">
             <div class="shade" data-action="close-cart"></div>
-            <aside class="drawer-panel">
-              <div class="drawer-head"><div style="font-size:22px;font-weight:900;">السلة</div><button class="icon-btn" data-action="close-cart">×</button></div>
+            <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="${t('cart')}" tabindex="-1">
+              <div class="drawer-head"><div style="font-size:22px;font-weight:900;">${t('cart')}</div><button class="icon-btn" data-action="close-cart" aria-label="إغلاق">×</button></div>
               ${items.length ? `
               ${items.map(item => `
                 <div class="cart-item">
@@ -1092,10 +1256,10 @@
         const currentImg = Math.max(0, Math.min((imgs.length || 1) - 1, Number(state.detailImages[p.id]) || 0));
         const specs = productSpecs(p, selection);
         return `
-          <div class="modal open">
+          <div class="modal open" aria-hidden="false">
             <div class="shade" data-action="close-detail"></div>
-            <div class="modal-card">
-              <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button class="icon-btn" data-action="close-detail">×</button></div>
+            <div class="modal-card" role="dialog" aria-modal="true" aria-label="${esc(text(p.name))}" tabindex="-1">
+              <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button class="icon-btn" data-action="close-detail" aria-label="إغلاق">×</button></div>
               <div class="detail">
                 <div class="detail-media">
                   <div class="detail-img" style="background:${detailImageBg(p)}">
@@ -1142,14 +1306,14 @@
         const total = Math.max(0, subtotal - discount) + fee;
         const payments = ensureCheckoutPayment();
         return `
-          <div class="modal open">
+          <div class="modal open" aria-hidden="false">
             <div class="shade" data-action="close-checkout"></div>
-            <div class="modal-card">
+            <div class="modal-card" role="dialog" aria-modal="true" aria-label="إتمام الطلب" tabindex="-1">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;">
                 <div>
                   <div style="font-size:22px;font-weight:900;">بيانات التوصيل</div>
                 </div>
-                <button class="icon-btn" data-action="close-checkout">×</button>
+                <button class="icon-btn" data-action="close-checkout" aria-label="إغلاق">×</button>
               </div>
               <div class="checkout-summary">
                 <div class="summary-line"><span>المجموع</span><strong>${money(subtotal)}</strong></div>
@@ -1162,13 +1326,14 @@
                 ${payments.map(p => `<button class="pay-option ${state.checkout.payment === p.key ? 'active' : ''}" data-action="select-payment" data-payment="${esc(p.key)}"><strong>${esc(p.label)}</strong><span>${esc(p.desc)}</span></button>`).join('')}
               </div>
               <div class="checkout-form">
+                <div id="checkoutError" class="field-error full" role="alert" aria-live="assertive"></div>
                 <label class="field">
                   <span>اسم الزبون</span>
-                  <input data-checkout-field="name" value="${esc(state.checkout.name)}" placeholder="مثال: علي حسين">
+                  <input data-checkout-field="name" value="${esc(state.checkout.name)}" placeholder="مثال: علي حسين" required minlength="2" autocomplete="name">
                 </label>
                 <label class="field">
                   <span>رقم الهاتف</span>
-                  <input data-checkout-field="phone" value="${esc(state.checkout.phone)}" inputmode="tel" dir="ltr" placeholder="+9647700000000">
+                  <input data-checkout-field="phone" value="${esc(state.checkout.phone)}" inputmode="tel" dir="ltr" placeholder="+9647700000000" required pattern="\\+9647[0-9]{9}" autocomplete="tel">
                 </label>
                 <label class="field">
                   <span>المحافظة</span>
@@ -1184,7 +1349,7 @@
                 </label>
                 <label class="field full">
                   <span>العنوان التفصيلي</span>
-                  <textarea data-checkout-field="address" placeholder="الشارع، أقرب نقطة دالة، رقم الدار">${esc(state.checkout.address)}</textarea>
+                  <textarea data-checkout-field="address" placeholder="الشارع، أقرب نقطة دالة، رقم الدار" required minlength="5" autocomplete="street-address">${esc(state.checkout.address)}</textarea>
                 </label>
                 <label class="field full">
                   <span>ملاحظات للتوصيل</span>
@@ -1200,9 +1365,9 @@
         if (!state.orderSuccess) return '<div class="modal"></div>';
         const order = state.orderSuccess;
         return `
-          <div class="modal open">
+          <div class="modal open" aria-hidden="false">
             <div class="shade" data-action="close-success"></div>
-            <div class="modal-card success-card">
+            <div class="modal-card success-card" role="dialog" aria-modal="true" aria-label="تم استلام الطلب" tabindex="-1">
               <div class="success-mark">✓</div>
               <div class="success-title">تم استلام طلبك</div>
               <div class="success-sub">راح يتواصل وياك المتجر لتأكيد التفاصيل قبل التوصيل.</div>
@@ -1221,15 +1386,15 @@
         if (!state.trackingOpen) return '<div class="modal"></div>';
         const result = state.trackResult;
         return `
-          <div class="modal open">
+          <div class="modal open" aria-hidden="false">
             <div class="shade" data-action="close-tracking"></div>
-            <div class="modal-card track-card">
+            <div class="modal-card track-card" role="dialog" aria-modal="true" aria-label="${t('track')}" tabindex="-1">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
                 <div>
                   <div style="font-size:22px;font-weight:900;">تتبع الطلب</div>
                   <div style="color:var(--sub);font-size:12px;margin-top:3px;">اكتب رقم الطلب أو رقم الهاتف</div>
                 </div>
-                <button class="icon-btn" data-action="close-tracking">×</button>
+                <button class="icon-btn" data-action="close-tracking" aria-label="إغلاق">×</button>
               </div>
               <div class="coupon-box">
                 <input id="trackInput" value="${esc(state.trackQuery)}" placeholder="WEB-123456 أو +9647...">
@@ -1257,15 +1422,15 @@
       function policyHtml() {
         if (!state.policyOpen) return '<div class="modal"></div>';
         return `
-          <div class="modal open">
+          <div class="modal open" aria-hidden="false">
             <div class="shade" data-action="close-policy"></div>
-            <div class="modal-card policy-card">
+            <div class="modal-card policy-card" role="dialog" aria-modal="true" aria-label="${t('policies')}" tabindex="-1">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
                 <div>
                   <div style="font-size:22px;font-weight:900;">السياسات والخدمة</div>
                   <div style="color:var(--sub);font-size:12px;margin-top:3px;">معلومات واضحة قبل الشراء</div>
                 </div>
-                <button class="icon-btn" data-action="close-policy">×</button>
+                <button class="icon-btn" data-action="close-policy" aria-label="إغلاق">×</button>
               </div>
               <div class="policy-grid">
                 <div class="policy-item"><strong>التوصيل</strong><span>التوصيل داخل العراق حسب المحافظة والمنطقة، ويتم تأكيد الطلب هاتفياً قبل الإرسال.</span></div>
@@ -1432,6 +1597,11 @@
       async function submitCheckout() {
         const error = validateCheckout();
         if (error) {
+          const errorEl = document.getElementById('checkoutError');
+          if (errorEl) errorEl.textContent = error;
+          const field = /اسم/.test(error) ? 'name' : /هاتف|الهاتف/.test(error) ? 'phone' : /عنوان|العنوان/.test(error) ? 'address' : /محافظة|منطقة/.test(error) ? 'cityId' : '';
+          const input = field ? document.querySelector(`[data-checkout-field="${field}"]`) : null;
+          if (input) { input.setAttribute('aria-invalid', 'true'); input.focus(); }
           toast(error);
           return;
         }
@@ -1768,6 +1938,10 @@
           state.detailId = id;
           const product = state.products.find(p => p.id === id);
           if (product) selectedVariant(product);
+          try {
+            const recent = safeJson(localStorage.getItem('urCommerceOS.storefront.recent.v1'), []).filter(x => String(x) !== String(id));
+            localStorage.setItem('urCommerceOS.storefront.recent.v1', JSON.stringify([id, ...recent].slice(0, 12)));
+          } catch (err) {}
         }
         if (action === 'close-detail') state.detailId = null;
         if (action === 'gallery-prev' || action === 'gallery-next') {
@@ -1795,6 +1969,20 @@
           }
         }
         if (action === 'category') state.category = target.dataset.key || 'all';
+        if (action === 'category-scroll') {
+          state.category = target.dataset.key || 'all';
+          render();
+          setTimeout(() => document.getElementById('products')?.scrollIntoView({ behavior:'smooth', block:'start' }), 0);
+        }
+        if (action === 'toggle-locale') setLocale(state.locale === 'ar' ? 'en' : 'ar');
+        if (action === 'retry-store') {
+          state.storefront.error = '';
+          state.storefront.loading = true;
+          render();
+          loadRemoteStorefront().then(() => render());
+        }
+        if (action === 'scroll-home') window.scrollTo({ top:0, behavior:'smooth' });
+        if (action === 'scroll-categories') document.querySelector('.category-showcase')?.scrollIntoView({ behavior:'smooth', block:'center' });
         if (action === 'scroll-products') document.getElementById('products')?.scrollIntoView({ behavior:'smooth', block:'start' });
         if (action === 'checkout') {
           const availabilityError = checkoutAvailabilityError();
@@ -1832,17 +2020,47 @@
           state.trackingOpen = true;
           trackOrder();
         }
-        if (!['add','add-selected','inc','dec','scroll-products','checkout','close-checkout','select-payment','submit-checkout','close-success','continue-shopping','apply-coupon','track-order','track-success'].includes(action)) render();
+        if (!['add','add-selected','inc','dec','scroll-products','scroll-home','scroll-categories','category-scroll','retry-store','checkout','close-checkout','select-payment','submit-checkout','close-success','continue-shopping','apply-coupon','track-order','track-success'].includes(action)) render();
+      });
+      document.addEventListener('keydown', event => {
+        if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('.product')) {
+          event.preventDefault();
+          const id = event.target.dataset.id;
+          state.detailId = id;
+          try {
+            const recent = safeJson(localStorage.getItem('urCommerceOS.storefront.recent.v1'), []).filter(x => String(x) !== String(id));
+            localStorage.setItem('urCommerceOS.storefront.recent.v1', JSON.stringify([id, ...recent].slice(0, 12)));
+          } catch (err) {}
+          render();
+        }
+        if (event.key === 'Escape') {
+          const wasOpen = state.detailId || state.cartOpen || state.checkoutOpen || state.trackingOpen || state.policyOpen;
+          state.detailId = null; state.cartOpen = false; state.checkoutOpen = false; state.trackingOpen = false; state.policyOpen = false;
+          if (wasOpen) render();
+        }
+        if (event.key === 'Tab') {
+          const dialog = document.querySelector('.modal.open .modal-card, .drawer.open .drawer-panel');
+          if (!dialog) return;
+          const focusable = [...dialog.querySelectorAll('button:not([disabled]),a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')];
+          if (!focusable.length) return;
+          const first = focusable[0], last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
       });
       function init() {
         load();
+        setLocale(state.locale);
+        installThemePreviewHooks();
         if (typeof window !== 'undefined' && window.__UR_STOREFRONT_TEST__) {
           render();
           return;
         }
+        const remote = storefrontParams();
+        if (remote.storeId && remote.key) state.storefront.loading = true;
         render();
-        loadRemoteStorefront().then((loaded) => {
-          if (loaded) render();
+        loadRemoteStorefront().then(() => {
+          render();
         }).finally(() => {
           flushQueuedStorefrontOrders();
           if (typeof window !== 'undefined') window.addEventListener('online', flushQueuedStorefrontOrders);

@@ -2,10 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>أور</title>
 <link rel="icon" href="data:,">
 <script src="./support.js"></script>
+<script src="./assets/ur-dialog-runtime.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -13,10 +14,8 @@
   <meta charset="utf-8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="./assets/ur-foundation.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&family=Alexandria&family=Almarai&family=Amiri&family=Baloo+Bhaijaan+2&family=Cairo&family=Changa&family=El+Messiri&family=Harmattan&family=Kufam&family=Lalezar&family=Lateef&family=Lemonada&family=Mada&family=Marhey&family=Markazi+Text&family=Noto+Naskh+Arabic&family=Noto+Sans+Arabic&family=Noto+Serif+Arabic&family=Rakkas&family=Readex+Pro&family=Reem+Kufi&family=Scheherazade+New&family=Tajawal&family=Vazirmatn&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow&family=DM+Sans&family=Fira+Sans&family=IBM+Plex+Sans&family=Inter&family=Josefin+Sans&family=Kanit&family=Lato&family=Lexend&family=Manrope&family=Montserrat&family=Mulish&family=Nunito&family=Open+Sans&family=Outfit&family=Plus+Jakarta+Sans&family=Poppins&family=Quicksand&family=Raleway&family=Roboto&family=Rubik&family=Source+Sans+3&family=Space+Grotesk&family=Sora&family=Urbanist&family=Work+Sans&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Merriweather&family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     :root { --ur-motion-spring:cubic-bezier(.16,1,.3,1); --ur-motion-soft:cubic-bezier(.22,1,.36,1); --ur-motion-quick:cubic-bezier(.2,.9,.2,1); }
@@ -135,6 +134,37 @@
     #dc-root button:active, #dc-root [onclick]:active { transform:translate3d(0,1px,0) scale(0.985); filter:saturate(1.04); }
     #dc-root input, #dc-root textarea, #dc-root select { transition:border-color 0.16s var(--ur-motion-soft), box-shadow 0.18s var(--ur-motion-soft), background-color 0.18s var(--ur-motion-soft); }
     #dc-root input:focus, #dc-root textarea:focus, #dc-root select:focus { box-shadow:0 0 0 4px color-mix(in srgb,var(--c-gold,#C8A96B) 16%, transparent); }
+    #dc-root :where(button,[role="button"],a,input,textarea,select):focus-visible { outline:3px solid color-mix(in srgb,var(--c-gold,#C8A96B) 72%, #2563EB); outline-offset:3px; box-shadow:0 0 0 5px color-mix(in srgb,var(--c-surface,#fff) 82%, transparent); }
+    #dc-root :where(button,[role="button"])[aria-disabled="true"] { cursor:not-allowed;opacity:.58; }
+    #dc-root .ur-ops-trigger { min-height:40px;border:1px solid var(--c-border,#D8D0C0);border-radius:var(--ur-radius-md,12px);background:var(--c-surface,#fff);color:var(--c-ink,#24231F);padding:0 12px;display:inline-flex;align-items:center;gap:8px;font:800 12px/1 inherit;cursor:pointer;white-space:nowrap; }
+    #dc-root .ur-ops-trigger kbd { padding:3px 6px;border:1px solid var(--c-border,#D8D0C0);border-radius:6px;background:var(--c-bg,#F7F4EE);color:var(--c-sub,#625D54);font:800 10px/1 inherit; }
+    #dc-root .ur-ops-overlay { position:fixed;inset:0;z-index:2147483500;display:flex;align-items:flex-start;justify-content:center;padding:clamp(18px,8vh,72px) 16px;background:color-mix(in srgb,var(--c-overlay,rgba(22,22,20,.5)) 88%, transparent);backdrop-filter:blur(8px);animation:urOverlayIn .16s ease both; }
+    #dc-root .ur-ops-dialog { width:min(620px,100%);max-height:min(760px,84vh);overflow:auto;border:1px solid var(--c-border,#D8D0C0);border-radius:var(--ur-radius-xl,20px);background:var(--c-surface,#fff);color:var(--c-ink,#24231F);box-shadow:0 28px 80px rgba(20,20,18,.28);animation:urScaleIn .2s var(--ur-motion-soft) both; }
+    #dc-root .ur-ops-head { position:sticky;top:0;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px;border-bottom:1px solid var(--c-divider,#E8E2D7);background:color-mix(in srgb,var(--c-surface,#fff) 94%,transparent);backdrop-filter:blur(12px); }
+    #dc-root .ur-ops-title { margin:0;font-size:18px;font-weight:950;line-height:1.35; }
+    #dc-root .ur-ops-sub { margin:4px 0 0;color:var(--c-sub,#625D54);font-size:12.5px;line-height:1.65; }
+    #dc-root .ur-ops-close { width:38px;height:38px;flex:0 0 auto;border:1px solid var(--c-border,#D8D0C0);border-radius:12px;background:var(--c-bg,#F7F4EE);color:var(--c-ink,#24231F);font-size:20px;cursor:pointer; }
+    #dc-root .ur-ops-body { padding:16px 18px 20px; }
+    #dc-root .ur-command-search { width:100%;min-height:48px;border:1.5px solid var(--c-border,#D8D0C0);border-radius:14px;background:var(--c-bg,#F7F4EE);color:var(--c-ink,#24231F);padding:0 15px;font:700 14px/1 inherit; }
+    #dc-root .ur-command-list { display:grid;gap:7px;margin-top:12px; }
+    #dc-root .ur-command-item { width:100%;min-height:54px;border:1px solid transparent;border-radius:14px;background:transparent;color:var(--c-ink,#24231F);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:start;font-family:inherit;cursor:pointer; }
+    #dc-root .ur-command-item:hover { border-color:var(--c-border,#D8D0C0);background:var(--c-bg,#F7F4EE); }
+    #dc-root .ur-ops-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px; }
+    #dc-root .ur-ops-card { border:1px solid var(--c-border,#D8D0C0);border-radius:16px;background:var(--c-bg,#F7F4EE);padding:14px; }
+    #dc-root .ur-ops-row { display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--c-divider,#E8E2D7); }
+    #dc-root .ur-ops-row:last-child { border-bottom:0; }
+    #dc-root .ur-switch { width:46px;height:26px;border:0;border-radius:999px;background:var(--switch-bg,var(--c-border,#D8D0C0));padding:3px;cursor:pointer; }
+    #dc-root .ur-switch span { display:block;width:20px;height:20px;border-radius:50%;background:#fff;transform:translateX(var(--switch-x,0));transition:transform .18s var(--ur-motion-soft);box-shadow:0 2px 6px rgba(0,0,0,.18); }
+    #dc-root .ur-sync-strip { display:flex;align-items:center;gap:8px;color:var(--c-sub,#625D54);font-size:11.5px;font-weight:850; }
+    #dc-root .ur-sync-dot { width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px color-mix(in srgb,currentColor 12%,transparent); }
+    #dc-root .ur-toast-live { position:fixed;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);max-width:min(520px,calc(100vw - 28px));background:var(--c-inverse-bg,#24231F);color:var(--c-inverse-ink,#fff);padding:12px 18px;border-radius:12px;font-size:13.5px;font-weight:750;box-shadow:0 16px 36px rgba(0,0,0,.28);z-index:2147483600;animation:urToastIn 2.2s ease both; }
+    #dc-root .ur-dashboard-toolbar { display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px; }
+    #dc-root .ur-dashboard-compact .ur-desk-kpis { grid-template-columns:repeat(4,minmax(0,1fr));gap:8px; }
+    #dc-root .ur-dashboard-compact .ur-desk-kpis .ur-desk-card { padding:14px 16px;border-radius:14px;box-shadow:none;border:1px solid var(--c-border,#D8D0C0); }
+    #dc-root .ur-dashboard-compact .ur-desk-kpi-value { font-size:20px; }
+    #dc-root .ur-mobile-topbar { min-height:64px; }
+    #dc-root .ur-mobile-main { padding-bottom:calc(86px + env(safe-area-inset-bottom)); }
+    @media (max-width:700px) { #dc-root .ur-ops-overlay{padding:0;align-items:flex-end} #dc-root .ur-ops-dialog{width:100%;max-height:88vh;border-radius:22px 22px 0 0;border-bottom:0} #dc-root .ur-ops-grid{grid-template-columns:1fr} #dc-root .ur-ops-trigger kbd{display:none} #dc-root .ur-dashboard-toolbar{justify-content:stretch} #dc-root .ur-dashboard-toolbar .ur-ops-trigger{flex:1;justify-content:center} }
     #dc-root {
       --ur-glass-surface:color-mix(in srgb,var(--c-surface,#FFFDF9) 72%, transparent);
       --ur-glass-surface-strong:color-mix(in srgb,var(--c-surface,#FFFDF9) 86%, transparent);
@@ -2566,7 +2596,7 @@
     #dc-root .ur-unified-actions {
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-start;
       gap:12px;
       margin-top:28px;
     }
@@ -2612,7 +2642,7 @@
       #dc-root .ur-unified-onboard-main { padding-inline:16px; }
       #dc-root .ur-unified-choice-grid { grid-template-columns:1fr; }
       #dc-root .ur-unified-summary { grid-template-columns:1fr; }
-      #dc-root .ur-unified-actions { flex-direction:column-reverse; align-items:stretch; }
+      #dc-root .ur-unified-actions { flex-direction:column; align-items:stretch; }
       #dc-root .ur-unified-actions > button { width:100%; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -2673,8 +2703,8 @@
                   </sc-if>
                 </div>
                 <div class="ur-unified-actions">
-                  <button class="ur-unified-secondary" onclick="{{startGoogleLogin}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">لدي حساب بالفعل</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">I already have an account</sc-if></button>
                   <button class="ur-unified-primary" onclick="{{startGoogleSignup}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">ابدأ الآن</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">Get started</sc-if></button>
+                  <button class="ur-unified-secondary" onclick="{{startGoogleLogin}}"><sc-if value="{{isAr}}" hint-placeholder-val="{{true}}">لدي حساب بالفعل</sc-if><sc-if value="{{isEn}}" hint-placeholder-val="{{false}}">I already have an account</sc-if></button>
                 </div>
               </div>
             </sc-if>
@@ -3296,6 +3326,7 @@
             <div style="height:100%;display:flex;flex-direction:column;position:relative;">
 
               <div class="ur-mobile-main {{screenMotionRunClass}}" data-screen="{{screen}}" style="flex:1;overflow:auto;">
+                <div class="ur-sr-only" role="status" aria-live="polite" aria-atomic="true">{{commerceSyncLabel}}</div>
 
                 <div class="ur-mobile-topbar" style="flex-shrink:0;position:sticky;top:0;z-index:5;padding:18px 20px 12px;background:var(--c-bg,#F7F4EE);display:flex;align-items:center;justify-content:space-between;">
                   <sc-if value="{{isPrimaryScreen}}" hint-placeholder-val="{{true}}">
@@ -3331,6 +3362,7 @@
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9Z" stroke="var(--c-ink,#2B2A27)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 17a2.5 2.5 0 0 0 5 0" stroke="var(--c-ink,#2B2A27)" stroke-width="1.7" stroke-linecap="round"/></svg>
                     <sc-if value="{{hasUnread}}" hint-placeholder-val="{{true}}"><div style="position:absolute;top:7px;inset-inline-end:7px;width:8px;height:8px;border-radius:50%;background:#B2583F;border:1.5px solid var(--c-on-gold,#FFFDF9);"></div></sc-if>
                   </button>
+                  <button class="ur-ops-trigger" data-command-palette-trigger onclick="{{openCommandPalette}}" aria-label="{{commandPaletteTitle}}" title="{{commandPaletteTitle}}" style="width:38px;min-height:38px;padding:0;justify-content:center;flex-shrink:0;">⌕</button>
                 </div>
 
                 <sc-if value="{{scrHome}}" hint-placeholder-val="{{true}}">
@@ -4902,7 +4934,7 @@
                         <button class="ur-module-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border-radius:18px;padding:14px;box-shadow:0 2px 14px rgba(43,42,39,0.05);border:1px solid var(--c-border,#EAE1D0);cursor:pointer;text-align:start;font-family:inherit;">
                           <div style="display:flex;align-items:center;justify-content:space-between;">
                             <sc-if value="{{m.showStandardIcon}}" hint-placeholder-val="{{true}}"><div class="ur-icon-3d" style="width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></sc-if>
-                            <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:34px;height:34px;border-radius:11px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 7px 14px rgba(42,171,238,0.2);overflow:hidden;"><img src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
+                            <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:34px;height:34px;border-radius:11px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 7px 14px rgba(42,171,238,0.2);overflow:hidden;"><img data-src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
                             <span style="display:flex;align-items:center;gap:5px;"><sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="font-size:8.5px;font-weight:900;color:#1976B8;background:#E3F4FF;padding:4px 6px;border-radius:999px;">{{m.telegramActionLabel}}</span></sc-if><span style="font-size:9px;font-weight:900;color:{{m.auditFg}};background:{{m.auditBg}};padding:4px 7px;border-radius:999px;">{{m.auditLabel}}</span></span>
                           </div>
                           <div style="font-size:12px;font-weight:900;color:var(--c-ink,#2B2A27);line-height:1.35;">{{m.name}}</div>
@@ -5135,6 +5167,7 @@
                     </div>
 
                     <div data-qa="admin-v2-mobile" style="display:flex;flex-direction:column;gap:12px;">
+                      <div data-qa="admin-mfa-card" style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:15px;border-inline-start:4px solid {{subscriptionAdminMfaTone}};box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span><b style="display:block;font-size:13px;color:var(--c-ink,#2B2A27);">{{subscriptionAdminMfaTitle}}</b><span style="display:block;font-size:10px;color:var(--c-sub,#8A8274);margin-top:4px;">{{subscriptionAdminMfaStatus}}</span></span><button onclick="{{subscriptionAdminMfaAction}}" style="padding:8px 10px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:9.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{subscriptionAdminMfaActionLabel}}</button></div><div style="font-size:9.5px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:8px;">{{subscriptionAdminMfaNote}}</div></div>
                       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
                         <sc-for list="{{subscriptionAdminOpsStats}}" as="stat" hint-placeholder-count="4">
                           <div style="background:var(--c-surface,#FFFDF9);border-radius:16px;padding:12px;border-top:3px solid {{stat.tone}};box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:16px;font-weight:900;color:var(--c-ink,#2B2A27);" dir="ltr">{{stat.value}}</div><div style="font-size:9.8px;color:var(--c-sub,#8A8274);margin-top:3px;">{{stat.label}}</div></div>
@@ -5150,7 +5183,8 @@
                         <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;"><sc-for list="{{subscriptionAdminQuickActions}}" as="action" hint-placeholder-count="4"><button onclick="{{action.fn}}" style="padding:8px 10px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-ink,#2B2A27);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for><sc-if value="{{subscriptionAdminCanRevokeSessions}}" hint-placeholder-val="false"><button onclick="{{revokeSelectedMerchantSessions}}" style="padding:8px 10px;border-radius:10px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{subscriptionAdminRevokeSessionsLabel}}</button></sc-if></div>
                         <div style="display:flex;gap:7px;overflow-x:auto;margin-top:11px;padding-top:11px;border-top:1px solid var(--c-divider,#F1EADC);"><sc-for list="{{subscriptionAdminPlanOptions}}" as="plan" hint-placeholder-count="4"><button onclick="{{plan.fn}}" style="flex-shrink:0;padding:8px 11px;border-radius:999px;border:1px solid {{plan.border}};background:{{plan.bg}};color:{{plan.fg}};font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{plan.label}}</button></sc-for></div>
                       </div>
-                      <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:15px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div style="display:flex;flex-direction:column;gap:7px;"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:8px;align-items:start;padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:10.5px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:8.5px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div></div>
+                      <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:15px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:9px;">{{subscriptionAdminSessionsTitle}}</div><div style="display:flex;flex-direction:column;gap:7px;"><sc-for list="{{subscriptionAdminSessionRows}}" as="session" hint-placeholder-count="2"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);"><span style="min-width:0;"><b style="display:block;font-size:10.5px;color:var(--c-ink,#2B2A27);">{{session.userLabel}}</b><span style="display:block;font-size:9px;color:var(--c-sub,#8A8274);margin-top:3px;">{{session.stateLabel}} · {{session.timeLabel}}</span></span><sc-if value="{{session.canRevoke}}" hint-placeholder-val="false"><button onclick="{{session.revokeFn}}" style="padding:7px 9px;border-radius:9px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:9px;font-weight:900;cursor:pointer;font-family:inherit;">{{session.revokeLabel}}</button></sc-if></div></sc-for></div></div>
+                      <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:15px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div style="display:flex;flex-direction:column;gap:7px;"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:8px;align-items:start;padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:10.5px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:8.5px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;"><sc-for list="{{subscriptionAdminWorkflowActions}}" as="action" hint-placeholder-count="2"><button onclick="{{action.fn}}" style="padding:8px 10px;border-radius:9px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:9.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for></div></div>
                     </div>
                   </div>
                 </sc-if>
@@ -6183,13 +6217,13 @@
                     <sc-if value="{{selectedModuleIsShipping}}" hint-placeholder-val="{{false}}">
                       <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:18px;padding:14px;margin-bottom:16px;">
                         <div style="display:flex;align-items:center;gap:11px;padding:4px;">
-                          <div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="https://alwaseet-iq.net/app-assets/images/ico/Icon@4x.png" alt="Al-Waseet" referrerpolicy="no-referrer" style="width:42px;height:42px;object-fit:contain;"/></div>
+                          <div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="./assets/alwaseet-logo.png" alt="Al-Waseet" style="width:42px;height:42px;object-fit:contain;"/></div>
                           <div style="flex:1;min-width:0;"><div style="font-size:13.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:10px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div>
                           <button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:11px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:11px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button>
                         </div>
                         <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}">
                           <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;">
-                            <div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div>
+                            <div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><sc-if value="{{alWaseetHasConnectionError}}" hint-placeholder-val="{{false}}"><div role="alert" style="padding:9px 11px;border-radius:10px;background:var(--c-error-bg,#FDECEC);color:var(--c-error,#C93C3C);font-size:10.5px;font-weight:800;line-height:1.55;">{{alWaseetConnectionError}}</div></sc-if>
                             <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
                             <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label>
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:11px;border-radius:12px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:12px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div>
@@ -8181,12 +8215,14 @@
                   </div>
                 </div>
                 <div data-qa="admin-v2-tablet" style="display:flex;flex-direction:column;gap:12px;max-width:1120px;margin-top:18px;">
+                  <div data-qa="admin-mfa-card" style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:16px;border-inline-start:4px solid {{subscriptionAdminMfaTone}};box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span><b style="display:block;font-size:14px;color:var(--c-ink,#2B2A27);">{{subscriptionAdminMfaTitle}}</b><span style="display:block;font-size:10px;color:var(--c-sub,#8A8274);margin-top:4px;">{{subscriptionAdminMfaStatus}}</span></span><button onclick="{{subscriptionAdminMfaAction}}" style="padding:8px 11px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{subscriptionAdminMfaActionLabel}}</button></div><div style="font-size:10px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:8px;">{{subscriptionAdminMfaNote}}</div></div>
                   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px;"><sc-for list="{{subscriptionAdminOpsStats}}" as="stat" hint-placeholder-count="4"><div style="background:var(--c-surface,#FFFDF9);border-radius:16px;padding:13px;border-top:3px solid {{stat.tone}};box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:17px;font-weight:900;color:var(--c-ink,#2B2A27);" dir="ltr">{{stat.value}}</div><div style="font-size:10px;color:var(--c-sub,#8A8274);margin-top:3px;">{{stat.label}}</div></div></sc-for></div>
                   <div style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px;align-items:start;">
                     <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:16px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;"><div style="font-size:14px;font-weight:900;color:var(--c-ink,#2B2A27);">{{subscriptionAdminAttentionTitle}}</div><button onclick="{{exportSubscriptionAdminCsv}}" style="padding:8px 10px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-ink,#2B2A27);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{subscriptionAdminExportLabel}}</button></div><div style="display:flex;flex-direction:column;gap:7px;"><sc-for list="{{subscriptionAdminAttentionRows}}" as="item" hint-placeholder-count="3"><button onclick="{{item.selectFn}}" style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-radius:13px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);text-align:start;cursor:pointer;font-family:inherit;"><span style="min-width:0;"><b style="display:block;font-size:11px;color:var(--c-ink,#2B2A27);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{item.name}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{item.reasonLabel}}</span></span><span style="width:8px;height:8px;border-radius:999px;background:{{item.tone}};flex-shrink:0;"></span></button></sc-for></div></div>
                     <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:16px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:15px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:11px;">{{subscriptionAdminMerchantTitle}}</div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;"><sc-for list="{{subscriptionAdminMerchantRows}}" as="row" hint-placeholder-count="6"><div style="padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);min-width:0;"><div style="font-size:9px;color:var(--c-sub,#8A8274);">{{row.label}}</div><div style="font-size:10.5px;font-weight:900;color:var(--c-ink,#2B2A27);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" dir="auto">{{row.value}}</div></div></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;"><sc-for list="{{subscriptionAdminQuickActions}}" as="action" hint-placeholder-count="4"><button onclick="{{action.fn}}" style="padding:8px 10px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-ink,#2B2A27);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for><sc-if value="{{subscriptionAdminCanRevokeSessions}}" hint-placeholder-val="false"><button onclick="{{revokeSelectedMerchantSessions}}" style="padding:8px 10px;border-radius:10px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{subscriptionAdminRevokeSessionsLabel}}</button></sc-if></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;padding-top:11px;border-top:1px solid var(--c-divider,#F1EADC);"><sc-for list="{{subscriptionAdminPlanOptions}}" as="plan" hint-placeholder-count="4"><button onclick="{{plan.fn}}" style="padding:8px 11px;border-radius:999px;border:1px solid {{plan.border}};background:{{plan.bg}};color:{{plan.fg}};font-size:10px;font-weight:900;cursor:pointer;font-family:inherit;">{{plan.label}}</button></sc-for></div></div>
                   </div>
-                  <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:16px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:14px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:8px;align-items:start;padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:10.5px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:8.5px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div></div>
+                  <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:16px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:14px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:9px;">{{subscriptionAdminSessionsTitle}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><sc-for list="{{subscriptionAdminSessionRows}}" as="session" hint-placeholder-count="2"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);"><span style="min-width:0;"><b style="display:block;font-size:10.5px;color:var(--c-ink,#2B2A27);">{{session.userLabel}}</b><span style="display:block;font-size:9px;color:var(--c-sub,#8A8274);margin-top:3px;">{{session.stateLabel}} · {{session.timeLabel}}</span></span><sc-if value="{{session.canRevoke}}" hint-placeholder-val="false"><button onclick="{{session.revokeFn}}" style="padding:7px 9px;border-radius:9px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:9px;font-weight:900;cursor:pointer;font-family:inherit;">{{session.revokeLabel}}</button></sc-if></div></sc-for></div></div>
+                  <div style="background:var(--c-surface,#FFFDF9);border-radius:20px;padding:16px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));"><div style="font-size:14px;font-weight:900;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:8px;align-items:start;padding:10px;border-radius:12px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:10.5px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:8.5px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;"><sc-for list="{{subscriptionAdminWorkflowActions}}" as="action" hint-placeholder-count="2"><button onclick="{{action.fn}}" style="padding:8px 10px;border-radius:9px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:9.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for></div></div>
                 </div>
               </sc-if>
 
@@ -8585,7 +8621,7 @@
                       <button class="ur-module-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:12px;background:var(--c-surface,#FFFDF9);border-radius:18px;padding:20px;box-shadow:var(--c-shadow-card,0 2px 14px rgba(43,42,39,0.05));border:1px solid var(--c-border,#EAE1D0);cursor:pointer;text-align:start;font-family:inherit;transition:transform 0.18s ease;" style-hover="transform:translateY(-3px);">
                         <div style="display:flex;align-items:center;justify-content:space-between;">
                           <sc-if value="{{m.showStandardIcon}}" hint-placeholder-val="{{true}}"><div class="ur-icon-3d" style="width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></sc-if>
-                          <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:40px;height:40px;border-radius:12px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(42,171,238,0.22);overflow:hidden;"><img src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
+                          <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:40px;height:40px;border-radius:12px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(42,171,238,0.22);overflow:hidden;"><img data-src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
                           <span style="display:flex;align-items:center;gap:6px;"><sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="font-size:9px;font-weight:900;color:#1976B8;background:#E3F4FF;padding:5px 7px;border-radius:999px;white-space:nowrap;">{{m.telegramActionLabel}}</span></sc-if><span style="font-size:9.5px;font-weight:900;color:{{m.auditFg}};background:{{m.auditBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.auditLabel}}</span></span>
                         </div>
                         <div style="font-size:13px;font-weight:900;color:var(--c-ink,#2B2A27);">{{m.name}}</div>
@@ -9360,8 +9396,8 @@
 
                 <sc-if value="{{selectedModuleIsShipping}}" hint-placeholder-val="{{false}}">
                   <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:17px;padding:14px;margin-bottom:14px;">
-                    <div style="display:flex;align-items:center;gap:11px;padding:3px;"><div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="https://alwaseet-iq.net/app-assets/images/ico/Icon@4x.png" alt="Al-Waseet" referrerpolicy="no-referrer" style="width:42px;height:42px;object-fit:contain;"/></div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div><button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button></div>
-                    <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}"><div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div><div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:10px 14px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div></div></sc-if>
+                    <div style="display:flex;align-items:center;gap:11px;padding:3px;"><div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="./assets/alwaseet-logo.png" alt="Al-Waseet" style="width:42px;height:42px;object-fit:contain;"/></div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div><button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button></div>
+                    <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}"><div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><sc-if value="{{alWaseetHasConnectionError}}" hint-placeholder-val="{{false}}"><div role="alert" style="padding:9px 11px;border-radius:10px;background:var(--c-error-bg,#FDECEC);color:var(--c-error,#C93C3C);font-size:10.5px;font-weight:800;line-height:1.55;">{{alWaseetConnectionError}}</div></sc-if><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div><div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:10px 14px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div></div></sc-if>
                   </div>
                 </sc-if>
 
@@ -9730,6 +9766,8 @@
                 <div style="font-size:22px;font-weight:950;color:var(--c-ink,#2B2A27);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{desktopScreenTitle}}</div>
               </div>
               <div style="display:flex;align-items:center;gap:10px;">
+                <button class="ur-ops-trigger" data-command-palette-trigger onclick="{{openCommandPalette}}" aria-label="{{commandPaletteTitle}}"><span>⌕</span><span>{{commandPaletteTitle}}</span></button>
+                <button class="ur-ops-trigger" onclick="{{openSyncCenter}}" aria-label="{{syncCenterTitle}}"><span class="ur-sync-dot" style="color:{{commerceSyncFg}};"></span><span>{{commerceSyncLabel}}</span></button>
                 <label class="ur-desktop-search" style="display:{{topSearchDisplay}};"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input value="{{topSearch}}" onChange="{{setTopSearch}}" placeholder="{{t.desktop.searchPlaceholder}}"/></label>
                 <button onclick="{{openPOS}}" aria-label="{{t.quick.newSale}}" title="{{t.quick.newSale}}" style="height:42px;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:14px;border:none;background:var(--c-gold,#C8A96B);color:var(--c-on-gold,#2B2A27);font-size:12px;font-weight:950;cursor:pointer;font-family:inherit;white-space:nowrap;box-shadow:0 10px 22px color-mix(in srgb,var(--c-gold,#C8A96B) 22%, transparent);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>{{t.quick.newSale}}</button>
                 <button onclick="{{openBranchSheet}}" style="height:42px;padding:0 14px;border-radius:999px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:12px;font-weight:950;cursor:pointer;font-family:inherit;">{{activeBranchName}}</button>
@@ -9738,14 +9776,15 @@
             </div>
 
             <sc-if value="{{scrHome}}" hint-placeholder-val="{{true}}">
-              <div class="ur-desktop-page">
-                <div class="ur-desk-grid ur-desk-kpis">
+              <div class="ur-desktop-page {{dashboardDensityClass}}">
+                <div class="ur-dashboard-toolbar"><button class="ur-ops-trigger" onclick="{{openDashboardCustomize}}">⚙ {{dashboardCustomizeTitle}}</button><button class="ur-ops-trigger" onclick="{{openActivityCenter}}">◷ {{activityCenterTitle}}</button><button class="ur-ops-trigger" onclick="{{openAutomationCenter}}">↯ {{automationTitle}}</button></div>
+                <div class="ur-desk-grid ur-desk-kpis" style="display:{{dashboardKpisDisplay}};">
                   <div class="ur-desk-card"><div class="ur-desk-kpi-label">{{t.kpi.revenueToday}}</div><div class="ur-desk-kpi-value" dir="ltr">{{kpiRevenue}}</div><div style="font-size:11px;color:var(--c-success,#3F6B3A);font-weight:900;margin-top:8px;">{{kpiRevenueDelta}} {{t.vsYesterday}}</div></div>
                   <div class="ur-desk-card"><div class="ur-desk-kpi-label">{{t.kpi.profit}}</div><div class="ur-desk-kpi-value" dir="ltr">{{kpiProfit}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);font-weight:850;margin-top:8px;">{{kpiProfitDelta}}</div></div>
                   <div class="ur-desk-card"><div class="ur-desk-kpi-label">{{t.kpi.orders}}</div><div class="ur-desk-kpi-value" dir="ltr">{{kpiOrders}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);font-weight:850;margin-top:8px;">{{ordersNewCount}} {{ordersNewLabel}}</div></div>
                   <div class="ur-desk-card"><div class="ur-desk-kpi-label">{{t.kpi.customers}}</div><div class="ur-desk-kpi-value" dir="ltr">{{kpiCustomers}}</div><div style="font-size:11px;color:var(--c-sub,#8A8274);font-weight:850;margin-top:8px;">{{customerVipCount}} {{customerVipLabel}}</div></div>
                 </div>
-                <div class="ur-desk-grid ur-desk-main-grid">
+                <div class="ur-desk-grid ur-desk-main-grid" style="display:{{dashboardFocusDisplay}};">
                   <section class="ur-desk-card">
                     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px;">
                       <div><div style="font-size:17px;font-weight:950;color:var(--c-ink,#2B2A27);">{{dashboardOrdersTitle}}</div><div style="font-size:12px;color:var(--c-sub,#8A8274);margin-top:3px;">{{dashboardFocusSub}}</div></div>
@@ -9802,6 +9841,7 @@
                     <button onclick="{{openAddProduct}}" style="padding:9px 12px;border-radius:999px;border:none;background:var(--c-gold,#C8A96B);color:var(--c-on-gold,#2B2A27);font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{productFormTitle}}</button>
                     <button onclick="{{openProductFilter}}" style="padding:9px 12px;border-radius:999px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{productFilterTitle}}</button>
                     <button onclick="{{openProductActions}}" style="padding:9px 12px;border-radius:999px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-gold-deep,#B8935A);font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{productActionsTitle}}</button>
+                    <button onclick="{{importProductsFile}}" style="padding:9px 12px;border-radius:999px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">CSV ↥</button>
                     <sc-for list="{{productQuickTabList}}" as="tab" hint-placeholder-count="5"><button onclick="{{tab.selectFn}}" style="padding:9px 12px;border-radius:999px;border:1px solid {{tab.border}};background:{{tab.bg}};color:{{tab.fg}};font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{tab.label}} · {{tab.countText}}</button></sc-for>
                   </div>
                 </section>
@@ -9827,7 +9867,7 @@
               <div class="ur-desktop-page">
                 <section class="ur-desk-card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
                   <div><div style="font-size:18px;font-weight:950;color:var(--c-ink,#2B2A27);">{{ordersSummaryTitle}}</div><div style="font-size:12px;color:var(--c-sub,#8A8274);margin-top:4px;">{{ordersSummarySub}}</div></div>
-                  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;"><sc-for list="{{orderStatusList}}" as="s" hint-placeholder-count="5"><button onclick="{{s.selectFn}}" style="padding:9px 12px;border-radius:999px;border:1px solid {{s.border}};background:{{s.bg}};color:{{s.fg}};font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{s.label}} · {{s.count}}</button></sc-for></div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;"><button onclick="{{openAutomationCenter}}" style="padding:9px 12px;border-radius:999px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">↯ {{automationTitle}}</button><sc-for list="{{orderStatusList}}" as="s" hint-placeholder-count="5"><button onclick="{{s.selectFn}}" style="padding:9px 12px;border-radius:999px;border:1px solid {{s.border}};background:{{s.bg}};color:{{s.fg}};font-size:11.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{s.label}} · {{s.count}}</button></sc-for></div>
                 </section>
                 <section class="ur-desk-card">
                   <div class="ur-desk-table-head" style="grid-template-columns:1fr 1.35fr .9fr .8fr 1fr 1fr .9fr;"><span>{{t.desktop.order}}</span><span>{{t.desktop.customer}}</span><span>{{t.desktop.date}}</span><span>{{t.desktop.items}}</span><span>{{t.desktop.payment}}</span><span>{{t.desktop.status}}</span><span style="text-align:end;">{{t.desktop.total}}</span></div>
@@ -10052,7 +10092,7 @@
                     <button class="ur-desk-card" onclick="{{m.openFn}}" style="display:flex;flex-direction:column;gap:12px;text-align:start;cursor:pointer;font-family:inherit;">
                       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
                         <sc-if value="{{m.showStandardIcon}}" hint-placeholder-val="{{true}}"><span class="ur-icon-3d" style="width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M0 0h0" data-d="{{m.iconD1}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 0h0" data-d="{{m.iconD2}}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></sc-if>
-                        <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:42px;height:42px;border-radius:14px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(42,171,238,0.22);overflow:hidden;"><img src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
+                        <sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="width:42px;height:42px;border-radius:14px;background:#2AABEE;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(42,171,238,0.22);overflow:hidden;"><img data-src="{{m.brandImage}}" alt="Telegram" style="width:100%;height:100%;object-fit:cover;display:block;"/></span></sc-if>
                         <span style="display:flex;align-items:center;gap:6px;"><sc-if value="{{m.isTelegram}}" hint-placeholder-val="{{false}}"><span style="font-size:9.5px;font-weight:950;color:#1976B8;background:#E3F4FF;padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.telegramActionLabel}}</span></sc-if><span style="font-size:9.5px;font-weight:950;color:{{m.auditFg}};background:{{m.auditBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{m.auditLabel}}</span></span>
                       </div>
                       <b style="font-size:13px;color:var(--c-ink,#2B2A27);">{{m.name}}</b>
@@ -10089,12 +10129,14 @@
                   <div style="position:sticky;top:104px;display:flex;flex-direction:column;gap:14px;min-width:0;"><section class="ur-desk-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;"><div style="min-width:0;"><div style="font-size:17px;font-weight:950;color:var(--c-ink,#2B2A27);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{subscriptionAdminSelected.name}}</div><div style="font-size:12px;color:var(--c-sub,#8A8274);margin-top:5px;">{{subscriptionAdminSelected.owner}} · {{subscriptionAdminSelected.phone}}</div></div><span style="font-size:10.5px;font-weight:950;color:{{subscriptionAdminSelected.statusFg}};background:{{subscriptionAdminSelected.statusBg}};padding:6px 10px;border-radius:999px;white-space:nowrap;">{{subscriptionAdminSelected.statusLabel}}</span></div><div style="margin-top:14px;border-radius:16px;background:var(--c-bg,#F7F4EE);padding:12px;border:1px solid var(--c-border,#EAE1D0);"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="font-size:12px;font-weight:950;color:var(--c-ink,#2B2A27);">{{subscriptionAdminReadinessTitle}}</div><span style="font-size:10px;font-weight:950;color:{{subscriptionAdminSelected.readinessFg}};background:{{subscriptionAdminSelected.readinessBg}};padding:5px 8px;border-radius:999px;">{{subscriptionAdminSelected.readinessScore}} · {{subscriptionAdminSelected.readinessLabel}}</span></div><div style="height:7px;border-radius:999px;background:var(--c-divider,#F1EADC);overflow:hidden;margin-top:10px;"><div style="width:{{subscriptionAdminSelected.readinessBarWidth}};height:100%;border-radius:999px;background:var(--c-gold,#C8A96B);"></div></div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.55;margin-top:8px;">{{subscriptionAdminSelected.readinessSummary}}</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;"><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionRenewalTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.renewsAt}}</div></div><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionPlansTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.planLabel}}</div></div><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionPaymentTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.paymentMethod}}</div></div><div style="border-radius:15px;background:var(--c-bg,#F7F4EE);padding:12px;"><div style="font-size:11px;color:var(--c-sub,#8A8274);">{{subscriptionInvoiceTitle}}</div><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:6px;">{{subscriptionAdminSelected.amountFmt}}</div></div></div></section><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;"><button onclick="{{subscriptionAdminSelected.openSiteFn}}" style="padding:12px;border-radius:13px;border:none;background:var(--c-inverse-bg,#2B2A27);color:var(--c-inverse-ink,#F7F4EE);font-size:12px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminOpenSiteLabel}}</button><button onclick="{{subscriptionAdminSelected.contactFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:12px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminContactLabel}}</button></div><section class="ur-desk-card"><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminReadinessTitle}}</div><sc-for list="{{subscriptionAdminSelected.readinessRows}}" as="row" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border-radius:14px;background:var(--c-bg,#F7F4EE);margin-top:8px;"><div><div style="font-size:11.5px;font-weight:950;color:var(--c-ink,#2B2A27);">{{row.label}}</div><div style="font-size:10px;color:var(--c-sub,#8A8274);line-height:1.45;margin-top:3px;">{{row.detail}}</div></div><span style="font-size:9.5px;font-weight:950;color:{{row.toneFg}};background:{{row.toneBg}};padding:5px 8px;border-radius:999px;white-space:nowrap;">{{row.stateLabel}}</span></div></sc-for></section><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;"><button onclick="{{subscriptionAdminSelected.extendFn}}" style="padding:12px;border-radius:13px;border:none;background:var(--c-gold,#C8A96B);color:var(--c-on-gold,#2B2A27);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminExtendLabel}}</button><button onclick="{{subscriptionAdminSelected.markPaidFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminPaidLabel}}</button><button onclick="{{subscriptionAdminSelected.activateFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-success,#3F6B3A);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminActivateLabel}}</button><button onclick="{{subscriptionAdminSelected.pauseFn}}" style="padding:12px;border-radius:13px;border:1.5px solid var(--c-error,#B2583F);background:var(--c-surface,#FFFDF9);color:var(--c-error,#B2583F);font-size:12px;font-weight:950;cursor:{{subscriptionAdminActionCursor}};font-family:inherit;opacity:{{subscriptionAdminActionOpacity}};">{{subscriptionAdminPauseLabel}}</button></div><section class="ur-desk-card"><div style="font-size:14px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminAuditTitle}}</div><sc-for list="{{subscriptionAdminAuditRows}}" as="log" hint-placeholder-count="6"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--c-divider,#F1EADC);margin-top:10px;"><span style="min-width:0;"><b style="display:block;font-size:12px;color:var(--c-ink,#2B2A27);">{{log.actionLabel}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{log.storeName}} · {{log.actorLabel}}</span></span><span style="font-size:10px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{log.timeLabel}}</span></div></sc-for></section></div>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;">
+                  <section data-qa="admin-mfa-card" class="ur-desk-card" style="border-inline-start:4px solid {{subscriptionAdminMfaTone}};"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;"><span><b style="display:block;font-size:15px;color:var(--c-ink,#2B2A27);">{{subscriptionAdminMfaTitle}}</b><span style="display:block;font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:4px;">{{subscriptionAdminMfaStatus}}</span></span><button onclick="{{subscriptionAdminMfaAction}}" style="padding:9px 12px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminMfaActionLabel}}</button></div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.6;margin-top:8px;">{{subscriptionAdminMfaNote}}</div></section>
                   <div class="ur-desk-grid" style="grid-template-columns:repeat(4,1fr);gap:10px;"><sc-for list="{{subscriptionAdminOpsStats}}" as="stat" hint-placeholder-count="4"><div class="ur-desk-card" style="padding:13px;border-top:3px solid {{stat.tone}};"><div style="font-size:18px;font-weight:950;color:var(--c-ink,#2B2A27);" dir="ltr">{{stat.value}}</div><div style="font-size:10.5px;color:var(--c-sub,#8A8274);margin-top:4px;">{{stat.label}}</div></div></sc-for></div>
                   <div class="ur-desk-grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:start;">
                     <section class="ur-desk-card"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px;"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#2B2A27);">{{subscriptionAdminAttentionTitle}}</div><button onclick="{{exportSubscriptionAdminCsv}}" style="padding:8px 11px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminExportLabel}}</button></div><div style="display:flex;flex-direction:column;gap:8px;"><sc-for list="{{subscriptionAdminAttentionRows}}" as="item" hint-placeholder-count="3"><button onclick="{{item.selectFn}}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;border-radius:13px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);text-align:start;cursor:pointer;font-family:inherit;"><span style="min-width:0;"><b style="display:block;font-size:11.5px;color:var(--c-ink,#2B2A27);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{item.name}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{item.reasonLabel}}</span></span><span style="width:8px;height:8px;border-radius:999px;background:{{item.tone}};flex-shrink:0;"></span></button></sc-for></div></section>
                     <section class="ur-desk-card"><div style="font-size:16px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:12px;">{{subscriptionAdminMerchantTitle}}</div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;"><sc-for list="{{subscriptionAdminMerchantRows}}" as="row" hint-placeholder-count="6"><div style="padding:11px;border-radius:13px;background:var(--c-bg,#F7F4EE);min-width:0;"><div style="font-size:9.5px;color:var(--c-sub,#8A8274);">{{row.label}}</div><div style="font-size:11px;font-weight:950;color:var(--c-ink,#2B2A27);margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" dir="auto">{{row.value}}</div></div></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;"><sc-for list="{{subscriptionAdminQuickActions}}" as="action" hint-placeholder-count="4"><button onclick="{{action.fn}}" style="padding:9px 11px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for><sc-if value="{{subscriptionAdminCanRevokeSessions}}" hint-placeholder-val="false"><button onclick="{{revokeSelectedMerchantSessions}}" style="padding:9px 11px;border-radius:10px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:10.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{subscriptionAdminRevokeSessionsLabel}}</button></sc-if></div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid var(--c-divider,#F1EADC);"><sc-for list="{{subscriptionAdminPlanOptions}}" as="plan" hint-placeholder-count="4"><button onclick="{{plan.fn}}" style="padding:8px 11px;border-radius:999px;border:1px solid {{plan.border}};background:{{plan.bg}};color:{{plan.fg}};font-size:10px;font-weight:950;cursor:pointer;font-family:inherit;">{{plan.label}}</button></sc-for></div></section>
                   </div>
-                  <section class="ur-desk-card"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div class="ur-desk-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:9px;align-items:start;padding:10px;border-radius:13px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:11px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:9px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div></section>
+                  <section class="ur-desk-card"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminSessionsTitle}}</div><div class="ur-desk-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));"><sc-for list="{{subscriptionAdminSessionRows}}" as="session" hint-placeholder-count="2"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;border-radius:13px;background:var(--c-bg,#F7F4EE);"><span style="min-width:0;"><b style="display:block;font-size:11px;color:var(--c-ink,#2B2A27);">{{session.userLabel}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{session.stateLabel}} · {{session.timeLabel}}</span></span><sc-if value="{{session.canRevoke}}" hint-placeholder-val="false"><button onclick="{{session.revokeFn}}" style="padding:7px 10px;border-radius:9px;border:1px solid var(--c-error,#B2583F);background:var(--c-error-bg,#F7E9E2);color:var(--c-error,#B2583F);font-size:9.5px;font-weight:950;cursor:pointer;font-family:inherit;">{{session.revokeLabel}}</button></sc-if></div></sc-for></div></section>
+                  <section class="ur-desk-card"><div style="font-size:15px;font-weight:950;color:var(--c-ink,#2B2A27);margin-bottom:10px;">{{subscriptionAdminTimelineTitle}}</div><div class="ur-desk-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));"><sc-for list="{{subscriptionAdminTimelineRows}}" as="event" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:9px;align-items:start;padding:10px;border-radius:13px;background:var(--c-bg,#F7F4EE);"><span style="width:8px;height:8px;border-radius:999px;background:{{event.tone}};margin-top:4px;"></span><span style="min-width:0;"><b style="display:block;font-size:11px;color:var(--c-ink,#2B2A27);">{{event.title}}</b><span style="display:block;font-size:9.5px;color:var(--c-sub,#8A8274);margin-top:3px;">{{event.kindLabel}} · {{event.status}}</span></span><span style="font-size:9px;color:var(--c-tertiary,#B5AD9C);white-space:nowrap;">{{event.timeLabel}}</span></div></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;"><sc-for list="{{subscriptionAdminWorkflowActions}}" as="action" hint-placeholder-count="2"><button onclick="{{action.fn}}" style="padding:8px 11px;border-radius:9px;border:1px solid var(--c-border,#EAE1D0);background:var(--c-surface,#FFFDF9);color:var(--c-ink,#2B2A27);font-size:10px;font-weight:950;cursor:pointer;font-family:inherit;">{{action.label}}</button></sc-for></div></section>
                 </div>
               </div>
             </sc-if>
@@ -10520,8 +10562,8 @@
 
                 <sc-if value="{{selectedModuleIsShipping}}" hint-placeholder-val="{{false}}">
                   <div style="display:flex;flex-direction:column;gap:10px;background:var(--c-surface,#FFFDF9);border:1px solid var(--c-border,#EAE1D0);border-radius:17px;padding:14px;margin-bottom:14px;">
-                    <div style="display:flex;align-items:center;gap:11px;padding:3px;"><div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="https://alwaseet-iq.net/app-assets/images/ico/Icon@4x.png" alt="Al-Waseet" referrerpolicy="no-referrer" style="width:42px;height:42px;object-fit:contain;"/></div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div><button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button></div>
-                    <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}"><div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div><div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:10px 14px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div></div></sc-if>
+                    <div style="display:flex;align-items:center;gap:11px;padding:3px;"><div style="width:50px;height:50px;border-radius:15px;background:#fff;border:1px solid var(--c-border,#EAE1D0);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;"><img src="./assets/alwaseet-logo.png" alt="Al-Waseet" style="width:42px;height:42px;object-fit:contain;"/></div><div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:950;color:var(--c-ink,#2B2A27);">{{alWaseetTitle}}</div><div style="font-size:9.5px;font-weight:900;color:{{alWaseetStatusFg}};margin-top:4px;">{{alWaseetStatusLabel}}</div></div><button onclick="{{openAlWaseetConnection}}" style="padding:9px 13px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap;">{{alWaseetProviderActionLabel}}</button></div>
+                    <sc-if value="{{alWaseetConnectOpen}}" hint-placeholder-val="{{false}}"><div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--c-border,#EAE1D0);padding-top:12px;"><div style="font-size:10.5px;color:var(--c-sub,#8A8274);line-height:1.65;">{{alWaseetSub}}</div><sc-if value="{{alWaseetHasConnectionError}}" hint-placeholder-val="{{false}}"><div role="alert" style="padding:9px 11px;border-radius:10px;background:var(--c-error-bg,#FDECEC);color:var(--c-error,#C93C3C);font-size:10.5px;font-weight:800;line-height:1.55;">{{alWaseetConnectionError}}</div></sc-if><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">يوزر الوسيط</span><input value="{{alWaseetUsername}}" onChange="{{setAlWaseetUsername}}" dir="ltr" autocomplete="username" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">باسورد الوسيط</span><input type="password" value="{{alWaseetPassword}}" onChange="{{setAlWaseetPassword}}" dir="ltr" autocomplete="current-password" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">أجرة التوصيل</span><input value="{{shippingDeliveryFee}}" onChange="{{setShippingDeliveryFee}}" inputmode="numeric" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label><label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:10.5px;font-weight:900;color:var(--c-sub,#8A8274);">حجم الطرد</span><input value="{{shippingDefaultPackageSize}}" onChange="{{setShippingPackageSize}}" dir="ltr" style="width:100%;padding:10px;border-radius:11px;border:1.5px solid var(--c-border,#EAE1D0);background:var(--c-bg,#F7F4EE);font-size:11.5px;color:var(--c-ink,#2B2A27);outline:none;font-family:inherit;"/></label></div><div style="display:flex;gap:8px;"><button onclick="{{connectAlWaseet}}" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--c-ink,#2B2A27);color:var(--c-inverse,#FFFDF9);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetSubmitLabel}}</button><button onclick="{{closeAlWaseetConnection}}" style="padding:10px 14px;border-radius:10px;border:1px solid var(--c-border,#EAE1D0);background:transparent;color:var(--c-sub,#8A8274);font-size:10.5px;font-weight:900;cursor:pointer;font-family:inherit;">{{alWaseetCancelLabel}}</button></div></div></sc-if>
                   </div>
                 </sc-if>
 
@@ -10801,13 +10843,38 @@
       </div>
     </div>
   </sc-if>
+  <sc-if value="{{commandPaletteOpen}}" hint-placeholder-val="{{false}}">
+    <div class="ur-ops-overlay">
+      <section class="ur-ops-dialog" role="dialog" aria-modal="true" aria-label="{{commandPaletteTitle}}">
+        <header class="ur-ops-head"><div><h2 class="ur-ops-title">{{commandPaletteTitle}}</h2><p class="ur-ops-sub">{{commandPaletteSub}}</p></div><button class="ur-ops-close" onclick="{{closeCommandPalette}}" aria-label="{{opsCloseLabel}}">×</button></header>
+        <div class="ur-ops-body"><input class="ur-command-search" value="{{commandQuery}}" onChange="{{setCommandQuery}}" placeholder="{{commandSearchPlaceholder}}" aria-label="{{commandSearchPlaceholder}}" autofocus/><div class="ur-command-list"><sc-for list="{{commandItems}}" as="item" hint-placeholder-count="6"><button class="ur-command-item" onclick="{{item.runFn}}"><span><b style="display:block;font-size:13.5px;">{{item.label}}</b><span style="display:block;margin-top:3px;color:var(--c-sub,#625D54);font-size:11.5px;">{{item.sub}}</span></span><span aria-hidden="true">↵</span></button></sc-for><sc-if value="{{commandEmpty}}" hint-placeholder-val="{{false}}"><div style="padding:24px;text-align:center;color:var(--c-sub,#625D54);font-size:13px;">{{commandEmptyText}}</div></sc-if></div></div>
+      </section>
+    </div>
+  </sc-if>
+  <sc-if value="{{dashboardCustomizeOpen}}" hint-placeholder-val="{{false}}">
+    <div class="ur-ops-overlay"><section class="ur-ops-dialog" role="dialog" aria-modal="true" aria-label="{{dashboardCustomizeTitle}}"><header class="ur-ops-head"><div><h2 class="ur-ops-title">{{dashboardCustomizeTitle}}</h2><p class="ur-ops-sub">{{dashboardCustomizeSub}}</p></div><button class="ur-ops-close" onclick="{{closeDashboardCustomize}}" aria-label="{{opsCloseLabel}}">×</button></header><div class="ur-ops-body"><sc-for list="{{dashboardWidgetOptions}}" as="item" hint-placeholder-count="3"><div class="ur-ops-row"><span style="font-size:13px;font-weight:900;">{{item.label}}</span><button class="ur-switch" onclick="{{item.toggleFn}}" role="switch" aria-checked="{{item.enabled}}" style="--switch-bg:{{item.track}};"><span style="--switch-x:{{item.knob}};"></span></button></div></sc-for><div class="ur-ops-row"><span><b style="display:block;font-size:13px;">{{demoDataLabel}}</b><small style="display:block;margin-top:4px;color:var(--c-sub,#625D54);line-height:1.5;">{{demoDataSub}}</small></span><button class="ur-switch" onclick="{{toggleDemoData}}" role="switch" aria-checked="{{demoDataEnabled}}" style="--switch-bg:{{demoTrack}};"><span style="--switch-x:{{demoKnob}};"></span></button></div></div></section></div>
+  </sc-if>
+  <sc-if value="{{csvImportWizardOpen}}" hint-placeholder-val="{{false}}">
+    <div class="ur-ops-overlay"><section class="ur-ops-dialog" role="dialog" aria-modal="true" aria-label="{{csvImportTitle}}"><header class="ur-ops-head"><div><h2 class="ur-ops-title">{{csvImportTitle}}</h2><p class="ur-ops-sub">{{csvImportSub}}</p></div><button class="ur-ops-close" onclick="{{closeCsvImportWizard}}" aria-label="{{opsCloseLabel}}">×</button></header><div class="ur-ops-body"><div style="display:flex;gap:7px;margin-bottom:18px;"><span style="flex:1;height:5px;border-radius:999px;background:var(--c-gold,#C8A96B);"></span><span style="flex:1;height:5px;border-radius:999px;background:var(--c-border,#D8D0C0);"></span><span style="flex:1;height:5px;border-radius:999px;background:var(--c-border,#D8D0C0);"></span></div><div class="ur-ops-card"><b style="display:block;font-size:12px;color:var(--c-gold-deep,#8E6D32);">{{csvImportStep}} / 3</b><p style="margin:10px 0 0;font-size:13px;line-height:1.75;color:var(--c-ink,#24231F);">{{csvImportStepCopy}}</p></div><button onclick="{{csvImportNext}}" style="width:100%;min-height:46px;margin-top:14px;border:0;border-radius:14px;background:var(--c-gold,#C8A96B);color:var(--c-on-gold,#24231F);font:950 13px/1 inherit;cursor:pointer;">{{csvImportNextLabel}}</button></div></section></div>
+  </sc-if>
+  <sc-if value="{{automationCenterOpen}}" hint-placeholder-val="{{false}}">
+    <div class="ur-ops-overlay"><section class="ur-ops-dialog" role="dialog" aria-modal="true" aria-label="{{automationTitle}}"><header class="ur-ops-head"><div><h2 class="ur-ops-title">{{automationTitle}}</h2><p class="ur-ops-sub">{{automationSub}}</p></div><button class="ur-ops-close" onclick="{{closeAutomationCenter}}" aria-label="{{opsCloseLabel}}">×</button></header><div class="ur-ops-body"><sc-for list="{{automationRules}}" as="rule" hint-placeholder-count="3"><div class="ur-ops-row"><span style="font-size:13px;font-weight:900;">{{rule.label}}</span><button class="ur-switch" onclick="{{rule.toggleFn}}" role="switch" aria-checked="{{rule.enabled}}" style="--switch-bg:{{rule.track}};"><span style="--switch-x:{{rule.knob}};"></span></button></div></sc-for><sc-if value="{{automationEmpty}}" hint-placeholder-val="{{false}}"><div style="padding:24px;text-align:center;color:var(--c-sub,#625D54);font-size:13px;">{{automationEmptyText}}</div></sc-if></div></section></div>
+  </sc-if>
+  <sc-if value="{{activityCenterOpen}}" hint-placeholder-val="{{false}}">
+    <div class="ur-ops-overlay"><section class="ur-ops-dialog" role="dialog" aria-modal="true" aria-label="{{activityCenterTitle}}"><header class="ur-ops-head"><div><h2 class="ur-ops-title">{{activityCenterTitle}}</h2><p class="ur-ops-sub">{{activityCenterSub}}</p></div><button class="ur-ops-close" onclick="{{closeActivityCenter}}" aria-label="{{opsCloseLabel}}">×</button></header><div class="ur-ops-body"><sc-for list="{{activityFeed}}" as="item" hint-placeholder-count="4"><div class="ur-ops-row" style="align-items:flex-start;"><span class="ur-sync-dot" style="margin-top:6px;color:var(--c-gold,#C8A96B);"></span><span style="flex:1;"><b style="display:block;font-size:13px;">{{item.title}}</b><span style="display:block;margin-top:4px;color:var(--c-sub,#625D54);font-size:11.5px;line-height:1.6;">{{item.body}}</span><small style="display:block;margin-top:5px;color:var(--c-tertiary,#7D7568);">{{item.time}}</small></span></div></sc-for></div></section></div>
+  </sc-if>
+  <sc-if value="{{syncCenterOpen}}" hint-placeholder-val="{{false}}">
+    <div class="ur-ops-overlay"><section class="ur-ops-dialog" role="dialog" aria-modal="true" aria-label="{{syncCenterTitle}}"><header class="ur-ops-head"><div><h2 class="ur-ops-title">{{syncCenterTitle}}</h2><p class="ur-ops-sub">{{syncCenterSub}}</p></div><button class="ur-ops-close" onclick="{{closeSyncCenter}}" aria-label="{{opsCloseLabel}}">×</button></header><div class="ur-ops-body"><div class="ur-ops-card"><div class="ur-sync-strip"><span class="ur-sync-dot" style="color:{{commerceSyncFg}};"></span><b style="color:{{commerceSyncFg}};">{{commerceSyncLabel}}</b></div><div style="margin-top:10px;color:var(--c-sub,#625D54);font-size:12px;">{{syncLastLabel}}</div></div><button onclick="{{retryCommerceSync}}" style="width:100%;min-height:46px;margin-top:14px;border:0;border-radius:14px;background:var(--c-inverse-bg,#24231F);color:var(--c-inverse-ink,#fff);font:950 13px/1 inherit;cursor:pointer;">{{syncRetryLabel}}</button></div></section></div>
+  </sc-if>
+  <div class="ur-sr-only" role="status" aria-live="polite" aria-atomic="true">{{commerceSyncLabel}}</div>
   <sc-if value="{{toast}}" hint-placeholder-val="{{false}}">
-    <div style="position:fixed;bottom:32px;left:50%;background:var(--c-inverse-bg,var(--c-ink,#2B2A27));color:var(--c-inverse-ink,var(--c-bg,#F7F4EE));padding:12px 22px;border-radius:14px;font-size:13.5px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,0.25);z-index:999;animation:urToastIn 2.2s ease both;">{{toast}}</div>
+    <div class="ur-toast-live" role="status" aria-live="polite" aria-atomic="true">{{toast}}</div>
   </sc-if>
 
 </div>
 
 </x-dc>
+<div id="ur-app-live-region" class="ur-sr-only" role="status" aria-live="polite" aria-atomic="true">واجهة أور جاهزة</div>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
@@ -10855,6 +10922,16 @@ class Component extends DCLogic {
     quickCreateOpen: false,
     quickCreateType: '',
     quickCreateForm: {},
+    commandPaletteOpen: false,
+    commandQuery: '',
+    dashboardCustomizeOpen: false,
+    dashboardWidgets: { kpis: true, focus: true, compact: true },
+    csvImportWizardOpen: false,
+    csvImportStep: 1,
+    automationCenterOpen: false,
+    activityCenterOpen: false,
+    syncCenterOpen: false,
+    demoDataEnabled: false,
     productSettings: { showSku: true, lowStockAlerts: true, groupByCategory: false, defaultSizes: ['S', 'M', 'L', 'XL'], defaultColors: [{ name: 'فوشي', color: '#EC4899' }, { name: 'أزرق قوي', color: '#2563EB' }, { name: 'بنفسجي', color: '#8B5CF6' }] },
     newProduct: { profileKey: 'fashion', variantMode: 'matrix', name: '', catKey: 'shirts', price: '', stock: '', sku: '', barcode: '', color: '#EC4899', colorNames: { '#EC4899': 'فوشي' }, colors: [{ name: 'فوشي', color: '#EC4899' }], colorStocks: {}, variantStocks: {}, sizes: ['M'], newColorName: '', imageDataUrl: '', imageName: '', extraFields: {} },
     selectedOrderId: null,
@@ -11020,6 +11097,7 @@ class Component extends DCLogic {
     subscriptionAdminOverview: null,
     subscriptionAdminMerchant: null,
     subscriptionAdminMerchantLoading: false,
+    subscriptionAdminMfa: null,
     connectedPrinters: [{ id: 'pr1', name: 'Epson TM-T88VI', connection: 'Bluetooth', role: 'receipt', paper: '80mm', health: 'ready', lastTestAt: '', active: true }],
     newPrinterName: '',
     newPrinterConnection: 'Bluetooth',
@@ -15623,14 +15701,24 @@ ZW|Zimbabwe|263
           window.removeEventListener('message', onMessage);
           resolve(value);
         };
-        const onMessage = (event) => {
+        const onMessage = async (event) => {
           if (event.origin !== backendOrigin) return;
           const payload = event.data || {};
           if (payload.type !== 'ur-google-auth') return;
-          if (payload.ok && payload.token && payload.user) {
-            this.applyBackendAuthSuccess(payload.token, payload.user, {
+          let authPayload = payload;
+          if (payload.ok && payload.requiresTwoFactor) {
+            if (closedTimer) { clearInterval(closedTimer); closedTimer = null; }
+            const code = String(window.prompt(isAr ? 'أدخل رمز تطبيق المصادقة أو رمز الاسترداد' : 'Enter authenticator or recovery code', '') || '').trim();
+            if (!code) { this.setState({ authLoading: false, authStatus: 'offline', onboardLaunching: false }); finish('failed'); return; }
+            try {
+              const verified = await this.backendJson('/api/auth/mfa/verify', { method: 'POST', body: JSON.stringify({ challengeToken: payload.challengeToken, code }) }, { auth: false, errorMessage: 'Two-factor verification failed' });
+              authPayload = { ...payload, ...(verified.body || {}) };
+            } catch (err) { this.setState({ authLoading: false, authStatus: 'offline', onboardLaunching: false }); this.showToast(isAr ? 'رمز التحقق غير صحيح' : 'Invalid verification code'); finish('failed'); return; }
+          }
+          if (authPayload.ok && authPayload.token && authPayload.user) {
+            this.applyBackendAuthSuccess(authPayload.token, authPayload.user, {
               mode,
-              created: payload.created !== false,
+              created: authPayload.created !== false,
               storeName: this.state.onboardStoreName,
               storePhone: this.state.onboardStorePhone,
               storeAddress: this.state.onboardStoreAddress,
@@ -15688,10 +15776,17 @@ ZW|Zimbabwe|263
           businessProfileKey: this.activeBusinessProfile().key,
         }),
       }, { auth: false, errorMessage: 'Login failed' });
-      if (!body.token || !body.user) throw Object.assign(new Error(body.error || 'Login failed'), { status: response.status });
-      return this.applyBackendAuthSuccess(body.token, body.user, {
+      let authBody = body;
+      if (body.requiresTwoFactor) {
+        const code = typeof window !== 'undefined' ? String(window.prompt(isAr ? 'أدخل رمز تطبيق المصادقة أو رمز الاسترداد' : 'Enter authenticator or recovery code', '') || '').trim() : '';
+        if (!code) throw Object.assign(new Error('Two-factor verification required'), { status: 401 });
+        const verified = await this.backendJson('/api/auth/mfa/verify', { method: 'POST', body: JSON.stringify({ challengeToken: body.challengeToken, code }) }, { auth: false, errorMessage: 'Two-factor verification failed' });
+        authBody = verified.body || {};
+      }
+      if (!authBody.token || !authBody.user) throw Object.assign(new Error(authBody.error || 'Login failed'), { status: response.status });
+      return this.applyBackendAuthSuccess(authBody.token, authBody.user, {
         mode,
-        created: !!body.created,
+        created: !!authBody.created,
         storeName,
         storePhone,
         storeAddress,
@@ -17479,11 +17574,12 @@ ZW|Zimbabwe|263
     if (this.state.subscriptionAdminLoading) return;
     this.setState({ subscriptionAdminLoading: true, subscriptionBackendStatus: 'connecting' });
     try {
-      const [subscriptions, audit, capacity, overview] = await Promise.all([
+      const [subscriptions, audit, capacity, overview, mfa] = await Promise.all([
         this.subscriptionApiRequest('/api/subscriptions'),
         this.subscriptionApiRequest('/api/audit?limit=50'),
         this.subscriptionApiRequest('/api/capacity?users=1000'),
         this.subscriptionApiRequest('/api/admin/overview'),
+        this.subscriptionApiRequest('/api/auth/mfa'),
       ]);
       if (Array.isArray(subscriptions.stores) && subscriptions.stores.length) this.SUBSCRIPTION_STORES = subscriptions.stores;
       if (Array.isArray(audit.audit)) this.SUBSCRIPTION_AUDIT = audit.audit.slice(0, 80);
@@ -17494,6 +17590,7 @@ ZW|Zimbabwe|263
         selectedSubscriptionStoreId: selectedId,
         subscriptionAdminCapacity: capacity && capacity.capacity ? capacity.capacity : null,
         subscriptionAdminOverview: overview || null,
+        subscriptionAdminMfa: mfa || null,
         subscriptionBackendStatus: 'connected',
         subscriptionAdminLastSync: new Date().toISOString(),
         subscriptionAdminLoading: false,
@@ -17573,6 +17670,80 @@ ZW|Zimbabwe|263
       this.showToast(isAr ? `تم إلغاء ${Number(result.revoked || 0)} جلسة` : `${Number(result.revoked || 0)} sessions revoked`);
     } catch (err) { this.showToast(isAr ? 'تعذر إلغاء الجلسات' : 'Could not revoke sessions'); }
   };
+  revokeSubscriptionSession = async (sessionId) => {
+    const storeId = this.state.selectedSubscriptionStoreId;
+    if (!storeId || !sessionId || !this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
+    const isAr = this.state.lang === 'ar';
+    if (!window.confirm(isAr ? 'تسجيل خروج هذه الجلسة فقط؟' : 'Sign out this session only?')) return;
+    try {
+      await this.subscriptionApiRequest(`/api/admin/stores/${encodeURIComponent(storeId)}/sessions/${encodeURIComponent(sessionId)}`, { method: 'DELETE' });
+      await this.refreshSubscriptionMerchant360(storeId, true);
+      this.showToast(isAr ? 'تم إلغاء الجلسة' : 'Session revoked');
+    } catch (err) { this.showToast(isAr ? 'تعذر إلغاء الجلسة' : 'Could not revoke session'); }
+  };
+  updateSubscriptionAdminEvent = async (eventId, status) => {
+    const storeId = this.state.selectedSubscriptionStoreId;
+    if (!storeId || !eventId || !status || !this.canManageSubscriptionAdmin()) return;
+    const isAr = this.state.lang === 'ar';
+    let resolutionNote = '';
+    if (['resolved', 'closed', 'refunded', 'failed'].includes(status) && typeof window !== 'undefined') resolutionNote = String(window.prompt(isAr ? 'ملاحظة الإجراء (اختياري)' : 'Action note (optional)', '') || '').trim();
+    try {
+      await this.subscriptionApiRequest(`/api/admin/stores/${encodeURIComponent(storeId)}/events/${encodeURIComponent(eventId)}`, { method: 'PATCH', body: JSON.stringify({ status, resolutionNote }) });
+      await Promise.all([this.refreshSubscriptionMerchant360(storeId, true), this.refreshSubscriptionAdminFromApi(true)]);
+      this.showToast(isAr ? 'تم تحديث حالة العملية' : 'Action status updated');
+    } catch (err) { this.showToast(isAr ? 'تعذر تحديث الحالة' : 'Could not update status'); }
+  };
+  printSubscriptionPaymentReceipt = (event) => {
+    if (!event || event.kind !== 'payment' || typeof window === 'undefined') return;
+    const popup = window.open('', '_blank');
+    if (!popup) { this.showToast(this.state.lang === 'ar' ? 'اسمح بالنوافذ المنبثقة لطباعة الوصل' : 'Allow popups to print the receipt'); return; }
+    const esc = value => String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+    const store = (this.SUBSCRIPTION_STORES || []).find(item => item.id === this.state.selectedSubscriptionStoreId) || {};
+    const amount = Number(event.details && event.details.amount || 0).toLocaleString('en-US');
+    const date = new Date(event.createdAt || Date.now()).toLocaleString(this.state.lang === 'ar' ? 'ar-IQ' : 'en-US');
+    popup.document.open();
+    popup.document.write(`<!doctype html><html dir="rtl"><head><meta charset="utf-8"><title>UR Receipt</title><style>body{font-family:Arial,sans-serif;background:#f7f4ee;color:#2b2a27;padding:32px}.card{max-width:620px;margin:auto;background:#fffdf9;border:1px solid #eae1d0;border-radius:24px;padding:28px}h1{margin:0 0 8px}.row{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid #f1eadc}.amount{font-size:28px;font-weight:900;color:#3f6b3a}.muted{color:#8a8274;font-size:13px}</style></head><body><div class="card"><h1>وصل دفع أور</h1><div class="muted">UR Commerce OS</div><div class="row"><span>المتجر</span><b>${esc(store.name || '')}</b></div><div class="row"><span>رقم الوصل</span><b dir="ltr">${esc(event.id)}</b></div><div class="row"><span>البيان</span><b>${esc(event.title)}</b></div><div class="row"><span>الحالة</span><b>${esc(event.status)}</b></div><div class="row"><span>التاريخ</span><b>${esc(date)}</b></div><div class="row"><span>المبلغ</span><b class="amount" dir="ltr">${esc(amount)} د.ع</b></div><p class="muted">وصل إداري صادر من مركز إدارة أور.</p></div></body></html>`);
+    popup.document.close();
+    setTimeout(() => { popup.focus(); popup.print(); }, 250);
+  };
+  downloadMfaRecoveryCodes = (codes = []) => {
+    if (!Array.isArray(codes) || !codes.length || typeof document === 'undefined') return;
+    const text = `UR Commerce OS - Two-factor recovery codes\n\n${codes.join('\n')}\n\nEach code works once. Keep this file private.`;
+    const blobUrl = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    const link = document.createElement('a'); link.href = blobUrl; link.download = 'ur-two-factor-recovery-codes.txt'; link.click();
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+  };
+  setupSubscriptionAdminMfa = async () => {
+    if (!this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
+    const isAr = this.state.lang === 'ar';
+    try {
+      const setup = await this.subscriptionApiRequest('/api/auth/mfa/setup', { method: 'POST', body: '{}' });
+      window.prompt(isAr ? 'انسخ هذا المفتاح إلى تطبيق Google أو Microsoft Authenticator' : 'Copy this key into Google or Microsoft Authenticator', setup.secret || '');
+      const currentPassword = String(window.prompt(isAr ? 'أدخل كلمة مرور حسابك للتأكيد' : 'Enter your account password to confirm', '') || '');
+      if (!currentPassword) return;
+      const code = String(window.prompt(isAr ? 'أدخل الرمز المكوّن من 6 أرقام' : 'Enter the 6-digit code', '') || '').trim();
+      if (!code) return;
+      const enabled = await this.subscriptionApiRequest('/api/auth/mfa/enable', { method: 'POST', body: JSON.stringify({ secret: setup.secret, code, currentPassword }) });
+      this.downloadMfaRecoveryCodes(enabled.recoveryCodes || []);
+      window.prompt(isAr ? 'احفظ رموز الاسترداد بمكان آمن. كل رمز يعمل مرة واحدة.' : 'Store these recovery codes safely. Each code works once.', (enabled.recoveryCodes || []).join('\n'));
+      this.setState({ subscriptionAdminMfa: { available: true, enabled: true, recoveryCodesRemaining: (enabled.recoveryCodes || []).length, enabledAt: enabled.enabledAt || new Date().toISOString() } });
+      await Promise.all([this.refreshSubscriptionMerchant360(this.state.selectedSubscriptionStoreId, true), this.refreshSubscriptionAdminFromApi(true)]);
+      this.showToast(isAr ? 'تم تفعيل التحقق بخطوتين' : 'Two-factor authentication enabled');
+    } catch (err) { this.showToast(err.message || (isAr ? 'تعذر تفعيل التحقق بخطوتين' : 'Could not enable two-factor authentication')); }
+  };
+  disableSubscriptionAdminMfa = async () => {
+    if (!this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
+    const isAr = this.state.lang === 'ar';
+    if (!window.confirm(isAr ? 'تعطيل التحقق بخطوتين يقلل حماية الحساب. هل تريد المتابعة؟' : 'Disabling two-factor authentication reduces account protection. Continue?')) return;
+    const code = String(window.prompt(isAr ? 'أدخل رمز المصادقة أو رمز استرداد' : 'Enter authenticator or recovery code', '') || '').trim();
+    if (!code) return;
+    try {
+      await this.subscriptionApiRequest('/api/auth/mfa/disable', { method: 'POST', body: JSON.stringify({ code }) });
+      this.setState({ subscriptionAdminMfa: { available: true, enabled: false, recoveryCodesRemaining: 0, enabledAt: '' } });
+      await this.refreshSubscriptionAdminFromApi(true);
+      this.showToast(isAr ? 'تم تعطيل التحقق بخطوتين' : 'Two-factor authentication disabled');
+    } catch (err) { this.showToast(isAr ? 'تعذر تعطيل التحقق بخطوتين' : 'Could not disable two-factor authentication'); }
+  };
   exportSubscriptionAdminCsv = async () => {
     if (!this.canManageSubscriptionAdmin() || typeof window === 'undefined') return;
     try {
@@ -17651,6 +17822,8 @@ ZW|Zimbabwe|263
       activated: isAr ? 'تفعيل المتجر' : 'Store activated',
       activate: isAr ? 'تفعيل المتجر' : 'Store activated',
       past_due: isAr ? 'متابعة دفع متأخر' : 'Past-due follow-up',
+      mfa_enabled: isAr ? 'تفعيل التحقق بخطوتين' : 'Two-factor authentication enabled',
+      mfa_disabled: isAr ? 'تعطيل التحقق بخطوتين' : 'Two-factor authentication disabled',
       updated: isAr ? 'تحديث الاشتراك' : 'Subscription updated',
     };
     return labels[action] || labels.updated;
@@ -18462,6 +18635,7 @@ ZW|Zimbabwe|263
       token: '',
       connected: false,
       connectionStatus: 'not_configured',
+      connectionError: '',
       lastConnectedAt: '',
       sendMode: 'backend',
     };
@@ -18480,6 +18654,7 @@ ZW|Zimbabwe|263
     next.token = String(next.token || '');
     next.connected = !!next.connected;
     next.connectionStatus = ['not_configured', 'saved', 'connecting', 'connected', 'failed', 'browser_blocked'].includes(next.connectionStatus) ? next.connectionStatus : defaults.connectionStatus;
+    next.connectionError = String(next.connectionError || '').trim().slice(0, 240);
     next.lastConnectedAt = String(next.lastConnectedAt || '');
     next.sendMode = 'backend';
     return next;
@@ -18512,7 +18687,7 @@ ZW|Zimbabwe|263
     this.setState(s => ({
       storeSettings: {
         ...s.storeSettings,
-        shippingSettings: this.normalizeShippingSettings({ ...((s.storeSettings || {}).shippingSettings || {}), connectionStatus: 'connecting' }),
+        shippingSettings: this.normalizeShippingSettings({ ...((s.storeSettings || {}).shippingSettings || {}), connectionStatus: 'connecting', connectionError: '' }),
       },
     }));
     this.persistSettingsSoon();
@@ -18529,24 +18704,30 @@ ZW|Zimbabwe|263
         token: '',
         connected: true,
         connectionStatus: 'connected',
+        connectionError: '',
         lastConnectedAt: new Date().toISOString(),
       });
       this.setState(s => ({ storeSettings: { ...s.storeSettings, shippingSettings }, alWaseetConnectOpen: false }));
       this.persistSettingsSoon();
       this.showToast(this.state.lang === 'ar' ? 'تم ربط الوسيط' : 'Connected to Al-Waseet');
     } catch (err) {
-      const blocked = err && /fetch|cors|failed/i.test(String(err.message || err));
+      const reason = String((err && err.message) || (this.state.lang === 'ar' ? 'تعذر تسجيل الدخول' : 'Login failed')).trim().slice(0, 240);
+      const blocked = /failed to fetch|fetch failed|load failed|network(?:error| request)?|cors/i.test(reason);
+      const connectionError = blocked
+        ? (this.state.lang === 'ar' ? 'تعذر الوصول إلى خادم الربط. تحقق من اتصال الإنترنت ثم أعد المحاولة.' : 'Could not reach the connection server. Check your internet connection and retry.')
+        : reason;
       const shippingSettings = this.normalizeShippingSettings({
         ...current,
         connected: false,
         token: '',
         connectionStatus: blocked ? 'browser_blocked' : 'failed',
+        connectionError,
       });
       this.setState(s => ({ storeSettings: { ...s.storeSettings, shippingSettings } }));
       this.persistSettingsSoon();
       this.showToast(blocked
         ? (this.state.lang === 'ar' ? 'تم حفظ البيانات، لكن المتصفح منع الاتصال المباشر' : 'Saved, but browser blocked direct connection')
-        : (this.state.lang === 'ar' ? 'فشل الاتصال بالوسيط' : 'Al-Waseet connection failed'));
+        : (this.state.lang === 'ar' ? `فشل الاتصال بالوسيط: ${reason}` : `Al-Waseet connection failed: ${reason}`));
     }
   };
   disconnectAlWaseet = async () => {
@@ -18716,7 +18897,19 @@ ZW|Zimbabwe|263
     this.setState(s => ({ storeSettings: { ...s.storeSettings, fontStyle: legacyMap[fontStyle] || fontStyle }, brandFontsOpen: false }));
     this.persistSettingsSoon();
   };
-  toggleBrandFonts = () => this.setState(s => ({ brandFontsOpen: !s.brandFontsOpen }));
+  ensureEditorFonts = () => {
+    if (typeof document === 'undefined' || document.getElementById('ur-editor-fonts-ar')) return;
+    const urls = [
+      ['ur-editor-fonts-ar', 'https://fonts.googleapis.com/css2?family=Aref+Ruqaa&family=Alexandria&family=Almarai&family=Amiri&family=Baloo+Bhaijaan+2&family=Cairo&family=Changa&family=El+Messiri&family=Harmattan&family=Kufam&family=Lalezar&family=Lateef&family=Lemonada&family=Mada&family=Marhey&family=Markazi+Text&family=Noto+Naskh+Arabic&family=Noto+Sans+Arabic&family=Noto+Serif+Arabic&family=Rakkas&family=Readex+Pro&family=Reem+Kufi&family=Scheherazade+New&family=Tajawal&family=Vazirmatn&display=swap'],
+      ['ur-editor-fonts-latin', 'https://fonts.googleapis.com/css2?family=Barlow&family=DM+Sans&family=Fira+Sans&family=IBM+Plex+Sans&family=Inter&family=Josefin+Sans&family=Kanit&family=Lato&family=Lexend&family=Manrope&family=Montserrat&family=Mulish&family=Nunito&family=Open+Sans&family=Outfit&family=Plus+Jakarta+Sans&family=Poppins&family=Quicksand&family=Raleway&family=Roboto&family=Rubik&family=Source+Sans+3&family=Space+Grotesk&family=Sora&family=Urbanist&family=Work+Sans&display=swap'],
+      ['ur-editor-fonts-serif', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Merriweather&family=Playfair+Display&display=swap'],
+    ];
+    urls.forEach(([id, href]) => { const link = document.createElement('link'); link.id = id; link.rel = 'stylesheet'; link.href = href; document.head.appendChild(link); });
+  };
+  toggleBrandFonts = () => {
+    if (!this.state.brandFontsOpen) this.ensureEditorFonts();
+    this.setState(s => ({ brandFontsOpen: !s.brandFontsOpen }));
+  };
   toggleBrandThemes = () => this.setState(s => ({ brandThemesOpen: !s.brandThemesOpen }));
   brandThemeLibrary() {
     return [
@@ -19995,6 +20188,47 @@ ZW|Zimbabwe|263
     this.showToast(this.T[this.state.lang].order.toastReturnDone);
   };
 
+  openCommandPalette = () => this.setState({ commandPaletteOpen: true, commandQuery: '' });
+  closeCommandPalette = () => this.setState({ commandPaletteOpen: false, commandQuery: '' });
+  setCommandQuery = (e) => this.setState({ commandQuery: e && e.target ? e.target.value : String(e || '') });
+  runCommand = (screen) => {
+    this.setState({ commandPaletteOpen: false, commandQuery: '' });
+    if (screen === 'sale') this.openPOS();
+    else if (screen === 'product') this.openAddProduct();
+    else this.nav(screen);
+  };
+  openDashboardCustomize = () => this.setState({ dashboardCustomizeOpen: true });
+  closeDashboardCustomize = () => this.setState({ dashboardCustomizeOpen: false });
+  toggleDashboardWidget = (key) => this.setState(s => ({ dashboardWidgets: { ...s.dashboardWidgets, [key]: !s.dashboardWidgets[key] } }));
+  toggleDemoData = () => {
+    this.setState(s => ({ demoDataEnabled: !s.demoDataEnabled }));
+    this.showToast(this.state.lang === 'ar' ? (this.state.demoDataEnabled ? 'تم إخفاء البيانات التجريبية' : 'تم تفعيل المعاينة التجريبية') : (this.state.demoDataEnabled ? 'Demo data hidden' : 'Demo preview enabled'));
+  };
+  openCsvImportWizard = () => this.setState({ productActionsOpen: false, csvImportWizardOpen: true, csvImportStep: 1 });
+  closeCsvImportWizard = () => this.setState({ csvImportWizardOpen: false, csvImportStep: 1 });
+  advanceCsvImportWizard = () => this.setState(s => ({ csvImportStep: Math.min(3, s.csvImportStep + 1) }));
+  chooseCsvImportFile = () => { this.setState({ csvImportWizardOpen: false, csvImportStep: 1 }); this.importProductsFile(); };
+  openAutomationCenter = () => this.setState({ automationCenterOpen: true });
+  closeAutomationCenter = () => this.setState({ automationCenterOpen: false });
+  toggleAutomationRule = (id) => {
+    this.setState(s => {
+      const storeSettings = s.storeSettings || {};
+      const appSettings = this.normalizeAppSettings(storeSettings.appSettings);
+      const workflowRules = (appSettings.workflowRules || []).map(rule => rule.id === id ? { ...rule, enabled: !rule.enabled } : rule);
+      return { storeSettings: { ...storeSettings, appSettings: { ...appSettings, workflowRules } } };
+    }, () => { this.persistAppSettings(); this.showToast(this.state.lang === 'ar' ? 'تم تحديث قاعدة الأتمتة' : 'Automation rule updated'); });
+  };
+  openActivityCenter = () => this.setState({ activityCenterOpen: true, notifPanelOpen: false });
+  closeActivityCenter = () => this.setState({ activityCenterOpen: false });
+  openSyncCenter = () => this.setState({ syncCenterOpen: true });
+  closeSyncCenter = () => this.setState({ syncCenterOpen: false });
+  retryCommerceSync = () => {
+    this.setState({ commerceSyncStatus: 'loading' });
+    Promise.resolve(this.loadCommerceSnapshotFromBackend ? this.loadCommerceSnapshotFromBackend(true, { force: true }) : null)
+      .then(() => { this.setState({ commerceSyncStatus: 'connected', commerceUpdatedAt: new Date().toISOString() }); this.showToast(this.state.lang === 'ar' ? 'اكتملت المزامنة' : 'Sync complete'); })
+      .catch(() => { this.setState({ commerceSyncStatus: 'offline' }); this.showToast(this.state.lang === 'ar' ? 'تعذرت المزامنة، سنحاول عند عودة الاتصال' : 'Sync failed; we will retry when online'); });
+  };
+
   showToast = (msg) => {
     this.setState({ toast: msg });
     clearTimeout(this._toastTimer);
@@ -20563,8 +20797,39 @@ ZW|Zimbabwe|263
       { label: isAr ? 'المستخدمون' : 'Users', value: String(merchant360.store.usersCount || (merchant360.users || []).length || 0) },
       { label: isAr ? 'الجلسات النشطة' : 'Active sessions', value: String(merchant360.activeSessions || 0) },
     ] : [];
+    vals.subscriptionAdminSessionsTitle = isAr ? 'الجلسات النشطة' : 'Active sessions';
+    vals.subscriptionAdminSessionRows = merchant360 && Array.isArray(merchant360.sessions) ? merchant360.sessions.slice(0, 8).map(session => ({
+      ...session,
+      userLabel: session.userName || (isAr ? 'مستخدم' : 'User'),
+      timeLabel: adminDateLabel(session.createdAt),
+      stateLabel: session.current ? (isAr ? 'جلستك الحالية' : 'Current session') : (isAr ? 'نشطة' : 'Active'),
+      canRevoke: !session.current,
+      revokeLabel: isAr ? 'تسجيل خروج' : 'Sign out',
+      revokeFn: () => this.revokeSubscriptionSession(session.id),
+    })) : [];
+    const adminMfa = s.subscriptionAdminMfa || { available: false, enabled: false, recoveryCodesRemaining: 0 };
+    vals.subscriptionAdminMfaTitle = isAr ? 'أمان حساب المنصة' : 'Platform account security';
+    vals.subscriptionAdminMfaStatus = adminMfa.enabled ? (isAr ? 'التحقق بخطوتين مفعّل' : 'Two-factor authentication enabled') : (adminMfa.available ? (isAr ? 'التحقق بخطوتين غير مفعّل' : 'Two-factor authentication is off') : (isAr ? 'خدمة 2FA غير متاحة' : '2FA service unavailable'));
+    vals.subscriptionAdminMfaNote = adminMfa.enabled ? (isAr ? `${Number(adminMfa.recoveryCodesRemaining || 0)} رموز استرداد متبقية` : `${Number(adminMfa.recoveryCodesRemaining || 0)} recovery codes remaining`) : (isAr ? 'احمِ حساب المالك بتطبيق مصادقة ورموز استرداد.' : 'Protect the owner account with an authenticator app and recovery codes.');
+    vals.subscriptionAdminMfaTone = adminMfa.enabled ? TK.success : (adminMfa.available ? TK.warning : TK.tertiary);
+    vals.subscriptionAdminMfaActionLabel = adminMfa.enabled ? (isAr ? 'تعطيل 2FA' : 'Disable 2FA') : (isAr ? 'تفعيل 2FA' : 'Enable 2FA');
+    vals.subscriptionAdminMfaActionDisabled = !adminMfa.available;
+    vals.subscriptionAdminMfaAction = adminMfa.enabled ? this.disableSubscriptionAdminMfa : this.setupSubscriptionAdminMfa;
     vals.subscriptionAdminTimelineTitle = isAr ? 'سجل التاجر' : 'Merchant timeline';
-    vals.subscriptionAdminTimelineRows = merchant360 && Array.isArray(merchant360.events) ? merchant360.events.slice(0, 8).map(event => ({ ...event, kindLabel: ({ note: isAr ? 'ملاحظة' : 'Note', payment: isAr ? 'دفعة' : 'Payment', ticket: isAr ? 'دعم' : 'Support', notification: isAr ? 'تنبيه' : 'Notification' })[event.kind] || event.kind, timeLabel: adminDateLabel(event.createdAt), tone: event.kind === 'ticket' ? TK.error : (event.kind === 'payment' ? TK.success : (event.kind === 'notification' ? TK.info : TK.goldDeep)) })) : [];
+    const adminEventStatusLabel = status => ({ open: isAr ? 'مفتوحة' : 'Open', in_progress: isAr ? 'قيد المعالجة' : 'In progress', resolved: isAr ? 'محلولة' : 'Resolved', closed: isAr ? 'مغلقة' : 'Closed', pending: isAr ? 'معلقة' : 'Pending', recorded: isAr ? 'مسجلة' : 'Recorded', confirmed: isAr ? 'مؤكدة' : 'Confirmed', refunded: isAr ? 'مسترجعة' : 'Refunded', failed: isAr ? 'فشلت' : 'Failed', queued: isAr ? 'بالطابور' : 'Queued', sent: isAr ? 'مرسلة' : 'Sent', read: isAr ? 'مقروءة' : 'Read', archived: isAr ? 'مؤرشفة' : 'Archived' }[status] || status);
+    vals.subscriptionAdminTimelineRows = merchant360 && Array.isArray(merchant360.events) ? merchant360.events.slice(0, 10).map(event => {
+      const actions = [];
+      if (event.kind === 'ticket' && event.status === 'open') actions.push({ label: isAr ? 'بدء المعالجة' : 'Start', fn: () => this.updateSubscriptionAdminEvent(event.id, 'in_progress') });
+      if (event.kind === 'ticket' && event.status === 'in_progress') actions.push({ label: isAr ? 'حل التذكرة' : 'Resolve', fn: () => this.updateSubscriptionAdminEvent(event.id, 'resolved') });
+      if (event.kind === 'ticket' && event.status === 'resolved') actions.push({ label: isAr ? 'إغلاق' : 'Close', fn: () => this.updateSubscriptionAdminEvent(event.id, 'closed') });
+      if (event.kind === 'payment' && ['pending', 'recorded'].includes(event.status)) actions.push({ label: isAr ? 'تأكيد الدفعة' : 'Confirm', fn: () => this.updateSubscriptionAdminEvent(event.id, 'confirmed') });
+      if (event.kind === 'payment' && event.status === 'confirmed') actions.push({ label: isAr ? 'استرجاع' : 'Refund', fn: () => this.updateSubscriptionAdminEvent(event.id, 'refunded') });
+      if (event.kind === 'payment') actions.push({ label: isAr ? 'طباعة الوصل' : 'Print receipt', fn: () => this.printSubscriptionPaymentReceipt(event) });
+      if (event.kind === 'note' && event.status === 'open') actions.push({ label: isAr ? 'أرشفة' : 'Archive', fn: () => this.updateSubscriptionAdminEvent(event.id, 'archived') });
+      return { ...event, rawStatus: event.status, status: adminEventStatusLabel(event.status), actions, kindLabel: ({ note: isAr ? 'ملاحظة' : 'Note', payment: isAr ? 'دفعة' : 'Payment', ticket: isAr ? 'دعم' : 'Support', notification: isAr ? 'تنبيه' : 'Notification' })[event.kind] || event.kind, timeLabel: adminDateLabel(event.updatedAt || event.createdAt), tone: event.kind === 'ticket' ? TK.error : (event.kind === 'payment' ? TK.success : (event.kind === 'notification' ? TK.info : TK.goldDeep)) };
+    }) : [];
+    vals.subscriptionAdminWorkflowTitle = isAr ? 'إجراءات التذاكر والمدفوعات' : 'Ticket and payment actions';
+    vals.subscriptionAdminWorkflowActions = vals.subscriptionAdminTimelineRows.flatMap(event => (event.actions || []).map(action => ({ ...action, label: `${event.title} · ${action.label}` })));
     vals.subscriptionAdminQuickActions = [
       { key: 'note', label: isAr ? 'إضافة ملاحظة' : 'Add note', fn: () => this.createSubscriptionAdminEvent('note') },
       { key: 'payment', label: isAr ? 'تسجيل دفعة' : 'Record payment', fn: () => this.createSubscriptionAdminEvent('payment') },
@@ -21411,6 +21676,8 @@ ZW|Zimbabwe|263
     vals.shippingCompaniesSub = isAr ? 'اربط شركات التوصيل وحدد إعدادات إرسال الطلبات.' : 'Connect delivery providers and configure order dispatch.';
     vals.alWaseetTitle = isAr ? 'الوسيط للتوصيل' : 'Al-Waseet delivery';
     vals.alWaseetSub = isAr ? 'أدخل بيانات حسابك في الوسيط واحفظها حتى تستخدمها الطلبات.' : 'Enter your Al-Waseet merchant credentials for order dispatch.';
+    vals.alWaseetConnectionError = shippingSettings.connectionError;
+    vals.alWaseetHasConnectionError = !!shippingSettings.connectionError;
     vals.alWaseetConnectOpen = !!s.alWaseetConnectOpen;
     vals.alWaseetProviderActionLabel = shippingSettings.connected ? (isAr ? 'إدارة الربط' : 'Manage') : (isAr ? 'ربط' : 'Connect');
     vals.alWaseetSubmitLabel = shippingSettings.connectionStatus === 'connecting' ? (isAr ? 'جاري الربط...' : 'Connecting...') : (isAr ? 'ربط الحساب' : 'Connect account');
@@ -21743,7 +22010,7 @@ ZW|Zimbabwe|263
     vals.printProducts = this.printProducts;
     vals.exportProductsPDF = this.exportProductsPDF;
     vals.exportProductsJSON = this.exportProductsJSON;
-    vals.importProductsFile = this.importProductsFile;
+    vals.importProductsFile = this.openCsvImportWizard;
     vals.saveNewProduct = this.saveNewProduct;
     vals.productToolsHint = productCopy.toolsHint;
     vals.productActionsTitle = productCopy.actionsTitle;
@@ -23830,6 +24097,78 @@ ZW|Zimbabwe|263
     vals.hasUnread = this.NOTIFICATIONS.some(n => n.unread) && !s.allNotifsRead && !s.notifsCleared;
     vals.notificationsLocalized = this.NOTIFICATIONS.map(n => ({ ...n, title: L(n.title), body: L(n.body), time: L(n.time) }));
     vals.activityFeed = vals.notificationsLocalized.slice(0, 4);
+    vals.openCommandPalette = this.openCommandPalette;
+    vals.closeCommandPalette = this.closeCommandPalette;
+    vals.commandPaletteOpen = !!s.commandPaletteOpen;
+    vals.commandPaletteTitle = isAr ? 'نفّذ أي شيء بسرعة' : 'Run anything quickly';
+    vals.commandPaletteSub = isAr ? 'انتقل إلى أي قسم أو ابدأ إجراءً بدون ما تترك سياقك.' : 'Jump to a section or start an action without losing context.';
+    vals.commandSearchPlaceholder = isAr ? 'ابحث عن طلب، منتج، عميل أو إجراء…' : 'Search orders, products, customers, or actions…';
+    vals.commandQuery = s.commandQuery || '';
+    vals.setCommandQuery = this.setCommandQuery;
+    const commandSource = [
+      ['home', t.nav.home, isAr ? 'الرئيسية ومؤشرات المتجر' : 'Dashboard and store metrics'],
+      ['orders', t.nav.orders, isAr ? 'متابعة الطلبات وتحديث حالتها' : 'Review and update orders'],
+      ['products', t.nav.products, isAr ? 'الكتالوج والمخزون' : 'Catalog and inventory'],
+      ['customers', t.nav.customers, isAr ? 'العملاء وسجل الشراء' : 'Customers and purchase history'],
+      ['analytics', t.nav.analytics, isAr ? 'التقارير والأداء' : 'Reports and performance'],
+      ['product', isAr ? 'إضافة منتج' : 'Add product', isAr ? 'افتح نموذج منتج جديد' : 'Open a new product form'],
+      ['sale', t.quick.newSale, isAr ? 'ابدأ بيعاً من نقطة البيع' : 'Start a point-of-sale checkout'],
+      ['settings', t.nav.settings, isAr ? 'هوية المتجر والإعدادات' : 'Brand and store settings'],
+    ];
+    const commandNeedle = String(s.commandQuery || '').trim().toLowerCase();
+    vals.commandItems = commandSource.filter(item => !commandNeedle || `${item[1]} ${item[2]}`.toLowerCase().includes(commandNeedle)).map(([key, label, sub]) => ({ key, label, sub, runFn: () => this.runCommand(key) }));
+    vals.commandEmpty = vals.commandItems.length === 0;
+    vals.commandEmptyText = isAr ? 'ما لقينا نتيجة. جرّب كلمة أقصر.' : 'No results. Try a shorter query.';
+    vals.openDashboardCustomize = this.openDashboardCustomize;
+    vals.closeDashboardCustomize = this.closeDashboardCustomize;
+    vals.dashboardCustomizeOpen = !!s.dashboardCustomizeOpen;
+    vals.dashboardCustomizeTitle = isAr ? 'تخصيص الرئيسية' : 'Customize dashboard';
+    vals.dashboardCustomizeSub = isAr ? 'اختار كثافة المعلومات والأقسام التي تحتاجها يومياً.' : 'Choose the information density and sections you need daily.';
+    const dashboardWidgets = s.dashboardWidgets || { kpis: true, focus: true, compact: true };
+    vals.dashboardKpisDisplay = dashboardWidgets.kpis ? 'grid' : 'none';
+    vals.dashboardFocusDisplay = dashboardWidgets.focus ? 'flex' : 'none';
+    vals.dashboardDensityClass = dashboardWidgets.compact ? 'ur-dashboard-compact' : '';
+    vals.dashboardWidgetOptions = [
+      { key: 'kpis', label: isAr ? 'شريط المؤشرات' : 'KPI strip', enabled: !!dashboardWidgets.kpis },
+      { key: 'focus', label: isAr ? 'مهام تحتاج متابعة' : 'Focus tasks', enabled: !!dashboardWidgets.focus },
+      { key: 'compact', label: isAr ? 'كثافة مريحة' : 'Compact density', enabled: !!dashboardWidgets.compact },
+    ].map(item => ({ ...item, track: item.enabled ? TK.gold : TK.border, knob: item.enabled ? (isAr ? '-20px' : '20px') : '0', toggleFn: () => this.toggleDashboardWidget(item.key) }));
+    vals.demoDataEnabled = !!s.demoDataEnabled;
+    vals.demoDataLabel = isAr ? 'بيانات تجريبية' : 'Demo data';
+    vals.demoDataSub = isAr ? 'معاينة مؤقتة للتاجر الجديد، بدون تغيير البيانات الحقيقية.' : 'A temporary preview for new merchants without changing real data.';
+    vals.demoTrack = s.demoDataEnabled ? TK.gold : TK.border;
+    vals.demoKnob = s.demoDataEnabled ? (isAr ? '-20px' : '20px') : '0';
+    vals.toggleDemoData = this.toggleDemoData;
+    vals.csvImportWizardOpen = !!s.csvImportWizardOpen;
+    vals.csvImportTitle = isAr ? 'استيراد المنتجات' : 'Import products';
+    vals.csvImportSub = isAr ? 'ثلاث خطوات بسيطة: جهّز الملف، راجع الأعمدة، ثم نفّذ الاستيراد.' : 'Three steps: prepare the file, review columns, then import.';
+    vals.csvImportStep = String(s.csvImportStep || 1);
+    vals.csvImportStepCopy = (s.csvImportStep || 1) === 1 ? (isAr ? 'استخدم CSV أو JSON. الأعمدة المقترحة: name, price, stock, sku.' : 'Use CSV or JSON. Suggested columns: name, price, stock, sku.') : ((s.csvImportStep || 1) === 2 ? (isAr ? 'سيطابق أور الاسم والسعر والمخزون والرمز تلقائياً، ويحدّث المتكرر حسب SKU.' : 'UR maps name, price, stock, and SKU automatically and updates matching SKUs.') : (isAr ? 'الملف جاهز للاختيار. سترى نتيجة الإنشاء والتحديث بعد الاستيراد.' : 'Choose the file now. You will get a created/updated summary after import.'));
+    vals.csvImportNextLabel = (s.csvImportStep || 1) < 3 ? (isAr ? 'التالي' : 'Next') : (isAr ? 'اختيار الملف والاستيراد' : 'Choose file and import');
+    vals.csvImportNext = (s.csvImportStep || 1) < 3 ? this.advanceCsvImportWizard : this.chooseCsvImportFile;
+    vals.closeCsvImportWizard = this.closeCsvImportWizard;
+    vals.openAutomationCenter = this.openAutomationCenter;
+    vals.closeAutomationCenter = this.closeAutomationCenter;
+    vals.automationCenterOpen = !!s.automationCenterOpen;
+    vals.automationTitle = isAr ? 'أتمتة الطلبات' : 'Order automation';
+    vals.automationSub = isAr ? 'قواعد واضحة للحالات المتكررة. تقدر توقف أي قاعدة بدون حذفها.' : 'Clear rules for repetitive order work. Pause any rule without deleting it.';
+    vals.automationRules = (appSettings.workflowRules || []).map(rule => ({ ...rule, label: L(rule.name) || rule.name, track: rule.enabled ? TK.gold : TK.border, knob: rule.enabled ? (isAr ? '-20px' : '20px') : '0', toggleFn: () => this.toggleAutomationRule(rule.id) }));
+    vals.automationEmpty = vals.automationRules.length === 0;
+    vals.automationEmptyText = isAr ? 'ماكو قواعد حالياً. أضفها من تطبيق سير العمل.' : 'No rules yet. Add them from the workflow app.';
+    vals.openActivityCenter = this.openActivityCenter;
+    vals.closeActivityCenter = this.closeActivityCenter;
+    vals.activityCenterOpen = !!s.activityCenterOpen;
+    vals.activityCenterTitle = isAr ? 'النشاط والتنبيهات' : 'Activity and notifications';
+    vals.activityCenterSub = isAr ? 'آخر ما صار بالمتجر في مكان واحد.' : 'The latest store activity in one place.';
+    vals.openSyncCenter = this.openSyncCenter;
+    vals.closeSyncCenter = this.closeSyncCenter;
+    vals.syncCenterOpen = !!s.syncCenterOpen;
+    vals.syncCenterTitle = isAr ? 'مركز المزامنة' : 'Sync center';
+    vals.syncCenterSub = isAr ? 'حالة الاتصال والحفظ والعمليات المعلّقة.' : 'Connection, saving, and pending operation status.';
+    vals.syncLastLabel = s.commerceUpdatedAt ? new Date(s.commerceUpdatedAt).toLocaleString(isAr ? 'ar-IQ' : 'en-US') : (isAr ? 'ما تمت مزامنة ناجحة بعد' : 'No successful sync yet');
+    vals.syncRetryLabel = isAr ? 'إعادة المحاولة' : 'Retry sync';
+    vals.retryCommerceSync = this.retryCommerceSync;
+    vals.opsCloseLabel = isAr ? 'إغلاق' : 'Close';
 
     // KPIs are derived from the active store data, so a new isolated store starts clean.
     const kpiRevenueValue = this.ORDERS.reduce((sum, order) => sum + Number(order.total || 0), 0);
@@ -23842,13 +24181,14 @@ ZW|Zimbabwe|263
       }, 0);
       return sum + Math.max(0, profit);
     }, 0);
-    vals.kpiRevenue = this.fmt(kpiRevenueValue);
-    vals.kpiRevenueDelta = kpiRevenueValue ? '+0%' : '0%';
-    vals.kpiProfit = this.fmt(kpiProfitValue);
-    vals.kpiProfitDelta = kpiProfitValue ? '+0%' : '0%';
-    vals.kpiOrders = String(this.ORDERS.length);
+    const demoPreview = !!s.demoDataEnabled && !this.ORDERS.length && !this.PRODUCTS.length;
+    vals.kpiRevenue = this.fmt(demoPreview ? 1840000 : kpiRevenueValue);
+    vals.kpiRevenueDelta = (demoPreview || kpiRevenueValue) ? '+0%' : '0%';
+    vals.kpiProfit = this.fmt(demoPreview ? 510000 : kpiProfitValue);
+    vals.kpiProfitDelta = (demoPreview || kpiProfitValue) ? '+0%' : '0%';
+    vals.kpiOrders = String(demoPreview ? 14 : this.ORDERS.length);
     vals.kpiOrdersDelta = '0';
-    vals.kpiCustomers = String(this.CUSTOMERS.length);
+    vals.kpiCustomers = String(demoPreview ? 9 : this.CUSTOMERS.length);
     vals.kpiCustomersDelta = '0';
 
     return vals;
@@ -23860,6 +24200,10 @@ ZW|Zimbabwe|263
 (function syncDynamicTemplateAttributes() {
   const validPath = (value) => /^[Mm]/.test(String(value || '').trim());
   const validHex = (value) => /^#[0-9a-f]{6}$/i.test(String(value || '').trim());
+  const validImageSrc = (value) => {
+    const src = String(value || '').trim();
+    return !!src && !src.includes('{{') && (/^(?:https?:|data:image\/|blob:)/i.test(src) || /^(?:\.\/)?assets\/[a-z0-9._/-]+$/i.test(src));
+  };
   const apply = (root) => {
     (root || document).querySelectorAll('path[data-d]').forEach((path) => {
       const next = path.getAttribute('data-d');
@@ -23868,6 +24212,10 @@ ZW|Zimbabwe|263
     (root || document).querySelectorAll('input[type="color"][data-value]').forEach((input) => {
       const next = input.getAttribute('data-value');
       if (validHex(next) && input.value.toLowerCase() !== next.toLowerCase()) input.value = next;
+    });
+    (root || document).querySelectorAll('img[data-src]').forEach((img) => {
+      const next = img.getAttribute('data-src');
+      if (validImageSrc(next) && img.getAttribute('src') !== next) img.setAttribute('src', next);
     });
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => apply(document));
@@ -23880,7 +24228,7 @@ ZW|Zimbabwe|263
           if (node && node.nodeType === 1) apply(node);
         });
       });
-    }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-d', 'data-value'] });
+    }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-d', 'data-value', 'data-src'] });
   }
 })();
 </script>
