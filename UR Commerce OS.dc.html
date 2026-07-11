@@ -11319,6 +11319,7 @@ class Component extends DCLogic {
     { id: 'm17', icon: 'code', name: { ar: 'الحسابات والصلاحيات', en: 'Accounts & Permissions' }, desc: { ar: 'أدر أدوار الفريق ومن يقدر يدخل لكل قسم', en: 'Manage team roles and access' }, status: 'connected' },
     { id: 'm18', icon: 'calc', name: { ar: 'بوابات الدفع', en: 'Payment Gateways' }, desc: { ar: 'طرق الدفع التي تظهر بالكاشير والموقع', en: 'Payment methods for POS and storefront' }, status: 'connected' },
   ];
+  DEFAULT_MODULES = this.MODULES.map(module => ({ ...module, name: { ...(module.name || {}) }, desc: { ...(module.desc || {}) } }));
 
   coreModuleAdditions() {
     return [
@@ -11332,7 +11333,10 @@ class Component extends DCLogic {
   normalizeModuleList(modules = []) {
     const hidden = this.deprecatedModuleIds();
     const list = Array.isArray(modules) ? modules.filter(module => module && module.id && !hidden.has(module.id)).map(module => ({ ...module })) : [];
-    if (!list.length) return list;
+    if (!list.length) {
+      const defaults = Array.isArray(this.DEFAULT_MODULES) ? this.DEFAULT_MODULES.filter(module => module && module.id && !hidden.has(module.id)).map(module => ({ ...module, name: { ...(module.name || {}) }, desc: { ...(module.desc || {}) } })) : [];
+      return defaults.length ? defaults : this.coreModuleAdditions().map(module => ({ ...module }));
+    }
     const byId = new Map(list.map(module => [module.id, module]));
     this.coreModuleAdditions().forEach(module => {
       const existing = byId.get(module.id);
